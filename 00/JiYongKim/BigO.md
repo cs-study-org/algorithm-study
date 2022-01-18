@@ -71,7 +71,7 @@
 
 <br>
 
-[성능분석 이미지]
+<img width="713" alt="스크린샷 2022-01-18 오후 9 03 42" src="https://user-images.githubusercontent.com/81874493/149946737-a3b75604-5b24-495a-ae9b-a2836fded4e4.png">
 
 >⇒ 위의 표처럼 데이터의 양의 따른 알고리즘 실행 시간 차이가 커진다.
 
