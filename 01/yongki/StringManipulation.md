@@ -1,7 +1,7 @@
 # 문자열 조작
 
 <details>
-<summary>1. Valid Palindrome</summary>
+<summary>125. Valid Palindrome</summary>
 <br/>
 
 테스트 코드에서 제출 오류가 있었다.
@@ -43,7 +43,7 @@ var isPalindrome = function(s) {
 
 </details>
 <details>
-<summary>2. Reverse String</summary>
+<summary>344. Reverse String</summary>
 <br/>
 
 반환 조건을 보면, 함수 인자 자체를 바꾸라고 나와있다.
@@ -69,12 +69,8 @@ var reverseString = function(s) {
 </details>
 
 <details>
-<summary>3. Reorder Data in Log Files</summary>
+<summary>937. Reorder Data in Log Files</summary>
 <br/>
-
-주석에서 `Start main logic` 부터 확인하면된다.
-
-코드의 윗단은 다 사용되는 함수이다.
 
 ```javascript
 /**
@@ -120,7 +116,7 @@ var reorderLogFiles = function(logs) {
                   "let3 art zero"
                 ]
 
-      Expected: [
+    Expected:   [
                   "let3 art zero",
                   "let1 art zero can", // +++ check this!
                   "let2 own kit dig",
@@ -136,4 +132,47 @@ var reorderLogFiles = function(logs) {
 해당 테스트 케이스는 아직 해결중이다.
 </details>
 
+<details>
+<summary>819. Most Common Word</summary>
+<br/>
+
+자바스크립트에는 `getKeyByValue`와 같이 빌트인 메서드로 있슴직한 메서드들이 없어서 불편하였다.
+
+```javascript
+/**
+ * @param {string} paragraph
+ * @param {string[]} banned
+ * @return {string}
+ */
+var mostCommonWord = function(paragraph, banned) {
+    const getKeyByValue = (obj, value) =>
+      Object.keys(obj)
+        .find(key => obj[key] === value);
+      
+    const seperatorPattern = /[\s!"#$%&\'()*+,\-\.\/:;<=>?@\[\]^_`{|}~]/
+  
+    const words = paragraph
+      .toLowerCase()
+      .split(seperatorPattern)
+      .filter(each => each);    
+    
+    const wordCounter = {};
+    words.forEach(each => { 
+      if(!wordCounter[each])
+        wordCounter[each] = 0;
+      
+      return wordCounter[each] += 1;
+    });
+  
+    banned.forEach(each => {      
+      if(wordCounter[each])
+        delete wordCounter[each]
+    });
+    
+    const maxCount = Math.max(...Object.values(wordCounter));    
+    
+    return getKeyByValue(wordCounter, maxCount);
+};
+```
+</details>
 <hr/>
