@@ -175,4 +175,51 @@ var mostCommonWord = function(paragraph, banned) {
 };
 ```
 </details>
+
+<details>
+<summary>49. Group Anagrams</summary>
+<br/>
+
+```javascript
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+var groupAnagrams = function(strs) {  
+  const result = [];
+
+  let paragraph = strs.join();  
+  
+  const breakPattern = ",{" + strs.length + "}";
+  const breakCondition = paragraph.match(new RegExp(breakPattern), "g");  
+  let loopCount = 0;
+  
+  while(!breakCondition && loopCount < strs.length){
+    const findString = strs[loopCount];    
+    
+    const pattern = new RegExp(
+          "[" + findString + "]" + "{" + findString.length + "}",
+          "g"
+      );
+    
+    const matchWords = paragraph.match(pattern);   
+        
+    if(matchWords)
+      result.push(matchWords);      
+        
+    paragraph = paragraph.replace(pattern, "");    
+    loopCount += 1;    
+  };
+    
+  return result;
+};
+```
+
+아래 테스트 케이스 통과가 안되서 해결중이다.
+
+      Test Case A: ["",""]
+      Test Case B: ["","b"]
+
+
+</details>
 <hr/>
