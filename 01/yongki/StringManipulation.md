@@ -220,6 +220,61 @@ var groupAnagrams = function(strs) {
       Test Case A: ["",""]
       Test Case B: ["","b"]
 
+</details>
 
+<details>
+<summary>5. Longest Palindromic Substring</summary>
+<br/>
+
+교재에 나온 투 포인터 방법을 
+자바스크립트 버전으로 바꾸고, 약간의 가독성을 높여 사용하였다.
+
+`findLongestPalindrome` 함수 대신
+빌트인 메서드 `Math.max`를 사용할 수 있었지만, 파이썬처럼 key라는 옵션이 지원되지 않아 단순히 수를 돌려주는 메서드였다. 
+
+때문에 함수를 구현해줘야 했다.
+
+```javascript
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function(s) {
+  const findLongestPalindrome = (...args) => args.reduce((a, b) => (a.length > b.length) ? a : b);
+  
+  const helper = (left, right) => {
+    let current = '';
+    
+    while(
+        left >= 0
+      && right < s.length
+      && s[left] === s[right]
+    ){
+      current = s.substring(left, right + 1);
+      left -= 1;
+      right += 1;
+    }
+    
+    return current;
+  }
+  
+  // +++ Exception
+  if(s.length < 2)
+    return s;  
+  
+  // +++ Start
+  let result = '';
+    
+  for(let i = 0; i < s.length; i++){
+    const slow = helper(i, i);
+    const fast = helper(i, i + 1);
+    
+    
+    result = findLongestPalindrome(result, slow, fast);
+  }
+  
+  return result;
+};
+```
 </details>
 <hr/>
