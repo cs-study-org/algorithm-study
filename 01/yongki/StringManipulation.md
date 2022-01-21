@@ -276,5 +276,95 @@ var longestPalindrome = function(s) {
   return result;
 };
 ```
+
+루프에 따른 결과값 정리를 해보았다.
+
+    Input: babad
+
+    ==================================
+
+    Ⅰ) i = 0;
+        
+      ⅰ) left = 0; right = 0; b === b;
+
+          current = b
+          left = -1
+          right = 1
+
+      ⅱ) left = -1; right = 1;
+
+          quit loop
+
+      slow = b
+
+      ------------------------
+
+      ⅱ) left = 0; right = 1; b !== a;
+
+          quit loop
+
+      fast = ''
+
+      result = max('', b, '')
+    
+    ==================================
+
+    Ⅱ) i = 1;
+
+      ⅰ) left = 1; right = 1; a === a;
+
+          current = a
+          left = 0
+          right = 2
+
+      ⅱ) left = 0; right = 2; b === b
+
+          current = bab
+          left = -1
+          right = 3
+
+      ⅲ) left = -1; right = 3;
+
+          quit loop
+
+      slow = bab
+
+      ------------------------
+
+      ⅱ) left = 1; right = 2;  a !== b
+
+          quit loop
+
+      fast = ''
+
+      result = max(b, bab, '')
+
+    ==================================
+
+    Ⅲ) i = 2;
+
+      slow = aba
+      fast = ''
+
+      result = bab
+
+    ==================================
+
+    Ⅳ) i = 3;
+
+      slow = a
+      fast = ''
+
+      result = bab
+    
+    ==================================
+
+    Ⅴ) i = 4;
+
+      slow = d
+      fast = ''    
+
+      result = bab
+
 </details>
 <hr/>
