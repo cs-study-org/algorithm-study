@@ -1,5 +1,13 @@
 # 문자열 조작
 
+## 들어가며
+
+오랜 시간이 들인 문제는 `문제 3줄 요약`과 `문제 풀이`를 기술하였습니다.
+
+그 외 문제는 간단한 회고를 적어두었습니다.
+
+## 문제 리스트
+
 <details>
 <summary>125. Valid Palindrome</summary>
 <br/>
@@ -180,6 +188,38 @@ var mostCommonWord = function(paragraph, banned) {
 <summary>49. Group Anagrams</summary>
 <br/>
 
+**문제 3줄 요약**    
+
+    1. Input: strs = ["eat","tea","tan","ate","nat","bat"]       
+
+    2. Output: [["bat"],["nat","tan"],["ate","eat","tea"]]    
+
+**문제 풀이 1/2**
+
+다음은 처음 접근했던 방법이다.
+
+    1. Input 배열의 문자열 요소들을 하나의 단락(paragraph)을 만든다. 
+       이 단락은 루프를 돌면서 문자열 선별작업의 대상이 되고,
+       선별된 문자열은 단락에서 삭제된다.
+
+        "eat,tea,tan,ate,nat,bat"
+
+    2. 루프를 돌 때, Input 배열에서 문자열을 하나 꺼내서
+       문자열과 문자열 길이로 정규표현식을 만든다.
+       
+        [eat]{3}
+
+    3. 정규표현식의 뜻은 [] 안의 알파벳과 일치한 문자열 3개를 추출하는 것이다.
+        
+        즉, eat, tea, ate를 선별할 수 있다.
+
+    4. 단, 선별한 뒤에 paragraph는 ",,,,"가 남게되어
+
+        Test Case A: ["",""]
+        Test Case B: ["","b"]
+
+       위와 같이 빈 문자열을 선별하는 테스트 케이스를 통과할 수 없었다.
+
 ```javascript
 /**
  * @param {string[]} strs
@@ -215,10 +255,29 @@ var groupAnagrams = function(strs) {
 };
 ```
 
-아래 테스트 케이스 통과가 안되서 해결중이다.
+**문제 풀이 2/2**
+따라서, 리트코드 내에서 좋은 풀이를 참고하였다.
 
-      Test Case A: ["",""]
-      Test Case B: ["","b"]
+```js
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+var groupAnagrams = function(strs) {  
+  const obj = {};
+
+  for (const str of strs){
+    let sortedStr = str.split('').sort().join('');
+
+    if (sortedStr in obj)
+      obj[sortedStr].push(str);
+    else
+      obj[sortedStr] = [str];
+  }
+  
+  return Object.values(obj);  
+};
+```
 
 </details>
 
@@ -368,3 +427,9 @@ var longestPalindrome = function(s) {
 
 </details>
 <hr/>
+
+## 참고문헌
+
+[Simple Solution at 49. Group Anagrams](https://leetcode.com/problems/group-anagrams/discuss/1720092/Simple-and-Fastest-JavaScript-Solution) -- abagarwa
+
+[Simple Solution at 5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/discuss/1022625/Javascript) -- rbwn
