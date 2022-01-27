@@ -655,3 +655,175 @@ public class Main {
     }
 }
 ```
+
+## 51번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+        int b = sc.nextInt();
+
+        if(a<=b){
+            System.out.println(1);
+        }
+        else{
+            System.out.println(0);
+        }
+    }
+}
+```
+
+## 52번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+        int b = sc.nextInt();
+
+        if(a!=b){
+            System.out.println(1);
+        }
+        else{
+            System.out.println(0);
+        }
+    }
+}
+```
+
+## 53번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+
+        if(a==0){
+            System.out.println(1);
+        }
+        else{
+            System.out.println(0);
+        }
+    }
+}
+```
+## 54번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+        int b = sc.nextInt();
+
+        if(a==1 && b==1){
+            System.out.println(1);
+        }
+        else{
+            System.out.println(0);
+        }
+    }
+}
+```
+
+## 55번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+        int b = sc.nextInt();
+
+        if(a==1 || b==1){
+            System.out.println(1);
+        }
+        else{
+            System.out.println(0);
+        }
+    }
+}
+```
+
+## 56번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+        int b = sc.nextInt();
+
+        if((a==1 && b==0)||(a==0&&b==1)){
+            System.out.println(1);
+        }
+        else{
+            System.out.println(0);
+        }
+    }
+}
+```
+
+## 57번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+        int b = sc.nextInt();
+
+        if((a==1 && b==1)||(a==0&&b==0)){
+            System.out.println(1);
+        }
+        else{
+            System.out.println(0);
+        }
+    }
+}
+```
+
+## 58번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+        int b = sc.nextInt();
+
+        if((a==0&&b==0)){
+            System.out.println(1);
+        }
+        else{
+            System.out.println(0);
+        }
+    }
+}
+```
+
+## 59번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+        
+        System.out.println(~a);
+    }
+}
+```
