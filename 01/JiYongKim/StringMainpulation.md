@@ -203,7 +203,7 @@ class Solution
 {
     public String solution(String s, String[] banned)
     {
-		    Map<String, Integer> counter = new HashMap<>();
+	Map<String, Integer> counter = new HashMap<>();
 
         String str = s.replaceAll("[^A-Za-z0-9\\s]", "").toLowerCase();
 
