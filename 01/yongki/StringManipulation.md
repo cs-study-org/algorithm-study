@@ -281,7 +281,9 @@ var mostCommonWord = function(paragraph, banned) {
 
 다음은 처음 접근했던 방법이다.
 
-    1. Input 배열의 문자열 요소들을 하나의 단락(paragraph)을 만든다. 
+    Input: strs = ["eat","tea","tan","ate","nat","bat"]
+
+    1. strs 배열의 문자열 요소들을 하나의 단락(paragraph)을 만든다. 
        이 단락은 루프를 돌면서 문자열 선별작업의 대상이 되고,
        선별된 문자열은 단락에서 삭제된다.
 
@@ -340,6 +342,26 @@ var groupAnagrams = function(strs) {
 
 **문제 풀이 2/2**
 따라서, 리트코드 내에서 좋은 풀이를 참고하였다.
+
+    Input: strs = ["eat","tea","tan","ate","nat","bat"]
+
+    1. 배열의 갯수만큼 루프를 도는데,
+       배열의 요소 마다 알파벳 순으로 정렬한다.
+
+        aet
+        aet
+        ant
+        aet
+        ant
+        abt
+
+    2. 정렬된 요소를 key로 두어 관련된 value를 취합한다.
+ 
+        { 
+          aet: [ 'eat', 'tea', 'ate' ], 
+          ant: [ 'tan', 'nat' ], 
+          abt: [ 'bat' ] 
+        }
 
 ```js
 /**
