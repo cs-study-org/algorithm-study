@@ -12,6 +12,8 @@
 <summary>125. Valid Palindrome</summary>
 <br/>
 
+**이슈**
+
 테스트 코드에서 제출 오류가 있었다.
 
     Input:    ".," 
@@ -19,24 +21,56 @@
   
 테스트 코드의 형태가 Palindrome이 아니라서 테스트 코드 오류가 아닌가 싶다.
 
+**문제 풀이**
+
+    1. 정규표현식을 이용해 문자열을 전처리해준다.
+
+       "A man, a plan, a canal: Panama"
+
+       → "amanaplanacanalpanama"
+    
+    2. 전처리된 문자열을 문자를 요소로한 배열을 만든다.
+        
+        [
+          'a', 'm', 'a', 'n', 'a',
+          'p', 'l', 'a', 'n', 'a',
+          'c', 'a', 'n', 'a', 'l',
+          'p', 'a', 'n', 'a', 'm',
+          'a'
+        ]
+
+    3. 루프를 돌 때마다 배열의 앞요소와 뒷요소가 같은지 검사한다.
+    4. 검사가 패스된 요소는 제거하여 배열을 재조정한다.
+
+        [
+          'm', 'a', 'n', 'a',
+          'p', 'l', 'a', 'n', 'a',
+          'c', 'a', 'n', 'a', 'l',
+          'p', 'a', 'n', 'a', 'm'
+        ]
+
 ```javascript
 /**
  * @param {string} s
  * @return {boolean}
  */
-var isPalindrome = function(s) {  
+var isPalindrome = function(s) {
+  // +++ Exception
   if(s.length === 1)
     return true;
+
+  if(s.length === 2)
+    return false;
   
-  const antiPattern = /[^a-zA-Z]/g;
-  const pattern = /[a-zA-Z]/g;
+  // +++ Start
+  const antiPattern = /[^a-zA-Z]/g;  
   
-  let arr = s.replace(antiPattern, "").toLowerCase().split(pattern);  
+  let arr = s.replace(antiPattern, "").toLowerCase().split('');  
   
-  while (arr.length >= 1){
-    const targetA = arr.shift();
-    const targetB = arr.pop();
-    
+  while (arr.length > 1){
+    const targetA = arr[0];
+    const targetB = arr[arr.length - 1];
+        
     if(targetA !== targetB)
       return false;
     
@@ -50,9 +84,12 @@ var isPalindrome = function(s) {
 ```
 
 </details>
+
 <details>
 <summary>344. Reverse String</summary>
 <br/>
+
+**문제 풀이**
 
 반환 조건을 보면, 함수 인자 자체를 바꾸라고 나와있다.
 
@@ -80,41 +117,9 @@ var reverseString = function(s) {
 <summary>937. Reorder Data in Log Files</summary>
 <br/>
 
-```javascript
-/**
- * @param {string[]} logs
- * @return {string[]}
- */
-var reorderLogFiles = function(logs) {  
-  const extractCompareStandard = (target, index) => target.split(" ")[index];
-  
-  const letterArrayCompareFunction = (a, b) => 
-    extractCompareStandard(a, 1)
-        .localeCompare(extractCompareStandard(b, 1)) 
-      || extractCompareStandard(a, 2)
-        .localeCompare(extractCompareStandard(b, 2))
-      || extractCompareStandard(a, 0)
-          .localeCompare(extractCompareStandard(b, 0));
-  
-  // +++ Start main logic
-  let letterArray = [];
-  let digitArray = [];
+**이슈**
 
-  const pattern = / [0-9]+/;
-  
-  // +++ Seperate logs by element type
-  logs.forEach(each => 
-    !each.match(pattern) 
-    ? letterArray.push(each)
-    : digitArray.push(each)    
-  );
-  
-  letterArray.sort(letterArrayCompareFunction);  
-  
-  return letterArray.concat(digitArray);
-};
-```
-최근 테스트 케이스로 인해 조건이 추가된듯하다.
+최근 테스트 케이스의 조건이 추가된듯하다.
 
     Input:      [
                   "dig1 8 1 5 1",
@@ -132,17 +137,101 @@ var reorderLogFiles = function(logs) {
                   "dig2 3 6"
                 ]
 
-비교대상이 되는 1번째 문자열 
-→ 동일할 시 2번째 문자열
-→ 동일할 시 식별자의 문자열
-→ 동일할 시 3번째 문자열의 유무에 따라 우선순위가 추가되었다.
+        비교대상이 되는 1번째 문자열
+        → 동일할 시     2번째 문자열
+        → 동일할 시     식별자의 문자열
+
+        그 다음에
+        → 동일할 시     3번째 문자열의 유무에 따른 우선순위가 추가되었다.
 
 해당 테스트 케이스는 아직 해결중이다.
+
+**문제 풀이**
+
+    1. 주어진 Input을 letter와 digit 타입의 배열로 나눈다.
+
+        [ 'let1 art can', 'let2 own kit dig', 'let3 art zero' ]
+        [ 'dig1 8 1 5 1', 'dig2 3 6' ]
+
+    2. letter 타입의 배열은 우선순위 대로 정렬해야한다.
+       우선순위에 대한 계산을 수행하는 함수를 만들었다.
+
+        비교대상이 되는 1번째 문자열
+        → 동일할 시     2번째 문자열
+        → 동일할 시     식별자의 문자열
+
+```javascript
+/**
+ * @param {string[]} logs
+ * @return {string[]}
+ */
+var reorderLogFiles = function(logs) {  
+  const extractCompareStandard = (target, index) => target.split(" ")[index];
+  
+  const letterArrayCompareFunction = (a, b) => 
+        extractCompareStandard(a, 1)
+        .localeCompare(extractCompareStandard(b, 1))
+      || extractCompareStandard(a, 2)
+        .localeCompare(extractCompareStandard(b, 2))
+      || extractCompareStandard(a, 0)
+          .localeCompare(extractCompareStandard(b, 0));
+  
+  // +++ Start
+  let letterArray = [];
+  let digitArray = [];
+
+  const pattern = / [0-9]+/;
+  
+  logs.forEach(each => 
+    !each.match(pattern) 
+    ? letterArray.push(each)
+    : digitArray.push(each)    
+  );
+  
+  letterArray.sort(letterArrayCompareFunction);  
+  
+  return letterArray.concat(digitArray);
+};
+```
 </details>
 
 <details>
 <summary>819. Most Common Word</summary>
 <br/>
+
+**문제 풀이**
+
+    Input: 
+      paragraph = "Bob hit a ball, the hit BALL flew far after it was hit."
+      banned    = ["hit"]
+
+    1. Input을 전처리한다.
+
+        [
+          'bob',   'hit',  'a',
+          'ball',  'the',  'hit',
+          'ball',  'flew', 'far',
+          'after', 'it',   'was',
+          'hit'
+        ]
+
+    2. 단어의 빈도 수를 계산한 객체를 만든다.
+
+        {
+          bob: 1,
+          hit: 3,
+          a: 1,
+          ball: 2,
+          the: 1,
+          flew: 1,
+          far: 1,
+          after: 1,
+          it: 1,
+          was: 1
+        }
+
+    3. banned와 일치한 key를 객체에서 삭제한뒤
+       객체에서 제일 큰 value를 같는 key를 반환한다.
 
 자바스크립트에는 `getKeyByValue`와 같이 빌트인 메서드로 있슴직한 메서드들이 없어서 불편하였다.
 
@@ -285,11 +374,14 @@ var groupAnagrams = function(strs) {
 <summary>5. Longest Palindromic Substring</summary>
 <br/>
 
+**문제 풀이**
+
 교재에 나온 투 포인터 방법을 
 자바스크립트 버전으로 바꾸고, 약간의 가독성을 높여 사용하였다.
 
 `findLongestPalindrome` 함수 대신
-빌트인 메서드 `Math.max`를 사용할 수 있었지만, 파이썬처럼 key라는 옵션이 지원되지 않아 단순히 수를 돌려주는 메서드였다. 
+`Math 객체`의 빌트인 메서드 `Math.max`를 사용할 수 있었지만, 
+파이썬처럼 `key 옵션`이 지원되지 않아 단순히 수를 돌려주는 메서드였다. 
 
 때문에 함수를 구현해줘야 했다.
 
