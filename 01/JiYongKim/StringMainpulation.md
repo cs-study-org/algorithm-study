@@ -19,7 +19,7 @@ class Solution
 {
     public Boolean solution(String s)
     {
-	      s = s.replaceAll("[^a-z0-9]", "");
+	s = s.replaceAll("[^a-z0-9]", "");
         int md = str.length()/2;
 
         String first = str.substring(0,md+1);
@@ -46,7 +46,7 @@ class Solution
 {
     public int solution(String s)
    {
-		s = s.replaceAll("[^a-z0-9]", "");
+     s = s.replaceAll("[^a-z0-9]", "");
      int j = s.length()-1;
      for(int i =0 ; i < s.length(); i++ , j--)
          if(s.charAt(i) != s.charAt(j))
@@ -84,7 +84,7 @@ class Solution
 
         for (int i = s.length()-1; i>=0; i--)
             result += String.valueOf(s.charAt(i));
-        System.out.println(result.length());
+
         return result;
     }
 }
@@ -106,7 +106,7 @@ class Solution
 {
     public String solution(String s)
     {
-			  StringBuilder sb = new StringBuilder(s);
+	StringBuilder sb = new StringBuilder(s);
         return sb.reverse().toString();
     }
 }
@@ -146,7 +146,7 @@ class Solution
 {
     public String[] solution(String []log)
     {
-	    List<String> letters = new ArrayList<>();
+	List<String> letters = new ArrayList<>();
         List<String> digits = new ArrayList<>();
 
     for(int i=0; i<log.length; i++){
@@ -174,6 +174,7 @@ class Solution
         List<String> result = new ArrayList<>();
         result.addAll(letters);
         result.addAll(digits);
+	
         return result.toArray(new String[result.size()]);
 	}
 }
@@ -248,7 +249,7 @@ class Solution
 {
     public List<List<String>> solution(String[] s)
     {
-			 List<List<String>> result = new ArrayList<>();
+	    List<List<String>> result = new ArrayList<>();
             Map<String, List<Integer>> map = new HashMap<>();
 
         for(int i=0; i<s.length;i++){
@@ -314,9 +315,9 @@ class Solution {
 class Solution
 {
 
-    public int solution(String s)
-    {
-			if (s == null || s.length() < 1) return "";
+    public int solution(String s){
+    
+	if (s == null || s.length() < 1) return "";
         int start = 0, end = 0;
         for (int i = 0; i < s.length(); i++) {
             int len1 = expandAroundCenter(s, i, i);
@@ -331,7 +332,7 @@ class Solution
  
     }
 
-		private static int expandAroundCenter(String s, int left, int right) {
+     private static int expandAroundCenter(String s, int left, int right) {
 	        int L = left, R = right;
 	        while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
 	            L--;
@@ -339,7 +340,7 @@ class Solution
 	        }
 	        return R - L - 1;
 	    }
-}
+	}
 ```
 
     
