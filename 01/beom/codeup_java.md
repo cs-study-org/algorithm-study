@@ -827,3 +827,526 @@ public class Main {
     }
 }
 ```
+
+## 60번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+        int b = sc.nextInt();
+
+        System.out.println(a&b);
+    }
+}
+```
+
+## 61번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+        int b = sc.nextInt();
+
+        System.out.println(a|b);
+    }
+}
+```
+
+## 62번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+        int b = sc.nextInt();
+
+        System.out.println(a^b);
+    }
+}
+```
+
+## 63번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+        int b = sc.nextInt();
+
+        System.out.printf("%d",a>b ? a:b);
+    }
+}
+```
+
+## 64번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+        int b = sc.nextInt();
+        int c = sc.nextInt();
+
+        System.out.printf("%d",(a>b ? b:a)>c? c:(a>b ? b:a));
+    }
+}
+```
+
+## 65번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+        int b = sc.nextInt();
+        int c = sc.nextInt();
+
+        if(a%2 ==0){
+            System.out.println(a);
+        }
+        if(b%2 ==0){
+            System.out.println(b);
+        }
+        if(c%2 ==0){
+            System.out.println(c);
+        }
+    }
+}
+```
+
+## 66번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+        int b = sc.nextInt();
+        int c = sc.nextInt();
+
+        if(a%2 ==0){
+            System.out.println("even");
+        }
+        else{
+            System.out.println("odd");
+        }
+        if(b%2 ==0){
+            System.out.println("even");
+        }
+        else{
+            System.out.println("odd");
+        }
+        if(c%2 ==0){
+            System.out.println("even");
+        }
+        else{
+            System.out.println("odd");
+        }
+    }
+}
+```
+
+## 67번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a =sc.nextInt();
+
+
+        if(a>0){
+            System.out.println("plus");
+            if(a%2==0){
+                System.out.println("even");
+            }
+            else {
+                System.out.println("odd");
+            }
+        }
+        else{
+            System.out.println("minus");
+            if(a%2==0){
+                System.out.println("even");
+            }
+            else {
+                System.out.println("odd");
+            }
+        }
+    }
+}
+```
+
+## 68번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+
+
+        if (a >= 90) {
+            System.out.println("A");
+        } else if (a >= 70) {
+            System.out.println("B");
+        } else if (a >= 40) {
+            System.out.println("C");
+        } else {
+            System.out.println("D");
+        }
+    }
+}
+```
+
+## 69번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String a = sc.nextLine();
+
+        switch (a) {
+            case "A": {
+                System.out.println("best!!!");
+                break;
+            }
+            case "B": {
+                System.out.println("good!!");
+                break;
+            }
+            case "C": {
+                System.out.println("run!");
+                break;
+            }
+            case "D": {
+                System.out.println("slowly~");
+                break;
+            }
+            default:
+                System.out.println("what?");
+                break;
+        }
+    }
+}
+```
+
+## 70번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+
+        switch (a) {
+            case 12:
+                System.out.println("winter");
+                break;
+            case 1:
+                System.out.println("winter");
+                break;
+            case 2:
+                System.out.println("winter");
+                break;
+            case 3:
+                System.out.println("spring");
+                break;
+            case 4:
+                System.out.println("spring");
+                break;
+            case 5:
+                System.out.println("spring");
+                break;
+            case 6:
+                System.out.println("summer");
+                break;
+            case 7:
+                System.out.println("summer");
+                break;
+            case 8:
+                System.out.println("summer");
+                break;
+            case 9:
+                System.out.println("fall");
+                break;
+            case 10:
+                System.out.println("fall");
+                break;
+            case 11:
+                System.out.println("fall");
+                break;
+        }
+    }
+}
+```
+
+## 71번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while(true){
+            int a = sc.nextInt();
+            if(a!=0){
+                System.out.println(a);
+            }
+            else{
+                break;
+            }
+        }
+    }
+}
+```
+
+## 72번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (true){
+            int a = sc.nextInt();
+            if(a==0){
+                break;
+            }
+            else{
+                System.out.println(a);
+            }
+        }
+    }
+}
+```
+
+## 74번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        while (a!=0){
+            System.out.println(a);
+            a--;
+        }
+    }
+}
+```
+
+## 75번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        while (a!=0){
+            System.out.println(a-1);
+            a--;
+        }
+    }
+}
+```
+
+## 76번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        char a = sc.next().charAt(0);
+        char b = 'a';
+        while (b<=a){
+            System.out.print(b+" ");
+            b++;
+        }
+    }
+}
+```
+
+## 77번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = 0;
+        while (a>=b){
+            System.out.println(b);
+            b++;
+        }
+    }
+}
+```
+
+## 78번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int sum = 0;
+
+        for(int i=0;i<=a;i++){
+            if(i%2==0) {
+                sum = sum + i;
+            }
+        }
+        System.out.println(sum);
+    }
+}
+```
+
+## 79번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while(true){
+            char a = sc.next().charAt(0);
+            if(a=='q'){
+                System.out.println(a);
+                break;
+            }
+            else {
+                System.out.println(a);
+            }
+        }
+    }
+}
+```
+
+## 80번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b=1;
+        int sum =0;
+        while (true){
+            sum = sum+b;
+            if(sum>=a){
+                System.out.println(b);
+                break;
+            }
+            b++;
+        }
+    }
+}
+```
+
+## 81번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        for(int i = 0; i<a;i++){
+            for (int j =0;j<b;j++){
+                System.out.println((i+1)+" "+(j+1));
+            }
+        }
+    }
+}
+```
+
+## 82번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt(16);
+        for(int i = 1; i<16;i++){
+            System.out.printf("%X*%X=%X\n",a,i,a*i);
+        }
+    }
+}
+```
+
+## 83번
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        for(int i = 1; i<=a;i++){
+            if(i%3==0){
+                System.out.print("X ");
+            }
+            else{
+                System.out.print(i+" ");
+            }
+        }
+    }
+}
+```
+
+## 84번
+```java
+import java.io.*;
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        String s = br.readLine();
+        String[] str = s.split(" ");
+        int count = 0;
+        for(int i = 0; i<Integer.valueOf(str[0]);i++) {
+            for (int j =0;j<Integer.valueOf(str[1]);j++){
+                for(int k = 0;k<Integer.valueOf(str[2]);k++){
+                    bw.write(i + " "+ j+ " "+k+"\n");
+                    count++;
+                }
+            }
+        }
+        bw.write(String.valueOf(count));
+        bw.flush();
+    }
+}
+```
+
