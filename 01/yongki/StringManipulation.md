@@ -692,6 +692,124 @@ var lengthOfLongestSubstring = function(s) {
 
 </details>
 
+<details>
+<summary>
+  763. Partition Labels
+  <a href="https://leetcode.com/problems/partition-labels/">👊</a>
+</summary>
+<br/>
+
+    Input: s = "ababcbacadefegdehijhklij"
+    Output: [9,7,8]
+
+        "ababcbaca", "defegde", "hijhklij"
+
+    1. 먼저, 문자별 인덱스 위치를 나타내는 객체를 만들었다.
+    2. 객체의 value 요소의 길이가 가장 길고, 마지막 인덱스가 가장 큰 숫자일때, 
+       그 숫자가 파티션을 나누는 기준이 된다.    
+
+        {
+          a: [ 0, 2, 6, 8 ],  // +++
+          b: [ 1, 3, 5 ],          
+          c: [ 4, 7 ],     
+
+          d: [ 9, 14 ],     
+          e: [ 10, 12, 15 ],  // +++
+          f: [ 11 ],          
+          g: [ 13 ],          
+          h: [ 16, 19 ],
+          i: [ 17, 22 ],
+          j: [ 18, 23 ],     
+          k: [ 20 ],
+          l: [ 21 ]
+        }
+
+    3. 기준을 찾을때까지, 객체에서 문자를 key로 찾아 삭제한다.
+
+        ⅰ)
+          {
+            d: [ 9, 14 ],
+            e: [ 10, 12, 15 ],
+            f: [ 11 ],
+            g: [ 13 ],
+            h: [ 16, 19 ],
+            i: [ 17, 22 ],
+            j: [ 18, 23 ],
+            k: [ 20 ],
+            l: [ 21 ]
+          }
+
+        ⅱ)
+          { 
+            h: [ 16, 19 ], 
+            i: [ 17, 22 ], 
+            j: [ 18, 23 ], 
+            k: [ 20 ], 
+            l: [ 21 ] 
+          }
+
+        ⅲ)
+          { 
+            k: [ 20 ], 
+            l: [ 21 ] 
+          }        
+
+    하지만, 파티션을 나누는 기준이 너무 정밀한 나머지 원하는 결과를 얻지 못했다.
+
+        [9,7,13,8]
+
+```js
+/**
+ * @param {string} s
+ * @return {number[]}
+ */
+var partitionLabels = function(s) {  
+  const idxTable = {};
+  
+  for(const [index, letter] of Object.entries(s)){
+    if(letter in idxTable)
+      idxTable[letter].push(
+        s.indexOf(letter, index)
+      );
+    else
+      idxTable[letter] = [s.indexOf(letter)];
+  }    
+    
+  const result = [];  
+  
+  while(Object.keys(idxTable).length){
+    const letterList = Object.keys(idxTable);
+    let splitIdx = 0;
+    let maxFreq = 0; 
+
+    for(const letter of letterList){         
+      const lastIdx = idxTable[letter].at(-1);
+      const letterFreq = idxTable[letter].length;
+
+      if(splitIdx < lastIdx){
+        if(maxFreq < letterFreq){
+          splitIdx = lastIdx;
+          maxFreq = letterFreq;          
+        }else if(maxFreq > letterFreq)        
+          break;
+      }
+      
+      delete idxTable[letter];            
+    }
+    
+    const recentSplitIdx = result.at(-1);
+    result.push(
+      recentSplitIdx 
+      ? (splitIdx + 1) - recentSplitIdx  
+      : splitIdx + 1
+    );    
+  }    
+  return result;
+};
+```
+
+</details>
+
 <hr/>
 
 ## 참고문헌
