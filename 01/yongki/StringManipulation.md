@@ -534,6 +534,164 @@ var longestPalindrome = function(s) {
       result = bab
 
 </details>
+
+### 추가 문제
+
+- 테스트 케이스까지 통과한 문제만 시간 복잡도를 기록해두었습니다.
+- 각 문제의 👊를 클릭하면 문제로 이동합니다.
+
+<details>
+<summary>
+  3. Longest Substring Without Repeating Characters
+  <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/">👊</a>
+</summary>
+<br/>
+
+**문제 풀이 1/2**
+
+처음에 접근한 방법이다.
+
+    Input: s = "abcabcbb"
+
+    1. 문자열의 문자 갯수만큼 루프를 돈다.
+    2. 루프를 돌때마다 substring을 찾아내는데,
+       현재 문자 인덱스로 부터 다시 자신이 나올때까지 찾아낸다.
+
+        abc
+        bca
+        cab
+        abcbb
+        bc
+        cbb
+
+    3. 중복되는 문자는 제거하였다.
+
+        abc
+        bca
+        cab
+        bc
+
+    하지만, 다음 테스트케이스를 통과하지 못했다.
+    TestCase: s = "cdd"
+
+    substring을 찾아내는 함수가 적절하지 못했다.
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+  
+  // +++ Exception
+  if(new Set(s).size === 1)
+    return 1;
+  if(!s.length)
+    return 0;
+  if(s.length < 2)
+    return 1;
+
+  // +++ Function
+  const findSubstring = (left, right) => {
+    let current = '';
+    
+    while(
+      left >= 0
+      && right < s.length
+      && s[left] !== s[right]
+    ){                  
+      current = s.substring(left, right + 1);
+      right += 1;
+    }              
+
+    return current;
+  }
+  
+  const checkRepeatAlpabet = (string) => string !== [...new Set(string.split(''))].join('');
+    
+  // +++ Start
+  let result = 0;
+  
+  for(let i = 0; i < s.length; i++){    
+    const substring = findSubstring(i, i + 1);        
+    
+    if(checkRepeatAlpabet(substring))
+      continue;
+    
+    result = Math.max(result, substring.length);    
+  }
+  
+  if(!result)
+    return s.length;  
+  
+  return result;
+};
+```
+
+**문제 풀이 2/2**
+
+따라서, 리트코드의 많은 풀이를 참고했지만, 이를 이해하기 힘들었다.
+
+이 문제는 `sliding window`라는 알고리즘 기법으로 해결한다고 하는데, 관련 easy 난이도를 풀어도 기법을 이해하지 못했다.
+
+`sliding window` 기법은 아니지만 가장 직관적인 풀이를 찾을 수 있었다.
+
+    time:  O(n^2)
+
+      for       → O(n)
+        indexOf → O(n)    
+
+    ---------------------
+
+    Input: s = "abcabcbb"
+
+    1. 문자열의 문자 갯수만큼 루프를 돈다.
+    2. 현재 루프 순서인 자신의 문자와 동일한 문자를 current에서 찾는다.
+       동일한 문자가 없으면 current에 넣는다.
+
+        current = '' → a
+        letter = a
+
+    3. 자신의 문자와 동일한 문자를 찾았다면, 
+       current에 있던 동일 문자를 제거하고, 자신을 current에 붙인다.
+
+        current = abc
+        letter  = a
+
+        current = bc + a = bca
+    
+    4. 또한, current의 length가 제일 길었을 때 longest에 넣어 기억해둔다.
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {  
+  let longest = '';
+  let current = '';
+  
+  for(const letter of s){
+    let index = current.indexOf(letter);
+    
+    if(index > -1){
+      if(current.length > longest.length)
+        longest = current;
+      
+      current = current.slice(index + 1) + letter;
+    }else
+      current += letter;    
+  }
+  
+  if(current.length > longest.length)
+    longest = current;
+  
+  return longest.length;
+};
+```
+
+</details>
+
 <hr/>
 
 ## 참고문헌
@@ -541,3 +699,5 @@ var longestPalindrome = function(s) {
 [Simple Solution at 49. Group Anagrams](https://leetcode.com/problems/group-anagrams/discuss/1720092/Simple-and-Fastest-JavaScript-Solution) -- abagarwa
 
 [Simple Solution at 5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/discuss/1022625/Javascript) -- rbwn
+
+[Simple Solution at 3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/discuss/199006/Javascript-Solution-96.10) -- lanceyvang
