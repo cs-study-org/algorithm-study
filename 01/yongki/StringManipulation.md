@@ -848,6 +848,97 @@ var partitionLabels = function(s) {
   return result;
 };
 ```
+</details>
+
+<details>
+<summary>
+  139. Word Break
+  <a href="https://leetcode.com/problems/word-break/">👊</a>
+</summary>
+<br/>
+
+**문제 풀이 1/2**    
+    
+    time:  O(n^3)
+
+      some          → O(n)
+        while       → O(n)
+          indexOf   → O(n)
+        some        → O(n)
+
+    ----------------------------------
+
+    Input:
+      s         = "abcd"
+      wordDict  = ["a","abc","b","cd"]
+
+    Output: true
+
+    1. wordDict를 문자열 길이에 따라 내림차순 정렬을 해준다.
+    2. 문자열 길이가 길수록, 해당 문자열을 s에서 제외했을 시 남은 문자열이 wordDict에 있는지 선별작업을 더 앞당길 수 있기 때문이다.
+
+        sortWordDict  = ["abc","cd", "a", "b"]
+        word          = abc
+        left          = abcd - abc = d 
+
+          → Output: false
+
+    3. 남은 문자열 안의 문자가 wordDict에 속했을 때 골치가 아프다.
+
+        word          = cd
+        left          = ab 
+
+          → 'a' and 'b' is in wordDict
+    
+    4. 따라서, 이를 탐색하는 n 작업이 뒤따른다.
+
+        Is 'ab' have 'abc'?
+        ...
+        Is 'ab' have 'a'?
+        Is 'ab' have 'b'?
+
+    5. 하지만, 아래 테스트 케이스에서 막혀버렸다.
+       디버깅을 해봤지만, 원인을 찾을 수 없었다.
+
+        Testcase: 
+          s        = "ccbb"
+          wordDict = ["bc","cb"]
+
+```js
+/**
+ * @param {string} s
+ * @param {string[]} wordDict
+ * @return {boolean}
+ */
+var wordBreak = function(s, wordDict) {
+  const doDescend = (a, b) => b.length - a.length;
+  
+  const isKeepable = string => wordDict.some(word => string.indexOf(word) > -1);
+  
+  let keep = '';
+  
+  return [...wordDict]
+    .sort(doDescend)
+    .some(word => {                
+      let withoutWord = keep ? keep : s; 
+    
+      while(withoutWord.indexOf(word) > -1)
+        withoutWord = withoutWord.replace(word, '');               
+      
+      if(wordDict.includes(withoutWord) || !withoutWord)
+          return true;
+    
+      if(isKeepable(withoutWord))
+          keep = withoutWord;  
+    
+      return false;
+    });  
+};
+```
+
+**문제 풀이 2/2**
+
+    ...
 
 </details>
 
