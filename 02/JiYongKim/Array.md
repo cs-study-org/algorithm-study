@@ -25,7 +25,8 @@
 Ex)
 <br>
 
-![Uploading 스크린샷 2022-01-29 오후 5.07.56.png…]()
+<img width="264" alt="스크린샷 2022-01-29 오후 5 07 56" src="https://user-images.githubusercontent.com/81874493/151656566-0272875f-e23b-403d-98d5-586e10a49212.png">
+
 
 배열을 정수형 int로 선언했을때
 
