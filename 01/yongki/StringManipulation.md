@@ -699,13 +699,18 @@ var lengthOfLongestSubstring = function(s) {
 </summary>
 <br/>
 
+**문제 풀이 1/2**
+
     Input: s = "ababcbacadefegdehijhklij"
     Output: [9,7,8]
 
         "ababcbaca", "defegde", "hijhklij"
 
-    1. 먼저, 문자별 인덱스 위치를 나타내는 객체를 만들었다.
-    2. 객체의 value 요소의 길이가 가장 길고, 마지막 인덱스가 가장 큰 숫자일때, 
+    1. 먼저, 문자 별 인덱스 위치들을 정리한 객체를 만들었다.
+    2. 객체의 
+          a. value 배열의 길이가 가장 길고, 
+          b, 마지막 인덱스가 가장 큰 숫자일때, 
+
        그 숫자가 파티션을 나누는 기준이 된다.    
 
         {
@@ -717,8 +722,8 @@ var lengthOfLongestSubstring = function(s) {
           e: [ 10, 12, 15 ],  // +++
           f: [ 11 ],          
           g: [ 13 ],          
-          h: [ 16, 19 ],
-          i: [ 17, 22 ],
+          h: [ 16, 19 ],      // +++ 🤪 기준의 오류 발생 지점
+          i: [ 17, 22 ],      
           j: [ 18, 23 ],     
           k: [ 20 ],
           l: [ 21 ]
@@ -726,7 +731,7 @@ var lengthOfLongestSubstring = function(s) {
 
     3. 기준을 찾을때까지, 객체에서 문자를 key로 찾아 삭제한다.
 
-        ⅰ)
+        [After loop 1]
           {
             d: [ 9, 14 ],
             e: [ 10, 12, 15 ],
@@ -739,7 +744,7 @@ var lengthOfLongestSubstring = function(s) {
             l: [ 21 ]
           }
 
-        ⅱ)
+        [After loop 2]
           { 
             h: [ 16, 19 ], 
             i: [ 17, 22 ], 
@@ -748,7 +753,7 @@ var lengthOfLongestSubstring = function(s) {
             l: [ 21 ] 
           }
 
-        ⅲ)
+        [After loop 3]
           { 
             k: [ 20 ], 
             l: [ 21 ] 
@@ -808,6 +813,42 @@ var partitionLabels = function(s) {
 };
 ```
 
+**문제 풀이 2/2**
+
+이후 좋은 풀이를 참조하니, 
+
+필자가 처음 접근한 자료구조 단위가 아닌 변수 단위를 활용하니 훨씬 간단한 문제였음을 알 수 있었다.
+
+코드가 직관적이어서 따로 설명이 필요 없을 정도였다.
+
+    time: O(n)
+
+```js
+/**
+ * @param {string} s
+ * @return {number[]}
+ */
+var partitionLabels = function(s) {  
+  let maxLabel = 0;
+  let recentLabel = 0;
+  
+  const result = [];
+  
+  for(let i = 0; i < s.length; i++){        
+    maxLabel = Math.max(s.lastIndexOf(s[i]), maxLabel);
+    
+    if(i === maxLabel){    
+      const label = (maxLabel + 1) - recentLabel;
+      result.push(label);
+
+      recentLabel = maxLabel + 1;
+    }    
+  }
+  
+  return result;
+};
+```
+
 </details>
 
 <hr/>
@@ -819,3 +860,5 @@ var partitionLabels = function(s) {
 [Simple Solution at 5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/discuss/1022625/Javascript) -- rbwn
 
 [Simple Solution at 3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/discuss/199006/Javascript-Solution-96.10) -- lanceyvang
+
+[Simple Solution at 763. Partition Labels](https://leetcode.com/problems/partition-labels/discuss/1283020/Easy-to-understand-for-beginners-as-well(runtime-98)) -- lssuseendharlal
