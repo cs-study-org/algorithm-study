@@ -1350,3 +1350,87 @@ public class Main {
 }
 ```
 
+## 85번
+```java
+import java.util.*;
+
+class Main {  
+  public static void main(String args[]) { 
+    Scanner sc = new Scanner(System.in);
+    double h = sc.nextInt();
+    double b = sc.nextInt();
+    double c = sc.nextInt();
+    double s = sc.nextInt();
+
+    double result = (h*b*c*s)/1024/1024/8;
+    System.out.printf("%.1f MB",result);
+    
+  } 
+}
+```
+
+## 86번
+```java
+import java.util.*;
+
+class Main {  
+  public static void main(String args[]) { 
+    Scanner sc = new Scanner(System.in);
+    double w = sc.nextInt();
+    double h = sc.nextInt();
+    double b = sc.nextInt();
+
+    double result = (w*h*b)/1024/1024/8;
+    System.out.printf("%.2f MB",result);
+    
+  } 
+}
+```
+
+## 87번
+```java
+import java.util.*;
+
+class Main {  
+  public static void main(String args[]) { 
+    Scanner sc = new Scanner(System.in);
+    int a = sc.nextInt();
+    int i=0;
+    int b = 1;
+    while(true){
+        i=i+b;
+        if(i>=a){
+            System.out.println(i);
+            break;
+        }
+        b++;
+    }
+  } 
+}
+```
+
+## 88번
+```java
+import java.util.*;
+
+class Main {  
+  public static void main(String args[]) { 
+    Scanner sc = new Scanner(System.in);
+    int a = sc.nextInt();
+    int b=1;
+    while(true){
+        if(b%3==0){
+        }
+        else{
+            System.out.printf("%d ",b);
+        }
+        if(a<=b){
+            break;
+        }
+        b++;
+    }
+  } 
+}
+```
+
+
