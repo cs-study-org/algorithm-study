@@ -2,6 +2,7 @@
 
 ## 목차
 ## 1672. Richest Customer Wealth
+## 20. Valid Parentheses
 ## 3. Longest Substring Without Repeating Characters
 ## 763. Partition Labels
 ## 139. Word Break
@@ -40,8 +41,56 @@ class Solution {
 }
 ```
 
+## 20. Valid Parentheses
 
+### 풀이 서술
+1. 문자열을 입력받고
+2. 스택 자료구조를 사용
+3. ([{ 으로 시작하면 push
+4. 아니면 )}]인 경우이므로 stack의 가장 위에 값이 맞는 괄호라면 pop
 
+### 코드
+```java
+import java.util.Stack;
+
+class Solution {
+    public static boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i) == '('||s.charAt(i) == '{'||s.charAt(i) == '['){
+                stack.push(s.charAt(i));
+            }
+            else{
+                if(stack.size()==0) return false;
+                if(s.charAt(i)==')'){
+                    if(stack.peek() =='('){
+                        stack.pop();
+                    }
+                    else return false;
+                }
+                else if(s.charAt(i)=='}'){
+                    if(stack.peek() =='{'){
+                        stack.pop();
+                    }
+                    else return false;
+                }
+                else if(s.charAt(i)==']'){
+                    if(stack.peek() =='['){
+                        stack.pop();
+                    }
+                    else return false;
+                }
+            }
+        }
+        if(stack.size()==0) return true;
+        else return false;
+    }
+
+    public static void main(String[] args) {
+        isValid("{}[");
+    }
+}
+```
 
 
 ## 3. Longest Substring Without Repeating Characters
