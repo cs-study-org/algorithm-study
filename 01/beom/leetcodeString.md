@@ -1,9 +1,45 @@
 # 문자열 문제 모음
 
 ## 목차
+## 1672. Richest Customer Wealth
 ## 3. Longest Substring Without Repeating Characters
 ## 763. Partition Labels
 ## 139. Word Break
+
+
+## 1672. Richest Customer Wealth
+### 풀이서술
+1. 2차원 배열을 입력받고
+2. 2차원 배열의 for문 안에 sum을 구해 변수에 넣고 Math.max로 비교
+3. 가장 큰값 출력
+
+### 코드
+```java
+class Solution {
+    public static int maximumWealth(int[][] accounts) {
+        int res = 0;
+        int m = accounts.length;
+        int n = accounts[0].length;
+
+        for(int i=0; i<m;i++){
+            int tmp = 0;
+
+            for(int j=0;j<n;j++){
+                tmp = tmp + accounts[i][j];
+            }
+            res = Math.max(res,tmp);
+        }
+        System.out.println(res);
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int[][] account = {{9,8},{5,7},{2,3}};
+        maximumWealth(account);
+    }
+}
+```
+
 
 
 
