@@ -123,8 +123,90 @@ var searchInsert = function(nums, target) {
 
 </details>
 
+<!-- <details> -->
+<summary>
+  53. Maximum Subarray
+  <a href="https://leetcode.com/problems/maximum-subarray/">👊</a>
+</summary>
+<br/>
+
+이 문제는 접근 방법이 떠오르지 않았다.
+때문에 시간복잡도를 줄여나가는 풀이로 접근 방법을 배웠다.
+
+**문제 풀이 1/3 [`Brute force`]**
+
+    time:   O(n^2)
+
+    Input:  [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+    Output: 6
+
+    1. 루프에 따른 결과값을 확인해보면 이해가 편하다.
+
+      i = 0 일때, 다른 배열 요소를 모두 순회하는데, 
+
+      (현재요소 + 다음요소) vs 다음 요소
+      에서 최댓값을 tempMax에 넣어둔다.
+
+      (-2 + 1)    vs  1      tempMax = 1
+      (1  + -3)   vs  -3     tempMax = -2
+      (-2 + 4)    vs  4      tempMax = 4
+      ...
+      (5 + 1)     vs 1       tempMax = 6 
+
+      tempMax를 가산기와 헷갈리면 안된다.
+
+    2. 이 계산 과정중의 최댓값은 또 따로 빼둔다.
+
+        max = 6
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {  
+  let max = nums[0];
+  
+  for(let i = 0; i < nums.length; i++){
+    let tempMax = nums[i];
+        
+    for(let j = i + 1; j < nums.length; j++){    
+      tempMax = Math.max(tempMax + nums[j], nums[j]);
+      max = Math.max(tempMax, max);      
+    }    
+  }
+  
+  return max;
+};
+```
+
+**문제 풀이 2/3 [`Brute force to O(n)`]**
+
+    time:   O(n)
+
+    a. 이전 tempSum이 음수인 경우 tempSum은 현재 숫자이다.
+    b. tempSum이 양수인 경우 tempSum은 현재 숫자와 합이다.
+
+    이 2가지 특징을 이용해서 하나의 루프로 해결한다.
+
+    1. 
+
+```js
+```
+
+**문제 풀이 3/3 [`divide and conquer`]**
+
+```js
+```
+
+</details>
+
 <hr/>
 
 ## 참고문헌
 
 [Binary Search code](https://velog.io/@yujo/JS이진-탐색Binary-Search) -- yujo
+
+[Simple Solution at 53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/discuss/164670/JavaScript-Solution-Comparisons) -- Busyreadingsomething
+
+[Simple Solution at 53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/discuss/898149/JavaScript-Solution-with-Explanation) -- akshajmody
