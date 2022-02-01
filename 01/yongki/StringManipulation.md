@@ -938,6 +938,10 @@ var wordBreak = function(s, wordDict) {
 
 **문제 풀이 2/2**
 
+참고할 풀이들이 BFS나 DP를 활용하는 것 같다.
+
+앞으로 관련된 주제의 스터디 시간 때 개념을 익히고, 풀이를 참고하도록 하겠다.
+
     ...
 
 </details>
