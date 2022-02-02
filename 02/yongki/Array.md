@@ -2,6 +2,18 @@
 
 > 각 문제의 👊를 클릭하면 문제로 이동합니다.
 
+- [배열](#배열)
+  - [문제 리스트](#문제-리스트)
+    - [문제 회고](#문제-회고)
+    - [문제 풀이 1/2 [`재귀적 호출`]](#문제-풀이-12-재귀적-호출)
+    - [문제 풀이 2/2 [`하나의 루프에서 범위 재조정`]](#문제-풀이-22-하나의-루프에서-범위-재조정)
+    - [이슈](#이슈)
+    - [문제 회고](#문제-회고-1)
+    - [문제 풀이 1/3 [`Brute force`]](#문제-풀이-13-brute-force)
+    - [문제 풀이 2/3 [`Kadane's Algorithm`]](#문제-풀이-23-kadanes-algorithm)
+    - [문제 풀이 3/3 [`divide and conquer`]](#문제-풀이-33-divide-and-conquer)
+  - [참고문헌](#참고문헌)
+
 ## 문제 리스트
 
 <details>
@@ -9,7 +21,8 @@
   35. Search Insert Position
   <a href="https://leetcode.com/problems/search-insert-position/">👊</a>
 </summary>
-<br/>
+
+### 문제 회고
 
 문제 조건에 시간 복잡도 `O(log n)`을 만족하라고 나와있었다.
 
@@ -27,20 +40,36 @@
 
 좀더 구현체를 활용한 코드들은 정렬되지 않은 배열일 때를 극복하는 경우라고 예상한다.
 
-**문제 풀이 1/2 [재귀적 호출]**
+### 문제 풀이 1/2 [`재귀적 호출`]
+
+<table>
+  <tr>
+    <th>문제 설명</th>
+    <th>코드</th>
+  </tr>
+  <tr>
+    <td>
+<pre>
 
     time: O(log n)
 
-    1. 주어진 배열의 중간 인덱스값(이하 middle 값)가 target을 찾을때까지 루프를 돈다.
-    2. middle 값을 기준으로 target이 작은 범위냐 큰 범위냐에 있으면 그 반대편 범위는 탐색 대상에서 제외한다.
-    3. 그렇게 범위를 재조정했으면, 그 안에서 middle 값을 찾아 target을 계속 찾는다.
+    1. 주어진 배열의 중간 인덱스값(이하 middle 값)가 
+       target을 찾을때까지 루프를 돈다.
+    2. middle 값을 기준으로 target이 작은 범위냐 큰 범위냐에 있으면 
+       그 반대편 범위는 탐색 대상에서 제외한다.
+    3. 그렇게 범위를 재조정했으면, 
+       범위 안에서 middle 값을 찾아 target을 계속 찾는다.
+</pre>
+    </td>
+    <td>
+<pre>
 
 ```js
 /**
- * @param {number[]} nums
- * @param {number} target
- * @return {number}
- */
+* @param {number[]} nums
+* @param {number} target
+* @return {number}
+*/
 var searchInsert = function(nums, target) {
   var binarySearch = function(startIdx, endIdx, target){  
     while(startIdx <= endIdx){
@@ -61,16 +90,31 @@ var searchInsert = function(nums, target) {
   return binarySearch(startIdx=0, endIdx, target);
 };
 ```
+</pre>
+    </td>
+  </tr>
+</table>
 
-**문제 풀이 2/2 [하나의 루프에서 범위 재조정]**
+### 문제 풀이 2/2 [`하나의 루프에서 범위 재조정`]
 
 좀 더 이해하기 쉬운 풀이이다.
 
-    time: O(log n) 🤔 (확실하지 않다.)
+<table>
+  <tr>
+    <th>문제 설명</th>
+    <th>코드</th>
+  </tr>
+  <tr>
+    <td>
+<pre>
 
-    1. 주어진 배열의 중간 인덱스값(이하 middle 값)가 target을 찾을때까지 루프를 돈다.
-    2. middle 값을 기준으로 target이 작은 범위냐 큰 범위냐에 있으면 범위를 재조정한다.
-    3. 그렇게 범위를 재조정했으면, 그 안에서 middle 값을 찾아 target을 계속 찾는다.
+    time: O(log n) 
+    
+      🤔 (확실하지 않다.)    
+</pre>
+    </td>
+    <td>
+<pre>
 
 ```js
 /**
@@ -101,6 +145,13 @@ var searchInsert = function(nums, target) {
   return binarySearch(nums, target);
 };
 ```
+</pre>
+    </td>
+  </tr>
+</table>
+
+
+### 이슈
 하지만, 수행 시간에서 차이가 극명했다.
 
 🤔 코드를 확인해보면 후자의 풀이도 이진 탐색 풀이는 맞다고 판단되지만, 
@@ -123,17 +174,33 @@ var searchInsert = function(nums, target) {
 
 </details>
 
-<!-- <details> -->
+<details>
 <summary>
   53. Maximum Subarray
   <a href="https://leetcode.com/problems/maximum-subarray/">👊</a>
 </summary>
 <br/>
 
-이 문제는 접근 방법이 떠오르지 않았다.
-때문에 시간복잡도를 줄여나가는 풀이로 접근 방법을 배웠다.
+### 문제 회고
 
-**문제 풀이 1/3 [`Brute force`]**
+이 문제는 접근 방법이 떠오르지 않았다.
+
+여러 풀이를 참고하였고, [문제 풀이 2/3](#문제-풀이-23-kadanes-algorithm)의 가장 직관적인 풀이를 찾아내었다.
+
+### 문제 풀이 1/3 [`Brute force`]
+
+제일 많이 등장한 풀이이다.
+
+하지만, 설명이 부자연스러울 정도로 필자는 제대로 이해하지 못했다.
+
+<table>
+  <tr>
+    <th>문제 설명</th>
+    <th>코드</th>
+  </tr>
+  <tr>
+    <td>
+<pre>
 
     time:   O(n^2)
 
@@ -158,6 +225,10 @@ var searchInsert = function(nums, target) {
     2. 이 계산 과정중의 최댓값은 또 따로 빼둔다.
 
         max = 6
+</pre>
+    </td>
+    <td>
+<pre>
 
 ```js
 /**
@@ -179,22 +250,79 @@ var maxSubArray = function(nums) {
   return max;
 };
 ```
+</pre>
+    </td>
+  </tr>  
+</table>
 
-**문제 풀이 2/3 [`Brute force to O(n)`]**
+### 문제 풀이 2/3 [`Kadane's Algorithm`]
 
-    time:   O(n)
+배열 챕터에 등장한 풀이법이다.
 
-    a. 이전 tempSum이 음수인 경우 tempSum은 현재 숫자이다.
-    b. tempSum이 양수인 경우 tempSum은 현재 숫자와 합이다.
+**알고리즘 설명**
 
-    이 2가지 특징을 이용해서 하나의 루프로 해결한다.
+`Kadane's Algorithm`은 
 
-    1. 
+    수열에서 각 수들을 더했을때 가장 큰 수가 나오는 연속된 부분(최대 부분합)을 찾는 알고리즘이다.
+
+<table>
+  <tr>
+    <td width="50%">
+      <img src="https://miro.medium.com/max/1400/1*0T4vufD3IKkBLC895NNtkA.png">
+    </td>
+    <td>
+      <p>풀이의 핵심은</p>
+<pre><code>수열의 요소별 최대 부분합은
+이전 요소의 최대 부분합이 반영된 결과값인 것이다.</code></pre>
+    </td>
+  </tr>
+</table>
+
+최대 부분합은 이렇게
+
+1. `이전 요소의 최대 부분합` + `현재 요소의 최대 부분합`하여 연장할지,
+2. 또는, `현재 요소의 최대 부분합`으로 초기화할지 선택하면 된다.
+
+<table>
+  <tr>
+    <th>문제 설명</th>
+    <th>코드</th>
+  </tr>
+  <tr>
+    <td>
+<pre>
+
+    time: O(n)
+
+위 알고리즘 설명으로 대체한다.
+
+</pre>
+    </td>
+    <td>
+<pre>
 
 ```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {  
+  for(let i = 1; i < nums.length; i++){
+    nums[i] = Math.max(
+      nums[i],
+      nums[i] + nums[i - 1]
+    )    
+  }
+  
+  return Math.max(...nums);
+};
 ```
+</pre>
+    </td>
+  </tr>
+</table>
 
-**문제 풀이 3/3 [`divide and conquer`]**
+### 문제 풀이 3/3 [`divide and conquer`]
 
 ```js
 ```
@@ -207,6 +335,10 @@ var maxSubArray = function(nums) {
 
 [Binary Search code](https://velog.io/@yujo/JS이진-탐색Binary-Search) -- yujo
 
+[Kadane's Algorithm](https://kplog.tistory.com/273) -- 센치한개발자
+
+[Kadane's Algorithm](https://medium.com/@vdongbin/kadanes-algorithm-카데인-알고리즘-acbc8c279f29) -- vincent
+
 [Simple Solution at 53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/discuss/164670/JavaScript-Solution-Comparisons) -- Busyreadingsomething
 
-[Simple Solution at 53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/discuss/898149/JavaScript-Solution-with-Explanation) -- akshajmody
+[Simple Solution at 53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/discuss/1152811/Kadane's-Algorithm-Javascript) -- EziO-
