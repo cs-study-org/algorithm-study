@@ -301,6 +301,42 @@ Ex)
 </details>
 
 <details>
+    <summary>Product of Array Except Self</summary>
+    문제 : 배열을 입력받아 output[i]가 자신을 제외한 나머지 모든 요소의 곱셈 결과가 되도록 출력하라.
+    (단, 나눗셈을 하지 않고 O(n)에 풀이하라.)
+
+```java
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        
+        int[] result = new int[nums.length];
+        List <Integer> a = new ArrayList<>();
+        List <Integer> b = new ArrayList<>();
+        a.add(1);
+        b.add(1);
+        
+        int a_num=1, b_num=1;
+        
+        for(int i =0; i<nums.length-1;i++){
+            a_num *= nums[i];
+            a.add(a_num);
+        }
+        for(int i =nums.length-1; i>0 ; i--){
+            b_num *= nums[i];
+            b.add(b_num);       
+        }
+        Collections.reverse(b);
+        
+        for(int i =0; i<nums.length; i++)
+            result[i]=a.get(i)*b.get(i);
+        
+        return result;           
+    }
+}
+```
+</details>
+
+<details>
     <summary>Array Partition I</summary>
     
 - Array Partition I
