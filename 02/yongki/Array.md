@@ -1,7 +1,5 @@
 # 배열
 
-> 각 문제의 👊를 클릭하면 문제로 이동합니다.
-
 - [배열](#배열)
   - [문제 리스트](#문제-리스트)
     - [문제 회고](#문제-회고)
@@ -12,9 +10,13 @@
     - [문제 풀이 1/3 [`Brute force`]](#문제-풀이-13-brute-force)
     - [문제 풀이 2/3 [`Kadane's Algorithm`]](#문제-풀이-23-kadanes-algorithm)
     - [문제 풀이 3/3 [`divide and conquer`]](#문제-풀이-33-divide-and-conquer)
+    - [문제 회고](#문제-회고-2)
+    - [문제 풀이 [`Brute force`]](#문제-풀이-brute-force)
   - [참고문헌](#참고문헌)
 
 ## 문제 리스트
+
+> 각 문제의 👊를 클릭하면 문제로 이동합니다.
 
 <details>
 <summary>
@@ -44,7 +46,7 @@
 
 <table>
   <tr>
-    <th>문제 설명</th>
+    <th>풀이 설명</th>
     <th>코드</th>
   </tr>
   <tr>
@@ -101,7 +103,7 @@ var searchInsert = function(nums, target) {
 
 <table>
   <tr>
-    <th>문제 설명</th>
+    <th>풀이 설명</th>
     <th>코드</th>
   </tr>
   <tr>
@@ -189,13 +191,13 @@ var searchInsert = function(nums, target) {
 
 ### 문제 풀이 1/3 [`Brute force`]
 
-제일 많이 등장한 풀이이다.
+본 `Brute force`를 `O(n)`으로 간추린 알고리즘이 제일 많이 등장한 풀이이다.
 
 하지만, 설명이 부자연스러울 정도로 필자는 제대로 이해하지 못했다.
 
 <table>
   <tr>
-    <th>문제 설명</th>
+    <th>풀이 설명</th>
     <th>코드</th>
   </tr>
   <tr>
@@ -285,7 +287,7 @@ var maxSubArray = function(nums) {
 
 <table>
   <tr>
-    <th>문제 설명</th>
+    <th>풀이 설명</th>
     <th>코드</th>
   </tr>
   <tr>
@@ -329,6 +331,127 @@ var maxSubArray = function(nums) {
 
 </details>
 
+<details>
+<summary>
+  2133. Check if Every Row and Column Contains All Numbers
+  <a href="https://leetcode.com/problems/check-if-every-row-and-column-contains-all-numbers/">👊</a>
+</summary>
+
+### 문제 회고
+원래 [79. Word Search](https://leetcode.com/problems/word-search/)가 발표 문제였지만, 난이도 조정이 필요하다 생각하였다.
+
+따라서, 위 문제와 유사하지만 난이도 조정된 문제를 
+`Related Topics`에 `Array`, `Metrix`와 `Easy`태그를 더해 찾았다.
+
+### 문제 풀이 [`Brute force`]
+
+    row를 하나의 배열이라 할때,
+    길이가 3이면, row에는 1, 2, 3이 배열의 요소로 들어있어야한다.
+
+    col도 마찬가지다.
+
+<table>
+  <tr>
+    <th colspan="2">예시 사진</th>
+  </tr>
+  <tr align="center">
+    <td><small>Pass</small></td>
+    <td><small>Non-pass</small></td>
+  </tr>
+  <tr align="center">
+    <td>      
+      <img src="https://assets.leetcode.com/uploads/2021/12/21/example1drawio.png">
+    </td>
+    <td>
+      <img src="https://assets.leetcode.com/uploads/2021/12/21/example2drawio.png">
+    </td>
+  </tr>
+  <tr>
+    <th>풀이 설명</th>
+    <th>코드</th>
+  </tr>
+  <tr>
+  <td>
+<pre>
+
+    time:   O(n^2)
+
+    1. row와 col(이하 line이라 통칭)을 검증할 숫자(validateNum)는 그 요소들의 합이다.
+       요소의 합 6을 기준으로 1, 2, 3을 빼면서 0이 되어야 검증된 line이다.
+
+    2. 이때, 이러한 테스트 케이스가 있었다.
+
+        [
+          [2, 1, 3],
+          [2, 3, 1],
+          [2, 2, 2]
+        ]
+
+        즉, validateNum을 통과하지만, 1, 2, 3의 요소가 모두 들어있지 않다.
+        때문에, isSameElement 함수는 
+          배열을 Set화 시킬때 길이와 배열의 길이를 비교해서 이를 극복한다.
+
+    3. 또한, col의 요소들을 비교하기 위해 col마다 배열화 시켜야했다.
+       때문에, matrix를 회전하여, 해당 데이터 또한 활용하였다.
+</pre>
+  </td>
+  <td>
+<pre>
+
+```js
+var checkValid = function(matrix) {
+  
+  // +++ Function
+  const isSameElement = (arr) => new Set(arr).size !== matrix.length;
+  
+  const rotateMatrix = (matrix) => {
+    const result = [];
+    
+    for(let row = 0; row < matrix.length; row++){      
+      let rotateRow = [];
+      
+      for(let col = 0; col < matrix.length; col++)
+        rotateRow.push(matrix[col][row])
+
+      result.push(rotateRow);
+    }
+    
+    return result;
+  }
+  
+  // +++ Start
+  const validateNum = matrix[0].reduce((a, b) => a + b, 0);  
+  const rotatedMatrix = rotateMatrix(matrix);
+  
+  
+  for(let row = 0; row < matrix.length; row++){
+    if(isSameElement(matrix[row]))
+      return false;
+    
+    if(isSameElement(rotatedMatrix[row))
+      return false;
+    
+    let rowRange = validateNum;
+    let colRange = validateNum;
+
+    for(let col = 0; col < matrix.length; col++){      
+      rowRange = rowRange - matrix[row][col];
+      colRange = colRange - matrix[col][row];
+    }
+
+    if(rowRange || colRange)
+      return false;
+  }
+  
+  return true;
+}
+```
+</pre>
+  </td>
+  </tr>
+</table>
+
+</details>
 <hr/>
 
 ## 참고문헌
