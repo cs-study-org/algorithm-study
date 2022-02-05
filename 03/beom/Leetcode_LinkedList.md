@@ -2,7 +2,7 @@
 
 ## 목차
 ## 1290. Convert Binary Number in a Linked List to Integer
-
+## 237. Delete Node in a Linked List
 
 
 ## 1290. Convert Binary Number in a Linked List to Integer
@@ -39,3 +39,31 @@ O(n)
 
 ### 다른 풀이
 [연결리스트 값을 문자열로 변환후 2진수를 십진수로 변환](https://jaime-note.tistory.com/168)
+
+[문자열로 변환후 parseInt](https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/discuss/1739116/linkes-list-easy-to-understanding)
+
+
+## 237. Delete Node in a Linked List
+
+### 문제 요약
+ListNode의 입력된 데이터 값을 없애고 노드를 다음 노드로 연결하시오
+
+### 문제 풀이
+1. !!해당 문제의 매개변수는 ListNode하나여서 없애고자하는 데이터 값을 어디서 가져오는 이해하지 못해 해답을 봄
+2. 풀이를 본 결과 매개변수 ListNode에 연결리스트의 없애고자하는 데이터값이 head로 설정되어 있는 상황이였다.
+3. ListNode의 데이터 값을 다음 데이터 값으로 설정
+4. ListNode의 Node도 다음 Node로 설정
+
+### 코드
+```java
+public class Solution {
+    public void deleteNode(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
+}
+```
+
+### 시간복잡도
+O(1)
+
