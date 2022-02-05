@@ -181,7 +181,6 @@ var searchInsert = function(nums, target) {
   53. Maximum Subarray
   <a href="https://leetcode.com/problems/maximum-subarray/">👊</a>
 </summary>
-<br/>
 
 ### 문제 회고
 
@@ -325,6 +324,8 @@ var maxSubArray = function(nums) {
 </table>
 
 ### 문제 풀이 3/3 [`divide and conquer`]
+
+`Follow up`에 기술된 추가 조건이다. `DP`를 익힌 후에 다시 한번 풀어보도록 하자.
 
 ```js
 ```
