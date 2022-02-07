@@ -5,6 +5,8 @@
   - [문제 리스트](#문제-리스트)
     - [문제 풀이 1/2 [`문자열 조작`]](#문제-풀이-12-문자열-조작)
     - [문제 풀이 2/2 [`비트 연산`]](#문제-풀이-22-비트-연산)
+    - [문제 회고](#문제-회고)
+    - [문제 풀이](#문제-풀이)
   - [참고문헌](#참고문헌)
 
 ## 개념
@@ -195,6 +197,131 @@ var getDecimalValue = function(head) {
 
 </details>
 
+<details>
+<summary>237. Delete Node in a Linked List
+  <a href="https://leetcode.com/problems/delete-node-in-a-linked-list/">👊</a>
+</summary>
+
+### 문제 회고
+
+Input에 기술된 head 인자가 문제 메인 함수에 없는 오류가 있다. 
+
+때문에 별도의 에디터에서 연결리스트를 구현해서 옳은 인자를 만들어 문제를 풀게되었다.
+
+### 문제 풀이
+
+`deleteNode 함수`만 확인하면 된다.
+
+<table>
+  <tr>
+    <th>풀이 설명</th>
+    <th>코드</th>
+  </tr>
+  <tr>
+    <td>
+<p>
+
+    time:   O(n)
+
+    1. 연결리스트의 노드를 순회할 때 prev라는 변수에 노드를 저장한다.
+       해당 변수는 삭제할 노드를 찾았을 시 
+       이전 노드와 삭제 이후의 노드를 연결하기 위해 사용한다.
+
+        prev: 4 → 5 → 1 → 9
+
+        head: 5 to delete
+          prev.next = head.next
+          5 → 1 → 9 = 1 → 9 
+
+          head = prev.next;
+          4 → 1 → 9
+        done            
+
+</p>
+    </td> 
+    <td>
+<p>
+
+```js
+const util = require('util')
+const assert = require('assert')
+
+class ListNode {
+  constructor(val) {
+      this.val = val;
+      this.next = null;              
+  }
+}
+
+class LinkedList {  
+  constructor(arr){
+    arr.forEach(each => {
+      const node = new ListNode(each);
+      let current;
+
+      if(this.head == null)
+        this.head = node
+      else{
+        current = this.head;
+
+        while(current.next)
+          current = current.next;
+
+        current.next = node;
+      }
+    })    
+  }  
+}
+
+var printArray = function(head){
+    const result = [];
+    let current = head;
+
+    while(current){
+      result.push(current.val);
+      current = current.next;
+    }
+
+    return result;
+}
+
+
+/**
+ * +++ Main Function
+ * @param {ListNode, ListNode} node
+ * @return {void} Do not return anything, modify node in-place instead.
+ */
+var deleteNode = function(head, node) {  
+  let prev = head;
+
+  while(head){    
+    if(head.val === node.val){
+      prev.next = head.next;
+      head = prev.next;
+    }else{
+      prev = head;
+      head = head.next;
+    } 
+  }
+};
+
+// +++ Test
+const list = new LinkedList([4, 5, 1, 9]);
+
+deleteNode(list.head, new ListNode(5));
+assert.deepEqual(printArray(list.head), [4, 1, 9]);
+console.log(util.inspect(list, {showHidden: false, depth: null}))
+
+const list2 = new LinkedList([4, 5, 1, 9]);
+
+deleteNode(list2.head, new ListNode(1));
+assert.deepEqual(printArray(list2.head), [4, 5, 9]);
+```
+</p>
+    </td>
+  </tr>
+</table>
+</details>
 <hr/>
 
 ## 참고문헌
@@ -204,3 +331,5 @@ var getDecimalValue = function(head) {
 [연결리스트 빅오](https://velog.io/@grinding_hannah/CS-자료구조-Big-O-표기법-링크드-리스트Linked-List) -- grinding_hannah
 
 [Simple Solution at 1290. Convert Binary Number in a Linked List to Integer](https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/discuss/461356/JavaScript-Easy-to-understand-bit-operator) -- poppinlp
+
+[Implementation of LinkedList in Javascript](https://www.geeksforgeeks.org/implementation-linkedlist-javascript/) -- GeeksforGeeks
