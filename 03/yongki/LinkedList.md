@@ -3,6 +3,8 @@
 - [연결리스트](#연결리스트)
   - [개념](#개념)
   - [문제 리스트](#문제-리스트)
+    - [문제 풀이 1/2 [`문자열 조작`]](#문제-풀이-12-문자열-조작)
+    - [문제 풀이 2/2 [`비트 연산`]](#문제-풀이-22-비트-연산)
   - [참고문헌](#참고문헌)
 
 ## 개념
@@ -55,6 +57,144 @@
 
 ## 문제 리스트
 
+> 각 문제의 👊를 클릭하면 문제로 이동합니다.
+> 각 문제의 `메인 함수에 대한 주석`은 중복되어 첫 문제 풀이에만 기술하겠습니다.
+
+<details>
+<summary>1290. Convert Binary Number in a Linked List to Integer
+  <a href="https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/">👊</a>
+</summary>
+
+### 문제 풀이 1/2 [`문자열 조작`]
+
+<table>
+  <tr>
+    <th>풀이 설명</th>
+    <th>코드</th>
+  </tr>
+  <tr>
+    <td>
+<p>
+
+    time:   O(n)
+    space:  O(n)
+
+    1. 연결리스트를 순회하여 노드의 val를 str 문자열 변수에 합한다.
+    2. str 문자열 변수를 정수화시킨다.
+
+</p>
+    </td>
+    <td>
+<p>
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {number}
+ */
+var getDecimalValue = function(head) {
+  let str = '';  
+  
+  while(head){
+    str += String(head.val);
+    head = head.next;    
+  }
+  
+  return parseInt(str, 2);
+};
+```
+</p>
+    </td>
+  </tr>
+</table>
+
+### 문제 풀이 2/2 [`비트 연산`]
+
+`Show Hint 2`에 다음과 같은 추가 조건을 주었다.
+
+*"한 번의 작업으로 십진수 값을 얻으려면 shift left 연산(`<<`) 및 or 연산(`|`)을 사용합니다"*
+
+처음에는 `LSB`부터 접근해서 2씩 곱해주는데, 1과 0은 or연산으로 걸러주면 된다고 생각하였다.
+shift left 연산은 어떻게 활용해야할 지 몰랐다.
+
+다만, 그러면 연결리스트를 reverse 해야하는데, 메소드를 지원하지도 않고 잘못된 접근이었다.
+
+따라서 리트코드의 풀이를 참고하였다.
+
+풀이의 핵심은 **결과값을** shift left 연산으로 값을 높여가면서,
+연결리스트와 or 연산으로 비교해 나아가는 것이다.
+
+<table>
+  <tr>
+    <th>풀이 설명</th>
+    <th>코드</th>
+  </tr>
+  <tr>
+    <td width="50%">
+<p>
+
+    time:   O(n)
+    space:  O(1)
+
+    Input: head = [1,0,1]
+    Output: 5
+
+     1. 루프에 따른 결과값으로 알고리즘을 이해하자.
+
+        val = 0
+
+        loop start
+
+          head: 1
+            val = (val << 1) | head.val
+            val = (0 << 1) | 1
+            
+            val = 1
+
+          head: 0
+            val = (val << 1) | head.val
+            val = (1 << 1) | 0 
+            val = 10
+
+          head: 1
+            val = (val << 1) | head.val
+            val = (10 << 1) | 1 
+            val = 101
+
+          head: null
+        done
+
+</p>
+    </td>
+    <td width="50%">
+<p>
+
+```js
+var getDecimalValue = function(head) {
+  let result = 0; 
+  
+  while(head){
+    result = (result << 1) | head.val;
+    head = head.next;
+  }
+  
+  return result;
+};
+```
+</p>
+    </td>
+  </tr>
+</table>
+
+</details>
+
 <hr/>
 
 ## 참고문헌
@@ -62,3 +202,5 @@
 [연결리스트 참고사진](https://m.blog.naver.com/std_34/221532135313) -- 514
 
 [연결리스트 빅오](https://velog.io/@grinding_hannah/CS-자료구조-Big-O-표기법-링크드-리스트Linked-List) -- grinding_hannah
+
+[Simple Solution at 1290. Convert Binary Number in a Linked List to Integer](https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/discuss/461356/JavaScript-Easy-to-understand-bit-operator) -- poppinlp
