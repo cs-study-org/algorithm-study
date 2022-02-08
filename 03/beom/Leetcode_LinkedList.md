@@ -3,6 +3,9 @@
 ## 목차
 ## 1290. Convert Binary Number in a Linked List to Integer
 ## 237. Delete Node in a Linked List
+## 160. Intersection of Two Linked Lists
+
+
 
 
 ## 1290. Convert Binary Number in a Linked List to Integer
@@ -43,6 +46,7 @@ O(n)
 [문자열로 변환후 parseInt](https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/discuss/1739116/linkes-list-easy-to-understanding)
 
 
+
 ## 237. Delete Node in a Linked List
 
 ### 문제 요약
@@ -67,3 +71,87 @@ public class Solution {
 ### 시간복잡도
 O(1)
 
+
+
+## 160. Intersection of Two Linked Lists
+
+### 문제요약
+두 연결리스트의 교차점 찾아 반환하시오
+
+### 문제 풀이
+1. 연결리스트 A를 반복할때 안에서 연결리스트B.contain(A의 val)이  true이면 A의 val return
+
+### 코드
+```java
+public class Solution {
+
+    public class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
+
+    }
+
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        LinkedList<Integer> listA = new LinkedList<Integer>();
+        ListNode m = headA;
+        ListNode n = headB;
+
+        while(m!=null){
+            listA.add(m.val);
+            m=m.next;
+        }
+
+        while(n!=null){
+            if(listA.contains(n.val)) break;
+            else n=n.next;
+        }
+        return n;
+    }
+}
+```
+
+### 틀린점
+![wrongcase](asset/wrongcase.PNG)
+
+우선 headA에 4가 중복으로 나와서 틀렸다.
+
+하지만 문제도 이해가 되지 않았다.
+
+분명 1이 반환되어야하는데 8이 반환되었다....
+
+후.....
+
+### 해결방법
+```java
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) { 
+        HashSet<ListNode> set=new HashSet<>();
+        ListNode p=headA;
+        while(p!=null){ // headA의 노드들을 HashSet에 저장
+            set.add(p);
+            p=p.next;
+        }
+        
+        p=headB;
+        while(p!=null){ // headB 순회
+            if(set.contains(p)) break; // headA와 같은 노드(교차점)를 발견했다면
+            else p=p.next;
+        }
+        
+        return p;
+    }
+}
+```
+hashset 자료구조를 통해 해결한 방법이다.
+
+
+### 시간 복잡도
+Linkedlist에서 contains는 O(n)인데
+
+HashSet에서 contains는 O(1)이다.
+
+고로 O(m + n)이다.
