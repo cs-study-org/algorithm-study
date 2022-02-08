@@ -7,6 +7,10 @@
     - [문제 풀이 2/2 [`비트 연산`]](#문제-풀이-22-비트-연산)
     - [문제 회고](#문제-회고)
     - [문제 풀이](#문제-풀이)
+    - [문제 회고](#문제-회고-1)
+    - [문제 풀이[`Switch tracks at the end`]](#문제-풀이switch-tracks-at-the-end)
+  - [문제 회고](#문제-회고-2)
+  - [문제 풀이](#문제-풀이-1)
   - [참고문헌](#참고문헌)
 
 ## 개념
@@ -38,6 +42,7 @@
 | Access | Search | Insertion | Deletion |
 | :----: | :----: | :-------: | :------: |
 | `O(n)` | `O(n)` |  `O(n)`   |  `O(n)`  |
+
 <b>원형 연결리스트</b>
 
 | Access | Search | Insertion | Deletion |
@@ -243,7 +248,6 @@ Input에 기술된 head 인자가 문제 메인 함수에 없는 오류가 있�
 <p>
 
 ```js
-const util = require('util')
 const assert = require('assert')
 
 class ListNode {
@@ -309,13 +313,173 @@ var deleteNode = function(head, node) {
 const list = new LinkedList([4, 5, 1, 9]);
 
 deleteNode(list.head, new ListNode(5));
-assert.deepEqual(printArray(list.head), [4, 1, 9]);
-console.log(util.inspect(list, {showHidden: false, depth: null}))
+assert.deepEqual(printArray(list.head), [4, 1, 9]);   // pass
 
 const list2 = new LinkedList([4, 5, 1, 9]);
 
 deleteNode(list2.head, new ListNode(1));
-assert.deepEqual(printArray(list2.head), [4, 5, 9]);
+assert.deepEqual(printArray(list2.head), [4, 5, 9]);  // pass
+```
+</p>
+    </td>
+  </tr>
+</table>
+</details>
+<details>
+<summary>
+  160. Intersection of Two Linked Lists
+  <a href="https://leetcode.com/problems/intersection-of-two-linked-lists/">👊</a>
+</summary>
+
+### 문제 회고
+
+처음에는 아래와 같이 접근했지만, 요구하는 문제는 정렬되있지 않아 적합하지 않았다.
+
+    cf. headA = [2, 3, 4, 5]
+        headB = [1, 2, 3, 4, 5] 라면,
+
+        while(headA || headB){
+          if(headA > headB)
+            headB = headB.next;
+          else
+            headA = headA.next;
+        }
+
+접근 방법이 떠오르지 않아 리트코드 풀이를 참고했다.
+
+### 문제 풀이[`Switch tracks at the end`]
+
+연결리스트 간 길이가 다르다 보니
+
+짧은 연결리스트A가 끝나면 연결리스트B를 이어붙여서 sync를 맞추는 알고리즘이었다.
+
+<table>
+  <tr>
+    <th>풀이 설명</th>
+    <th>코드</th>
+  </tr>
+  <tr>
+    <td>
+<p>
+
+    time:   O(n)
+
+    Input:  [4,1,8,4,5]
+            [5,6,1,8,4,5]
+
+    1. 루프 마다 다음 노드를 헤드에 넣어 연결리스트를 순회한다.
+       다음 노드를 헤드에 넣을 때 조건을 넣어
+       다음 노드가 없을 시 또 다른 연결리스트를 이어붙인다.
+
+        4 → 1 → 8 → 4 → 5 → null 
+                              5 → 6 → 1 → 8 → 4 → 5
+
+        5 → 6 → 1 → 8 → 4 → 5 → null
+                                  4 → 1 → 8 → 4 → 5
+
+    2. sync가 맞춰지면, 교차되는 지점은 에디터에서 판별한다.
+</p>
+    </td>
+    <td>
+<p>
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+var getIntersectionNode = function(headA, headB) {
+  let curA = headA;
+  let curB = headB;
+  
+  while (curA !== curB) {        
+    curA = curA ? curA.next : headB;
+    curB = curB ? curB.next : headA;    
+  }
+  
+  return curA;
+};
+```
+</p>
+    </td>
+  </tr>
+</table>
+
+</details>
+<details>
+<summary>
+  83. Remove Duplicates from Sorted List
+  <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list/">👊</a>
+</summary>
+
+## 문제 회고
+
+이전 `237번 문제`는 별도의 에디터를 사용해서 풀었다고 하였다.
+
+문제 메인 함수를 사용해 연결리스트를 순회해서 head가 마지막에 다다라도 
+함수 종류 이후 head는 첫 노드를 다시 가리켰었다.
+
+리트코드 에디터에서는 head가 마지막에 다다르면
+마지막 노드를 유지하는 것 같다.
+
+때문에, 연결리스트는 만족해도 head가 마지막을 가리켜서 오답인 경우가 있다.
+
+## 문제 풀이
+
+투 포인터 기법으로 뒤따르는 포인터와 앞서 가는 포인터와 일치할 시 
+이전 노드와 앞서 가는 포인터 이후의 노드를 연결해준다.
+
+해당 문제는 **정렬되있지 않은 문제로** 난이도를 올려서 풀면 도움이 많이 될 것이라 생각했다.
+
+<table>
+  <tr>
+    <th>풀이 설명</th>
+    <th>코드</th>
+  </tr>
+  <tr>
+    <td>
+<p>
+
+    time:   O(n)
+
+</p>
+    </td>
+    <td>
+<p>
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var deleteDuplicates = function(head) {  
+  let cur = head;
+  
+  while(cur && cur.next){
+    if(cur === cur.next)
+      cur.next = cur.next.next;    
+    else
+      cur = cur.next;    
+  }
+  
+  return head;
+};
 ```
 </p>
     </td>
@@ -330,6 +494,12 @@ assert.deepEqual(printArray(list2.head), [4, 5, 9]);
 
 [연결리스트 빅오](https://velog.io/@grinding_hannah/CS-자료구조-Big-O-표기법-링크드-리스트Linked-List) -- grinding_hannah
 
-[Simple Solution at 1290. Convert Binary Number in a Linked List to Integer](https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/discuss/461356/JavaScript-Easy-to-understand-bit-operator) -- poppinlp
+[Simple Solution at 1290. Convert Binary Number in a Linked List to Integer](https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/discuss/461356/JavaScript-Easy-to-understand-bit-operator) -- LeetCode
 
 [Implementation of LinkedList in Javascript](https://www.geeksforgeeks.org/implementation-linkedlist-javascript/) -- GeeksforGeeks
+
+[Remove duplicates from an unsorted linked list](https://www.geeksforgeeks.org/remove-duplicates-from-an-unsorted-linked-list/) -- GeeksforGeeks
+
+[Simple Solution at 160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/discuss/324105/Heavily-commented-Javascript-O(n)-in-O(1)-space-solution) -- LeetCode
+
+[Simple Solution at 83. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/discuss/28722/Javascript-Solution) -- LeetCode
