@@ -241,3 +241,43 @@ O(n)
 O(n^2)
 
 
+## 203. Remove Linked List Elements
+
+### 문제 요약
+연결리스트의 val을 삭제해라
+
+### 문제 풀이
+1. 연결리스트를 arrayList로 옮긴 후 remove를 사용하여 삭제
+
+
+### 코드(틀림)
+```java
+    public ListNode removeElements(ListNode head, int val) {
+        ArrayList<Integer> arr = new ArrayList<>();
+        ListNode res = head;
+
+        while (head!=null){
+            arr.add(head.val);
+            head = head.next;
+        }
+
+        while(arr.remove(Integer.valueOf(val)))
+            
+        for (Integer integer : arr) {
+            res.val = integer;
+            res = res.next;
+        }
+        return res;
+    }
+```
+
+arraylist에서 val를 삭제까지는 잘했다.
+
+다시 Listnode형으로 바꾸는 과정에서 해결방법을 찾지 못했다.
+
+remove를 사용했기때문에 시간복잡도 O(n^2)이다..
+
+[쉬운 풀이](https://leetcode.com/problems/remove-linked-list-elements/discuss/1757588/Java-Solution-with-Dry-Run)
+
+이 풀이가 가장 이해가 쉬웠다.
+
