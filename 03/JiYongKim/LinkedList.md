@@ -321,5 +321,7 @@
     - 순차 리스트(배열) vs 연결리스트
         
         <img width="640" alt="스크린샷 2022-01-19 오전 3 56 49" src="https://user-images.githubusercontent.com/81874493/150007470-7f0d3070-ee38-460c-96b0-32b55299234d.png">
+        
         <br>
+        
         - 탐색에 있어 n개의 노드를 가진 연결리스트 = O(n)
