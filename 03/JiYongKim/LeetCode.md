@@ -189,4 +189,47 @@ class Solution {
 2. 현재의 노드의 next에 이전에 찾은 앞 뒤의 값이 동일하지않은 노드를 할당한다. 
 </details>
 
+<br>
 
+<details>
+    <summary>141.Linked List Cycle</summary>
+    문제 : 주어진 연결리스트에 cycle의 존재 여부 파악
+
+```java
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        
+        ArrayList<ListNode> list = new ArrayList<>();
+        
+        ListNode temp = head;
+        while(temp != null){
+            if(list.contains(temp)){
+                return true;
+            }
+            list.add(temp);
+            temp = temp.next;
+        }
+        return false;
+        
+    }
+}
+```
+
+설명)
+
+![스크린샷 2022-02-10 오전 1.38.29.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cf8104ce-1dc6-4c62-b3ac-43a54cce4462/스크린샷_2022-02-10_오전_1.38.29.png)
+
+1. 새로운 ArrayList를 만들고 연결리스트를 순회하며 노드 객체값을 리스트에 저장
+2. 만약 순회중 ArrayList내에 동일한 노드 객체값이 있다면 true 반환 아닐경우 false 반환
+</details>
