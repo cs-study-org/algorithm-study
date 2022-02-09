@@ -75,7 +75,7 @@ class Solution {
 
 설명)
 
-![스크린샷 2022-02-09 오후 7.36.07.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6f1db566-9883-49de-b6c0-895047706fe0/스크린샷_2022-02-09_오후_7.36.07.png)
+<img width="335" alt="스크린샷 2022-02-10 오전 1 42 21" src="https://user-images.githubusercontent.com/81874493/153247885-909d4b00-2d38-433e-bc6e-8e74f910536b.png">
 
 1. 주어진 노드의 value 를 다음 노드의 값(1)으로 할당한다.
 2. 주어진 노드의 next를 다음 노드의 next 노드(9)로 변경한다.
@@ -132,7 +132,7 @@ public class Solution {
 
 설명)
 
-![스크린샷 2022-02-09 오후 7.54.56.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/889cc184-2093-4654-9c15-b363ccc41d35/스크린샷_2022-02-09_오후_7.54.56.png)
+<img width="617" alt="스크린샷 2022-02-10 오전 1 42 29" src="https://user-images.githubusercontent.com/81874493/153247938-daa2e9dc-c34f-47b1-bdbb-f1e880b25ff6.png">
 
 1. A 노드에서 연결되는 모든 노드들의 객체 값을  ArrayList에 넣는다.
 2. ArrayList에서 B의 노드값을 순환하며 처음으로 동일되는 객체값을 result에 할당하여 반환한다.
@@ -183,7 +183,7 @@ class Solution {
 
 설명)
 
-![스크린샷 2022-02-10 오전 1.21.31.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3687a39e-40de-4a52-9dcd-15db63deecd5/스크린샷_2022-02-10_오전_1.21.31.png)
+<img width="505" alt="스크린샷 2022-02-10 오전 1 42 35" src="https://user-images.githubusercontent.com/81874493/153247976-89e76b22-4190-4bc9-a664-93e09d449a01.png">
 
 1. 주어진 노드 값과 다음 노드의 값이 동일하다면 새로운 temp2를 생성하여 앞 뒤의 값이 동일하지 않은 노드를 찾는다.
 2. 현재의 노드의 next에 이전에 찾은 앞 뒤의 값이 동일하지않은 노드를 할당한다. 
@@ -227,8 +227,8 @@ public class Solution {
 ```
 
 설명)
-
-![스크린샷 2022-02-10 오전 1.38.29.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cf8104ce-1dc6-4c62-b3ac-43a54cce4462/스크린샷_2022-02-10_오전_1.38.29.png)
+f
+<img width="407" alt="스크린샷 2022-02-10 오전 1 42 42" src="https://user-images.githubusercontent.com/81874493/153248014-72d741b3-1ea2-415e-9035-99ad7b94e280.png">
 
 1. 새로운 ArrayList를 만들고 연결리스트를 순회하며 노드 객체값을 리스트에 저장
 2. 만약 순회중 ArrayList내에 동일한 노드 객체값이 있다면 true 반환 아닐경우 false 반환
