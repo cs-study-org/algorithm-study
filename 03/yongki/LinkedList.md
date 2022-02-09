@@ -203,7 +203,6 @@ var getDecimalValue = function(head) {
     </td>
   </tr>
 </table>
-
 </details>
 
 <details>
@@ -232,7 +231,7 @@ Input에 기술된 head 인자가 문제 메인 함수에 없는 오류가 있�
 
     time:   O(n)
 
-    1. 연결리스트의 노드를 순회할 때 prev라는 변수에 노드를 저장한다.
+    1. 연결리스트를 순회할 때 prev라는 변수에 노드를 저장한다.
        해당 변수는 삭제할 노드를 찾았을 시 
        이전 노드와 삭제 이후의 노드를 연결하기 위해 사용한다.
 
@@ -242,9 +241,9 @@ Input에 기술된 head 인자가 문제 메인 함수에 없는 오류가 있�
           prev.next = head.next
           5 → 1 → 9 = 1 → 9 
 
-          head = prev.next;
+          head = head.next;
           4 → 1 → 9
-        done            
+        done         
 
 </p>
     </td> 
@@ -303,13 +302,12 @@ var deleteNode = function(head, node) {
   let prev = head;
 
   while(head){    
-    if(head.val === node.val){
-      prev.next = head.next;
-      head = prev.next;
-    }else{
+    if(head.val === node.val)
+      prev.next = head.next;      
+    else
       prev = head;
-      head = head.next;
-    } 
+      
+    head = head.next        
   }
 };
 
@@ -329,6 +327,7 @@ assert.deepEqual(printArray(list2.head), [4, 5, 9]);  // pass
   </tr>
 </table>
 </details>
+
 <details>
 <summary>
   160. Intersection of Two Linked Lists
@@ -417,8 +416,8 @@ var getIntersectionNode = function(headA, headB) {
     </td>
   </tr>
 </table>
-
 </details>
+
 <details>
 <summary>
   83. Remove Duplicates from Sorted List
@@ -439,8 +438,7 @@ var getIntersectionNode = function(headA, headB) {
 
 ## 문제 풀이
 
-투 포인터 기법으로 뒤따르는 포인터와 앞서 가는 포인터와 일치할 시 
-이전 노드와 앞서 가는 포인터 이후의 노드를 연결해준다.
+`237번` 문제와 풀이 과정이 유사하다.
 
 해당 문제는 **정렬되있지 않은 문제로** 난이도를 올려서 풀면 도움이 많이 될 것이라 생각했다.
 
@@ -462,24 +460,21 @@ var getIntersectionNode = function(headA, headB) {
 
 ```js
 /**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
  * @param {ListNode} head
  * @return {ListNode}
  */
-var deleteDuplicates = function(head) {  
-  while(head && head.next){
-    if(head === head.next)
-      head.next = head.next.next;    
-    else
-      head = head.next;    
-  }
+var deleteDuplicates = function(head) { 
+  let prev = null;
+  let cur = head;  
   
+  while(cur){
+    if(prev && cur === cur.next)
+      prev.next = cur.next;
+    else
+      prev = cur;
+    
+    cur = cur.next;          
+  }
   return head;
 };
 ```
@@ -685,6 +680,7 @@ var hasCycle = function(head) {
 ## 문제 회고
 
 `237번`, `83번`과 풀이 과정이 유사하다.
+다행히 위 문제들에서 나타난 에디터의 이슈는 없었다.
 
 ## 문제 풀이
 
@@ -712,13 +708,6 @@ var hasCycle = function(head) {
 <p>
 
 ```js
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
 /**
  * @param {ListNode} head
  * @param {number} val
@@ -752,7 +741,6 @@ var removeElements = function(head, val) {
     </td>
   </tr>
 </table>
-
 </details>
 
 <hr/>
