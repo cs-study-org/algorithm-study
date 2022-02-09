@@ -4,6 +4,7 @@
 ## 1290. Convert Binary Number in a Linked List to Integer
 ## 237. Delete Node in a Linked List
 ## 160. Intersection of Two Linked Lists
+## 83. Remove Duplicates from Sorted List
 
 
 
@@ -155,3 +156,40 @@ Linkedlist에서 contains는 O(n)인데
 HashSet에서 contains는 O(1)이다.
 
 고로 O(m + n)이다.
+
+
+
+
+## 83. Remove Duplicates from Sorted List
+
+### 문제 요약
+연결 리스트의 중복을 삭제하시오
+
+### 문제 풀이
+1. 연결리스트의 값을 hashset 자료구조를 사용해 중복값이 있으면 저장하지 않음
+2. 중복값이 없다면 hashset에 저장하고 새로운 연결리스트에 저장함
+
+
+### 코드
+```java
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        HashSet<Integer> set = new HashSet<>();
+        ListNode p = head;
+        ListNode res = null;
+        while (p != null) {
+            if (set.contains(p.val)) {
+                res.next = p.next;
+            } else {
+                set.add(p.val);
+                res = p;
+            }
+            p = p.next;
+        }
+        return head;
+    }
+}
+```
+
+### 시간복잡도
+O(n)
