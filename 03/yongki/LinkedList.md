@@ -11,6 +11,10 @@
     - [문제 풀이[`Switch tracks at the end`]](#문제-풀이switch-tracks-at-the-end)
   - [문제 회고](#문제-회고-2)
   - [문제 풀이](#문제-풀이-1)
+    - [문제 풀이 1/2 [`Brute Force`]](#문제-풀이-12-brute-force)
+    - [문제 풀이 2/2 [`Runner`]](#문제-풀이-22-runner)
+  - [문제 회고](#문제-회고-3)
+  - [문제 풀이](#문제-풀이-2)
   - [참고문헌](#참고문헌)
 
 ## 개념
@@ -469,13 +473,11 @@ var getIntersectionNode = function(headA, headB) {
  * @return {ListNode}
  */
 var deleteDuplicates = function(head) {  
-  let cur = head;
-  
-  while(cur && cur.next){
-    if(cur === cur.next)
-      cur.next = cur.next.next;    
+  while(head && head.next){
+    if(head === head.next)
+      head.next = head.next.next;    
     else
-      cur = cur.next;    
+      head = head.next;    
   }
   
   return head;
@@ -486,6 +488,273 @@ var deleteDuplicates = function(head) {
   </tr>
 </table>
 </details>
+
+<details>
+<summary>
+  141. Linked List Cycle
+  <a href="https://leetcode.com/problems/linked-list-cycle/">👊</a>
+</summary>
+
+### 문제 풀이 1/2 [`Brute Force`]
+
+만약 중복된 요소가 없는 연결리스트라면 다음과 같이 `Map`을 활용하였을 것이다.
+    
+    const map = new Map();
+    
+    while(head){
+      ...
+      
+      if(map.has(head.val))
+        return true;
+      else
+        map.set(head.val);
+      
+      ...
+    };
+
+중복된 요소가 있다고 가정하였다.
+
+    Input:  head = [3, 2, 2, 0, 4]
+            pos  =  2
+
+<table>
+  <tr>
+    <th>풀이 설명</th>
+    <th>코드</th>
+  </tr>
+  <tr>
+    <td>
+<p>
+
+    time:   O(n^2)
+
+    1. 연결리스트를 순회할 때, 
+       현재 노드와 같은 요소가 
+       나머지 노드들에 있는지 검사한다.       
+
+    하지만, 
+    반복되는 연결리스트를 찾지 않고,
+    중복된 요소만 찾는 코드였다.
+
+    때문에, 다음과 같은 테스트 케이스를 해결하지 못했다.
+
+    Input:    head = [-21,10,17,8,4,26,5,
+                       35,33,-7,-16,27,-12,
+                       6,29,-12,5,9,20,14,14,
+                       2,13,-24,21,23,-21,5]
+
+              pos  =  -1
+
+    Output:   true
+    Expected: false
+
+</p>
+    </td>
+    <td>
+<p>
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var hasCycle = function(head) {
+  const findSameValue = (cur) => {
+    let fast = cur;
+    
+    while(fast){
+      if(cur === fast)
+        return true;
+      
+      fast = fast.next;
+    }
+    
+    return false;
+  }
+  
+  if(!head)
+    return false;  
+  
+  while(head){
+    if(!head.next)
+      return false;
+    
+    if(findSameValue(head))
+      return true;    
+    
+    head = head.next;
+  }  
+};
+```
+</p>
+    </td>
+  </tr>
+</table>
+
+### 문제 풀이 2/2 [`Runner`]
+
+해당 풀이는 `Follow up`의 `space O(1)` 또한 만족한다.
+
+**알고리즘 설명**
+
+`Runner`는 
+
+    연결리스트를 순회할 때 2개의 포인터를 사용한다.
+
+    빠른 포인터는 2칸씩, 느린 포인터는 1칸씩 이동하여
+
+    빠른 포인터가 연결리스트의 끝에 도달 했을 때,
+    느린 포인터는 연결리스트의 중간에 도달함을 이용한다.
+
+<table>
+  <tr>
+    <th>풀이 설명</th>
+    <th>코드</th>
+  </tr>
+  <tr>
+    <td>
+<p>
+
+    time:   O(n)
+    space:  O(1)
+
+    Input:  head = [3,2,0,-4]
+            pos  =  1
+
+    다음과 같이 반복할 때,
+
+    3 → 2 → 0 → -4 → 2 → 0 → -4
+
+    루프는 fast를 기준으로 돈다.
+
+    fast는 3 → 0 → 2 → -4
+    slow는 3 → 2 → 0 → -4
+
+    풀이의 핵심은 
+    
+    반복의 시작인 2를 보는 것이 아니라
+    끝인 -4가 동일해질 때이다.
+
+</p>
+    </td>
+    <td>
+<p>
+
+```js
+var hasCycle = function(head) {
+  if(!head)
+    return false;  
+  
+  let slow = head;
+  let fast = head;
+  
+  while(fast){
+    if(!fast.next)
+      return false;
+    
+    else{
+      fast = fast.next.next;
+      slow = slow.next;
+    }
+    
+    if(fast === slow)
+      return true;
+  }
+  return false;
+};  
+```
+</p>
+    </td>
+  </tr>
+</table>
+</details>
+
+<details>
+<summary>203. Remove Linked List Elements
+  <a href="https://leetcode.com/problems/remove-linked-list-elements/">👊</a>
+</summary>
+
+## 문제 회고
+
+`237번`, `83번`과 풀이 과정이 유사하다.
+
+## 문제 풀이
+
+<table>
+  <tr>
+    <th>풀이 설명</th>
+    <th>코드</th>
+  </tr>
+  <tr>
+    <td>
+<p>
+
+    time:   O(n)
+
+    1. Exception은 연결리스트의 요소가
+       모두 동일한 경우 연결리스트를 끝내버리는
+       코드이다.
+
+       cf. 7 → 7 → 7 → 7
+
+       동일하지 않은 경우는 Start 부터 루프를 진행한다.
+</p>
+    </td>
+    <td>
+<p>
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} val
+ * @return {ListNode}
+ */
+var removeElements = function(head, val) {
+  let prev = null;
+  let cur = head;
+  
+  // +++ Exception
+  while(head){
+    if(head.val === val)
+      head = head.next;
+    else
+      break; 
+  }  
+  
+  // +++ Start
+  while(cur){
+    if(prev && cur.val === val)
+      prev.next = cur.next;
+    else
+      prev = cur;
+    
+    cur = cur.next;      
+  }
+  return head;
+};
+```
+</p>
+    </td>
+  </tr>
+</table>
+
+</details>
+
 <hr/>
 
 ## 참고문헌
@@ -503,3 +772,7 @@ var deleteDuplicates = function(head) {
 [Simple Solution at 160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/discuss/324105/Heavily-commented-Javascript-O(n)-in-O(1)-space-solution) -- LeetCode
 
 [Simple Solution at 83. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/discuss/28722/Javascript-Solution) -- LeetCode
+
+[Simple Solution at 141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/discuss/289913/JavaScript-Solution-(98-faster)) -- LeetCode
+
+[Simple Solution at 203. Remove Linked List Elements](https://leetcode.com/problems/remove-linked-list-elements/discuss/275445/Javascript-simple-solution) -- LeetCode
