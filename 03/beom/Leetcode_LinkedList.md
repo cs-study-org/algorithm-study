@@ -5,6 +5,7 @@
 ## 237. Delete Node in a Linked List
 ## 160. Intersection of Two Linked Lists
 ## 83. Remove Duplicates from Sorted List
+## 141. Linked List Cycle
 
 
 
@@ -193,3 +194,50 @@ class Solution {
 
 ### 시간복잡도
 O(n)
+
+
+
+
+## 141. Linked List Cycle
+
+### 문제요약
+연결리스트의 순환이 있는지를 찾으시오
+
+### 문제 풀이
+연결리스트의 같은 값이 존재하면 true return
+
+
+### 코드
+```java
+    public boolean hasCycle(ListNode head) {
+        ListNode p = head;
+        ArrayList<Integer> arr = new ArrayList<>();
+
+        if(p==null&&p.next==null) return false;
+
+        while(p !=null){
+            arr.add(p.val);
+            p = p.next;
+
+            for(int i:arr){
+                if(i==p.val){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+```
+
+런타임 에러가 났다.....
+
+솔루션을 봤는데 다음node와 다다음node가 같으면 true를 반환 흠,,,,,,
+
+[hashset를 활용한 풀이](https://leetcode.com/problems/linked-list-cycle/discuss/1709039/Java-Simple-HashSet-Solution)
+
+위 링크가 이해가 되었다.
+
+### 시간복잡도
+O(n^2)
+
+
