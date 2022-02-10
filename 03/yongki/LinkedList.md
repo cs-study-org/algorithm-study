@@ -10,11 +10,10 @@
     - [문제 풀이 2/2 [`head 인자가 없다면`]](#문제-풀이-22-head-인자가-없다면)
     - [문제 회고](#문제-회고-1)
     - [문제 풀이[`Switch tracks at the end`]](#문제-풀이switch-tracks-at-the-end)
-    - [문제 회고](#문제-회고-2)
     - [문제 풀이](#문제-풀이)
     - [문제 풀이 1/2 [`Brute Force`]](#문제-풀이-12-brute-force)
     - [문제 풀이 2/2 [`Runner`]](#문제-풀이-22-runner)
-    - [문제 회고](#문제-회고-3)
+    - [문제 회고](#문제-회고-2)
     - [문제 풀이](#문제-풀이-1)
     - [문제 풀이](#문제-풀이-2)
   - [참고문헌](#참고문헌)
@@ -474,18 +473,6 @@ var getIntersectionNode = function(headA, headB) {
   <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list/">👊</a>
 </summary>
 
-### 문제 회고
-
-이전 `237번 문제`는 별도의 에디터를 사용해서 풀었다고 하였다.
-
-문제 메인 함수를 사용해 연결리스트를 순회해서 head가 마지막에 다다라도 
-함수 종류 이후 head는 첫 노드를 다시 가리켰었다.
-
-리트코드 에디터에서는 head가 마지막에 다다르면
-마지막 노드를 유지하는 것 같다.
-
-때문에, 연결리스트는 만족해도 head가 마지막을 가리켜서 오답인 경우가 있다.
-
 ### 문제 풀이
 
 `237번` 문제와 풀이 과정이 유사하다.
@@ -502,6 +489,7 @@ var getIntersectionNode = function(headA, headB) {
 <p>
 
     time:   O(n)
+    space:  O(1)
 
 </p>
     </td>
@@ -513,17 +501,14 @@ var getIntersectionNode = function(headA, headB) {
  * @param {ListNode} head
  * @return {ListNode}
  */
-var deleteDuplicates = function(head) { 
-  let prev = null;
+var deleteDuplicates = function(head) {   
   let cur = head;  
-  
-  while(cur){
-    if(prev && cur === cur.next)
-      prev.next = cur.next;
-    else
-      prev = cur;
     
-    cur = cur.next;          
+  while(cur){
+    if(cur.next && cur.val === cur.next.val)
+      cur.next = cur.next.next;
+    else      
+      cur = cur.next;    
   }
   return head;
 };
@@ -730,7 +715,6 @@ var hasCycle = function(head) {
 ### 문제 회고
 
 `237번`, `83번`과 풀이 과정이 유사하다.
-다행히 `83번` 문제에서 나타난 에디터의 이슈는 없었다.
 
 ### 문제 풀이
 
