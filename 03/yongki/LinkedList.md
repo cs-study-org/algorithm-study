@@ -501,17 +501,21 @@ var getIntersectionNode = function(headA, headB) {
  * @param {ListNode} head
  * @return {ListNode}
  */
-var deleteDuplicates = function(head) {   
+var deleteDuplicates = function(head) { 
+  let prev = null;
   let cur = head;  
     
   while(cur){
-    if(cur.next && cur.val === cur.next.val)
-      cur.next = cur.next.next;
+    if(prev && prev.val === cur.val)
+      prev.next = cur.next;
     else      
-      cur = cur.next;    
+      prev = cur;  
+    
+    cur = cur.next;    
   }
   return head;
 };
+
 ```
 </p>
     </td>
@@ -728,10 +732,18 @@ var hasCycle = function(head) {
 <p>
 
     time:   O(n)
+    space:  O(1)
 
-    1. Exception은 연결리스트의 요소가
-       모두 동일한 경우 연결리스트를 끝내버리는
-       코드이다.
+    head는 원본이고,
+    cur는 탐색용이다.
+
+    1. Exception은  문제의 Example 3과 같이
+
+       head의 요소가 모두 동일한 경우 
+       head를 모두 순회하여 null을 가리키게한다.
+
+       그러면, 다음 루프를 순회하지 못하고
+       함수가 종료된다.
 
        cf. 7 → 7 → 7 → 7
 
