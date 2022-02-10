@@ -1,7 +1,6 @@
 # 연결리스트
 
 - [연결리스트](#연결리스트)
-  - [개념](#개념)
   - [문제 리스트](#문제-리스트)
     - [문제 풀이 1/2 [`문자열 조작`]](#문제-풀이-12-문자열-조작)
     - [문제 풀이 2/2 [`비트 연산`]](#문제-풀이-22-비트-연산)
@@ -15,11 +14,13 @@
     - [문제 풀이 2/2 [`Runner`]](#문제-풀이-22-runner)
     - [문제 회고](#문제-회고-2)
     - [문제 풀이](#문제-풀이-1)
-    - [문제 풀이](#문제-풀이-2)
+    - [문제 회고](#문제-회고-3)
+    - [문제 풀이 1/2 [`Singly linked list`]](#문제-풀이-12-singly-linked-list)
+    - [문제 풀이 2/2 [`Doubly linked list`]](#문제-풀이-22-doubly-linked-list)
   - [참고문헌](#참고문헌)
 
-## 개념
-
+<details>
+<summary><b>개념</b></summary>
 <table>
   <tr>
     <th colspan="2">구조</th>
@@ -66,6 +67,7 @@
     </td>
   </tr>
 </table>
+</details>
 
 ## 문제 리스트
 
@@ -794,26 +796,39 @@ var removeElements = function(head, val) {
   <a href="https://leetcode.com/problems/design-linked-list/">👊</a>
 </summary>
 
-### 문제 풀이
+### 문제 회고
+
+현재, `Time Limit Exceeded` 제출 에러를 해결중이다.
+
+자료구조의 메소드를 구현하는 문제이다.
+주석이 달린 메소드가 확인 대상이다.
+
+### 문제 풀이 1/2 [`Singly linked list`]
 
 <table>
   <tr>
-    <th>풀이 설명</th>
-    <th>코드</th>
+    <th>빅오</th>
   </tr>
   <tr>
     <td>
 <p>
 
-    printArray는 디버깅을 위한 함수이다.
-    주석 달린 함수들만 확인하면 된다.
-
+|       | get    | addAtHead | addAtTail | addAtIndex | deleteAtIndex |
+|:-----:|:------:|:---------:|:---------:|:----------:|:-------------:|
+| time  | `O(n)` | `O(1)`    | `O(n)`    | `O(n)`     | `O(n)`        |
+| space | `O(1)` | `O(1)`    | `O(1)`    | `O(1)`     | `O(1)`        |
 </p>
     </td>
+  </tr>
+  <tr>    
+    <th>코드</th>
+  </tr>
+  <tr>    
     <td>
 <p>
 
 ```js
+// +++ Debug Funtion
 var _ = require('lodash');
 
 var printArray = function(head){
@@ -828,6 +843,7 @@ var printArray = function(head){
   return result;
 }
 
+// +++ ADT
 class ListNode {
   constructor(val) {
       this.val = val;
@@ -846,17 +862,16 @@ var MyLinkedList = function() {
 MyLinkedList.prototype.get = function(index) {
   let loopCnt = 0;
   let head = _.cloneDeep(MyLinkedList.prototype.head);
-  
-  // console.log(head);
-  while(head){
+    
+  while(head){    
     if(loopCnt === index)
       return head.val;
     
-    loopCnt += 1;
+    loopCnt += head.next ? 1 : 0;
     head = head.next;
   }
   
-  return null;
+  return -1;
 };
 
 /** 
@@ -879,19 +894,23 @@ MyLinkedList.prototype.addAtHead = function(val) {
  */
 MyLinkedList.prototype.addAtTail = function(val) {
   const node = new ListNode(val);  
-  let head = _.cloneDeep(MyLinkedList.prototype.head);  
-  let result = head;
   
-  while(head){    
-    if(!head.next){      
-      head.next = node;
+  let head = _.cloneDeep(MyLinkedList.prototype.head);
+  let cur = head;
+  
+  while(cur){    
+    if(!cur.next){      
+      cur.next = node;
       break;
     }      
     
-    head = head.next;    
+    cur = cur.next;    
   }
+  
+  if(!head)
+    head = node;
     
-  MyLinkedList.prototype.head = result;  
+  MyLinkedList.prototype.head = head;  
   console.log(printArray(MyLinkedList.prototype.head));
 };
 
@@ -904,24 +923,30 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
   let node = new ListNode(val);
     
   let head = _.cloneDeep(MyLinkedList.prototype.head);
-  let result = head;
+  let prev = null;
+  let cur = head;
+  
+  if(!index)
+    return MyLinkedList.prototype.addAtHead(val)
   
   let loopCnt = 0;  
-  
-  while(head){    
-    if(loopCnt === index){
-      node.next = head;
-      head.next = node;
-    }      
     
-    loopCnt += head.next ? 1 : 0;
-    head = head.next;    
+  while(cur){    
+    if(prev && loopCnt === index){
+      node.next = cur;
+      prev.next = node;
+    }else
+      prev = cur;
+    
+    loopCnt += cur.next ? 1 : 0;
+    cur = cur.next;    
   }  
   
-  MyLinkedList.prototype.head = result
+  MyLinkedList.prototype.head = head
     
-  if(loopCnt < index)
-    MyLinkedList.prototype.addAtTail(val);  
+  loopCnt < index 
+    ? MyLinkedList.prototype.addAtTail(val)  
+    : null;  
   
   console.log(printArray(MyLinkedList.prototype.head));
 };
@@ -930,31 +955,37 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
  * @param {number} index
  * @return {void}
  */
+
 MyLinkedList.prototype.deleteAtIndex = function(index) {    
   let head = _.cloneDeep(MyLinkedList.prototype.head);
-  let result = head;
+  let prev = null;
+  let cur = head;
+  
+  if(!index)
+    head = head.next;
   
   let loopCnt = 0;
   
-  while(head){    
-    if(head.next && loopCnt === index){
-      head.val = head.next.val;
-      head.next = head.next.next;
-    }      
+  while(cur){    
+    if(prev && loopCnt === index)
+      prev.next = cur.next;      
+    else
+      prev = cur;
         
-    loopCnt += head.next ? 1 : 0;
-    head = head.next;
-  }
+    loopCnt += cur.next ? 1 : 0;
+    cur = cur.next;
+  }  
   
-  MyLinkedList.prototype.head = result;  
+  MyLinkedList.prototype.head = head;  
   console.log(printArray(MyLinkedList.prototype.head));
 };
-
 ```
 </p>
     </td>
   </tr>
 </table>
+
+### 문제 풀이 2/2 [`Doubly linked list`]
 
 </details>
 
