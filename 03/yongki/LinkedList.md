@@ -6,15 +6,16 @@
     - [문제 풀이 1/2 [`문자열 조작`]](#문제-풀이-12-문자열-조작)
     - [문제 풀이 2/2 [`비트 연산`]](#문제-풀이-22-비트-연산)
     - [문제 회고](#문제-회고)
-    - [문제 풀이](#문제-풀이)
+    - [문제 풀이 1/2 [`head 인자가 있다면`]](#문제-풀이-12-head-인자가-있다면)
+    - [문제 풀이 2/2 [`head 인자가 없다면`]](#문제-풀이-22-head-인자가-없다면)
     - [문제 회고](#문제-회고-1)
     - [문제 풀이[`Switch tracks at the end`]](#문제-풀이switch-tracks-at-the-end)
   - [문제 회고](#문제-회고-2)
-  - [문제 풀이](#문제-풀이-1)
+  - [문제 풀이](#문제-풀이)
     - [문제 풀이 1/2 [`Brute Force`]](#문제-풀이-12-brute-force)
     - [문제 풀이 2/2 [`Runner`]](#문제-풀이-22-runner)
   - [문제 회고](#문제-회고-3)
-  - [문제 풀이](#문제-풀이-2)
+  - [문제 풀이](#문제-풀이-1)
   - [참고문헌](#참고문헌)
 
 ## 개념
@@ -221,7 +222,7 @@ var getDecimalValue = function(head) {
 
 별도의 에디터에서 문제를 풀게되었다.
 
-### 문제 풀이
+### 문제 풀이 1/2 [`head 인자가 있다면`]
 
 `deleteNode 함수`만 확인하면 된다.
 
@@ -331,6 +332,49 @@ assert.deepEqual(printArray(list2.head), [4, 5, 9]);  // pass
     </td>
   </tr>
 </table>
+
+### 문제 풀이 2/2 [`head 인자가 없다면`]
+
+<table>
+  <tr>
+    <th>풀이 설명</th>
+    <th>코드</th>
+  </tr>
+  <tr>
+    <td>
+<p>
+
+    time:   O(1) 🤔
+
+         head = 4 → 5 → 1 → 9
+    
+    Input:
+         node = 5 → 1 → 9
+
+    node.val  = node.next.val
+           5  = 1
+
+    node.next = node.next.next
+     → 1 → 9  = → 9
+
+    Output: 4 → 1 → 9
+
+</p>
+    </td>
+    <td>
+<p>
+
+```js
+var deleteNode = function(node) {
+    node.val = node.next.val;
+    node.next = node.next.next;
+};
+```
+</p>
+    </td>
+  </tr>
+</table>
+
 </details>
 
 <details>
@@ -759,6 +803,8 @@ var removeElements = function(head, val) {
 [Simple Solution at 1290. Convert Binary Number in a Linked List to Integer](https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/discuss/461356/JavaScript-Easy-to-understand-bit-operator) -- LeetCode
 
 [Implementation of LinkedList in Javascript](https://www.geeksforgeeks.org/implementation-linkedlist-javascript/) -- GeeksforGeeks
+
+[Simple Solution at 237. Delete Node in a Linked List](https://leetcode.com/problems/delete-node-in-a-linked-list/discuss/65455/1-3-lines-C%2B%2BJavaPythonCCJavaScriptRuby) -- LeetCode
 
 [Remove duplicates from an unsorted linked list](https://www.geeksforgeeks.org/remove-duplicates-from-an-unsorted-linked-list/) -- GeeksforGeeks
 
