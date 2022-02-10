@@ -10,12 +10,13 @@
     - [문제 풀이 2/2 [`head 인자가 없다면`]](#문제-풀이-22-head-인자가-없다면)
     - [문제 회고](#문제-회고-1)
     - [문제 풀이[`Switch tracks at the end`]](#문제-풀이switch-tracks-at-the-end)
-  - [문제 회고](#문제-회고-2)
-  - [문제 풀이](#문제-풀이)
+    - [문제 회고](#문제-회고-2)
+    - [문제 풀이](#문제-풀이)
     - [문제 풀이 1/2 [`Brute Force`]](#문제-풀이-12-brute-force)
     - [문제 풀이 2/2 [`Runner`]](#문제-풀이-22-runner)
-  - [문제 회고](#문제-회고-3)
-  - [문제 풀이](#문제-풀이-1)
+    - [문제 회고](#문제-회고-3)
+    - [문제 풀이](#문제-풀이-1)
+    - [문제 풀이](#문제-풀이-2)
   - [참고문헌](#참고문헌)
 
 ## 개념
@@ -473,7 +474,7 @@ var getIntersectionNode = function(headA, headB) {
   <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list/">👊</a>
 </summary>
 
-## 문제 회고
+### 문제 회고
 
 이전 `237번 문제`는 별도의 에디터를 사용해서 풀었다고 하였다.
 
@@ -485,7 +486,7 @@ var getIntersectionNode = function(headA, headB) {
 
 때문에, 연결리스트는 만족해도 head가 마지막을 가리켜서 오답인 경우가 있다.
 
-## 문제 풀이
+### 문제 풀이
 
 `237번` 문제와 풀이 과정이 유사하다.
 
@@ -726,12 +727,12 @@ var hasCycle = function(head) {
   <a href="https://leetcode.com/problems/remove-linked-list-elements/">👊</a>
 </summary>
 
-## 문제 회고
+### 문제 회고
 
 `237번`, `83번`과 풀이 과정이 유사하다.
 다행히 `83번` 문제에서 나타난 에디터의 이슈는 없었다.
 
-## 문제 풀이
+### 문제 풀이
 
 <table>
   <tr>
@@ -790,6 +791,175 @@ var removeElements = function(head, val) {
     </td>
   </tr>
 </table>
+</details>
+
+<details>
+<summary>707. Design Linked List
+  <a href="https://leetcode.com/problems/design-linked-list/">👊</a>
+</summary>
+
+### 문제 풀이
+
+<table>
+  <tr>
+    <th>풀이 설명</th>
+    <th>코드</th>
+  </tr>
+  <tr>
+    <td>
+<p>
+
+    printArray는 디버깅을 위한 함수이다.
+    주석 달린 함수들만 확인하면 된다.
+
+</p>
+    </td>
+    <td>
+<p>
+
+```js
+var _ = require('lodash');
+
+var printArray = function(head){
+  const result = [];
+  let current = head;
+
+  while(current){
+    result.push(current.val);
+    current = current.next;
+  }
+
+  return result;
+}
+
+class ListNode {
+  constructor(val) {
+      this.val = val;
+      this.next = null;              
+  }
+}
+
+var MyLinkedList = function() {
+  MyLinkedList.prototype.head = null;
+};
+
+/** 
+ * @param {number} index
+ * @return {number}
+ */
+MyLinkedList.prototype.get = function(index) {
+  let loopCnt = 0;
+  let head = _.cloneDeep(MyLinkedList.prototype.head);
+  
+  // console.log(head);
+  while(head){
+    if(loopCnt === index)
+      return head.val;
+    
+    loopCnt += 1;
+    head = head.next;
+  }
+  
+  return null;
+};
+
+/** 
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtHead = function(val) {
+  let node = new ListNode(val);
+  const head = _.cloneDeep(MyLinkedList.prototype.head);
+  
+  node.next = head;
+  MyLinkedList.prototype.head = node;
+  
+  console.log(printArray(MyLinkedList.prototype.head));
+};
+
+/** 
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtTail = function(val) {
+  const node = new ListNode(val);  
+  let head = _.cloneDeep(MyLinkedList.prototype.head);  
+  let result = head;
+  
+  while(head){    
+    if(!head.next){      
+      head.next = node;
+      break;
+    }      
+    
+    head = head.next;    
+  }
+    
+  MyLinkedList.prototype.head = result;  
+  console.log(printArray(MyLinkedList.prototype.head));
+};
+
+/** 
+ * @param {number} index 
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtIndex = function(index, val) {
+  let node = new ListNode(val);
+    
+  let head = _.cloneDeep(MyLinkedList.prototype.head);
+  let result = head;
+  
+  let loopCnt = 0;  
+  
+  while(head){    
+    if(loopCnt === index){
+      node.next = head;
+      head.next = node;
+    }      
+    
+    loopCnt += head.next ? 1 : 0;
+    head = head.next;    
+  }  
+  
+  MyLinkedList.prototype.head = result
+    
+  if(loopCnt < index)
+    MyLinkedList.prototype.addAtTail(val);  
+  
+  console.log(printArray(MyLinkedList.prototype.head));
+};
+
+/** 
+ * @param {number} index
+ * @return {void}
+ */
+MyLinkedList.prototype.deleteAtIndex = function(index) {    
+  let head = _.cloneDeep(MyLinkedList.prototype.head);
+  let result = head;
+  
+  let loopCnt = 0;
+  
+  while(head){    
+    if(head.next && loopCnt === index){
+      head.val = head.next.val;
+      head.next = head.next.next;
+    }      
+        
+    loopCnt += head.next ? 1 : 0;
+    head = head.next;
+  }
+  
+  MyLinkedList.prototype.head = result;  
+  console.log(printArray(MyLinkedList.prototype.head));
+};
+
+```
+</p>
+    </td>
+  </tr>
+</table>
+
 </details>
 
 <hr/>
