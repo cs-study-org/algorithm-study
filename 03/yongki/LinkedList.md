@@ -1,6 +1,7 @@
 # 연결리스트
 
 - [연결리스트](#연결리스트)
+  - [개념](#개념)
   - [문제 리스트](#문제-리스트)
     - [문제 풀이 1/2 [`문자열 조작`]](#문제-풀이-12-문자열-조작)
     - [문제 풀이 2/2 [`비트 연산`]](#문제-풀이-22-비트-연산)
@@ -15,12 +16,13 @@
     - [문제 회고](#문제-회고-2)
     - [문제 풀이](#문제-풀이-1)
     - [문제 회고](#문제-회고-3)
-    - [문제 풀이 1/2 [`Singly linked list`]](#문제-풀이-12-singly-linked-list)
-    - [문제 풀이 2/2 [`Doubly linked list`]](#문제-풀이-22-doubly-linked-list)
+    - [문제 풀이 1/2 [`head deep copy & loop counting`]](#문제-풀이-12-head-deep-copy--loop-counting)
+    - [문제 풀이 2/2 [`head, size to prototype`]](#문제-풀이-22-head-size-to-prototype)
   - [참고문헌](#참고문헌)
 
+## 개념
+
 <details>
-<summary><b>개념</b></summary>
 <table>
   <tr>
     <th colspan="2">구조</th>
@@ -792,45 +794,62 @@ var removeElements = function(head, val) {
 </details>
 
 <details>
-<summary>707. Design Linked List
+<summary>
+  707. Design Linked List  
   <a href="https://leetcode.com/problems/design-linked-list/">👊</a>
+  (<code>Singly linked list</code> ver.)
 </summary>
 
 ### 문제 회고
 
-현재, `Time Limit Exceeded` 제출 에러를 해결중이다.
-
 자료구조의 메소드를 구현하는 문제이다.
 주석이 달린 메소드가 확인 대상이다.
 
-### 문제 풀이 1/2 [`Singly linked list`]
+### 문제 풀이 1/2 [`head deep copy & loop counting`]
+
+다음 테스트 케이스를 처리하기 매우 어려웠다.
+
+    ["MyLinkedList","addAtIndex","get"]
+    [[],[1,0],[0]]
+
+    빈 연결리스트에 1번째 노드에 0을 넣는다 하면
+    val = null인 0번째 노드를 생성한뒤
+    1번째 노드를 생성해야한다.
 
 <table>
-  <tr>
-    <th>빅오</th>
+  <tr >
+    <th colspan="2">빅오</th>
   </tr>
   <tr>
-    <td>
+    <td colspan="2">
 <p>
 
-|       | get    | addAtHead | addAtTail | addAtIndex | deleteAtIndex |
-|:-----:|:------:|:---------:|:---------:|:----------:|:-------------:|
-| time  | `O(n)` | `O(1)`    | `O(n)`    | `O(n)`     | `O(n)`        |
-| space | `O(1)` | `O(1)`    | `O(1)`    | `O(1)`     | `O(1)`        |
+|       | `get`  | `addAtHead` | `addAtTail` | `addAtIndex` | `deleteAtIndex` |
+| :---: | :----: | :---------: | :---------: | :----------: | :-------------: |
+| time  | `O(n)` |   `O(1)`    |   `O(n)`    |    `O(n)`    |     `O(n)`      |
+| space | `O(1)` |   `O(1)`    |   `O(1)`    |    `O(1)`    |     `O(1)`      |
 </p>
     </td>
   </tr>
   <tr>    
-    <th>코드</th>
+    <th colspan="2">코드</th>
   </tr>
-  <tr>    
+  <tr>
+    <td>
+<p>
+
+- 깊은 복사를 지원하는 내장 라이브러리 로드
+- 디버깅을 위해, 배열로 출력할 수 있는 함수
+</p>
+    </td>
     <td>
 <p>
 
 ```js
-// +++ Debug Funtion
 var _ = require('lodash');
 
+
+// +++ Debug Funtion
 var printArray = function(head){
   const result = [];
   let current = head;
@@ -842,11 +861,25 @@ var printArray = function(head){
 
   return result;
 }
+```
+</p>
+    </td>
+  </tr>
+  <tr>
+      <td>
+<p>
 
+- ADT 선언
+</p>
+    </td>
+    <td>
+<p>
+
+```js
 // +++ ADT
 class ListNode {
   constructor(val) {
-      this.val = val;
+      this.val = (val === undefined ? null : val);
       this.next = null;              
   }
 }
@@ -854,15 +887,32 @@ class ListNode {
 var MyLinkedList = function() {
   MyLinkedList.prototype.head = null;
 };
+```
+</p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+<p>
 
+- `get` 메소드
+1. head를 공유하기 때문에, 깊은 복사해온다.
+2. loop를 카운팅해서 인덱스와 일치하면 반환하고,
+   일치하지 않으면 -1을 반환한다.
+</p>
+    </td>
+    <td>
+<p>
+
+```js
 /** 
  * @param {number} index
  * @return {number}
  */
 MyLinkedList.prototype.get = function(index) {
   let loopCnt = 0;
-  let head = _.cloneDeep(MyLinkedList.prototype.head);
-    
+  let head = _.cloneDeep(MyLinkedList.prototype.head);  
+  
   while(head){    
     if(loopCnt === index)
       return head.val;
@@ -873,7 +923,23 @@ MyLinkedList.prototype.get = function(index) {
   
   return -1;
 };
+```
+</p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+<p>
 
+- `addAtHead` 메소드
+1. 복사한 head를 next로 갖는 노드를 생성한 뒤,
+2. 생성한 노드를 공유하는 head로 대체한다.
+</p>
+    </td>
+    <td>
+<p>
+
+```js
 /** 
  * @param {number} val
  * @return {void}
@@ -883,11 +949,26 @@ MyLinkedList.prototype.addAtHead = function(val) {
   const head = _.cloneDeep(MyLinkedList.prototype.head);
   
   node.next = head;
-  MyLinkedList.prototype.head = node;
-  
-  console.log(printArray(MyLinkedList.prototype.head));
+  MyLinkedList.prototype.head = node;  
 };
+```
+</p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+<p>
 
+- `addAtTail` 메소드
+1. 연결리스트를 순회하다, 다음 노드가 없는 노드에
+   새로운 노드를 연결한다.
+2. head가 없을 시 새로운 노드를 head로 대체한다.
+</p>
+    </td>
+    <td>
+<p>
+
+```js
 /** 
  * @param {number} val
  * @return {void}
@@ -911,9 +992,30 @@ MyLinkedList.prototype.addAtTail = function(val) {
     head = node;
     
   MyLinkedList.prototype.head = head;  
-  console.log(printArray(MyLinkedList.prototype.head));
 };
+```
+</p>
+    </td>
+  </tr>  
+  <tr>
+    <td>
+<p>
 
+- `addAtIndex` 메소드
+  1. cur는 연결리스트 순회 탐색용, 
+     prev는 cur 바로 이전 노드를 가리킨다.
+  2. 0번째 인덱스에 노드를 추가할 시
+     앞서 소개한 `addAtHead` 메소드를 호출하고 본 메소드는 종료 한다.
+  3. loop를 카운팅해서 인덱스를 찾아내는 방법은 `get` 메소드와 유사하다.
+  4. 이때, loop가 끝나고 카운팅보다 인덱스가 큰 경우는 연결리스트 종단에 배치해야함을 의미함으로 
+     `addAtTail` 메소드를 호출한다.
+
+</p>
+    </td>
+    <td>
+<p>
+
+```js
 /** 
  * @param {number} index 
  * @param {number} val
@@ -930,7 +1032,7 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
     return MyLinkedList.prototype.addAtHead(val)
   
   let loopCnt = 0;  
-    
+  
   while(cur){    
     if(prev && loopCnt === index){
       node.next = cur;
@@ -942,15 +1044,26 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
     cur = cur.next;    
   }  
   
-  MyLinkedList.prototype.head = head
-    
   loopCnt < index 
     ? MyLinkedList.prototype.addAtTail(val)  
-    : null;  
-  
-  console.log(printArray(MyLinkedList.prototype.head));
+    : MyLinkedList.prototype.head = head;
 };
+```
+</p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+<p>
 
+- `deleteAtIndex` 메소드
+1. 앞선 `83번`, `203번`의 알고리즘과 흡사하다.
+</p>
+    </td>
+    <td>
+<p>
+
+```js
 /** 
  * @param {number} index
  * @return {void}
@@ -977,7 +1090,6 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
   }  
   
   MyLinkedList.prototype.head = head;  
-  console.log(printArray(MyLinkedList.prototype.head));
 };
 ```
 </p>
@@ -985,8 +1097,16 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
   </tr>
 </table>
 
-### 문제 풀이 2/2 [`Doubly linked list`]
+### 문제 풀이 2/2 [`head, size to prototype`]
 
+</details>
+
+<details>
+<summary>
+  707. Design Linked List  
+  <a href="https://leetcode.com/problems/design-linked-list/">👊</a>
+  (<code>Doubly linked list</code> ver.)
+</summary>
 </details>
 
 <hr/>
