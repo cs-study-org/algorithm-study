@@ -16,8 +16,7 @@
     - [문제 회고](#문제-회고-2)
     - [문제 풀이](#문제-풀이-1)
     - [문제 회고](#문제-회고-3)
-    - [문제 풀이 1/2 [`head deep copy & loop counting`]](#문제-풀이-12-head-deep-copy--loop-counting)
-    - [문제 풀이 2/2 [`head, size to prototype`]](#문제-풀이-22-head-size-to-prototype)
+    - [문제 풀이 [`this 사용`]](#문제-풀이-this-사용)
   - [참고문헌](#참고문헌)
 
 ## 개념
@@ -74,7 +73,6 @@
 ## 문제 리스트
 
 > 각 문제의 👊를 클릭하면 문제로 이동합니다.
-> 각 문제의 `메인 함수에 대한 주석`은 중복되어 첫 문제 풀이에만 기술하겠습니다.
 
 <details>
 <summary>1290. Convert Binary Number in a Linked List to Integer
@@ -805,16 +803,38 @@ var removeElements = function(head, val) {
 자료구조의 메소드를 구현하는 문제이다.
 주석이 달린 메소드가 확인 대상이다.
 
-### 문제 풀이 1/2 [`head deep copy & loop counting`]
+처음 접근 방식은
 
-다음 테스트 케이스를 처리하기 매우 어려웠다.
+`MyLinkedList.prototype.head`를 만들고,
+이를 공유하니까 메소드에서 사용할 시 복제한뒤, 결과값을 다시 갖다두는 생각을 하였다.
 
-    ["MyLinkedList","addAtIndex","get"]
-    [[],[1,0],[0]]
+하지만, `this`를 사용하는 것이 코드의 양이 적었고,
+복제할 때 사용하는 `cloneDeep()` 함수는 비용이 많을것이라 생각하였다.
 
-    빈 연결리스트에 1번째 노드에 0을 넣는다 하면
-    val = null인 0번째 노드를 생성한뒤
-    1번째 노드를 생성해야한다.
+여기서 궁금증은
+
+`addAtIndex` 메소드에서 `addAtTail`을 호출하는데,
+각 메소드는 동작이 독립적이어서 `head 초기화`가 되줘야한다.
+
+다음과 같이 호출할 시 `head 초기화`가 되었고,
+```js
+MyLinkedList.prototype.addAtIndex = function(index, val) {
+  ...
+  return this.addAtTail(val);         
+};
+```
+
+다음과 같이 호출할 시 `head 초기화`가 되지 않았다.
+```js
+MyLinkedList.prototype.addAtIndex = function(index, val) {
+  ...
+  return MyLinkedList.prototype.addAtTail(val);         
+};
+```
+
+프로토타입이 공유하는 특성때문에 그런것이라 추측한다.
+
+### 문제 풀이 [`this 사용`]  
 
 <table>
   <tr >
@@ -834,45 +854,8 @@ var removeElements = function(head, val) {
   <tr>    
     <th colspan="2">코드</th>
   </tr>
-  <tr>
-    <td>
-<p>
-
-- 깊은 복사를 지원하는 내장 라이브러리 로드
-- 디버깅을 위해, 배열로 출력할 수 있는 함수
-</p>
-    </td>
-    <td>
-<p>
-
-```js
-var _ = require('lodash');
-
-
-// +++ Debug Funtion
-var printArray = function(head){
-  const result = [];
-  let current = head;
-
-  while(current){
-    result.push(current.val);
-    current = current.next;
-  }
-
-  return result;
-}
-```
-</p>
-    </td>
-  </tr>
-  <tr>
-      <td>
-<p>
-
-- ADT 선언
-</p>
-    </td>
-    <td>
+  <tr>      
+    <td colspan="2">
 <p>
 
 ```js
@@ -895,10 +878,19 @@ var MyLinkedList = function() {
     <td>
 <p>
 
-- `get` 메소드
-1. head를 공유하기 때문에, 깊은 복사해온다.
-2. loop를 카운팅해서 인덱스와 일치하면 반환하고,
-   일치하지 않으면 -1을 반환한다.
+```js
+// +++ Debug
+MyLinkedList.prototype.printList = function(){  
+  const result = [];  
+
+  while(this.head){
+    result.push(this.head.val);
+    this.head = this.head.next;
+  }
+
+  return result;
+};
+```
 </p>
     </td>
     <td>
@@ -909,16 +901,16 @@ var MyLinkedList = function() {
  * @param {number} index
  * @return {number}
  */
-MyLinkedList.prototype.get = function(index) {
-  let loopCnt = 0;
-  let head = _.cloneDeep(MyLinkedList.prototype.head);  
+MyLinkedList.prototype.get = function(index) {  
+  let cur = this.head;  
   
-  while(head){    
+  let loopCnt = 0;
+  while(cur){    
     if(loopCnt === index)
-      return head.val;
+      return cur.val;
     
-    loopCnt += head.next ? 1 : 0;
-    head = head.next;
+    loopCnt += 1;
+    cur = cur.next;
   }
   
   return -1;
@@ -927,15 +919,7 @@ MyLinkedList.prototype.get = function(index) {
 </p>
     </td>
   </tr>
-  <tr>
-    <td>
-<p>
-
-- `addAtHead` 메소드
-1. 복사한 head를 next로 갖는 노드를 생성한 뒤,
-2. 생성한 노드를 공유하는 head로 대체한다.
-</p>
-    </td>
+  <tr>    
     <td>
 <p>
 
@@ -945,26 +929,14 @@ MyLinkedList.prototype.get = function(index) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtHead = function(val) {
-  let node = new ListNode(val);
-  const head = _.cloneDeep(MyLinkedList.prototype.head);
+  let node = new ListNode(val);  
   
-  node.next = head;
-  MyLinkedList.prototype.head = node;  
+  node.next = this.head;
+  this.head = node;  
 };
 ```
 </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-<p>
-
-- `addAtTail` 메소드
-1. 연결리스트를 순회하다, 다음 노드가 없는 노드에
-   새로운 노드를 연결한다.
-2. head가 없을 시 새로운 노드를 head로 대체한다.
-</p>
-    </td>
+    </td>  
     <td>
 <p>
 
@@ -975,43 +947,22 @@ MyLinkedList.prototype.addAtHead = function(val) {
  */
 MyLinkedList.prototype.addAtTail = function(val) {
   const node = new ListNode(val);  
-  
-  let head = _.cloneDeep(MyLinkedList.prototype.head);
-  let cur = head;
-  
-  while(cur){    
-    if(!cur.next){      
-      cur.next = node;
-      break;
-    }      
     
-    cur = cur.next;    
-  }
+  if(this.head === null)
+    return this.head = node;   
   
-  if(!head)
-    head = node;
-    
-  MyLinkedList.prototype.head = head;  
+  let cur = this.head;  
+  
+  while(cur.next)
+    cur = cur.next;
+  
+  cur.next = node;  
 };
 ```
 </p>
     </td>
   </tr>  
   <tr>
-    <td>
-<p>
-
-- `addAtIndex` 메소드
-  1. cur는 연결리스트 순회 탐색용, 
-     prev는 cur 바로 이전 노드를 가리킨다.
-  2. 0번째 인덱스에 노드를 추가할 시
-     앞서 소개한 `addAtHead` 메소드를 호출하고 본 메소드는 종료 한다.
-  3. loop를 카운팅해서 인덱스를 찾아내는 방법은 `get` 메소드와 유사하다.
-  4. 이때, loop가 끝나고 카운팅보다 인덱스가 큰 경우는 연결리스트 종단에 배치해야함을 의미함으로 
-     `addAtTail` 메소드를 호출한다.
-
-</p>
-    </td>
     <td>
 <p>
 
@@ -1023,16 +974,14 @@ MyLinkedList.prototype.addAtTail = function(val) {
  */
 MyLinkedList.prototype.addAtIndex = function(index, val) {
   let node = new ListNode(val);
-    
-  let head = _.cloneDeep(MyLinkedList.prototype.head);
+  
   let prev = null;
-  let cur = head;
+  let cur = this.head;
   
   if(!index)
-    return MyLinkedList.prototype.addAtHead(val)
-  
-  let loopCnt = 0;  
-  
+    return this.addAtHead(val)
+      
+  let loopCnt = 0;
   while(cur){    
     if(prev && loopCnt === index){
       node.next = cur;
@@ -1042,24 +991,14 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
     
     loopCnt += cur.next ? 1 : 0;
     cur = cur.next;    
-  }  
+  }
   
-  loopCnt < index 
-    ? MyLinkedList.prototype.addAtTail(val)  
-    : MyLinkedList.prototype.head = head;
+  if(loopCnt < index)    
+    return this.addAtTail(val);         
 };
 ```
 </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-<p>
-
-- `deleteAtIndex` 메소드
-1. 앞선 `83번`, `203번`의 알고리즘과 흡사하다.
-</p>
-    </td>
+    </td>  
     <td>
 <p>
 
@@ -1068,17 +1007,14 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
  * @param {number} index
  * @return {void}
  */
-
-MyLinkedList.prototype.deleteAtIndex = function(index) {    
-  let head = _.cloneDeep(MyLinkedList.prototype.head);
+MyLinkedList.prototype.deleteAtIndex = function(index) {      
   let prev = null;
-  let cur = head;
+  let cur = this.head;
   
   if(!index)
-    head = head.next;
+    return this.head = this.head.next;  
   
   let loopCnt = 0;
-  
   while(cur){    
     if(prev && loopCnt === index)
       prev.next = cur.next;      
@@ -1088,17 +1024,12 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
     loopCnt += cur.next ? 1 : 0;
     cur = cur.next;
   }  
-  
-  MyLinkedList.prototype.head = head;  
 };
 ```
 </p>
-    </td>
+    </td>    
   </tr>
 </table>
-
-### 문제 풀이 2/2 [`head, size to prototype`]
-
 </details>
 
 <details>
