@@ -800,39 +800,56 @@ var removeElements = function(head, val) {
 
 ### 문제 회고
 
-자료구조의 메소드를 구현하는 문제이다.
-주석이 달린 메소드가 확인 대상이다.
+<dl>
+  <dt>
+  현재 가독성을 높이기 위한 리팩토링 중이고,<br/>
+  메소드간에 head가 초기화되지 않는 이슈가 다시 발생하여 해결중이다.
+  </dt>
+</dl>
 
 처음 접근 방식은
 
 `MyLinkedList.prototype.head`를 만들고,
-이를 공유하니까 메소드에서 사용할 시 복제한뒤, 결과값을 다시 갖다두는 생각을 하였다.
+이를 공유하니까 메소드에서 사용할 시 복제한뒤, 
+메소드를 거친 복제본을 다시 원본에 갖다두는 생각을 하였다.
 
 하지만, `this`를 사용하는 것이 코드의 양이 적었고,
 복제할 때 사용하는 `cloneDeep()` 함수는 비용이 많을것이라 생각하였다.
 
-여기서 궁금증은
+- 문제를 해결해나가는 과정 중에 궁금증이 있었다.
 
-`addAtIndex` 메소드에서 `addAtTail`을 호출하는데,
-각 메소드는 동작이 독립적이어서 `head 초기화`가 되줘야한다.
+    `addAtIndex()` 메소드에서 `addAtTail()`을 호출하는데,
+    각 메소드는 동작이 독립적이어서 `head 초기화`가 되줘야한다.
 
-다음과 같이 호출할 시 `head 초기화`가 되었고,
-```js
-MyLinkedList.prototype.addAtIndex = function(index, val) {
-  ...
-  return this.addAtTail(val);         
-};
-```
+    다음과 같이 호출할 시 `head 초기화`가 되었고,
+    ```js
+    MyLinkedList.prototype.addAtIndex = function(index, val) {
+      ...
+      return this.addAtTail(val);         
+    };
+    ```
 
-다음과 같이 호출할 시 `head 초기화`가 되지 않았다.
-```js
-MyLinkedList.prototype.addAtIndex = function(index, val) {
-  ...
-  return MyLinkedList.prototype.addAtTail(val);         
-};
-```
+    다음과 같이 호출할 시 `head 초기화`가 되지 않았다.
+    ```js
+    MyLinkedList.prototype.addAtIndex = function(index, val) {
+      ...
+      return MyLinkedList.prototype.addAtTail(val);         
+    };
+    ```
 
-프로토타입이 공유하는 특성때문에 그런것이라 추측한다.
+    프로토타입이 공유하는 특성때문에 그런것이라 추측한다.
+
+- 제일 어려웠던 테스트케이스는 다음이었다.
+
+      ["MyLinkedList","addAtIndex","get"]
+      [[],[1,0],[0]]
+
+      빈 연결리스트의 1번째 노드에 값을 넣는다 하면
+
+      빈값인 0번째 노드를 생성한뒤, 1번째 노드를 생성해야한다.
+
+  이 테스트케이스를 해결하기 위해 풀이를 참고했고, 
+  단순히 메소드에서 아무것도 return 하지 않으면 됬다.
 
 ### 문제 풀이 [`this 사용`]  
 
@@ -862,13 +879,14 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
 // +++ ADT
 class ListNode {
   constructor(val) {
-      this.val = (val === undefined ? null : val);
+      this.val = (val === undefined ? 0 : val);
       this.next = null;              
   }
 }
 
 var MyLinkedList = function() {
-  MyLinkedList.prototype.head = null;
+  this.head = null;
+  this.size = 0;  
 };
 ```
 </p>
@@ -880,6 +898,10 @@ var MyLinkedList = function() {
 
 ```js
 // +++ Debug
+MyLinkedList.prototype.lastIndex = function(){
+  return this.size > 0 ? this.size - 1 : 0;
+}
+
 MyLinkedList.prototype.printList = function(){  
   const result = [];  
 
@@ -901,19 +923,23 @@ MyLinkedList.prototype.printList = function(){
  * @param {number} index
  * @return {number}
  */
-MyLinkedList.prototype.get = function(index) {  
+MyLinkedList.prototype.get = function(index) {
+  // +++ Exception
+  if(!this.size || index > this.lastIndex())
+    return -1;
+  
+  // +++ Start
   let cur = this.head;  
   
   let loopCnt = 0;
-  while(cur){    
+    
+  while(cur){
     if(loopCnt === index)
       return cur.val;
     
     loopCnt += 1;
-    cur = cur.next;
-  }
-  
-  return -1;
+    cur = cur.next; 
+  }   
 };
 ```
 </p>
@@ -929,10 +955,18 @@ MyLinkedList.prototype.get = function(index) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtHead = function(val) {
-  let node = new ListNode(val);  
+  const node = new ListNode(val);  
+  
+  if(!this.head){
+    this.size += 1;    
+    return this.head = node; 
+  }    
   
   node.next = this.head;
-  this.head = node;  
+  this.head = node;
+      
+  this.size += 1;   
+  return this;  
 };
 ```
 </p>
@@ -946,17 +980,20 @@ MyLinkedList.prototype.addAtHead = function(val) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtTail = function(val) {
-  const node = new ListNode(val);  
-    
-  if(this.head === null)
-    return this.head = node;   
+  const node = new ListNode(val);           
   
-  let cur = this.head;  
+  if(!this.head)
+    return this.head = node; 
   
+  let cur = this.head;    
+
   while(cur.next)
     cur = cur.next;
   
-  cur.next = node;  
+  cur.next = node;    
+  
+  this.size += 1;  
+  return this;  
 };
 ```
 </p>
@@ -973,28 +1010,35 @@ MyLinkedList.prototype.addAtTail = function(val) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtIndex = function(index, val) {
-  let node = new ListNode(val);
-  
-  let prev = null;
-  let cur = this.head;
-  
+  // +++ Exception
   if(!index)
-    return this.addAtHead(val)
-      
-  let loopCnt = 0;
-  while(cur){    
+    return this.addAtHead(val);
+  
+  if(index === this.size)
+    return this.addAtTail(val);
+  
+  if(index > this.size)
+    return;  
+    
+  // +++ Start  
+  let prev = null;
+  let cur = this.head;    
+  
+  let loopCnt = 0; 
+  while(cur){
     if(prev && loopCnt === index){
+      let node = new ListNode(val);
+      
       node.next = cur;
       prev.next = node;
     }else
       prev = cur;
-    
-    loopCnt += cur.next ? 1 : 0;
+        
+    loopCnt += 1;
     cur = cur.next;    
-  }
+  }  
   
-  if(loopCnt < index)    
-    return this.addAtTail(val);         
+  this.size += 1;  
 };
 ```
 </p>
@@ -1007,12 +1051,19 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
  * @param {number} index
  * @return {void}
  */
-MyLinkedList.prototype.deleteAtIndex = function(index) {      
+MyLinkedList.prototype.deleteAtIndex = function(index) {        
+  // +++ Exception
+  if(!index){
+    this.size -= 1;
+    return this.head = this.head.next;    
+  }
+    
+  if(index > this.lastIndex())
+    return;
+  
+  // +++ Start
   let prev = null;
   let cur = this.head;
-  
-  if(!index)
-    return this.head = this.head.next;  
   
   let loopCnt = 0;
   while(cur){    
@@ -1020,10 +1071,12 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
       prev.next = cur.next;      
     else
       prev = cur;
-        
-    loopCnt += cur.next ? 1 : 0;
+  
+    loopCnt += 1;
     cur = cur.next;
-  }  
+  }      
+  
+  this.size -= 1;  
 };
 ```
 </p>
@@ -1063,3 +1116,5 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
 [Simple Solution at 141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/discuss/289913/JavaScript-Solution-(98-faster)) -- LeetCode
 
 [Simple Solution at 203. Remove Linked List Elements](https://leetcode.com/problems/remove-linked-list-elements/discuss/275445/Javascript-simple-solution) -- LeetCode
+
+[Simple Solution at 707. Design Linked List](https://leetcode.com/problems/design-linked-list/discuss/318796/My-JavaScript-solution) -- LeetCode
