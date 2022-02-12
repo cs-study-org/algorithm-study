@@ -7,6 +7,7 @@
 ## 83. Remove Duplicates from Sorted List
 ## 141. Linked List Cycle
 ## 203. Remove Linked List Elements
+## 707. Design Linked List
 
 
 
@@ -281,3 +282,97 @@ remove를 사용했기때문에 시간복잡도 O(n^2)이다..
 
 이 풀이가 가장 이해가 쉬웠다.
 
+
+
+## 707. Design Linked List
+### 문제 요약
+연결리스트를 구현하시오
+
+### 코드(런타임 에러)
+```java
+class MyLinkedList {
+    class Node{// Node class
+        int val;
+        Node next;
+
+        Node(int val){
+            this.val = val;
+            this.next = null;
+        }
+    }
+    Node head;
+    Node tail;
+    int size = 0;
+
+    //생성자
+    public MyLinkedList() {
+        head = new Node(0);
+        tail = head;
+        size = 0;
+    }
+
+    public int get(int index) {
+        Node nowNode = head;
+        for(int i =0;i<=index;i++){
+            nowNode = nowNode.next;
+        }
+        return nowNode.val;
+    }
+
+    public void addAtHead(int val) {
+        Node newNode = new Node(val);
+        newNode.next = head;
+        head = newNode;
+        size++;
+    }
+
+    public void addAtTail(int val) {
+        Node newNode = new Node(val);
+        tail.next = newNode;
+        tail = newNode;
+        size++;
+    }
+
+    public void addAtIndex(int index, int val) {
+        Node getNode = head;
+        for(int i = 0;i<index;i++){
+            getNode = getNode.next;
+        }
+        Node prevNode = getNode;
+        Node nextNode = prevNode.next;
+        Node newNode = new Node(val);
+
+        prevNode.next = null;
+        prevNode.next = newNode;
+        newNode.next = nextNode;
+        size++;
+    }
+
+    public void deleteAtIndex(int index) {
+        Node getNode = head;
+        for(int i = 0;i<index;i++){
+            getNode = getNode.next;
+        }
+        Node prevNode = getNode;
+        Node removeNode = prevNode.next;
+        Node nextNode = removeNode.next;
+
+        prevNode.next = nextNode;
+        size--;
+    }
+}
+```
+
+코드는 돌아가는데 런타임 에러가 났다.
+
+해당 이유는 모르겠다...
+
+예외 처리를 해줘야하는데 코드를 짜면서 예외처리가 감이 잘 안온다...
+
+더 많이 생각해보자!!
+
+### 시간 복잡도
+|   | get | addAtHead | addAtTail | addAtIndex | deleteAtIndex |
+|---|-----|-----------|-----------|------------|---------------|
+| 시간복잡도  |  O(n)   |     O(1)      |     O(1)      |    O(n)        |        O(n)       |
+| 공간 복잡도  |  O(1)   |     O(1)      |    O(1)       |   O(1)         |     O(1)          |
