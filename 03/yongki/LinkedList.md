@@ -804,12 +804,6 @@ var removeElements = function(head, val) {
 
 ### 문제 회고
 
-<dl>
-  <dt>  
-  메소드간에 head가 초기화되지 않는 이슈가 다시 발생하여 해결중이다.
-  </dt>
-</dl>
-
 - 처음 접근 방식은
 
   `MyLinkedList.prototype.head`를 만들고,
@@ -854,6 +848,13 @@ var removeElements = function(head, val) {
   이 테스트케이스를 해결하기 위해 풀이를 참고했고, 
   단순히 메소드에서 아무것도 return 하지 않으면 됬다.
 
+- 메소드간에 head가 초기화되지 않는 이슈는
+  디버깅을 위해 head를 순회하던 `printList()` 메소드 때문이었다.
+
+  `printList()` 메소드는 변수에 참조시키지 않고, `this.head`를 그대로 순회했기 때문인데,
+
+  왜 `this.head`를 변수에 참조시킨 뒤, 사용해야 할까? 
+
 ### 문제 풀이 [`this 사용`]  
 
 <table>
@@ -882,7 +883,7 @@ var removeElements = function(head, val) {
 // +++ ADT
 class ListNode {
   constructor(val) {
-      this.val = (val === undefined ? 0 : val);
+      this.val = val;
       this.next = null;              
   }
 }
@@ -908,9 +909,11 @@ MyLinkedList.prototype.lastIndex = function(){
 MyLinkedList.prototype.printList = function(){  
   const result = [];  
 
-  while(this.head){
-    result.push(this.head.val);
-    this.head = this.head.next;
+  let cur = this.head;
+  
+  while(cur){
+    result.push(cur.val);
+    cur = cur.next;
   }
 
   return result;
@@ -942,7 +945,7 @@ MyLinkedList.prototype.get = function(index) {
     
     loopCnt += 1;
     cur = cur.next; 
-  }   
+  }
 };
 ```
 </p>
@@ -968,8 +971,7 @@ MyLinkedList.prototype.addAtHead = function(val) {
   node.next = this.head;
   this.head = node;
       
-  this.size += 1;   
-  return this;  
+  this.size += 1; 
 };
 ```
 </p>
@@ -985,8 +987,10 @@ MyLinkedList.prototype.addAtHead = function(val) {
 MyLinkedList.prototype.addAtTail = function(val) {
   const node = new ListNode(val);           
   
-  if(!this.head)
+  if(!this.head){
+    this.size += 1;
     return this.head = node; 
+  }    
   
   let cur = this.head;    
 
@@ -995,8 +999,7 @@ MyLinkedList.prototype.addAtTail = function(val) {
   
   cur.next = node;    
   
-  this.size += 1;  
-  return this;  
+  this.size += 1;
 };
 ```
 </p>
@@ -1022,7 +1025,7 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
   
   if(index > this.size)
     return;  
-    
+  
   // +++ Start  
   let prev = null;
   let cur = this.head;    
@@ -1041,7 +1044,7 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
     cur = cur.next;    
   }  
   
-  this.size += 1;  
+  this.size += 1;
 };
 ```
 </p>
