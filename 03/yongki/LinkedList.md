@@ -238,6 +238,7 @@ var getDecimalValue = function(head) {
 <p>
 
     time:   O(n)
+    space:  O(1)
 
     1. 연결리스트를 순회할 때 prev라는 변수에 노드를 저장한다.
        해당 변수는 삭제할 노드를 찾았을 시 
@@ -346,7 +347,8 @@ assert.deepEqual(printArray(list2.head), [4, 5, 9]);  // pass
     <td>
 <p>
 
-    time:   O(1) 🤔
+    time:   O(1)
+    space:  O(1)
 
          head = 4 → 5 → 1 → 9
     
@@ -416,7 +418,8 @@ var deleteNode = function(node) {
     <td>
 <p>
 
-    time:   O(n)
+    time:   O(a + b)
+    space:  O(1)
 
     Input:  [4,1,8,4,5]
             [5,6,1,8,4,5]
@@ -563,6 +566,7 @@ var deleteDuplicates = function(head) {
 <p>
 
     time:   O(n^2)
+    space:  O(1)
 
     1. 연결리스트를 순회할 때, 
        현재 노드와 같은 요소가 
@@ -801,20 +805,19 @@ var removeElements = function(head, val) {
 ### 문제 회고
 
 <dl>
-  <dt>
-  현재 가독성을 높이기 위한 리팩토링 중이고,<br/>
+  <dt>  
   메소드간에 head가 초기화되지 않는 이슈가 다시 발생하여 해결중이다.
   </dt>
 </dl>
 
-처음 접근 방식은
+- 처음 접근 방식은
 
-`MyLinkedList.prototype.head`를 만들고,
-이를 공유하니까 메소드에서 사용할 시 복제한뒤, 
-메소드를 거친 복제본을 다시 원본에 갖다두는 생각을 하였다.
+  `MyLinkedList.prototype.head`를 만들고,
+  이를 공유하니까 메소드에서 사용할 시 복제한뒤, 
+  메소드를 거친 복제본을 다시 원본에 갖다두는 생각을 하였다.
 
-하지만, `this`를 사용하는 것이 코드의 양이 적었고,
-복제할 때 사용하는 `cloneDeep()` 함수는 비용이 많을것이라 생각하였다.
+  하지만, `this`를 사용하는 것이 코드의 양이 적었고,
+  복제할 때 사용하는 `cloneDeep()` 함수는 비용이 많을것이라 생각하였다.
 
 - 문제를 해결해나가는 과정 중에 궁금증이 있었다.
 
@@ -1083,14 +1086,6 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
     </td>    
   </tr>
 </table>
-</details>
-
-<details>
-<summary>
-  707. Design Linked List  
-  <a href="https://leetcode.com/problems/design-linked-list/">👊</a>
-  (<code>Doubly linked list</code> ver.)
-</summary>
 </details>
 
 <hr/>
