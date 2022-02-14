@@ -110,15 +110,15 @@ public class Solution {
         ListNode tempB = headB;
         ListNode result = null;
         
-        ArrayList <ListNode>list = new ArrayList<>();
-        
+        Set <ListNode> set = new HashSet<>();
+
         while(tempA !=null){
-            list.add(tempA);
+            set.add(tempA);
             tempA = tempA.next;
         }
         
         while(tempB != null){
-            if(list.contains(tempB)){
+            if(set.contains(tempB)){
                 result = tempB;
                 break;
             }
