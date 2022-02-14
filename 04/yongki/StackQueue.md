@@ -10,6 +10,7 @@
     - [문제 회고](#문제-회고-1)
     - [문제 풀이 1/2 [`스택 사용`]](#문제-풀이-12-스택-사용)
     - [문제 풀이 2/2 [`직관적인`]](#문제-풀이-22-직관적인)
+    - [문제 풀이 [`1614번 문제 풀이 1/2`]](#문제-풀이-1614번-문제-풀이-12)
   - [참고문헌](#참고문헌)
 
 ## 구현문제 리스트
@@ -387,6 +388,43 @@ var maxDepth = function(s) {
 };
 ```
 
+</details>
+
+<details>
+<summary>1598. Crawler Log Folder
+  <a href="https://leetcode.com/problems/crawler-log-folder/">👊</a>
+</summary>
+
+### 문제 풀이 [`1614번 문제 풀이 1/2`]
+
+```js
+/**
+ * @param {string[]} logs
+ * @return {number}
+ * time:    O(n)
+ * space:   O(n)
+ */
+var minOperations = function(logs) {
+  const stack = [];  
+  
+  for(let log of logs){
+    
+    if(log === './')
+      continue;
+    
+    if(log === '../'){
+      if(stack.length) 
+        stack.pop();                
+      
+      continue;  
+    }      
+    
+    stack.push(log);    
+  }
+  
+  return stack.length;
+};
+```
 </details>
 
 <hr/>
