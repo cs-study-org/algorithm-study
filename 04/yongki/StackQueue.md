@@ -11,6 +11,8 @@
     - [문제 풀이 1/2 [`스택 사용`]](#문제-풀이-12-스택-사용)
     - [문제 풀이 2/2 [`직관적인`]](#문제-풀이-22-직관적인)
     - [문제 풀이 [`1614번 문제 풀이 1/2`]](#문제-풀이-1614번-문제-풀이-12)
+    - [문제 풀이 1/2 [`Brute force`]](#문제-풀이-12-brute-force)
+    - [문제 풀이 2/2 [`Follow up 만족`]](#문제-풀이-22-follow-up-만족)
   - [참고문헌](#참고문헌)
 
 ## 구현문제 리스트
@@ -425,6 +427,72 @@ var minOperations = function(logs) {
   return stack.length;
 };
 ```
+</details>
+
+<details>
+<summary>496. Next Greater Element I
+  <a href="https://leetcode.com/problems/next-greater-element-i/">👊</a>
+</summary>
+
+### 문제 풀이 1/2 [`Brute force`]
+
+```js
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ 
+ * time:    O(ab)
+            → for           O(a)
+            →   indexOf()     O(b)
+            →   findNext..    O(b)
+
+ * space:   O(a)              
+ */
+var nextGreaterElement = function(nums1, nums2) {  
+  const findNextGreaterElement = (curIdx, curNum) => { 
+    if(nums2.length === curIdx + 1)
+      return -1;          
+      
+    for(let i = curIdx + 1; i < nums2.length; i++){
+      if(nums2[i] > curNum)
+        return nums2[i];      
+    }            
+    
+    return -1;
+  };
+  
+  const result = [];
+  
+  for(let num of nums1){
+    const idx = nums2.indexOf(num);       
+    
+    result.push(findNextGreaterElement(idx, num));
+  }    
+  
+  return result;
+};
+```
+
+### 문제 풀이 2/2 [`Follow up 만족`]
+
+다음과 같은 추가조건이 주어졌다.
+
+<dl><dt>
+Could you find an O(nums1.length + nums2.length) solution?
+</dl></dt> 
+
+```js
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ 
+ * time:    O(a + b)            
+ * space:   O(a)              
+ */
+```
+
 </details>
 
 <hr/>
