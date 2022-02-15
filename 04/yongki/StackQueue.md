@@ -2,10 +2,10 @@
 
 - [스택, 큐](#스택-큐)
   - [구현문제 리스트](#구현문제-리스트)
-    - [문제 풀이](#문제-풀이)
-    - [문제 회고](#문제-회고)
     - [문제 풀이 [`용량 제한적인`]](#문제-풀이-용량-제한적인)
-    - [문제 풀이 [`용량 제한없는`]](#문제-풀이-용량-제한없는)
+    - [문제 회고](#문제-회고)
+    - [문제 풀이 1/2 [`용량 제한적인`]](#문제-풀이-12-용량-제한적인)
+    - [문제 풀이 2/2 [`용량 제한없는`]](#문제-풀이-22-용량-제한없는)
   - [문제 리스트](#문제-리스트)
     - [문제 회고](#문제-회고-1)
     - [문제 풀이 1/2 [`스택 사용`]](#문제-풀이-12-스택-사용)
@@ -26,7 +26,7 @@
   <a href="https://leetcode.com/problems/design-a-stack-with-increment-operation/">👊</a>
 </summary>
 
-### 문제 풀이
+### 문제 풀이 [`용량 제한적인`]
 
 <table>
   <tr>
@@ -150,10 +150,10 @@ CustomStack.prototype.increment = function(k, val) {
 
 원형 큐 문제지만, 구현을 단순 큐 처럼해도 제출이 완료되었다.
 
-때문에 size 제한이 없고, 연결리스트를 사용한 실질적인 원형 큐를 
-2번째 문제 풀이로 별도의 에디터에 구현할 계획이다.
+때문에 용량 제한이 없고, 연결리스트를 사용한 실질적인 원형 큐를 
+`문제 풀이 2/2 `에 구현하였다.
 
-### 문제 풀이 [`용량 제한적인`]
+### 문제 풀이 1/2 [`용량 제한적인`]
 
 <table>
   <tr>
@@ -291,9 +291,9 @@ MyCircularQueue.prototype.isFull = function() {
   </tr>
 </table>
 
-### 문제 풀이 [`용량 제한없는`]
+### 문제 풀이 2/2 [`용량 제한없는`]
 
-    ...
+- 본 PR의 src폴더에서 코드를 확인할 수 있다.
 
 </details>
 
@@ -520,6 +520,8 @@ Could you find an O(nums1.length + nums2.length) solution?
             →     map.set             O(1)
             
             → for                 O(a)
+            →   map.has             O(1)
+            →   map.get             O(1)
             
  * space:   O(a + b)              
             → result              O(a)
@@ -589,3 +591,5 @@ var nextGreaterElement = function(nums1, nums2) {
 [Simple Solution at 1614. Maximum Nesting Depth of the Parentheses](https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/discuss/1707692/JavaScript-Stack-or-O(n)-Time-or-O(1)-Space) ━ *LeetCode*
 
 [Simple Solution at 496. Next Greater Element I](calendar.google.com/calendar/u/0/r/month/2022/1/1) ━ *LeetCode*
+
+[Circular Linked List]([calendar.google.com/calendar/u/0/r/month/2022/1/1](https://www.geeksforgeeks.org/circular-linked-list/)) ━ *GeeksforGeeks*
