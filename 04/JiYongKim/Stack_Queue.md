@@ -4,7 +4,7 @@
 
 ## 스택(Stack)
 
-![스크린샷 2022-01-04 오전 1.17.40.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/563bdead-6e5a-416a-9bd5-0fa91569c6b2/스크린샷_2022-01-04_오전_1.17.40.png)
+<img width="357" alt="스크린샷 2022-02-15 오후 8 19 55" src="https://user-images.githubusercontent.com/81874493/154052020-4ab99f69-0d8c-4fba-8ff6-3e2a137c9c24.png">
 
 스택은 컴퓨터의 기본 자료구조 중 하나로 한쪽 끝에서만 자료를 넣거나 뺄 수 있는 LIFO 형식의 자료 구조
 
@@ -51,7 +51,7 @@
 
 **큐(QUEUE) ..(선형 자료구조)**
 
-![스크린샷 2022-01-04 오전 1.23.11.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/520f56ed-f35b-4d1c-8b47-bd0fdf696a86/스크린샷_2022-01-04_오전_1.23.11.png)
+<img width="683" alt="스크린샷 2022-02-15 오후 8 20 01" src="https://user-images.githubusercontent.com/81874493/154052060-9d357bd7-6c2e-4429-83a1-b1ade25a4d97.png">
 
 >⇒ 큐란 컴퓨터의 기본 자료구조 중 하나로 먼저 들어온 데이터가 먼저 나가는 구조로 되어 있는 자료구조 이다.
 
@@ -66,14 +66,14 @@
 - 큐의 종류
     - Linear Queue(선형 **큐**)
         
-        ![스크린샷 2022-01-19 오전 12.22.20.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/dd7f9486-4772-442c-99bd-d7a8efea3801/스크린샷_2022-01-19_오전_12.22.20.png)
-        
+        <img width="648" alt="스크린샷 2022-02-15 오후 8 20 07" src="https://user-images.githubusercontent.com/81874493/154052108-b37b91f6-37c9-4a35-832e-7cd3fdf16721.png">
+
         <br>
 
     - Circular Queue (원형 **큐**)
         
-        ![스크린샷 2022-01-19 오전 12.22.38.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0f045679-d148-4f94-8956-bb27dd831880/스크린샷_2022-01-19_오전_12.22.38.png)
-        
+        <img width="651" alt="스크린샷 2022-02-15 오후 8 20 11" src="https://user-images.githubusercontent.com/81874493/154052124-3cd22887-d6c8-46ec-88a6-1c2dead727b7.png">
+
         <br>
 
     - Priority Queue(우선순위 **큐**)
