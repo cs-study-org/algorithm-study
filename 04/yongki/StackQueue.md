@@ -12,7 +12,11 @@
     - [문제 풀이 2/2 [`직관적인`]](#문제-풀이-22-직관적인)
     - [문제 풀이 [`1614번 문제 풀이 1/2`]](#문제-풀이-1614번-문제-풀이-12)
     - [문제 풀이 1/2 [`Brute force`]](#문제-풀이-12-brute-force)
-    - [문제 풀이 2/2 [`Follow up 만족`]](#문제-풀이-22-follow-up-만족)
+    - [문제 풀이 2/2 [`#Follow up 만족` `#Monotonic Stack`]](#문제-풀이-22-follow-up-만족-monotonic-stack)
+      - [알고리즘 설명](#알고리즘-설명)
+      - [코드](#코드)
+      - [루프에 따른 결과값 1/2 [`Example1`]](#루프에-따른-결과값-12-example1)
+      - [루프에 따른 결과값 2/2 [`Example2`]](#루프에-따른-결과값-22-example2)
   - [참고문헌](#참고문헌)
 
 ## 구현문제 리스트
@@ -474,7 +478,7 @@ var nextGreaterElement = function(nums1, nums2) {
 };
 ```
 
-### 문제 풀이 2/2 [`Follow up 만족`]
+### 문제 풀이 2/2 [`#Follow up 만족` `#Monotonic Stack`]
 
 다음과 같은 추가조건이 주어졌다.
 
@@ -482,16 +486,97 @@ var nextGreaterElement = function(nums1, nums2) {
 Could you find an O(nums1.length + nums2.length) solution?
 </dl></dt> 
 
+- 풀이법은 리트코드 풀이를 참조하였다.
+
+- 제출함수를 위해 스택을 간단히 구현했지만, `1381번: 스택 구현`과 유사해 생략하였다.
+
+#### 알고리즘 설명
+
+`Monotonic Stack`은 스택의 요소들이 오름차순 또는 내림차순을 유지해야한다.
+
+    오름차순을 유지해야하는 경우
+
+    [5, 19, 20]에 10을 넣는다고 했을때,
+    19, 20을 제거하고 10을 넣는다.
+
+    [5, 10]
+
+    이렇듯, 스택에 push되는 값 이상의 수를 모두 제거하는 특징을 이용한다.
+
+#### 코드
+
 ```js
 /**
  * @param {number[]} nums1
  * @param {number[]} nums2
  * @return {number[]}
  
- * time:    O(a + b)            
- * space:   O(a)              
+ * time:    O(a + b)
+            → for                 O(b)
+            →   while               O(1)
+            →     stack.isEmpty()     O(1)
+            →     stack.peek()        O(1)
+            →     stack.pop()         O(1)
+            →     map.set             O(1)
+            
+            → for                 O(a)
+            
+ * space:   O(a + b)              
+            → result              O(a)
+            → map                 O(b)
+            → stack               O(b)
  */
+var nextGreaterElement = function(nums1, nums2) {
+  const result = [];
+  
+  /*
+    key:    num2 
+    value:  num2's next greater element
+  */
+  const map = new Map();
+
+  // descend order monotonic stack
+  const stack = new Stack();
+  
+  for(const num of nums2){
+    while(!stack.isEmpty()
+         &&stack.peek() < num)
+      map.set(stack.pop(), num);
+    
+    stack.push(num);
+    console.log(stack, map);
+  }
+  
+  for(let i = 0; i < nums1.length; i++)
+    result[i] = map.has(nums1[i]) ? map.get(nums1[i]) : -1;
+    
+  return result;
+};
 ```
+
+#### 루프에 따른 결과값 1/2 [`Example1`]
+
+    Input:    [4,1,2]
+              [1,3,4,2]
+
+    Output:   [-1,3,-1]
+
+    Stack { stack: [ 1 ], size: 1 } Map(0) {}
+    Stack { stack: [ 3 ], size: 1 } Map(1) { 1 => 3 }
+    Stack { stack: [ 4 ], size: 1 } Map(2) { 1 => 3, 3 => 4 }
+    Stack { stack: [ 4, 2 ], size: 2 } Map(2) { 1 => 3, 3 => 4 }
+
+#### 루프에 따른 결과값 2/2 [`Example2`]
+
+    Input:    [2,4]
+              [1,2,3,4]
+
+    Output:   [3,-1]
+
+    Stack { stack: [ 1 ], size: 1 } Map(0) {}
+    Stack { stack: [ 2 ], size: 1 } Map(1) { 1 => 2 }
+    Stack { stack: [ 3 ], size: 1 } Map(2) { 1 => 2, 2 => 3 }
+    Stack { stack: [ 4 ], size: 1 } Map(3) { 1 => 2, 2 => 3, 3 => 4 }
 
 </details>
 
@@ -502,3 +587,5 @@ Could you find an O(nums1.length + nums2.length) solution?
 [Simple Solution at 1614. Maximum Nesting Depth of the Parentheses](https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/discuss/891829/javascript-O(n)-O(1)) ━ *LeetCode*
 
 [Simple Solution at 1614. Maximum Nesting Depth of the Parentheses](https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/discuss/1707692/JavaScript-Stack-or-O(n)-Time-or-O(1)-Space) ━ *LeetCode*
+
+[Simple Solution at 496. Next Greater Element I](calendar.google.com/calendar/u/0/r/month/2022/1/1) ━ *LeetCode*
