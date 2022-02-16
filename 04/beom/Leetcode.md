@@ -4,7 +4,7 @@
 ## 1381. Design a Stack With Increment Operation
 ## 622. Design Circular Queue
 ## 1614. Maximum Nesting Depth of the Parentheses
-
+## 1598. Crawler Log Folder
 
 
 
@@ -197,4 +197,58 @@ class Solution {
 }
 ```
 
+## 1598. Crawler Log Folder
+### 문제 요약
+중첩으로 들어가있는 폴더의 갯수를 구하시오
 
+../ : 폴더 한번 나가기
+
+./ : 폴더 유지
+
+d1/ : `d1`폴더로 들어가기
+
+
+### 시간복잡도 공간 복잡도
+| time | space |
+|------|-------|
+| O(n) | O(1)  |
+
+
+### 코드
+```java
+class Solution {
+    public int minOperations(String[] logs) {
+        Stack<String> stack = new Stack<>();
+
+        for(String i:logs){
+            if(i.equals("../")){
+                if(stack.empty()){
+                    continue;
+                }
+                stack.pop();
+            }
+            else if(i.equals("./")){
+                continue;
+            }
+            else{
+                stack.push(i);
+            }
+        }
+        return stack.size();
+    }
+}
+```
+
+
+
+## 1598. Crawler Log Folder
+### 문제 요약
+### 시간복잡도 공간 복잡도
+### 코드
+
+
+
+## 1598. Crawler Log Folder
+### 문제 요약
+### 시간복잡도 공간 복잡도
+### 코드
