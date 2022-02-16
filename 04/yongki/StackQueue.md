@@ -17,6 +17,8 @@
       - [코드](#코드)
       - [루프에 따른 결과값 1/2 [`Example1`]](#루프에-따른-결과값-12-example1)
       - [루프에 따른 결과값 2/2 [`Example2`]](#루프에-따른-결과값-22-example2)
+    - [문제 회고 [`종료조건 불만족`]](#문제-회고-종료조건-불만족)
+    - [문제 풀이 [`종료조건 만족`]](#문제-풀이-종료조건-만족)
   - [참고문헌](#참고문헌)
 
 ## 구현문제 리스트
@@ -579,6 +581,116 @@ var nextGreaterElement = function(nums1, nums2) {
     Stack { stack: [ 2 ], size: 1 } Map(1) { 1 => 2 }
     Stack { stack: [ 3 ], size: 1 } Map(2) { 1 => 2, 2 => 3 }
     Stack { stack: [ 4 ], size: 1 } Map(3) { 1 => 2, 2 => 3, 3 => 4 }
+
+</details>
+
+<details>
+<summary>1700. Number of Students Unable to Eat Lunch
+  <a href="https://leetcode.com/problems/number-of-students-unable-to-eat-lunch/">👊</a>
+</summary>
+
+### 문제 회고 [`종료조건 불만족`]
+
+Input으로 주어진 `students` 배열은 다음과 같은 특징을 보여
+
+- `Front` 만 확인하고,
+- 적합하지 않을 시 `Front`를 `Rear` 로 보낸다.
+
+연결리스트로 구현한 원형큐 자료구조로 변형해야겠다 생각했다.
+
+> 구현코드는 `622번`문제의 `문제 풀이 2/2`로 확인할 수 있다.
+  원형큐 객체 생성시 인자를 받는 부분만 추가했다.
+
+```js
+var MyCircularQueue = function(iterator) {
+  this.head = null;
+  this.size = 0;
+  
+  if(iterator){
+    iterator.forEach(each => this.enQueue(each));
+  }      
+};
+...
+
+/**
+ * @param {number[]} students
+ * @param {number[]} sandwiches
+ * @return {number}
+
+ * time:    O(b)
+ * space:   O(a)
+ */
+var countStudents = function(students, sandwiches) {  
+  let stuQueue = new MyCircularQueue(students);    
+  
+  let stuCur = stuQueue.head;
+                   
+  while(sandwiches.length){    
+    
+    if(stuCur.value ^ sandwiches[0])
+      stuCur = stuCur.next; 
+    else{      
+      stuQueue.deQueue();
+      sandwiches.shift();
+    }    
+  }
+  
+  return stuCur.size;
+};
+```
+
+루프에 대한 결과값은 다음과 같다. 
+
+    Input [1, 1, 1, 0, 0, 1]  [1, 0, 0, 0, 1, 1]    
+
+    take  1 → 1 → 0 → 0 → 1   [0, 0, 0, 1, 1]
+    leave 1 → 0 → 0 → 1 → 1   [0, 0, 0, 1, 1]
+    leave 0 → 0 → 1 → 1 → 1   [0, 0, 0, 1, 1]
+    take  0 → 1 → 1 → 1       [0, 0, 1, 1]
+    take  1 → 1 → 1           [0, 1, 1]          
+    take  1 → 1 → 1           [0, 1, 1]          // +++ inifinite loop!
+    ...
+
+주석에서 볼 수 있듯이 종료조건을 위해 연결리스트를 Set으로 변형해야한다.
+
+이 작업이 시간복잡도를 더 잡아먹을 수 있겠다 판단하여, 원형큐가 아닌 기존 배열을 다시 유지하였다.
+
+### 문제 풀이 [`종료조건 만족`]
+
+```js
+/**
+ * @param {number[]} students
+ * @param {number[]} sandwiches
+ * @return {number}
+
+ * time:    O(b)
+ * space:   O(ab)
+            → O(a)마다 O(b) 갱신
+ */
+var countStudents = function(students, sandwiches) {    
+  
+  while(sandwiches.length){
+    // +++ Exception
+    const sandwiche = sandwiches[0];    
+    
+    const notWantSandwiche = sandwiche !== students[0] 
+                            && new Set(students).size === 1;
+    
+    if(notWantSandwiche)
+      return students.length;
+    
+    // +++ Start
+    const student = students.shift();        
+    
+    if(student ^ sandwiche)
+      students.push(student);
+    else
+      sandwiches.shift();
+  }
+  
+  return students.length;
+};
+```
 
 </details>
 
