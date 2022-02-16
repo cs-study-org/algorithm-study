@@ -19,6 +19,8 @@
       - [루프에 따른 결과값 2/2 [`Example2`]](#루프에-따른-결과값-22-example2)
     - [문제 회고 [`종료조건 불만족`]](#문제-회고-종료조건-불만족)
     - [문제 풀이 [`종료조건 만족`]](#문제-풀이-종료조건-만족)
+    - [문제 회고 [`Brute force`]](#문제-회고-brute-force)
+    - [문제 풀이](#문제-풀이)
   - [참고문헌](#참고문헌)
 
 ## 구현문제 리스트
@@ -692,6 +694,53 @@ var countStudents = function(students, sandwiches) {
 };
 ```
 
+</details>
+
+<details>
+<summary>2073. Time Needed to Buy Tickets
+  <a href="https://leetcode.com/problems/time-needed-to-buy-tickets/">👊</a>
+</summary>
+
+### 문제 회고 [`Brute force`]
+
+처음 접근방법으로, 
+
+`k 횟수`당 `ticekts 배열`을 순회하여, `ticket 차감`당 `time 증가`로 계산했다.
+
+ticket의 단위가 큰 테스트 케이스를 해결하지 못했다.
+
+```js
+/**
+ * @param {number[]} tickets
+ * @param {number} k
+ * @return {number}
+ 
+ * a as tickets
+ * b as k 
+ * time:    O(ab)
+ * space:   O(1)
+ */
+var timeRequiredToBuy = function(tickets, k) {  
+  let time = 0;
+  
+  while(tickets[k]){    
+    for(let i = 0; i < tickets.length; i++){
+      const ticket = tickets[i];
+            
+      if(ticket){
+        tickets[i] = ticket - 1;
+        time += 1;
+      }else
+        continue;
+    }
+  }    
+    
+  return time;
+};
+
+```
+
+### 문제 풀이
 </details>
 
 <hr/>
