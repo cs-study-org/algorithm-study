@@ -3,7 +3,7 @@
 ## 목차
 ## 1381. Design a Stack With Increment Operation
 ## 622. Design Circular Queue
-
+## 1614. Maximum Nesting Depth of the Parentheses
 
 
 
@@ -162,6 +162,37 @@ class MyCircularQueue {
         else{
             return false;
         }
+    }
+}
+```
+
+
+## 1614. Maximum Nesting Depth of the Parentheses
+### 문제 요약
+중첩된 괄호의 갯수를 구하시오
+
+### 시간복잡도 공간 복잡도
+| time | space |
+|------|-------|
+| O(n) | O(1)  |
+
+### 코드
+```java
+class Solution {
+    public int maxDepth(String s) {
+        int count = 0; // 괄호 카운트
+        Stack<Character> stack = new Stack<>();
+
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i) == '('){
+                stack.push(s.charAt(i));
+            }
+            else if(s.charAt(i)==')'){
+                stack.pop();
+            }
+            count = Math.max(count,stack.size());//'('의 갯수를 센다.
+        }
+        return count;
     }
 }
 ```
