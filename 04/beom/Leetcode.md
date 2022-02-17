@@ -7,6 +7,8 @@
 ## 1598. Crawler Log Folder
 ## 496. Next Greater Element I
 ## 1700. Number of Students Unable to Eat Lunch
+## 2073. Time Needed to Buy Tickets
+
 
 
 ## 1381. Design a Stack With Increment Operation
@@ -279,19 +281,19 @@ class Solution {
         Queue<Integer> queue = new LinkedList<>();
         Stack<Integer> stack = new Stack<>();
 
-        for (int i : students) {
+        for (int i : students) {//학생배열 queue에 삽입
             queue.offer(i);
         }
-        for (int i = sandwiches.length - 1; i >= 0; i--) {
+        for (int i = sandwiches.length - 1; i >= 0; i--) {//샌드위치배열 stack에 삽입
             stack.push(sandwiches[i]);
         }
         int counter = queue.size()* stack.size();//최대 실행 횟수
 
         for (int i=0;i< counter;i++) {
-            if ((!stack.isEmpty())&&queue.peek() == stack.peek()) {
+            if ((!stack.isEmpty())&&queue.peek() == stack.peek())//학생의 맨 앞의 값과 샌드위치의 맨 앞값이 같다면 {
                 queue.poll();
                 stack.pop();
-            } else {
+            } else {//다르다면
                 if(queue.size()>0){
                     queue.offer(queue.poll());
                 }
@@ -305,3 +307,60 @@ class Solution {
 }
 ```
 
+
+
+## 2073. Time Needed to Buy Tickets
+### 문제 요약
+각자 사고 싶은 티켓의 갯수가 적힌 배열과 알고싶은 인덱스 번호를 입력받는다.
+
+티겟 한장은 사는 걸리는 시간은 1초
+
+k번째 사람이 티켓을 다 사는데 걸리는 시간
+
+티켓을 샀으면 뒤로 가야함
+
+### 시간복잡도 공간 복잡도
+| time | space |
+|------|-------|
+| O(n) | O(1)  |
+
+### 코드
+```java
+class Solution {
+    public int timeRequiredToBuy(int[] tickets, int k) {
+        int indexNum = tickets[k];//k번째의 사야할 표 갯수
+        int time = 0;//k번째 사람이 티켓을 다사는데 걸리는 시간
+        int i=0;//tickets의 인덱스로 사용될 변수
+
+        while(indexNum!=0) {
+            if (tickets[i] > 0) {
+                tickets[i]--;
+                time++;
+            }
+            i++;
+            if (i > tickets.length - 1)
+                i = 0;
+        }
+        return time;
+    }
+}
+```
+
+해당 코드는 Time Limit Exceeded 나온다.
+
+n^2을 억지로 n으로 바꿨지만 더 줄여야하는 것 같다...
+
+
+```java
+public int timeRequiredToBuy(int[] tickets, int k) {
+        int timeTakenForK = 0;
+       
+        for(int i = 0; i < tickets.length; i++){
+            if(i < k) timeTakenForK+=Math.min(tickets[k], tickets[i]);
+            if(i > k) timeTakenForK+=Math.min(tickets[k] - 1, tickets[i]);
+            if(i == k)timeTakenForK+=tickets[k];}
+  
+        return timeTakenForK;}
+```
+
+해당 코드는 Discuss의 코드이다. ticket.length의 반복만으로 문제를 풀어야하는 것 같다.
