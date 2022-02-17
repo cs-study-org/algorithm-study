@@ -125,6 +125,12 @@
 - 1381. Design a Stack With Increment Operation
     
     ```java
+    // 시간복잡도 
+    // push , pop O(1)
+    // increment O(n) ... n = 스택의 길이 혹은 k
+
+    // 공간 복잡도
+    // O(n)... n = maxSize
     class CustomStack {
         int top;
         int stackSize;
@@ -189,6 +195,8 @@
 - 622. Design Circular Queue
 
 ```java
+// 시간 복잡도 O(1)
+// 공간 복잡도 O(n) ... n = k
 class MyCircularQueue {
     class Node {
         Node next;
