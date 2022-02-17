@@ -567,22 +567,25 @@ var nextGreaterElement = function(nums1, nums2) {
 
     Output:   [-1,3,-1]
 
-    Stack { stack: [ 1 ], size: 1 } Map(0) {}
-    Stack { stack: [ 3 ], size: 1 } Map(1) { 1 => 3 }
-    Stack { stack: [ 4 ], size: 1 } Map(2) { 1 => 3, 3 => 4 }
-    Stack { stack: [ 4, 2 ], size: 2 } Map(2) { 1 => 3, 3 => 4 }
+    Stack { stack: [ 1 ], size: 1 }     Map(0) {}
+    Stack { stack: [ 3 ], size: 1 }     Map(1) { 1 => 3 }
+    Stack { stack: [ 4 ], size: 1 }     Map(2) { 1 => 3, 3 => 4 }
+    Stack { stack: [ 4, 2 ], size: 2 }  Map(2) { 1 => 3, 3 => 4 }
 
 #### 루프에 따른 결과값 2/2 [`Example2`]
 
-    Input:    [2,4]
-              [1,2,3,4]
+    Input:    [1,3,5,2,4]
+              [6,5,4,3,2,1,7]
 
-    Output:   [3,-1]
+    Output:   [7,7,7,7,7]
 
-    Stack { stack: [ 1 ], size: 1 } Map(0) {}
-    Stack { stack: [ 2 ], size: 1 } Map(1) { 1 => 2 }
-    Stack { stack: [ 3 ], size: 1 } Map(2) { 1 => 2, 2 => 3 }
-    Stack { stack: [ 4 ], size: 1 } Map(3) { 1 => 2, 2 => 3, 3 => 4 }
+    Stack { stack: [ 6 ], size: 1 }                 Map(0) {}
+    Stack { stack: [ 6, 5 ], size: 2 }              Map(0) {}
+    Stack { stack: [ 6, 5, 4 ], size: 3 }           Map(0) {}
+    Stack { stack: [ 6, 5, 4, 3 ], size: 4 }        Map(0) {}
+    Stack { stack: [ 6, 5, 4, 3, 2 ], size: 5 }     Map(0) {}
+    Stack { stack: [ 6, 5, 4, 3, 2, 1 ], size: 6 }  Map(0) {}
+    Stack { stack: [ 7 ], size: 1 }                 Map(6) { 1 => 7, 2 => 7, 3 => 7, 4 => 7, 5 => 7, 6 => 7 }
 
 </details>
 
