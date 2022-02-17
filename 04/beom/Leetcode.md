@@ -5,7 +5,8 @@
 ## 622. Design Circular Queue
 ## 1614. Maximum Nesting Depth of the Parentheses
 ## 1598. Crawler Log Folder
-
+## 496. Next Greater Element I
+## 1700. Number of Students Unable to Eat Lunch
 
 
 ## 1381. Design a Stack With Increment Operation
@@ -241,14 +242,66 @@ class Solution {
 
 
 
-## 1598. Crawler Log Folder
+## 496. Next Greater Element I
 ### 문제 요약
+num2 기준으로 각 숫자 다음에 오는 큰 숫자를 찾아 놓고
+
+num1이 각각 매핑되는 큰 숫자를 담아 리턴하는 문제
 ### 시간복잡도 공간 복잡도
 ### 코드
+일단 스킵!
 
 
 
-## 1598. Crawler Log Folder
+
+
+## 1700. Number of Students Unable to Eat Lunch
 ### 문제 요약
+Student는 queue로 이루어져있고, sandwiches는 stack으로 이루어져있다.
+
+student의 맨 앞에 있는 숫자와 sandwiches의 맨 앞에 있는 숫자와 같으면 두 요소를 삭제 시켜주고, 다르면 student의 맨 앞 요소를 맨 뒤로 보낸다.
+
+위 과정을 반복하고 남아 있는 student의 수를 리턴하시오
+
 ### 시간복잡도 공간 복잡도
+| time | space |
+|------|-------|
+| O(n+m) | O(1)  |
+
 ### 코드
+```java
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+class Solution {
+    public int countStudents(int[] students, int[] sandwiches) {
+        Queue<Integer> queue = new LinkedList<>();
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i : students) {
+            queue.offer(i);
+        }
+        for (int i = sandwiches.length - 1; i >= 0; i--) {
+            stack.push(sandwiches[i]);
+        }
+        int counter = queue.size()* stack.size();//최대 실행 횟수
+
+        for (int i=0;i< counter;i++) {
+            if ((!stack.isEmpty())&&queue.peek() == stack.peek()) {
+                queue.poll();
+                stack.pop();
+            } else {
+                if(queue.size()>0){
+                    queue.offer(queue.poll());
+                }
+                else{
+                    return 0;
+                }
+            }
+        }
+        return queue.size();
+    }
+}
+```
+
