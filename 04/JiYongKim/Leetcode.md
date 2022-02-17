@@ -180,4 +180,99 @@
 
 - [1700. Number of Students Unable to Eat Lunch](https://leetcode.com/problems/number-of-students-unable-to-eat-lunch/)
 - [2073. Time Needed to Buy Tickets](https://leetcode.com/problems/time-needed-to-buy-tickets/)
-- [622. Design Circular Queue](https://leetcode.com/problems/design-circular-queue/)
+
+<br>
+
+<details>
+    <summary>622. Design Circular Queue</summary>
+
+- 622. Design Circular Queue
+
+```java
+class MyCircularQueue {
+    class Node {
+        Node next;
+        int val;
+
+        Node(int val) {
+            this.val = val;
+            this.next = null;
+        }
+    }
+
+    Node head;
+    Node tail;
+    int size;
+    int max;
+
+    public MyCircularQueue(int k) {
+        this.head = null;
+        this.tail = null;
+        this.max = k;
+        this.size = 0;
+    }
+
+    public boolean enQueue(int value) {
+        Node node = new Node(value);
+        if (size == max) {
+            return false;
+        } else {
+            if (size == 0) {
+                head = node;
+                tail = node;
+            } else {
+                tail.next = node;
+                tail = node;
+            }
+            size++;
+            return true;
+        }
+    }
+
+    public boolean deQueue() {
+        if (size == 0) {
+            return false;
+        } else if (size == 1) {
+            head = null;
+            tail = null;
+        } else {
+            head = head.next;
+        }
+        size--;
+        return true;
+    }
+
+    public int Front() {
+        if (size == 0) {
+            return -1;
+        } else {
+            return head.val;
+        }
+    }
+
+    public int Rear() {
+        if (size == 0) {
+            return -1;
+        } else {
+            return tail.val;
+        }
+    }
+
+    public boolean isEmpty() {
+        if (size == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isFull() {
+        if (size == max) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+```
+</details>
