@@ -246,14 +246,40 @@ class Solution {
 
 ## 496. Next Greater Element I
 ### 문제 요약
-num2 기준으로 각 숫자 다음에 오는 큰 숫자를 찾아 놓고
 
-num1이 각각 매핑되는 큰 숫자를 담아 리턴하는 문제
+해당 값이 같을 때 다음 인덱스의 값이 해당 값보다 크면 다음 인덱스의 값을 넣고 아니면 -1을 넣는다.
+
 ### 시간복잡도 공간 복잡도
+
+| time | space |
+|------|-------|
+| O(nm) | O(nm)  |
+
 ### 코드
-일단 스킵!
+```java
+import java.util.HashMap;
+import java.util.Stack;
 
+//496. Next Greater Element I
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        Stack<Integer> stack = new Stack<>();
 
+        for(Integer num : nums2){
+            while(!stack.isEmpty() && stack.peek()<num){
+                hashMap.put(stack.pop(),num);
+            }
+            stack.push(num);
+        }
+
+        for(int i=0;i< nums1.length;i++){
+            nums1[i] = hashMap.getOrDefault(nums1[i],-1);
+        }
+        return nums1;
+    }
+}
+```
 
 
 
