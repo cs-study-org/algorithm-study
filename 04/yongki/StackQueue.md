@@ -751,6 +751,6 @@ var timeRequiredToBuy = function(tickets, k) {
 
 [Simple Solution at 1614. Maximum Nesting Depth of the Parentheses](https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/discuss/1707692/JavaScript-Stack-or-O(n)-Time-or-O(1)-Space) ━ *LeetCode*
 
-[Simple Solution at 496. Next Greater Element I](calendar.google.com/calendar/u/0/r/month/2022/1/1) ━ *LeetCode*
+[Simple Solution at 496. Next Greater Element I](https://leetcode.com/problems/next-greater-element-i/discuss/97595/Java-10-lines-linear-time-complexity-O(n)-with-explanation) ━ *LeetCode*
 
-[Circular Linked List]([calendar.google.com/calendar/u/0/r/month/2022/1/1](https://www.geeksforgeeks.org/circular-linked-list/)) ━ *GeeksforGeeks*
+[Circular Linked List](https://www.geeksforgeeks.org/circular-linked-list/) ━ *GeeksforGeeks*
