@@ -233,3 +233,145 @@ f
 1. 새로운 ArrayList를 만들고 연결리스트를 순회하며 노드 객체값을 리스트에 저장
 2. 만약 순회중 ArrayList내에 동일한 노드 객체값이 있다면 true 반환 아닐경우 false 반환
 </details>
+
+<br>
+
+<details>
+    <summary>203. Remove Linked List Elements</summary>
+
+- 203. Remove Linked List Elements
+    
+    문제 : 주어진 연결리스트에서 주어진 값과 동일한 값의 제거
+    
+    ```java
+    class Solution {
+        public ListNode removeElements(ListNode head, int val) {
+    
+            while (head != null && head.val == val)
+                head = head.next;
+    
+            if (head == null) return head;
+    
+            ListNode node = head;
+    
+            while (node != null && node.next != null) {
+                if (node.next.val == val) {
+                    node.next = node.next.next;
+                } else {
+                    node = node.next;
+                }
+            }
+            return head;
+        }
+    }
+    ```
+    
+    설명 ) 
+    
+    ![스크린샷 2022-02-18 오후 4.10.20.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2671db3a-c3b2-427b-85b7-c1ff5dcfa279/스크린샷_2022-02-18_오후_4.10.20.png)
+    
+    1. head 노드에서 현재 노드값이 val 값이 아닐때까지 다음 노드로 넘긴다.
+    2. node 에서 next 노드의 값이 val 과 동일하면 다음 노드를 다다음 노드로 연결시킨다.
+        1. 연결이후 다음 노드로 넘어가지 않고 (2)번을 반복
+    3. head 반환
+
+</details>
+
+<details>
+    <summary>707. Designed Linked List</summary>
+- 707. Designed Linked List
+
+<br>
+
+문제 : 연결리스트를 구현하라.
+
+```java
+class MyLinkedList {
+	Node head;
+	int length;
+    public class Node{
+        int val;
+        Node next;
+        
+        Node(int val){
+            this.val = val;
+        }
+    }
+
+    public MyLinkedList() {
+        this.head = null;
+        this.length = 0;
+    }
+    
+    public int get(int index) {
+        if(index >= length)
+        	return -1;
+        int counter = 0;
+        Node node = head;
+        while(counter < index) {
+        	counter++;
+        	node = node.next;
+        }
+        return node.val;
+    }
+    
+    public void addAtHead(int val) {
+        Node newNode = new Node(val);
+        newNode.next = head;
+        head = newNode;
+        length++;
+    }
+    
+    public void addAtTail(int val) {
+        if(head == null) {
+        	addAtHead(val);
+        }else {
+        	Node node = head;
+        	while(node.next != null)
+        		node = node.next;
+        	Node newNode = new Node(val);
+        	node.next = newNode;
+        	length++;
+        }
+    }
+    
+    public void addAtIndex(int index, int val) {
+    	if(index > length)
+    		return;
+        if(index == 0)
+        	addAtHead(val);
+        else {
+        	int counter = 1;
+        	Node node = head;
+        	while(counter < index) {
+        		node = node.next;
+        		counter++;
+        	}
+        	Node newNode = new Node(val);
+        	Node next = node.next;
+        	node.next = newNode;
+        	newNode.next = next;
+        	length++;
+        }
+    }
+    
+    public void deleteAtIndex(int index) {
+        if(index >= length)
+        	return;
+        if(index == 0) {
+        	head = head.next;
+        	length--;
+        }else {
+        	int counter = 1;
+        	Node node = head;
+        	while(counter < index) {
+        		counter++;
+        		node = node.next;
+        	}
+        	node.next = node.next.next;
+        	length--;
+        }
+    }
+}
+```
+</details>
