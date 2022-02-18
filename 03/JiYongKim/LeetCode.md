@@ -17,6 +17,8 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+ // 시간 복잡도 O(n) .. n = 연결리스트의 길이
+ // 공간 복잡도 O(n) .. n = 연결리스트의 길이
 class Solution {
     public int getDecimalValue(ListNode head) {
       
@@ -64,6 +66,8 @@ class Solution {
  *     ListNode(int x) { val = x; }
  * }
  */
+ // 시간 복잡도 O(1)
+ // 공간 복잡도 O(0)
 class Solution {
     public void deleteNode(ListNode node) {
         node.val = node.next.val;
@@ -100,6 +104,8 @@ class Solution {
  *     }
  * }
  */
+ // 시간 복잡도 O(nm) ... n = headA의 길이, m = headB의 길이
+ // 공간 복잡도 O(2n + m) ... n = headA의 길이 , m = headB의 길이
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         
@@ -155,26 +161,22 @@ public class Solution {
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+ // 시간 복잡도 O(n) ... n = head 의 길이
+ // 공간 복잡도 O(n) .... n = head의 길이
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
-        if(head == null){
+       if(head == null){
             return null;
         }
-        
         ListNode temp1 = head;
-        
         while(temp1 !=null){
-            
             if(temp1.next!=null && temp1.val == temp1.next.val){
-                ListNode temp2 = temp1;
-                while(temp2.next !=null && temp2.val == temp2.next.val){
-                    temp2=temp2.next;
-                }
-                temp1.next = temp2.next;
-            } 
-            temp1 = temp1.next;
+                
+                temp1.next = temp1.next.next;
+            }else{
+                temp1 = temp1.next;    
+            }   
         }
-        
         return head;
         
     }
@@ -207,6 +209,8 @@ class Solution {
  *     }
  * }
  */
+ // 시간복잡도 O(n(n-1)) ... n = head의 길이 (head의 길이 * head의 길이 -1) 
+ // 공간복잡도 O(n-1) .. n = head의 길이
 public class Solution {
     public boolean hasCycle(ListNode head) {
         
@@ -244,6 +248,8 @@ public class Solution {
     문제 : 주어진 연결리스트에서 주어진 값과 동일한 값의 제거
     
     ```java
+    // 시간복잡도 O(n) .... n = head의 길이
+    // 공간 복잡도 O(n) ... n = head의 길이
     class Solution {
         public ListNode removeElements(ListNode head, int val) {
     
