@@ -268,8 +268,8 @@ f
     
     설명 ) 
     
-    ![스크린샷 2022-02-18 오후 4.10.20.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2671db3a-c3b2-427b-85b7-c1ff5dcfa279/스크린샷_2022-02-18_오후_4.10.20.png)
-    
+    <img width="680" alt="스크린샷 2022-02-18 오후 4 27 17" src="https://user-images.githubusercontent.com/81874493/154637295-1b879a6c-852a-40a7-9428-93ae6eb44051.png">
+
     1. head 노드에서 현재 노드값이 val 값이 아닐때까지 다음 노드로 넘긴다.
     2. node 에서 next 노드의 값이 val 과 동일하면 다음 노드를 다다음 노드로 연결시킨다.
         1. 연결이후 다음 노드로 넘어가지 않고 (2)번을 반복
@@ -277,6 +277,8 @@ f
 
 </details>
 
+<br>ff
+	
 <details>
     <summary>707. Designed Linked List</summary>
 - 707. Designed Linked List
