@@ -16,35 +16,29 @@
 ```java
 class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
-        String word ="";
-        
-        String[] words = s.split("");
-        List <String> list = new ArrayList<>();
-        for(int i =0; i<words.length; i++){
-            word += words[i];
-            if(wordDict.contains(word)){
-                list.add(word);
-                word ="";   
+        int n = s.length();
+        Set<String> dict = new HashSet(wordDict);
+        boolean[] memo = new boolean[n+1];
+        memo[n] = true;
+        for(int i=n-1; i >= 0; i--){
+            for(int j=i; j < n; j++){
+                if(dict.contains(s.substring(i, j+1)) && memo[j+1]){
+                    memo[i] = true;
+                    break;
+                }
             }
         }
-        if(word !="")
-            list.add(word);
         
-        for(String w : list){
-            if(!wordDict.contains(w))
-                return false;
-        }
-        return true;
-        
+        return memo[0];
     }
-}    
+}
 ```
 설명)
 s = "leetcode", wordDict = {"leet", "code"} 일때
 1. 문자열 값 하나씩 더해가며 wordDict의 값에 존재하면 새로운 리스트에 저장한다.
 2. 새로운 리스트에 저장된 값이 wordDict에 모두 포함되어 있으면 true 반환.
 
-(위의 코드는 현재 s=aaaaaaa, wordDict={"aaa","aaaa"} 테스트 케이스를 통과하지 못함)
+( 현재 해결하지 못하였고 메모이제이션을 이용한 풀이법이다. DP 챕터로 넘어가 다시 풀이해 보아야 할것 같다...)
 
 </details>
 
