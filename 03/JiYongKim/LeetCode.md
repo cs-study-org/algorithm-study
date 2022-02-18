@@ -227,7 +227,7 @@ public class Solution {
 ```
 
 설명)
-f
+
 <img width="407" alt="스크린샷 2022-02-10 오전 1 42 42" src="https://user-images.githubusercontent.com/81874493/153248014-72d741b3-1ea2-415e-9035-99ad7b94e280.png">
 
 1. 새로운 ArrayList를 만들고 연결리스트를 순회하며 노드 객체값을 리스트에 저장
@@ -277,7 +277,7 @@ f
 
 </details>
 
-<br>ff
+<br>
 	
 <details>
     <summary>707. Designed Linked List</summary>
