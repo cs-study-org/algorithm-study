@@ -183,9 +183,75 @@
 <br>
 
 < Queue >
+<br>
+<details>
+<summary>1700. Number of Students Unable to Eat Lunch</summary>
 
-- [1700. Number of Students Unable to Eat Lunch](https://leetcode.com/problems/number-of-students-unable-to-eat-lunch/)
-- [2073. Time Needed to Buy Tickets](https://leetcode.com/problems/time-needed-to-buy-tickets/)
+- 1700. Number of Students Unable to Eat Lunch
+    
+    ```java
+    // 시간 복잡도 : O(n)
+    // 공간 복잡도 : O(1)
+    class Solution {
+        public int countStudents(int[] students, int[] sandwiches) {
+            int[] freq = new int[2];
+    
+            for(int s : students) freq[s]++;
+    
+            for(int i = 0; i < sandwiches.length; i++) {
+                if(--freq[sandwiches[i]] < 0) 
+                    return sandwiches.length - i;
+            }
+            
+            return 0;
+        }
+    }
+    ```
+    
+    설명 ) 
+    
+    1. freq 배열의 학생의 배열의 값 0,1 의 수를 담는다.
+    2. sandwiches 크기 만큼 반복을 돈다.
+        1. sandwiches 값 0,1 에 맞춰 freq 의 값을 줄이며 0 이하가 되면 그때의 시점의 sandwiches의 크기 반환
+        2. 아닐시 0 반환
+
+</details>
+
+<br>
+
+<details>
+<summary>2073. Time Needed to Buy Tickets</summary>
+
+- 2073. Time Needed to Buy Tickets
+    
+    ```java
+    // 시간 복잡도 O(n) ...n = tickets의 길이
+    // 공간 복잡도 O(1) 
+    public class Solution {
+        public static int solution(int[] tickets, int k) {
+            int count = 0;
+            int num = 0;
+            while (tickets[k] != 0) {
+                if (num % tickets.length != k
+                        && tickets[num % tickets.length] == 0) {
+                    num++;
+                    continue;
+                } else {
+                    tickets[num % tickets.length]--;
+                }
+                num++;
+                count++;
+            }
+            return count;
+        }
+    ```
+    
+    설명) 
+    
+    1. tickets의 k번째 값이 0 이 될때까지 반복을 돌며 줄여간다.
+    2. 반복문이 도는 횟수를 count에 저장하여 반환한다.
+
+</details>
 
 <br>
 
