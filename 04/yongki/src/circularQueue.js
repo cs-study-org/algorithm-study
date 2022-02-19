@@ -37,7 +37,7 @@ MyCircularQueue.prototype.displayQueue = function(pointer){
 MyCircularQueue.prototype.enQueue = function(value) {
   const node = new ListNode(value);    
 
-  if(!this.head)
+  if(this.isEmpty())
     this.head = node;    
   else{
     let cur = this.head;  
