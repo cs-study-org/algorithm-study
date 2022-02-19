@@ -18,7 +18,7 @@
  * }
  */
  // 시간 복잡도 O(n) .. n = 연결리스트의 길이
- // 공간 복잡도 O(n) .. n = 연결리스트의 길이
+ // 공간 복잡도 O(1)
 class Solution {
     public int getDecimalValue(ListNode head) {
       
@@ -105,7 +105,7 @@ class Solution {
  * }
  */
  // 시간 복잡도 O(nm) ... n = headA의 길이, m = headB의 길이
- // 공간 복잡도 O(2n + m) ... n = headA의 길이 , m = headB의 길이
+ // 공간 복잡도 O(1) ... n = headA의 길이 , m = headB의 길이
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         
@@ -162,7 +162,7 @@ public class Solution {
  * }
  */
  // 시간 복잡도 O(n) ... n = head 의 길이
- // 공간 복잡도 O(n) .... n = head의 길이
+ // 공간 복잡도 O(1) 
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
        if(head == null){
@@ -198,7 +198,7 @@ class Solution {
     문제 : 주어진 연결리스트에 cycle의 존재 여부 파악
 
 ```java
-/**
+/** 
  * Definition for singly-linked list.
  * class ListNode {
  *     int val;
@@ -210,7 +210,7 @@ class Solution {
  * }
  */
  // 시간복잡도 O(n(n-1)) ... n = head의 길이 (head의 길이 * head의 길이 -1) 
- // 공간복잡도 O(n-1) .. n = head의 길이
+ // 공간복잡도 O(n) .. n = head의 길이 -1
 public class Solution {
     public boolean hasCycle(ListNode head) {
         
@@ -249,7 +249,7 @@ public class Solution {
     
     ```java
     // 시간복잡도 O(n) .... n = head의 길이
-    // 공간 복잡도 O(n) ... n = head의 길이
+    // 공간 복잡도 O(1) 
     class Solution {
         public ListNode removeElements(ListNode head, int val) {
     
