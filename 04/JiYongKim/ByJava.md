@@ -98,7 +98,7 @@ public class Stack {
 
 <br>
 
-<스택 사용법>
+< 공식 Java 스택 라이브러리 사용법>
 
 ```java
 // 스택 선언
@@ -124,12 +124,13 @@ public class Stack {
 
 <br>
 
-<스택 시간 복잡도>
+**<공식 Java 스택 라이브러리 스택 시간 복잡도>**
 
 ```java
-삽입	O(1)
-삭제	O(1)
-검색 O(n)
+push	 O(1)
+pop      O(1)
+peek 	 O(1)
+contains O(n)
 ```
 
 <br>
@@ -233,7 +234,7 @@ public class ByJavaQueue {
 
 <br>
 
-<큐 사용법>
+**<공식 Java 큐 라이브러리 사용법>**
 
 ```java
 // 자바에서 큐를 사용하기 위해 LinkedList와 Queue 를 import 해야한다.
@@ -272,12 +273,12 @@ public static void main(String args[]){
 
 <br>
 
-<큐 시간 복잡도>
+<공식 Java 큐 라이브러리 시간 복잡도>
 
 ```java
 시간복잡도
-offer(입력)    : O(log n)
-peek(get)     : O(1)
-poll(반환)     : O(log n)
-size          : O(1)
+offer    : O(log n)
+peek     : O(1)
+poll     : O(log n)
+size     : O(1)
 ```
