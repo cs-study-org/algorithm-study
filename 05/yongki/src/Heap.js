@@ -76,4 +76,28 @@ Heap.prototype.extract = function(){
   return root;
 }
 
+Heap.prototype._findbyBS = function(value, start, end){
+  for(let i = start; i <= end; i++){
+    const middle = Math.floor((start + end) / 2);    
+
+    if(this.heap[middle] > value)
+      return this._findbyBS(value, start, middle - 1);
+    else if(this.heap[middle] < value)
+      return this._findbyBS(value, middle + 1, end);
+    
+    return i;
+  }
+}
+
+/**
+ * @param {number} value
+ * @returns {number}
+ * 
+ * time:      O(log n)              
+ * space:     O(1)
+ */
+Heap.prototype.findIndex = function(value){
+  return this._findbyBS(value, 0, this.heap.length - 1);
+}
+
 module.exports = Heap;

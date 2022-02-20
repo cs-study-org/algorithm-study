@@ -1,5 +1,6 @@
 const util = require('util')
 const fs = require('fs');
+
 const MinHeap = require('./MinHeap');
 const MaxHeap = require('./MaxHeap');
 
@@ -14,7 +15,15 @@ function handleInput(line, maxHeap, minHeap) {
       minHeap.insert(value);
       break;
     case 'D':
-      value > 0 ? maxHeap.extract() : minHeap.extract();
+      let syncValue = 0;
+
+      if(value > 0){
+        syncValue = maxHeap.extract();
+        minHeap.delete(syncValue);
+      }else{
+        syncValue = minHeap.extract();
+        maxHeap.delete(syncValue);
+      }
       break;
   }
 }
@@ -52,9 +61,10 @@ function displayOutput(maxHeap, minHeap) {
 
     displayOutput(maxHeap, minHeap);
 
-    // console.log(util.inspect(maxHeap, { showHidden: true, depth: null }))
-    // console.log(util.inspect(minHeap, { showHidden: true, depth: null }))
-
+    
     testCase = testCase.slice(lineCnt + 1);
   }
+  
+  console.log(util.inspect(maxHeap, { showHidden: true, depth: null }))
+  console.log(util.inspect(minHeap, { showHidden: true, depth: null }))
 })();

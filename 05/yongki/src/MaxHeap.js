@@ -66,4 +66,30 @@ MaxHeap.prototype._bubbleDown = function(){
   }
 }
 
+/**
+ * @param {number} value
+ * @returns {boolean}
+ * 
+ * time:      O(log n)
+              → findIndex:    O(log n)      
+              → swap          O(1)
+              → shift         O(1)
+              → bubbleUp:     O(log n)      
+              
+ * space:     O(1)
+ */
+MaxHeap.prototype.delete = function(value){
+  const idx = this.findIndex(value);
+  
+  if(idx === undefined)
+    return false;
+  
+  this.swap(0, idx);  
+  this.heap.shift();
+
+  this._bubbleDown();
+
+  return true;
+}
+
 module.exports = MaxHeap;
