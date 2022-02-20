@@ -333,3 +333,9 @@ MyCircularDeque.prototype.isFull = function() {
 [Javascript Heap 구현](https://nyang-in.tistory.com/153) ━ *냥인*
 
 [Javascript 객체 상속](https://www.zerocho.com/category/JavaScript/post/573d812680f0b9102dc370b7) ━ *ZeroCho*
+
+[Javascript 표준 입출력 방법](https://overcome-the-limits.tistory.com/25) ━ *Plus Ultra*
+
+[Javascript 표준 입출력과 백준 이슈](https://broadway.tistory.com/entry/자바스크립트-백준-입력받는법) ━ *이너멜*
+
+[백준 제출 형식](https://velog.io/@mttw2820/백준-7662.-이중-우선순위-큐) ━ *mttw2820*

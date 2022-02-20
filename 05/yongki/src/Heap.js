@@ -44,4 +44,36 @@ Heap.prototype.getRoot = function(){
   return this.heap[0];
 }
 
+/**
+ * @param {number} value 
+ * @returns 
+ * 
+ * time:      O(log n)
+ * space:     O(1)
+ */
+Heap.prototype.insert = function(value){
+  this.heap[this.heap.length] = value;
+
+  this._bubbleUp();
+}
+
+/**
+ * @returns 
+ * 
+ * time:      O(log n)
+              → pop:        O(1)
+              → bubbleDown: O(log n)
+
+ * space:     O(1)
+ */
+Heap.prototype.extract = function(){
+  const root = this.getRoot()
+
+  this.heap[0] = this.heap[this.heap.length - 1];
+  this.heap.pop();
+
+  this._bubbleDown();
+  return root;
+}
+
 module.exports = Heap;
