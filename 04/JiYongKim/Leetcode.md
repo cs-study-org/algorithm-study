@@ -125,12 +125,7 @@
 - 1381. Design a Stack With Increment Operation
     
     ```java
-    // 시간복잡도 
-    // push , pop O(1)
-    // increment O(n) ... n = 스택의 길이 혹은 k
-
-    // 공간 복잡도
-    // O(n)... n = maxSize
+    
     class CustomStack {
         int top;
         int stackSize;
@@ -173,6 +168,17 @@
      * obj.increment(k,val);
      */
     ```
+    <시공간 복잡도>
+
+* 공간 복잡도 : O(n) ... n = maxSize
+
+<br>
+
+* 시간 복잡도  
+  
+    |  | CustomStack() | push() | pop() | increment |
+    | --- | --- | --- | --- | --- |
+    | 시간 복잡도 | O(1) | O(1) | O(1) | O(n) |
 
 </details>
 
@@ -225,7 +231,7 @@
 - 2073. Time Needed to Buy Tickets
     
     ```java
-    // 시간 복잡도 O(n) ...n = tickets의 길이
+    // 시간 복잡도 O(n) ...n = tickets[k] 크기
     // 공간 복잡도 O(1) 
     public class Solution {
         public static int solution(int[] tickets, int k) {
@@ -261,8 +267,7 @@
 - 622. Design Circular Queue
 
 ```java
-// 시간 복잡도 O(1)
-// 공간 복잡도 O(n) ... n = k
+
 class MyCircularQueue {
     class Node {
         Node next;
@@ -349,4 +354,16 @@ class MyCircularQueue {
     }
 }
 ```
+<시공간 복잡도>
+
+* 공간 복잡도 : O(1)
+
+<br>
+
+* 시간 복잡도
+
+    |  | MyCircularQueue() | enqueue() | dequeue() | front() | rear() | isEmpty() | isFull() |
+    | --- | --- | --- | --- | --- | --- | --- | --- |
+    | 시간 복잡도 | O(1) | O(1) | O(1) | O(1) | O(1) | O(1) | O(1) |
+
 </details>
