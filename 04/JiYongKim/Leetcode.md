@@ -86,7 +86,7 @@
 - 496. Next Greater Element I
     
     ```java
-    // 시간복잡도 O(nm) .. n= nums1의 길이 , m = nums2의 길이 - nums1의 값과 일치하는 nums2값의 인덱스 번호
+    // 시간복잡도 O(n+m) .. n= nums1의 길이 , m = nums2의 길이 - nums1의 값과 일치하는 nums2값의 인덱스 번호
     // 공간복잡도 O(n+m) .. n = nums1의 크기 , m = nums2의 크기
     class Solution {
         public int[] nextGreaterElement(int[] nums1, int[] nums2) {
