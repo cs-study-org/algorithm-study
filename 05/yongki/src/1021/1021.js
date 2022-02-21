@@ -9,6 +9,8 @@ function rotateLeft(circularDeque, rotateCnt) {
     const value = circularDeque.deleteFront();
     circularDeque.insertLast(value);
   }
+
+  circularDeque.deleteFront();
 }
 
 function rotateRight(circularDeque, rotateCnt) {
@@ -16,6 +18,8 @@ function rotateRight(circularDeque, rotateCnt) {
     const value = circularDeque.deleteLast();
     circularDeque.insertFront(value);
   }
+
+  circularDeque.deleteFront();
 }
 
 /**
@@ -24,54 +28,38 @@ function rotateRight(circularDeque, rotateCnt) {
  *  b. when submit in BackJoon:     /dev/stdin
  * 
  */
-
-/*
-
-1 6 3 2 7 9 8 4 10 5
-
-[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-[2, 3, 4, 5, 6, 7, 8, 9, 10]   ← 1
-
-[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]   ← 6
-
-
- */
 (function main() {
+  // +++ Processcing
   const [size, _, ...targets] = fs.readFileSync(__dirname + '/stdin-1021')
     .toString()
     .replace('\n', '') 
     .split(/\s/)
-    .map(each => Number(each));
-  
-  console.log(util.inspect(targets, { showHidden: true, depth: null }))
+    .map(each => Number(each));  
   
   const circularDeque = new MyCircularDeque(size);  
   
-  for(let i = 1; i <= size; i++){
-    circularDeque.insertLast(i);
-  }  
+  for(let i = 1; i <= size; i++)
+    circularDeque.insertLast(i);  
 
-  const middle = Math.ceil(targets.length  / 2);
-  let calcCnt = 0;
-
+  // +++ Start
+  let result = 0;
+  
   for(const target of targets){    
-    circularDeque.displayDeque();  
-
-    if(circularDeque.getFront() === target){
-      circularDeque.deleteFront()
-
-      continue;
-    }
-
-    const idx = circularDeque.search(target);    
-
-    middle > idx
-      ? rotateLeft(circularDeque, idx) 
-      : rotateRight(circularDeque, idx);
+    const middle = Math.ceil(circularDeque.size  / 2);
+    const idx = circularDeque.search(target);  
     
-    calcCnt += 1;      
+    let moveCnt = 0;
+
+    if(middle > idx){
+      moveCnt = idx;
+      rotateLeft(circularDeque, moveCnt);
+    }else{
+      moveCnt = circularDeque.size - idx;
+      rotateRight(circularDeque, moveCnt);
+    }    
+
+    result += moveCnt; 
   }
 
-  console.log(calcCnt);
+  console.log(result);
 })();
