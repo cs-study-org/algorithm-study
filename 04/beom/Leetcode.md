@@ -253,7 +253,7 @@ class Solution {
 
 | time | space |
 |------|-------|
-| O(nm) | O(nm)  |
+| O(n+m) | O(n+m)  |
 
 ### 코드
 ```java
