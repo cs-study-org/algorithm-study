@@ -3,7 +3,16 @@ const fs = require('fs');
 
 const MyCircularDeque = require('../adt/CircularDeque');
 
-
+/**
+ * @param {MyCircularDeque} circularDeque 
+ * @param {Number} rotateCnt 
+ * 
+ * a as circularDeque
+ * b as rotateCnt
+ * 
+ * time:    O(b)
+ * space:   O(1)
+ */
 function rotateLeft(circularDeque, rotateCnt) {
   while(rotateCnt--){
     const value = circularDeque.deleteFront();
@@ -13,6 +22,16 @@ function rotateLeft(circularDeque, rotateCnt) {
   circularDeque.deleteFront();
 }
 
+/**
+ * @param {MyCircularDeque} circularDeque 
+ * @param {Number} rotateCnt 
+ * 
+ * a as circularDeque
+ * b as rotateCnt
+ * 
+ * time:    O(b)
+ * space:   O(1)
+ */
 function rotateRight(circularDeque, rotateCnt) {
   while(rotateCnt--){
     const value = circularDeque.deleteLast();
