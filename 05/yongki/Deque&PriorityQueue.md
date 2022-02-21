@@ -5,8 +5,10 @@
   - [구현문제 리스트](#구현문제-리스트)
     - [문제 회고](#문제-회고)
     - [문제 풀이](#문제-풀이)
-  - [문제 회고](#문제-회고-1)
+    - [문제 회고](#문제-회고-1)
     - [문제 풀이](#문제-풀이-1)
+  - [문제 리스트](#문제-리스트)
+    - [문제 회고](#문제-회고-2)
   - [참고 문헌](#참고-문헌)
 
 ## 이론
@@ -53,243 +55,15 @@
 
 ### 문제 풀이
 
-<table>
-  <tr >
-    <th colspan="2">빅오</th>
-  </tr>
-  <tr>
-    <td colspan="2">
-<p>
+빅오를 한눈에 보자면 다음과 같다.
 
 |       | `insertFront` | `insertLast` | `deleteFront` | `deleteLast` | `getFront` | `getRear` | `isEmpty` | `isFull` |
 | :---: | :-----------: | :----------: | :-----------: | :----------: | :--------: | :-------: | :-------: | :------: |
 | time  |    `O(1)`     |    `O(n)`    |    `O(1)`     |    `O(n)`    |   `O(1)`   |  `O(n)`   |  `O(1)`   |  `O(1)`  |
 | space |    `O(1)`     |    `O(1)`    |    `O(1)`     |    `O(1)`    |   `O(1)`   |  `O(1)`   |  `O(1)`   |  `O(1)`  |
-</p>
-    </td>
-  </tr>
-  <tr>    
-    <th colspan="2">코드</th>
-  </tr>
-  <tr>      
-    <td>
-<p>
 
-```js
-// +++ Struct
-class ListNode {
-  constructor(value) {
-      this.value = value;
-      this.next = null;     
-  }
-}
+문제 풀이는 `src\adt\CircularDeque.js`에서 확인할 수 있다.
 
-/**
- * @param {number} k
- */
-var MyCircularDeque = function(k) {
-  this.head = null;
-  this.size = 0;
-  this.maxSize = k;
-};
-```
-</p>
-    </td>
-    <td>
-<p>
-
-```js
-// +++ Debug
-MyCircularDeque.prototype.lastIndex = function(){
-  return this.size > 0 ? this.size - 1 : 0;
-}
-
-MyCircularDeque.prototype.displayDeque = function(pointer){  
-  let cur = pointer ? pointer : this.head;
-  
-  process.stdout.write(`size: ${this.size}   `);
-  process.stdout.write(`elements: `);
-
-  for(let i  = 0; i < this.size; i++){
-    process.stdout.write(`${cur.value} → `);    
-    cur = cur.next;
-  }  
-  process.stdout.write('\n');
-}
-```
-</p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-<p>
-
-```js
-/** 
- * @param {number} value
- * @return {boolean}
- */
-MyCircularDeque.prototype.insertFront = function(value) {
-  if(this.isFull())
-    return false;
-  
-  let cur = this.head;
-  const node = new ListNode(value);
-    
-  node.next = cur;
-  this.head = node;
-  
-  this.size += 1;  
-  return true;
-};
-```
-</p>
-    </td>
-    <td>
-<p>
-
-```js
-/** 
- * @param {number} value
- * @return {boolean}
- */
-MyCircularDeque.prototype.insertLast = function(value) {
-  if(this.isFull())
-    return false;
-    
-  const node = new ListNode(value);
-  
-  if(!this.head)
-    this.head = node;
-  else{
-    let cur = this.head;
-  
-    for(let i = 0; i < this.lastIndex(); i++)
-      cur = cur.next;
-    
-    cur.next = node;
-  }
-  
-  this.size += 1;  
-  return true;
-};
-```
-</p>
-    </td>  
-  </tr>
-  <tr>    
-    <td>
-<p>
-
-```js
-/**
- * @return {boolean}
- */
-MyCircularDeque.prototype.deleteFront = function() {
-  if(this.isEmpty())
-    return false;
-  
-  if(this.size === 1){
-    this.size = 0;
-    return this.head = null;
-  }
-  
-  this.head = this.head.next;      
-
-  this.size -= 1;  
-  return true;
-};
-
-```
-</p>
-    </td>
-    <td>
-<p>
-
-```js
-/**
- * @return {boolean}
- */
-MyCircularDeque.prototype.deleteLast = function() {
-  if(this.isEmpty())
-    return false;
-  
-  if(this.size === 1){
-    this.size = 0;
-    return this.head = null;
-  }
-  
-  let prev = null;
-  let cur = this.head;
-    
-  for(let i = 0; i < this.lastIndex(); i++){      
-    prev = cur;
-    cur = cur.next;
-  }
-  
-  prev.next = cur.next;
-  
-  this.size -= 1;      
-  return true;
-};
-```
-</p>
-    </td>  
-  </tr>  
-  <tr>
-    <td>
-<p>
-
-```js
-/**
- * @return {number}
- */
-MyCircularDeque.prototype.getFront = function() {
-  if(this.isEmpty())  
-    return -1;
-  
-  return this.head.value;
-};
-
-/**
- * @return {number}
- */
-MyCircularDeque.prototype.getRear = function() {
-  if(this.isEmpty()) 
-    return -1;
-  
-  let cur = this.head;
-  
-  for(let i = 0; i < this.lastIndex(); i++)
-    cur = cur.next;
-    
-  return cur.value;
-};
-```
-</p>
-    </td>
-    <td>
-<p>
-
-```js
-/**
- * @return {boolean}
- */
-MyCircularDeque.prototype.isEmpty = function() {
-  return !this.head;
-};
-
-/**
- * @return {boolean}
- */
-MyCircularDeque.prototype.isFull = function() {
-  return this.size === this.maxSize;
-};
-```
-</p>
-    </td>
-  </tr>
-</table>
 </details>
 
 <details>
@@ -298,13 +72,14 @@ MyCircularDeque.prototype.isFull = function() {
   <a href="https://www.acmicpc.net/problem/7662">👊</a>  
 </summary>
 
-## 문제 회고
+### 문제 회고
 
 힙 자료구조 기반으로 구현하였다.
 
 `이중 우선순위 큐`라는 단일 자료구조를 만든 것이 아닌,
 `최대힙`, `최소힙` 총 2개의 자료구조를 이용하였다.
 
+이 2개의 자료구조 구현의 전체적인 틀은 참고를 하였고, 문제 조건에 필요한 메소드 몇개만 직접 구현하였다.
 
 ### 문제 풀이
 
@@ -315,10 +90,9 @@ MyCircularDeque.prototype.isFull = function() {
 | time  | `O(log n)` | `O(log n)` | `O(log n)`  | `O(log n)` |
 | space |   `O(1)`   |   `O(1)`   |   `O(1)`    |   `O(1)`   |
 
-문제 풀이는 `src`폴더에서 확인할 수 있다.
+문제 풀이는 `src\7662`폴더에서 확인할 수 있다.
 
 - `7662.js`가 문제 제출 형식을 맞춘 파일이다.
--  `Heap.js`, `MaxHeap.js`, `MinHeap.js`는 문제 제출 형식에 필요한 자료구조 구현 파일이다.
 - `stdin-7662`는 문제에서 제공한 입력 예제이다.
     > 파일 형식을 사용한 이유는 노드 환경에서 표준 입출력을 받는 작업이 어렵기 때문이다.
 
@@ -334,6 +108,23 @@ MyCircularDeque.prototype.isFull = function() {
                     MinHeap { heap: [ -45, 45, 333, [length]: 3 ] }
 
 </details>
+
+## 문제 리스트
+
+<details>
+<summary>
+  1021. 회전하는 큐
+  <a href="https://www.acmicpc.net/problem/7662">👊</a>  
+</summary>
+
+### 문제 회고
+
+`641번`의 자료구조 구현 파일을 그대로 사용하였다.
+
+문제 풀이는 `src\1021`폴더에서 확인할 수 있다.
+
+</details>
+
 <hr/>
 
 ## 참고 문헌
@@ -341,6 +132,8 @@ MyCircularDeque.prototype.isFull = function() {
 [My Solution at 707. Design Linked List](https://github.com/cs-study-org/algorithm-study/blob/master/03/yongki/LinkedList.md) ━ *GitHub*
 
 [My Solution at 622. Design Circular Queue](https://github.com/cs-study-org/algorithm-study/blob/master/04/yongki/src/circularQueue.js) ━ *GitHub*
+
+[Simple Solution at 1021. 회전하는 큐](https://wiselog.tistory.com/126) ━ *지혜로운 개발로그*
 
 [Heap 특성](https://1ilsang.dev/2019-10-21/algorithm/heap) ━ *1ilsang*
 

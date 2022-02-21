@@ -1,8 +1,8 @@
 const util = require('util')
 const fs = require('fs');
 
-const MinHeap = require('./MinHeap');
-const MaxHeap = require('./MaxHeap');
+const MinHeap = require('../adt/MinHeap');
+const MaxHeap = require('../adt/MaxHeap');
 
 
 function handleInput(line, maxHeap, minHeap) {
