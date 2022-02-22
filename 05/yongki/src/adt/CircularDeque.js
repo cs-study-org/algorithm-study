@@ -1,28 +1,43 @@
+const util = require('util');
+
 const ListNode = require('./ListNode');
 
 /**
  * @param {number} k
  */
-var MyCircularDeque = function(k) {
-  this.head = null;
-  this.tail = null;
+var MyCircularDeque = function(k) {    
+  this.head = new ListNode();
+  this.tail = new ListNode();  
+
+  this.head.prev = this.tail;
+  this.head.next = this.tail;
+
+  this.tail.prev = this.head;
+  this.tail.next = this.head;
+
   this.size = 0;
   this.maxSize = k;
 };
 
-MyCircularDeque.prototype.lastIndex = function(){
-  return this.size > 0 ? this.size - 1 : 0;
-}
-
 MyCircularDeque.prototype.displayDeque = function(pointer){  
-  let cur = pointer ? pointer : this.head;
+  let head = pointer ? pointer : this.head;
+  let tail = pointer ? pointer : this.tail;
   
-  process.stdout.write(`size: ${this.size}   `);
+  process.stdout.write(`[HEAD] size: ${this.size}   `);
   process.stdout.write(`elements: `);
+  
+  for(let i = 0; i <= this.size; i++){
+    process.stdout.write(`${head.value} → `);    
+    head = head.next;
+  }  
+  process.stdout.write('\n');
 
-  for(let i  = 0; i < this.size; i++){
-    process.stdout.write(`${cur.value} → `);    
-    cur = cur.next;
+  process.stdout.write(`[TAIL] size: ${this.size}   `);
+  process.stdout.write(`elements: `);
+  
+  for(let i = 0; i < this.size; i++){
+    process.stdout.write(`${tail.value} → `);        
+    tail = tail.prev;
   }  
   process.stdout.write('\n');
 }
@@ -38,13 +53,14 @@ MyCircularDeque.prototype.getIndex = function(value){
   if(this.isEmpty())
     return false;  
 
+  let cur = this.head;
   let loopCnt = 0;
   
-  while(this.head){        
-    if(this.head.value === value)
+  while(cur){        
+    if(cur.value === value)
       return loopCnt;
 
-    this.head = this.head.next;
+    cur = cur.next;
     loopCnt += 1;
   }
     
@@ -62,17 +78,16 @@ MyCircularDeque.prototype.insertFront = function(value) {
   if(this.isFull())
     return false;
   
-  const node = new ListNode(value);
+  const newNode = new ListNode(value);
+  const nextNode = this.head.next;
   
-  if(this.isEmpty()){
-    this.head = node;
-    this.tail = node;
-  }else{
-    node.next = this.head;
-    this.head.prev = node;
-    this.head = node;
-  }    
+  this.head.next = newNode;
   
+  newNode.prev = this.head;
+  newNode.next = nextNode;
+
+  nextNode.prev = newNode;    
+
   this.size += 1;  
   return true;
 }
@@ -88,17 +103,16 @@ MyCircularDeque.prototype.insertLast = function(value) {
   if(this.isFull())
     return false;
     
-  const node = new ListNode(value);
+  const newNode = new ListNode(value);  
+  const nextNode = this.tail.prev.next;
+
+  this.tail.prev.next = newNode;
   
-  if(this.isEmpty()){
-    this.head = node;
-    this.tail = node;
-  }else{
-    node.prev = this.tail;
-    this.tail.next = node;
-    this.tail = node;
-  }
+  newNode.prev = this.tail.prev;
+  newNode.next = nextNode;
   
+  nextNode.prev = newNode;
+
   this.size += 1;  
   return true;
 };
@@ -114,14 +128,10 @@ MyCircularDeque.prototype.deleteFront = function() {
     return;
   
   const result = this.head.value;
+  const nexNode = this.head.next.next;
 
-  if(this.size === 1){
-    this.head = null;
-    this.tail = null;
-  }else{
-    this.head = this.head.next;
-    this.head.prev = this.tail;
-  }
+  this.head.next = nexNode;
+  nexNode.prev = this.head;
   
   this.size -= 1;  
   return result;
@@ -138,14 +148,10 @@ MyCircularDeque.prototype.deleteLast = function() {
     return;
   
   const result = this.head.value;
+  const nextNode = this.tail;
 
-  if(this.size === 1){
-    this.head = null;
-    this.tail = null;
-  }else{
-    this.tail = this.tail.next;
-    this.tail.next = this.head;
-  }  
+  this.tail.next = nextNode;
+  nextNode.prev = this.tail;
   
   this.size -= 1;      
   return result;
@@ -184,7 +190,7 @@ MyCircularDeque.prototype.getRear = function() {
  * space:     O(1)
  */
 MyCircularDeque.prototype.isEmpty = function() {
-  return !this.head;
+  return !this.head.value && !this.tail.value;
 };
 
 /**
