@@ -18,7 +18,11 @@
 
 덱은
 
-    ...
+    Double-Ended Queue의 줄임말이다.
+
+    주로, 이중 연결리스트 자료구조로 구현하는데, 
+      1. 덱 자료구조의 의미에 맞고,
+      2. 양쪽끝 추출의 시간 복잡도를 동일시 할 수 있기 때문이라 생각한다.
 
 우선순위 큐는
 
@@ -62,7 +66,7 @@
 
 |       | `insertFront` | `insertLast` | `deleteFront` | `deleteLast` | `getFront` | `getRear` | `isEmpty` | `isFull` |
 | :---: | :-----------: | :----------: | :-----------: | :----------: | :--------: | :-------: | :-------: | :------: |
-| time  |    `O(1)`     |    `O(n)`    |    `O(1)`     |    `O(n)`    |   `O(1)`   |  `O(n)`   |  `O(1)`   |  `O(1)`  |
+| time  |    `O(1)`     |    `O(1)`    |    `O(1)`     |    `O(1)`    |   `O(1)`   |  `O(1)`   |  `O(1)`   |  `O(1)`  |
 | space |    `O(1)`     |    `O(1)`    |    `O(1)`     |    `O(1)`    |   `O(1)`   |  `O(1)`   |  `O(1)`   |  `O(1)`  |
 
 문제 풀이는 `src\adt\CircularDeque.js`에서 확인할 수 있다.
@@ -209,13 +213,17 @@
 
 ## 참고 문헌
 
+**자료구조 이론**
+
+[Heap 특성](https://1ilsang.dev/2019-10-21/algorithm/heap) ━ *1ilsang*
+
+**자료구조 구현**
+
 [My Solution at 707. Design Linked List](https://github.com/cs-study-org/algorithm-study/blob/master/03/yongki/LinkedList.md) ━ *GitHub*
 
 [My Solution at 622. Design Circular Queue](https://github.com/cs-study-org/algorithm-study/blob/master/04/yongki/src/circularQueue.js) ━ *GitHub*
 
-[Simple Solution at 1021. 회전하는 큐](https://wiselog.tistory.com/126) ━ *지혜로운 개발로그*
-
-[Heap 특성](https://1ilsang.dev/2019-10-21/algorithm/heap) ━ *1ilsang*
+[이중 연결 리스트 구현](https://makasti.tistory.com/96) ━ *두콩*
 
 [Heap 삭제 과정](https://www.geeksforgeeks.org/insertion-and-deletion-in-heaps/) ━ *GeeksforGeeks*
 
@@ -224,6 +232,12 @@
 [Javascript Heap 구현](https://nyang-in.tistory.com/153) ━ *냥인*
 
 [Javascript 객체 상속](https://www.zerocho.com/category/JavaScript/post/573d812680f0b9102dc370b7) ━ *ZeroCho*
+
+**풀이 참고**
+
+[Simple Solution at 1021. 회전하는 큐](https://wiselog.tistory.com/126) ━ *지혜로운 개발로그*
+
+**백준 제출**
 
 [Javascript 표준 입출력과 백준 제출 팁](https://overcome-the-limits.tistory.com/25) ━ *Plus Ultra*
 

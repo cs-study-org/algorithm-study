@@ -65,7 +65,7 @@ function rotateRight(circularDeque, rotateCnt) {
   
   for(const target of targets){    
     const middle = Math.ceil(circularDeque.size  / 2);
-    const idx = circularDeque.search(target);  
+    const idx = circularDeque.getIndex(target);  
     
     let moveCnt = 0;
 
