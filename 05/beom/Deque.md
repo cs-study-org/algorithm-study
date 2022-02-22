@@ -7,6 +7,9 @@
 즉, 스택처럼도 사용 가능하고 큐 처럼도 사용할 수 있는 자료구조이다.
 
 
+## ArrayDeque vs LinkedList Deque
+
+
 ### 배열을 이용한 Deque
 ```java
 package algorithmStudyDeque;
@@ -225,4 +228,210 @@ public class ArrayDeque<E> implements Queue<E> {
         }
         return false;
     }
-    ```
+```
+
+
+## 연결리스트를 이용한 Deque
+```java
+package algorithmStudyDeque;
+
+import Interface_form.Queue;
+
+import java.util.NoSuchElementException;
+
+public class LinkedListDeque<E> implements Queue<E>{
+    private Node<E> head; //가장 앞에 있는 노드를 가르키는 변수
+    private Node<E> tail; //가장 뒤에 있는 노드를 가리키는 변수
+    private int size; //노드의 개수
+
+    //생성자
+    public LinkedListDeque(){
+        head = null;
+        tail = null;
+        size =0;
+    }
+
+    public boolean offerFirst(E value){
+        Node<E> newNode = new Node<E>(value); //새 노드 생성
+        newNode.next = head; //새 노드의 다음 노드로 head 노드를 연결
+
+        if(head != null){
+            head.prev = newNode;
+        }
+
+        head = newNode;
+        size++;
+
+        if(head.next ==null){
+            tail = head;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean offer(E value){
+        return offerLast(value);
+    }
+
+    public boolean offerLast(E value){
+        if(size ==0){
+            return offerFirst(value);
+        }
+
+        Node<E> newNode = new Node<E>(value);
+
+        tail.next = newNode;
+        newNode.prev = tail;
+        size++;
+
+        return true;
+    }
+
+    @Override
+    public E poll(){
+        return pollFirst();
+    }
+
+    public E pollFirst(){
+        if(size ==0){
+            return null;
+        }
+
+        E element = head.data;
+        Node<E> nextNode = head.next;
+
+        head.data = null;
+        head.next =null;
+
+        if(nextNode != null){
+            nextNode.prev = null;
+        }
+        head = null;
+        head = nextNode;
+        size--;
+
+        if(size ==0){
+            tail = null;
+        }
+
+        return element;
+    }
+
+    public E remove(){
+        return removeFirst();
+    }
+
+    public E removeFirst(){
+        E element = poll();
+
+        if(element ==null){
+            throw new NoSuchElementException();
+        }
+        return element;
+    }
+
+    public E pollLast(){
+        if(size==0){
+            return null;
+        }
+
+        E element = tail.data;
+        Node<E> prevNode = tail.prev;
+
+        tail.data = null;
+        tail.prev =null;
+
+        if(prevNode!=null){
+            prevNode.next =null;
+        }
+
+        tail =null;
+        tail = prevNode;
+        size--;
+
+        if(size ==0){
+            head = null;
+        }
+        return element;
+    }
+
+    public E removeLast(){
+        E element = pollLast();
+
+        if(element ==null){
+            throw new NoSuchElementException();
+        }
+        return element;
+    }
+
+    @Override
+    public E peek(){
+        return peekFirst();
+    }
+
+    public E peekFirst(){
+        if(size ==0){
+            return null;
+        }
+        return head.data;
+    }
+
+    public E peekLast(){
+        if(size ==0){
+            return null;
+        }
+        return tail.data;
+    }
+
+    public E element() {
+        return getFirst();
+    }
+
+    public E getFirst(){
+        E item = peek();
+
+        if(item ==null){
+            throw new NoSuchElementException();
+        }
+        return item;
+    }
+
+    public E getLast() {
+        E item = peekLast();
+        
+        if(item == null) {
+            throw new NoSuchElementException();
+        }
+        return item;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public boolean contains(Object value) {
+        for(Node<E> x = head; x != null; x = x.next) {
+            if(value.equals(x.data)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void clear() {
+        for (Node<E> x = head; x != null;) {
+            Node<E> next = x.next;
+            x.data = null;
+            x.next = null;
+            x.prev = null;
+            x = next;
+        }
+        size = 0;
+        head = tail = null;
+    }
+}
+```
