@@ -76,7 +76,7 @@ public int sum(int a[], int n){
 
 | time | space |
 |------|-------|
-| O(n) | O(n)  |
+| O(n) | O(1)  |
 
 
 ## 참고 문헌
