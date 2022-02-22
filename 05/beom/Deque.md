@@ -6,8 +6,66 @@
 `Deque`는 `Queue` 인터페이스를 확장하고 있는 인터페이스이다. `Queue`는 한쪽 방향에서만 삽입, 삭제를 할 수 있지만, `Deque`는 양쪽 끝에서 삽입, 삭제가 가능하다.
 즉, 스택처럼도 사용 가능하고 큐 처럼도 사용할 수 있는 자료구조이다.
 
+## ArratDeque 시간복잡도
+| offer | peek | poll | size |
+|------|-------|---|---|
+| O(1) | O(1)  | O(1)  | O(1)  |
 
 ## ArrayDeque vs LinkedList Deque
+자바에서는 Deque 인터페이스를 구현할 때 ArrayDeque으로 구현한다.
+
+이유는 수행속도와 메모리에 관련해서 ArrayDeque가 더 유리하기 때문이다.
+(삽입/삭제가 양끝에서만 일어나기 때문에 둘다 시간복잡도는 O(1)로 거의 동일하다.)
+
+- 수행속도 : ArrayDeque는 Array에 의해 지원되며 Array는 LinkedList보다 cache-locality에 좀 더 친숙하다.
+- 메모리 : ArrayDeque는 다음 노드에 대한 추가 참조를 유지할 필요가 없으므로 LinkedList보다 메모리 효율적이다.
+- null사용 여부 : LinkedList는 Null 요소를 추가할 수 있지만 ArrayDeque는 불가능하다.
+
+## 스택 자료구조로 사용하는 ArrayDeque
+**스택 구조** : 자료구조의 하나로 후입선출(Last In First Out) 자료구조
+
+Stack 클래스는 List 인터페이스의 Vector 클래스를 상속받아, 전형적인 스택 메모리 구조의 클래스를 제공한다.
+```java
+Stack<E> st = new Stack<E>();
+```
+
+ArrayDeque 클래스는 Deque인터페이스를 구현하고 있는 클래스이다.
+```java
+Deque<E> st = new ArrayDeque<E>();
+```
+
+ArrayDeque 공식문서를 보면
+
+> This class is likely to be faster than Stack when used as a stack, and faster than LinkedList when used as a queue.
+
+`스택구조로 사용하면 Stack 클래스보다 빠르고`, `큐 구조를 사용하면 Queue 클래스보다 빠르다`고한다.
+
+> Using the Deque interface is the most convenient approach for LIFO data structures as it provides all the needed stack operations
+
+이처럼 LIFO 구조를 만들기 위해 적합한 클래스는 ArrayDeque 클래스이다.
+
+왜 그럼 이름을 Stack이라고 해서 헷갈리게 하는 것일까?
+
+이유는 JAVA는 오랫동안 **잘못 작성된** Stack 구현을 가지고 있었다.
+(JAVA는 Stack의 기본 원칙을 무시하고 Vector 클래스를 상속받고 있었다)
+
+- Vector를 상속받는 다른 Stack클래스를 새로 만들경우 LIFO원칙이 아닌 중간에 데이터가 삽입되거나 삭제될 수 있는 치명적 문제 발생
+
+하지만! JAVA는 이전 버전과의 호환성 원칙에 따라 **실수를 수정할 수가 없다**고 한다...
+
+**[ Stack 클래스의 단점 ]**
+- 모든 메소드에 synchronized가 있기 때문에 단일 스레드 환경에서는 성능이 떨어진다.
+- Vector 클래스를 상속받았기 때문에 LIFO 구조를 유지하는 것이 아니라 중간에서 데이터를 삭제하고 삽입하는 것이 가능하다.
+- Stack 클래스를 만들 때 초기 용량을 설정할 수 없다.
+
+이러한 단점을 보완하기 위해 LIFO 구조를 만들 때 ArrayDeque를 사용해야한다.
+
+### 결론
+Vector를 상속받는 Stack의 장점이라고 하면 **Search()메소드**의 존재이다.
+
+만약 LIFO구조가 필요할 때 배열처럼 특정 값의 위치를 스택에서 알고 싶다면 Stack을 사용하고
+그렇지 않은 경우에서는 ArrayDeque를 사용하는 것이 좋은 것 같다.
+
 
 
 ### 배열을 이용한 Deque
@@ -435,3 +493,11 @@ public class LinkedListDeque<E> implements Queue<E>{
     }
 }
 ```
+
+## 참고 문헌
+[arrayDeque vs Linkedlist Deque 관련 참고문헌](https://chucoding.tistory.com/52)
+
+[스택자료구조에서 ArrayDeque를 사용하는 이유1](https://chucoding.tistory.com/50?category=880097)
+
+
+[스택자료구조에서 ArrayDeque를 사용하는 이유2](https://github.com/wjdrbs96/Today-I-Learn/blob/master/Java/Collection/Queue/ArrayDeque%EB%9E%80%3F.md)
