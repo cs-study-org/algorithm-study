@@ -2,6 +2,14 @@
 
 서류 통과를 위한 알고리즘 스터디 저장소입니다.
 
+## 교재
+
+<div align="center">
+<a href="http://www.yes24.com/Product/Goods/91084402">
+      <img width="240" src="http://docs.likejazz.com/images/2020/book-cover.jpg">
+</a>
+</div>
+
 ## 규칙
 1. 스터디원들은 PR이 올라오면 바로바로 피드백 답글을 남긴다.
 2. 주제에 맞는 알고리즘 문제를 발표자료로 준비한다.
