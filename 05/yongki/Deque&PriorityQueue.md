@@ -57,18 +57,22 @@
 이전 3주차의 `단일 연결리스트 구현`, 4주차의 `원형큐 구현`와 다르게
 이중 연결리스트 자료구조를 이용해 원형 덱을 구현하였다.
 
-front와 rear라는 각자의 노드를 사용하지만,
-Insertion / Deletion의 행위가 공유되어, 노드 간에 이를 동기화하는 과정이 매우 어려웠다.
+front와 rear라는 각자의 위치가 있지만,
+Insertion / Deletion의 행위에 의해 1개가 될 때 위치를 동기화하는 과정이 매우 어려웠다.
 
-때문에 처음에 구상한 다음과 같은 구조가 나오지 못했고,
+때문에 처음에 구상한 이상적인 구조가 나오지 못했고,
+    
+<center>
+<img width="60%" src="assets/circular-deque-aim.drawio.svg"/>
+</center>
 
-    HEAD: 1 → 2 → 3
-    TAIL: 3 → 2 → 1  
+교재의 풀이를 참고하여 각자 위치를 나타내는 빈 노드를 거쳐가는 형식의 구조를 사용하니, 동기화 문제가 사라졌다.
 
-교재의 풀이를 참고하여 각자 빈 노드를 거쳐가는 형식의 구조를 사용하니, 동기화 문제가 사라졌다.
+빈 노드들은 덱의 사이즈에 영향을 주지 않는다.
 
-    HEAD: undefined → 1 → 2 → 3
-    TAIL: undefined → 3 → 2 → 1
+<center>
+<img width="70%" src="assets/circular-deque-avoid.drawio.svg"/>
+</center>
 
 ### 문제 풀이
 
@@ -150,7 +154,7 @@ Insertion / Deletion의 행위가 공유되어, 노드 간에 이를 동기화�
 
     a. 10은 덱에 다음과 같이 채워져야 함을 의미한다.
     
-      size: 10    elements: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 →
+      [HEAD] size: 10   elements: undefined → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → undefined →      
 
     b. 3은 [2, 9, 5] 즉, 제거할 요소들의 개수이다.
 
@@ -158,29 +162,44 @@ Insertion / Deletion의 행위가 공유되어, 노드 간에 이를 동기화�
     
       [element = 2] 일때, 덱의 앞으로 회전해야 효율적이다.
       회전한 후,  
-        size: 10    elements: 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → 1 →
+        [HEAD] size: 10   elements: undefined → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → 1 → undefined →
 
       제거한다.
-        size: 9     elements: 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → 1 →
+        [HEAD] size: 9    elements: undefined → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → 1 → undefined →        
 
       [element = 9] 일때, 덱의 뒤에서 회전해야 효율적이다.
-      회전한 후,  
-        size: 9     elements: 9 → 10 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
+      회전한 후,          
+        [HEAD] size: 9    elements: undefined → 9 → 10 → 1 → 3 → 4 → 5 → 6 → 7 → 8 → undefined →
 
       제거한다.
-        size: 8     elements: 10 → 1 → 3 → 4 → 5 → 6 → 7 → 8 →
+        [HEAD] size: 8    elements: undefined → 10 → 1 → 3 → 4 → 5 → 6 → 7 → 8 → undefined →
 
-    d. 회전의 기준은 (deque.size) / 2이고, 홀수 일때, 올림한다.
+문제의 핵심은
+
+    a. 회전의 기준이다.
+
+       회전의 기준은 (deque.size) / 2이고, 홀수 일때, 올림한다.
 
         1 → 2 → 3이 있을때 올림값을 한 2를 회전의 기준으로 잡으면
         1, 2는 앞으로 3은 뒤로 돈다.
         
         이게 빠르다고 한다.
 
+    b. 삭제하는 곳이다.
+
+        1 → 2 → 3 → 4 → 5에서 3에 접근할때,
+
+        덱의 뒤에서 접근여 2번이 나오더라도,
+
+        4 → 5 → 1 → 2 → 3
+
+        앞에서 삭제해야하기 때문에 1번을 더 이동시켜줘야한다.
+
+        3 → 4 → 5 → 1 → 2
+        
 <dl><dt>
 문제에서 제공한 모든 예제에 출력이 정상적으로 나왔지만, 제출이 되지 않았다.
 </dt></dl>
-
 </details>
 
 <details>
