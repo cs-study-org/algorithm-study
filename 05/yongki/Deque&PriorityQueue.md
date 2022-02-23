@@ -12,6 +12,8 @@
     - [문제 풀이](#문제-풀이-2)
     - [문제 회고](#문제-회고-3)
     - [문제 풀이](#문제-풀이-3)
+    - [문제 회고](#문제-회고-4)
+    - [문제 풀이](#문제-풀이-4)
   - [참고 문헌](#참고-문헌)
 
 ## 이론
@@ -235,6 +237,22 @@ Insertion / Deletion의 행위에 의해 1개가 될 때 위치를 동기화하�
       size: 1   elements: 2 →
     
     c. Ouput은 삭제된 head가 Input의 몇 번째 요소인지를 배열로 나타낸다.
+
+</details>
+
+<details>
+<summary>
+  1046. Last Stone Weight
+  <a href="https://leetcode.com/problems/last-stone-weight/">👊</a>  
+</summary>
+
+### 문제 회고
+
+`7662번`에서 구현한 자료구조가 필요하기 때문에 별도의 소스 코드에 기술하였다.
+
+### 문제 풀이
+
+문제 풀이는 `src\1046.js`에서 확인할 수 있다.
 
 </details>
 
