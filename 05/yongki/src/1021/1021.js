@@ -13,11 +13,11 @@ const MyCircularDeque = require('../adt/CircularDeque');
  * time:    O(b)
  * space:   O(1)
  */
-function rotateLeft(circularDeque, rotateCnt) {
-  while(rotateCnt--){
+function rotateLeft(circularDeque, rotateCnt) {  
+  while(rotateCnt--){    
     const value = circularDeque.deleteFront();
-    circularDeque.insertLast(value);
-  }
+    circularDeque.insertLast(value);  
+  }  
 
   circularDeque.deleteFront();
 }
@@ -35,9 +35,9 @@ function rotateLeft(circularDeque, rotateCnt) {
 function rotateRight(circularDeque, rotateCnt) {
   while(rotateCnt--){
     const value = circularDeque.deleteLast();
-    circularDeque.insertFront(value);
-  }
-
+    circularDeque.insertFront(value);      
+  }  
+  
   circularDeque.deleteFront();
 }
 
@@ -64,19 +64,20 @@ function rotateRight(circularDeque, rotateCnt) {
   let result = 0;
   
   for(const target of targets){    
+    circularDeque.displayDeque();
+
     const middle = Math.ceil(circularDeque.size  / 2);
-    const idx = circularDeque.getIndex(target);  
+    const idx = circularDeque.getIndex(target);       
     
-    let moveCnt = 0;
+    let moveCnt = 0;                                  
 
     if(middle > idx){
       moveCnt = idx;
       rotateLeft(circularDeque, moveCnt);
-    }else{
-      moveCnt = circularDeque.size - idx;
+    }else{      
+      moveCnt = circularDeque.size - idx;      
       rotateRight(circularDeque, moveCnt);
-    }    
-
+    }        
     result += moveCnt; 
   }
 
