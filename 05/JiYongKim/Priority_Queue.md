@@ -157,10 +157,18 @@
 
 ⇒ (단, 힙(heap)을 이용한 우선순위 큐의 시간복잡도만 해당)
 
-|  | enqueue | dequeue |
-| --- | --- | --- |
-| 우선순위 큐 | O(logn) | O(logn) |
+```java
+시간복잡도
+offer(입력)   : O(log n)
+peek(get)    : O(1)
+poll(반환)    : O(log n)
+size         : O(1)
+natural order : JVM에서 제공하는 일반적인거와 다를수 있음 순서 ex) 문자는 ASCII 순서로 정렬
+java 1.5 에서 나옴
+특징 : 일반적은 큐는 FIFO의 구조를 가지지만 자연 네추럴 오더에 따라 정렬
+      - Null을 허용하지 않는다.
 
+```
 <br>
 
 - 구현시 이용한 자료구조에 따른 시간 복잡도
