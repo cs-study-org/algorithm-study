@@ -1,4 +1,4 @@
-## < Dequeue >
+ㄹ## < Dequeue >
 <details>
     <summary>(백준) 1021번 회전하는 큐</summary>
 
@@ -6,8 +6,8 @@
     
     ## 문제
     
-    ![스크린샷 2022-02-23 오후 7.36.37.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/757d6137-ee9c-45a0-b6f5-b5904642f7ed/스크린샷_2022-02-23_오후_7.36.37.png)
-    
+    <img width="678" alt="스크린샷 2022-02-24 오전 3 00 03" src="https://user-images.githubusercontent.com/81874493/155379992-b417c918-60c7-49f4-9d59-593625e64f45.png">
+
     풀이)
     
     ```java
