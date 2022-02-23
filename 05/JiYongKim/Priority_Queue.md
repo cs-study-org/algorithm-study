@@ -5,7 +5,8 @@
 
 
 ## **우선순위 큐란?**
-![스크린샷 2022-02-20 오후 11.08.41.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ee9b5953-9763-403d-aed3-c9ab8bd855b4/스크린샷_2022-02-20_오후_11.08.41.png)
+
+<img width="598" alt="스크린샷 2022-02-23 오후 3 20 26" src="https://user-images.githubusercontent.com/81874493/155270430-193a5cf8-eab9-4c89-b950-dfacdd9bfaec.png">
 
 <br>
 
@@ -95,7 +96,7 @@
 
 ## **힙(heap)의 종류**
 
-![스크린샷 2022-02-23 오후 2.41.57.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/99ebf4ce-5e8e-417c-85a9-d367aa72491a/스크린샷_2022-02-23_오후_2.41.57.png)
+<img width="643" alt="스크린샷 2022-02-23 오후 3 20 36" src="https://user-images.githubusercontent.com/81874493/155270454-7d38d729-08cb-4958-9d86-51c051304585.png">
 
 - 최대 힙(max heap)
     - 부모 노드의 키 값이 자식 노드의 키 값보다 크거나 같은 완전 이진 트리
@@ -108,7 +109,7 @@
 
 ## **힙(heap) 구현**
 
-![스크린샷 2022-02-23 오후 2.43.37.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2b99188f-fdc9-4a85-be9e-f67f65dbf4da/스크린샷_2022-02-23_오후_2.43.37.png)
+<img width="712" alt="스크린샷 2022-02-23 오후 3 20 43" src="https://user-images.githubusercontent.com/81874493/155270469-34c704de-6ec7-43a5-b5a4-d2b36a7f2a56.png">
 
 - 힙을 저장하는 표준적인 자료구조는 배열 이다.
 - 구현을 쉽게 하기 위하여 배열의 첫 번째 인덱스인 0은 사용되지 않는다.
@@ -128,7 +129,7 @@
 
 예시)
 
-![스크린샷 2022-02-23 오후 2.44.55.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7b1070d6-937b-4a24-8d68-19b1970d4bed/스크린샷_2022-02-23_오후_2.44.55.png)
+<img width="684" alt="스크린샷 2022-02-23 오후 3 20 58" src="https://user-images.githubusercontent.com/81874493/155270481-f45141c7-4acd-4cd8-a37c-097fc3d2fddc.png">
 
 </details>
 
@@ -146,7 +147,7 @@
 
 예시)
 
-![스크린샷 2022-02-23 오후 2.46.52.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/bff767b9-18e6-4af2-ab8b-8840420563e3/스크린샷_2022-02-23_오후_2.46.52.png)
+<img width="685" alt="스크린샷 2022-02-23 오후 3 21 08" src="https://user-images.githubusercontent.com/81874493/155270487-92c94118-ad5f-4a46-a9ff-80f170a8417a.png">
 
 </details>
 
@@ -169,6 +170,6 @@
     
     (우선순위 큐 구현에 사용하는 자료구조에 따른 시간 복잡도)
     
-    ![스크린샷 2022-02-23 오후 3.04.34.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/36003dd7-3a51-4548-bbd8-aa5bd984e748/스크린샷_2022-02-23_오후_3.04.34.png)
+    <img width="685" alt="스크린샷 2022-02-23 오후 3 21 15" src="https://user-images.githubusercontent.com/81874493/155270498-1f66120d-04c0-4376-bbb9-31ae43551063.png"> 
 
     </details>
