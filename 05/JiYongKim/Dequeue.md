@@ -2,7 +2,7 @@
 
 ## Dequeue
 
-![스크린샷 2022-01-19 오전 12.05.06.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8224de8f-9fbc-4da6-95d9-16e63c5d1da6/스크린샷_2022-01-19_오전_12.05.06.png)
+<img width="684" alt="스크린샷 2022-02-23 오후 3 36 36" src="https://user-images.githubusercontent.com/81874493/155271728-a29cf94c-6a84-499d-a248-85c27df759b8.png">
 
 Deque 는 **Double - Ended Queue** 의 줄임말
 
