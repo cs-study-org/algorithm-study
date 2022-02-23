@@ -1,4 +1,4 @@
-ㄹ## < Dequeue >
+## < Dequeue >
 <details>
     <summary>(백준) 1021번 회전하는 큐</summary>
 
