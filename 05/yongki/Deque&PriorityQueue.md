@@ -250,6 +250,57 @@ Insertion / Deletion의 행위에 의해 1개가 될 때 위치를 동기화하�
 
 `7662번`에서 구현한 자료구조가 필요하기 때문에 별도의 소스 코드에 기술하였다.
 
+처음 접근 방식은 문제의 조건들을 제대로 확인하지 못하고 풀었을 때이다.
+
+<dl><dt>
+If x != y, the stone of weight x is destroyed, <br/>
+and the stone of weight y has new weight y - x.
+</dt><dl>
+<br/>
+
+이를 확인하지 못하고 접근했을 때는 다음과 같다.
+
+    1. 힙의 최댓값(루트)을 조회 하고, 이보다 1작은 값이 힙에 있는지 검색한다.
+
+    2. 없다면, 다음 루프를 돌고
+       있다면, 최댓값을 힙에서 제거한다.
+
+    다만, 2가지 문제가 있었다. 
+    
+        a. 이전 문제에서 작동이 검증된 findIndex()가 제대로 작동하지 않았다.
+
+        b. 만약 findIndex()가 제대로 작동해서
+
+            [ 8, 7, 4, 1, 2, 1, [length]: 6 ]가
+
+            [ 1, 4, 1, 2, 1, [length]: 6 ]로 되었다면, 
+            
+          이를 다시 힙 정렬해두기가 내가 구현한 자료구조에서는 어렵다.
+
+          만약, 1로 바뀐 요소가 힙의 중간에 있을때 이를 bubbleUp 할지 bubbleDown 할지 확인하기 어렵기 때문이다.
+
+```js
+var lastStoneWeight = function (stones) {
+  const maxHeap = new MaxHeap();
+
+  ... array to heapify
+
+  for (let i = 0; i < maxHeap.heap.length; i++) {    
+    const root = maxHeap.getRoot();
+
+    const lessIdx = maxHeap.findIndex(root - 1);
+
+    if (lessIdx === undefined)
+      continue;
+    
+    maxHeap.heap[lessIdx] == 1;
+    maxHeap.extract();
+  }
+
+  return maxHeap.heap.length;
+};
+```
+
 ### 문제 풀이
 
 문제 풀이는 `src\1046.js`에서 확인할 수 있다.
@@ -283,6 +334,8 @@ Insertion / Deletion의 행위에 의해 1개가 될 때 위치를 동기화하�
 **풀이 참고**
 
 [Simple Solution at 1021. 회전하는 큐](https://wiselog.tistory.com/126) ━ *지혜로운 개발로그*
+
+[Simple Solution at 1046. Last Stone Weight](https://github.com/cs-study-org/algorithm-study/blob/7ad1cda101186ca7b18b2488ded242ea84d7bdc0/05/JiYongKim/Leetcode.md) ━ *Github*
 
 **백준 제출**
 

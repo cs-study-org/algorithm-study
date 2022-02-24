@@ -7,10 +7,9 @@ const MaxHeap = require('./adt/MaxHeap');
  * @param {number[]} stones
  * @return {number}
  * 
- * time:  O(n log n)
+ * time:  O(n)
  *        → for:          O(n)
- *        → for:          O(n)
- *        →   findIndex:  O(log n)
+ *        → while:        O(n - 1)
  * 
  * space: O(n)
  */
@@ -20,25 +19,21 @@ var lastStoneWeight = function (stones) {
   for (const stone of stones)
     maxHeap.insert(stone);
 
-  for (let i = 0; i < maxHeap.heap.length; i++) {
-    console.log(util.inspect(maxHeap.heap, { showHidden: true, depth: null }));
+  while (maxHeap.heap.length > 1) {    
+    const root = maxHeap.extract();
+    const lessNode = maxHeap.extract();
 
-    const root = maxHeap.getRoot();
+    const weight = root - lessNode;    
 
-    const lessNode = maxHeap.findIndex(root - 1);
-
-    if (lessNode === undefined)
-    continue;
-    
-    console.log(lessNode, root - 1);
-    maxHeap.extract();
+    if (weight)
+      maxHeap.insert(weight);
   }
 
-  return maxHeap.heap.length;
+  return maxHeap.extract() || 0;
 };
 
 (function main() {
-  const input = [2,7,4,1,8,1];
+  const input = [2, 7, 4, 1, 8, 1];
 
   const output = lastStoneWeight(input);
   console.log(output);
