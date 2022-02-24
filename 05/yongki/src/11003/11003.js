@@ -1,18 +1,14 @@
-const util = require('util');
 const fs = require('fs');
 
-function findMinTargets(targets, start, end) {
-  const result = [];  
+const MyCircularDeque = require('../adt/CircularDeque');
 
-  for(let i = start; i <= end; i++){
 
-    if(i < 0)
-      continue;
-
-    result.push(targets[i]);
-  }
-
-  return result;
+function handleInput(path) {
+  return fs.readFileSync(path)
+    .toString()
+    .replace('\n', '')
+    .split(/\s/)
+    .map(each => Number(each));
 }
 
 /**
@@ -21,27 +17,41 @@ function findMinTargets(targets, start, end) {
  *  b. when submit in BackJoon:     /dev/stdin
  * 
  * +++ Calculate after Start
+ * 
+ * n as nums
+ * limit always less than n. O(1)
+ * 
  * time:    O(n)
- *          → findMin...  O(less n)
+ *          → for:        O(n)
+ *            → while:    O(1)
  * 
  * space:   O(n)
  */
 (function main() {
-  const [size, limit, ...targets] = fs.readFileSync(__dirname + '/stdin-11003')
-    .toString()
-    .replace('\n', '')
-    .split(/\s/)
-    .map(each => Number(each));
+  const [_, limit, ...nums] = handleInput(__dirname + '/stdin-11003');
 
   // +++ Start
+  const circularDeque = new MyCircularDeque(limit);
   const result = [];
 
-  for (let i = 0; i < size; i++){
-    const start = i - limit + 1;
-    const end = i;
+  for (const [idx, num] of nums.entries()) {
+    while (!circularDeque.isEmpty()
+      && circularDeque.getRear() > num)
+      circularDeque.deleteLast();
 
-    const min = Math.min(...findMinTargets(targets, start, end));
-    result.push(min);
+    circularDeque.insertLast(num);
+
+    let curMinIdx = idx - limit + 1
+    curMinIdx = curMinIdx <= 0 ? 0 : curMinIdx;
+    
+    // console.log(nums[curMinIdx], circularDeque.getFront());
+    //   circularDeque.deleteFront();
+
+    circularDeque.displayDeque();
+    result.push(circularDeque.getFront());
+
+    if (circularDeque.isFull())
+      circularDeque.deleteFront();
   }
 
   console.log(result.join(' '));

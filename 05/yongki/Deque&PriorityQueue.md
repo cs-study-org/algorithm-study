@@ -13,9 +13,10 @@
     - [문제 회고](#문제-회고-3)
     - [문제 풀이](#문제-풀이-3)
     - [문제 회고](#문제-회고-4)
-    - [문제 풀이](#문제-풀이-4)
+    - [문제 풀이 1/2 [`Brute force`]](#문제-풀이-12-brute-force)
+    - [문제 풀이 2/2 [`#Sliding Window` `#Monotonic Stack`]](#문제-풀이-22-sliding-window-monotonic-stack)
     - [문제 회고](#문제-회고-5)
-    - [문제 풀이](#문제-풀이-5)
+    - [문제 풀이](#문제-풀이-4)
   - [참고 문헌](#참고-문헌)
 
 ## 이론
@@ -256,7 +257,95 @@ Insertion / Deletion의 행위에 의해 1개가 될 때 위치를 동기화하�
 시간 초과 에러를 해결 중이다.
 </dt><dl>
 
-### 문제 풀이
+### 문제 풀이 1/2 [`Brute force`]
+
+    Input:  nums = [1, 5, 2, 3, 6, 2, 3, 7, 3, 5, 2, 6]
+            ※ 표준 입출력 과정을 거치면서 배열로 받을 수 밖에 없다.
+
+            limit = 3
+
+    배열을 순회하면서, 
+    최솟값을 색출할 수 있는 범위를 찾아낸 뒤, 최솟값을 찾는다.
+
+    [idx = 3] range idx = 0, 1
+              range     = 1, 5 
+              min       = 1
+
+    Output: 1 1 1 2 2 2 2 2 3 3 2 2
+
+Output은 만족했지만, 시간 초과 에러가 났고, topic과 연관 없게 푼 풀이였다.
+
+```js
+function findMinTargets(targets, start, end) {
+  const result = [];  
+
+  for(let i = start; i <= end; i++){
+
+    if(i < 0)
+      continue;
+
+    result.push(targets[i]);
+  }
+
+  return result;
+}
+
+/**
+ * time:    O(n)
+ *          → findMin...  O(less n)
+ * 
+ * space:   O(n)
+ */
+(function main() {
+  ... stdin processing
+
+  // +++ Start
+  const result = [];
+
+  for (let i = 0; i < size; i++){
+    const start = i - limit + 1;
+    const end = i;
+
+    const min = Math.min(...findMinTargets(targets, start, end));
+    result.push(min);
+  }
+
+  console.log(result.join(' '));
+})();
+```
+
+### 문제 풀이 2/2 [`#Sliding Window` `#Monotonic Stack`]
+
+    Input:  nums = [1, 5, 2, 3, 6, 2, 3, 7, 3, 5, 2, 6]        
+
+            limit = 3
+
+            min idx = idx - limit + 1 (단, min idx > 0)
+    
+  배열을 순회하면서, min idx부터 순회하는 현재 인덱스까지 limit 만큼의 범위까지 확인한다.
+
+  즉, limit 만큼만 저장하는 자료구조가 필요하다.
+
+    [num = 1] pass
+
+    [num = 5] pass
+
+    [num = 2] pass    
+
+    [num = 3] [5, 2, 3]
+
+    [num = 6] [2, 3, 6]
+
+  덱이 적합한데, limit 까지만 뒤에서 받고,
+  지난 인덱스의 범위는 앞에서 삭제할 수 있기 때문이다.
+
+  여기서, 덱은 Monotonic Stack 처럼 오름차순을 유지하도록 한다.
+
+    1 → 5 에 2가 들어올 경우, 2보다 큰 요소를 모두 제거한 뒤, 넣는다.
+
+    [num = 1] 1 → 2
+
+    [num = 5] 1 → 2 → 5
 
 문제 풀이는 `src\11003`폴더에서 확인할 수 있다.
 
@@ -339,10 +428,6 @@ var lastStoneWeight = function (stones) {
 
 **자료구조 구현**
 
-[My Solution at 707. Design Linked List](https://github.com/cs-study-org/algorithm-study/blob/master/03/yongki/LinkedList.md) ━ *GitHub*
-
-[My Solution at 622. Design Circular Queue](https://github.com/cs-study-org/algorithm-study/blob/master/04/yongki/src/circularQueue.js) ━ *GitHub*
-
 [이중 연결 리스트 구현](https://makasti.tistory.com/96) ━ *두콩*
 
 [Heap 삭제 과정](https://www.geeksforgeeks.org/insertion-and-deletion-in-heaps/) ━ *GeeksforGeeks*
@@ -356,6 +441,8 @@ var lastStoneWeight = function (stones) {
 **풀이 참고**
 
 [Simple Solution at 1021. 회전하는 큐](https://wiselog.tistory.com/126) ━ *지혜로운 개발로그*
+
+[Simple Solution at 11003. 최솟값 찾기](https://wooooooak.github.io/algorithm/2018/12/03/백준11003번문제/) ━ *쾌락코딩*
 
 [Simple Solution at 1046. Last Stone Weight](https://github.com/cs-study-org/algorithm-study/blob/7ad1cda101186ca7b18b2488ded242ea84d7bdc0/05/JiYongKim/Leetcode.md) ━ *Github*
 
