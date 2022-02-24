@@ -7,9 +7,12 @@ const MaxHeap = require('./adt/MaxHeap');
  * @param {number[]} stones
  * @return {number}
  * 
- * time:  O(n)
+ * time:  O(n log n)
  *        → for:          O(n)
+ *          → insert:     O(log n)
+ * 
  *        → while:        O(n - 1)
+ *          → extract:    O(log n)
  * 
  * space: O(n)
  */
