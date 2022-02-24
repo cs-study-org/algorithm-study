@@ -4,6 +4,7 @@
 - Deque
   - 1021. 회전하는 큐
   - 2346. 풍선 터뜨리기
+  - 11003 최솟값 찾기
 
 
 # Deque
@@ -81,8 +82,11 @@ public class Baekjoon {
 ## 2346. 풍선 터뜨리기
 ### 문제 요약
 처음에는 원형 큐의 첫번째 인덱스의 값을 확인한다.
+
 인덱스의 값만큼 인덱스를 움직여 값을 확인한다.
+
 이동작을 반복한 후
+
 인덱스를 나열한다.
 ### 시간복잡도 공간복잡도
 아래 링크 코드의 시간복잡도이다.
@@ -103,15 +107,65 @@ public class Baekjoon {
 
 
 
+## 11003 최솟값 찾기
 
 ### 문제 요약
+N개의 수 A1, A2, ..., AN과 L이 주어진다.
 
+Di = Ai-L+1 ~ Ai 중의 최솟값이라고 할 때, D에 저장된 수를 출력하는 프로그램을 작성하시오. 이때, i ≤ 0 인 Ai는 무시하고 D를 구해야 한다.
 ### 시간복잡도 공간복잡도
 
+| time | space |
+|------|-------|
+| O(nm) | O(n)  |
+
 ### 코드
+```java
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
 
 
+public class Baekjoon{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Deque<Node> deque = new LinkedList<>();
 
+        int arraySize = sc.nextInt();
+        int maximumDequeSize = sc.nextInt();
+
+        StringBuilder sb = new StringBuilder();
+
+        for(int i = 0;i<arraySize;i++){
+            int element = sc.nextInt();
+            Node node = new Node(element,i);
+
+            while (!deque.isEmpty() && deque.getLast().value > element){
+                deque.removeLast();
+            }
+            deque.addLast(node);
+            if(deque.getFirst().index <= i-maximumDequeSize){
+                deque.removeFirst();
+            }
+            sb.append(deque.getFirst().value).append(" ");
+        }
+
+        System.out.println(sb);
+    }
+
+    static public class Node{
+        public int value;
+        public int index;
+
+        Node(int value, int index){
+            this.value = value;
+            this.index = index;
+        }
+    }
+}
+```
+
+해당 풀이는 답은 맞지만 시간초과가 난다...
 
 
 
