@@ -201,8 +201,172 @@
 
 <br>
 
-- [641. Design Circular Deque](https://leetcode.com/problems/design-circular-deque/)
+<details>
+    <summary>641. Deseign Circular Deque</summary>
 
+- 641. Design Circular Deque
+    ## 문제
+
+Dequeue를 디자인하라
+
+```java
+class Node {
+    Node rlink;
+    Node llink;
+    int data;
+}
+
+class MyCircularDeque {
+    private Node front;
+    private Node rear;
+    private int k;
+    private int size;
+
+    public MyCircularDeque(int k) {
+        front = null;
+        rear = null;
+        this.k = k;
+        size = 0;
+    }
+
+    public boolean insertFront(int value) {
+        if (isFull()) {
+            return false;
+        }
+
+        Node node = new Node();
+        node.data = value;
+
+        if (isEmpty()) {
+            front = node;
+            rear = node;
+
+            node.rlink = null;
+            node.llink = null;
+            size++;
+            return true;
+        } else {
+
+            front.llink = node;
+            node.rlink = front;
+            node.llink = null;
+            front = node;
+            size++;
+            return true;
+        }
+    }
+
+    public boolean insertLast(int value) {
+        if (isFull()) {
+            return false;
+        }
+
+        Node node = new Node();
+        node.data = value;
+
+        if (isEmpty()) {
+            front = node;
+            rear = node;
+
+            node.rlink = null;
+            node.llink = null;
+            size++;
+            return true;
+        } else {
+            rear.rlink = node;
+            node.rlink = null;
+            node.llink = rear;
+            rear = node;
+            size++;
+            return true;
+        }
+
+    }
+
+    public boolean deleteFront() {
+        if (isEmpty()) {
+            return false;
+        } else {
+
+            if (front.rlink == null) {
+                front = null;
+                rear = null;
+            } else {
+                front = front.rlink;
+                front.llink = null;
+            }
+            size--;
+            return true;
+        }
+
+    }
+
+    public boolean deleteLast() {
+        if (isEmpty()) {
+            return false;
+        } else {
+
+            if (rear.llink == null) {
+                front = null;
+                rear = null;
+            } else {
+                rear = rear.llink;
+                rear.rlink = null;
+            }
+
+            size--;
+            return true;
+        }
+    }
+
+    public int getFront() {
+        if (isEmpty()) {
+            return -1;
+        } else {
+            return front.data;
+        }
+    }
+
+    public int getRear() {
+        if (isEmpty()) {
+            return -1;
+        } else {
+            return rear.data;
+        }
+
+    }
+
+    public boolean isEmpty() {
+        return (front == null);
+    }
+
+    public boolean isFull() {
+        return (size == k);
+    }
+}
+
+/**
+ * Your MyCircularDeque object will be instantiated and called as such:
+ * MyCircularDeque obj = new MyCircularDeque(k);
+ * boolean param_1 = obj.insertFront(value);
+ * boolean param_2 = obj.insertLast(value);
+ * boolean param_3 = obj.deleteFront();
+ * boolean param_4 = obj.deleteLast();
+ * int param_5 = obj.getFront();
+ * int param_6 = obj.getRear();
+ * boolean param_7 = obj.isEmpty();
+ * boolean param_8 = obj.isFull();
+ */
+```
+<시공간 복잡도>
+
+공간 복잡도 : O(1)
+
+|  | MyCircularDeque() | insertFront() | insertLast() | deleteFront() | deleteLast() | getFront() | getLast() | isEmpty() | isFull() |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 시간 복잡도 | O(1) | O(1) | O(1) | O(1) | O(1) | O(1) | O(1) | O(1) | O(1) |
+
+</details>
 <br>
 
 ## < Priority Queue >
