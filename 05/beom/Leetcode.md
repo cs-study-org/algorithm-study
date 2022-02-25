@@ -2,10 +2,10 @@
 
 ## 목차
 - Deque
-  - 641. Design Circular Deque
+  - `641. Design Circular Deque`
 - PriorityQueue
-  - 1046. Last Stone Weight
-  - 703. Kth Largest Element in a Stream
+  - `1046. Last Stone Weight`
+  - `703. Kth Largest Element in a Stream`
 
 
 # Deque
@@ -110,7 +110,9 @@ CircularDeque클래스를 구현하시오
 
 ## 1046. Last Stone Weight
 ### 문제 요약
-배열이 주어지는데 그 배열에서 가장 큰 값을 두개 뽑아 뺀 수를 다시 배열에 넣는다. 이 과정을 배열의 요소가 하나가 남을 때까지 해라
+배열이 주어지는데 그 배열에서 가장 큰 값을 두개 뽑아 뺀 수를 다시 배열에 넣는다. 
+
+이 과정을 배열의 요소가 하나가 남을 때까지 해라
 
 ### 시간복잡도 공간복잡도
 | time | space |
@@ -143,7 +145,11 @@ class Solution {
 
 ## 703. Kth Largest Element in a Stream
 ### 문제 요약
-kthLargest 클래스를 구현하는데 kthLargest는 k와 nums를 매개변수로 하고 k=k번째 수, nums = 데이터를 의미한다. add 메소드는 k번째로 큰 수를 리턴한다.
+kthLargest 클래스를 구현하는데 kthLargest는 k와 nums를 매개변수로 하고 k=k번째 수, nums = 데이터를 의미한다.
+
+add 메소드는 k번째로 큰 수를 리턴한다.
+
+![703풀이](asset/703.jpg)
 
 ### 시간복잡도 공간복잡도
 

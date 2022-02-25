@@ -26,7 +26,7 @@
 ## LinkedList Queue vs Priority Queue
 자바에서 Queue를 구현할 경우에 LinkedList를 사용하여 구현할 수 있고 Priority Queue를 사용하여 구현할 수 있다.
 
-> 여기서 큐는 FIFO 방식의 자료구조이다.
+> 여기서 큐는 FIFO 방식의 자료구조이다.</br>
 > 그래프의 넓이 우선 탐색(BFS)에서 사용된다.
 
 **< LinkedList 구현 특징 >**

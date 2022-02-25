@@ -3,7 +3,7 @@
 ## 정의
 ![deque자료구조](asset/deque.PNG)
 
-`Deque`는 `Queue` 인터페이스를 확장하고 있는 인터페이스이다. `Queue`는 한쪽 방향에서만 삽입, 삭제를 할 수 있지만, `Deque`는 양쪽 끝에서 삽입, 삭제가 가능하다.
+`Deque`는 `Queue` 인터페이스를 확장하고 있는 인터페이스이다. `Queue`는 한쪽 방향에서만 삽입, 삭제를 할 수 있지만, `Deque`는 양쪽 끝에서 삽입, 삭제가 가능하다.</br>
 즉, 스택처럼도 사용 가능하고 큐 처럼도 사용할 수 있는 자료구조이다.
 
 ## ArratDeque 시간복잡도
@@ -14,7 +14,7 @@
 ## ArrayDeque vs LinkedList Deque
 자바에서는 Deque 인터페이스를 구현할 때 ArrayDeque으로 구현한다.
 
-이유는 수행속도와 메모리에 관련해서 ArrayDeque가 더 유리하기 때문이다.
+이유는 수행속도와 메모리에 관련해서 ArrayDeque가 더 유리하기 때문이다.</br>
 (삽입/삭제가 양끝에서만 일어나기 때문에 둘다 시간복잡도는 O(1)로 거의 동일하다.)
 
 - 수행속도 : ArrayDeque는 Array에 의해 지원되며 Array는 LinkedList보다 cache-locality에 좀 더 친숙하다.
@@ -22,13 +22,13 @@
 - null사용 여부 : LinkedList는 Null 요소를 추가할 수 있지만 ArrayDeque는 불가능하다.
 
 ## 스택 자료구조로 사용하는 ArrayDeque
-**스택 구조** : 자료구조의 하나로 후입선출(Last In First Out) 자료구조
+**스택 구조** : 자료구조의 하나로 후입선출(Last In First Out) 자료구조</br>
 
 Stack 클래스는 List 인터페이스의 Vector 클래스를 상속받아, 전형적인 스택 메모리 구조의 클래스를 제공한다.
 ```java
 Stack<E> st = new Stack<E>();
 ```
-
+</br>
 ArrayDeque 클래스는 Deque인터페이스를 구현하고 있는 클래스이다.
 ```java
 Deque<E> st = new ArrayDeque<E>();
@@ -63,7 +63,7 @@ ArrayDeque 공식문서를 보면
 ### 결론
 Vector를 상속받는 Stack의 장점이라고 하면 **Search()메소드**의 존재이다.
 
-만약 LIFO구조가 필요할 때 배열처럼 특정 값의 위치를 스택에서 알고 싶다면 Stack을 사용하고
+만약 LIFO구조가 필요할 때 배열처럼 특정 값의 위치를 스택에서 알고 싶다면 Stack을 사용하고</br>
 그렇지 않은 경우에서는 ArrayDeque를 사용하는 것이 좋은 것 같다.
 
 
