@@ -23,6 +23,35 @@
 | O(log n) | O(1)  | O(log n)  | O(1)  |
 
 
+## LinkedList Queue vs Priority Queue
+자바에서 Queue를 구현할 경우에 LinkedList를 사용하여 구현할 수 있고 Priority Queue를 사용하여 구현할 수 있다.
+
+> 여기서 큐는 FIFO 방식의 자료구조이다.
+> 그래프의 넓이 우선 탐색(BFS)에서 사용된다.
+
+**< LinkedList 구현 특징 >**
+
+- add             : O(1)
+- remove          : O(1)
+- get             : O(n)
+- Contains        : O(n)
+- iterator.remove : O(1)
+- java 1.2에 추가, thread-safe 보장 안함
+- 특징 : 데이터를 저장하는 각 노드가 이전 노드와 다음 노드의 상태만 알고 있다.
+   - 데이터 추가/삭제시 빠름
+   - 데이터 검색시 처음부터 노드를 순화해야 되기 때문에 느림
+
+**< priorityQueue 구현 특징 >**
+
+- offer(입력)   : O(log n)
+- peek(get)     : O(1)
+- poll(반환)    : O(log n)
+- size          : O(1)
+- natural order : JVM에서 제공하는 일반적인거와 다를수 있음 순서 ex) 문자는 ASCII 순서로 정렬
+- java 1.5 에서 나옴
+- 특징 : 일반적은 큐는 FIFO의 구조를 가지지만 자연 네추럴 오더에 따라 정렬
+  - Null을 허용하지 않는다.
+
 ## Priority Queue 구현
 ```java
 package algorithmStudyPriorityQueue;
