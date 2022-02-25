@@ -3,6 +3,9 @@
 ## 목차
 - Deque
   - 641. Design Circular Deque
+- PriorityQueue
+  - 1046. Last Stone Weight
+  - 703. Kth Largest Element in a Stream
 
 
 # Deque
@@ -103,14 +106,6 @@ CircularDeque클래스를 구현하시오
 
 
 
-
-
-
-
-
-
-
-
 # Priority Queue
 
 ## 1046. Last Stone Weight
@@ -146,17 +141,44 @@ class Solution {
 }
 ```
 
-
+## 703. Kth Largest Element in a Stream
 ### 문제 요약
+kthLargest 클래스를 구현하는데 kthLargest는 k와 nums를 매개변수로 하고 k=k번째 수, nums = 데이터를 의미한다. add 메소드는 k번째로 큰 수를 리턴한다.
 
 ### 시간복잡도 공간복잡도
 
+|  | time | space  |
+|------|-------|---|
+| KthLargest | O(n log m) | O(1) |
+| add        |  O(log m)  | O(1) |
+
 ### 코드
+```java
+import java.util.PriorityQueue;
 
+class KthLargest {
+    PriorityQueue<Integer> queue = new PriorityQueue<>();
+    int k;
 
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        for(int i=0;i < nums.length;i++){
+            queue.add(nums[i]);
+            if(queue.size() > k){
+                queue.poll();
+            }
+        }
+    }
 
-
-
+    public int add(int val) {
+        queue.add(val);
+        if(queue.size() > k){
+            queue.poll();
+        }
+        return queue.peek();
+    }
+}
+```
 
 
 
