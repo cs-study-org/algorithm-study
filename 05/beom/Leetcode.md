@@ -113,14 +113,38 @@ CircularDeque클래스를 구현하시오
 
 # Priority Queue
 
-
+## 1046. Last Stone Weight
 ### 문제 요약
+배열이 주어지는데 그 배열에서 가장 큰 값을 두개 뽑아 뺀 수를 다시 배열에 넣는다. 이 과정을 배열의 요소가 하나가 남을 때까지 해라
 
 ### 시간복잡도 공간복잡도
+| time | space |
+|------|-------|
+| O(n log n) | O(n)  |
+
 
 ### 코드
+```java
+import java.util.Collections;
+import java.util.PriorityQueue;
 
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+        PriorityQueue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
 
+        for(int i:stones){
+            queue.offer(i);
+        }
+        while(queue.size() > 1){
+            int firstMax = queue.poll();
+            int secondMax = queue.poll();
+            int newValue = firstMax - secondMax;
+            queue.offer(newValue);
+        }
+        return queue.peek();
+    }
+}
+```
 
 
 ### 문제 요약
