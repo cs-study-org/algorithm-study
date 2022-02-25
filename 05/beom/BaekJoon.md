@@ -5,7 +5,8 @@
   - 1021. 회전하는 큐
   - 2346. 풍선 터뜨리기
   - 11003 최솟값 찾기
-
+- Priority Queue
+  - 7662번 이중 우선순위 큐
 
 # Deque
 ## 1021. 회전하는 큐
@@ -174,9 +175,84 @@ public class Baekjoon{
 
 # Priority Queue
 
-
+## 7662번 이중 우선순위 큐
 ### 문제 요약
+이중 우선순위 큐라는 데이터 구조가 있다.
+
+처음 입력된 숫자 두개는 하나는 입력된 데이터구조의 갯수, 하나는 데이터구조안에 입력되는 연산의 수이다.
+
+연산은 I와 D만 가능한데 I는 Insert, D는 Delete를 의미한다.
+
+I 다음에 오는 수는 데이터 구조에 구조에 삽입하면되고
+D 다음에 오는 수가 1이면 최댓값 삭제, -1이면 최솟값 삭제를 의미한다.
+
+데이터 구조의 최솟값과 최댓값을 출력하여라, 없으면 EMPTY 출력
+
 
 ### 시간복잡도 공간복잡도
+| time | space |
+|------|-------|
+| O(nm log m) | O(n)  |
 
 ### 코드
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Collections;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
+
+
+public class Baekjoon {
+    public static void main(String[] args) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st =null;
+
+        int t = Integer.parseInt(br.readLine());//입력 데이터의 수
+
+        while(t-- > 0){
+            PriorityQueue<Integer> minQueue = new PriorityQueue<>();
+            PriorityQueue<Integer> maxQueue = new PriorityQueue<>(Collections.reverseOrder());
+
+            int k = Integer.parseInt(br.readLine());//연산의 갯수
+            for(int i=0;i<k;i++){
+                st = new StringTokenizer(br.readLine());
+                String method = st.nextToken();//삽입 또는 삭제
+                int value = 0;//연산 다음에 올 value값
+                switch (method){
+                    case "D":
+                        if(maxQueue.isEmpty()){
+                            break;
+                        }
+                        value = Integer.parseInt(st.nextToken());
+                        if(value == 1){
+                            int max = maxQueue.poll();
+                            minQueue.remove(max);
+                        }
+                        else{
+                            int min = minQueue.poll();
+                            maxQueue.remove(min);
+                        }
+                        break;
+                    case "I":
+                        value = Integer.parseInt(st.nextToken());
+                        maxQueue.offer(value);
+                        minQueue.offer(value);
+                        break;
+                }
+            }
+            if(maxQueue.isEmpty()){
+                sb.append("EMPTY\n");
+            }
+            else{
+                sb.append(maxQueue.poll() + " " + maxQueue.poll() + "\n");
+            }
+        }
+        System.out.println(sb);
+    }
+}
+```
+
+시간 초과가 났다... 다음에 TreeMap을 공부할 때 한번 더 보자
