@@ -194,7 +194,7 @@ Insertion / Deletion의 행위에 의해 1개가 될 때 위치를 동기화하�
 
         1 → 2 → 3 → 4 → 5에서 3에 접근할때,
 
-        덱의 뒤에서 접근여 2번이 나오더라도,
+        덱의 뒤에서 접근에 2번이 나오더라도,
 
         4 → 5 → 1 → 2 → 3
 
@@ -346,7 +346,7 @@ function findMinTargets(targets, start, end) {
 문제 풀이는 `src\11003`폴더에서 확인할 수 있다.
 
 <dl><dt>
-Output이 미세하게 다르게 나와서 원인 파악 중이다.
+런타임 에러 중 Referece Error를 해결중이다.
 </dt><dl>
 
 </details>

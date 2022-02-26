@@ -18,14 +18,20 @@ function handleInput(path) {
  * 
  * +++ Calculate after Start
  * 
- * n as nums
- * limit always less than n. O(1)
+ * a as nums
+ * b as limit
  * 
- * time:    O(n)
- *          → for:        O(n)
- *            → while:    O(1)
+ * time:    O(a)
+ * b always less than a.      O(1)
  * 
- * space:   O(n)
+ *          → for:            O(a)
+ *            → while:        O(b)
+ *            → includes:     O(b)
+ * 
+ * space:   O(ab)
+ *          → result:         O(a)
+ *          → for:
+ *            → curMinRange:  O(b) 
  */
 (function main() {
   const [_, limit, ...nums] = handleInput(__dirname + '/stdin-11003');
@@ -35,24 +41,24 @@ function handleInput(path) {
   const result = [];
 
   for (const [idx, num] of nums.entries()) {
-    while (!circularDeque.isEmpty()
-      && circularDeque.getRear() > num)
+    let curMinIdx = idx - limit + 1;
+    curMinIdx = curMinIdx <= 0 ? 0 : curMinIdx;
+
+    const curMinRange = nums.slice(curMinIdx, idx + 1);    
+
+    if (circularDeque.getFront() < nums[curMinIdx]
+      && !curMinRange.includes(circularDeque.getFront())
+    ) 
+      circularDeque.deleteFront();    
+
+    while (circularDeque.getRear() >= num)
       circularDeque.deleteLast();
 
     circularDeque.insertLast(num);
 
-    let curMinIdx = idx - limit + 1
-    curMinIdx = curMinIdx <= 0 ? 0 : curMinIdx;
-    
-    // console.log(nums[curMinIdx], circularDeque.getFront());
-    //   circularDeque.deleteFront();
-
-    circularDeque.displayDeque();
+    // circularDeque.displayDeque();
     result.push(circularDeque.getFront());
-
-    if (circularDeque.isFull())
-      circularDeque.deleteFront();
   }
 
-  console.log(result.join(' '));
+  console.log(result.join(' '));  
 })();
