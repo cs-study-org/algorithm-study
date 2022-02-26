@@ -253,10 +253,6 @@ Insertion / Deletion의 행위에 의해 1개가 될 때 위치를 동기화하�
 
 문제만 보면 힙으로 해결하는 문제같지만, 어떻게 최솟값을 정의하는가의 문제라서 힙 자료구조는 필요없었다.
 
-<dl><dt>
-시간 초과 에러를 해결 중이다.
-</dt><dl>
-
 ### 문제 풀이 1/2 [`Brute force`]
 
     Input:  nums = [1, 5, 2, 3, 6, 2, 3, 7, 3, 5, 2, 6]
@@ -349,6 +345,10 @@ function findMinTargets(targets, start, end) {
 
 문제 풀이는 `src\11003`폴더에서 확인할 수 있다.
 
+<dl><dt>
+Output이 미세하게 다르게 나와서 원인 파악 중이다.
+</dt><dl>
+
 </details>
 
 <details>
@@ -384,7 +384,7 @@ and the stone of weight y has new weight y - x.
 
             [ 8, 7, 4, 1, 2, 1, [length]: 6 ]가
 
-            [ 1, 4, 1, 2, 1, [length]: 6 ]로 되었다면, 
+            [ 1, 4, 1, 2, 1,    [length]: 5 ]로 되었다면, 
             
           이를 다시 힙 정렬해두기가 내가 구현한 자료구조에서는 어렵다.
 
@@ -422,13 +422,18 @@ var lastStoneWeight = function (stones) {
 
 ## 참고 문헌
 
-**자료구조 이론**
+<details>
+<summary>자료구조 이론</summary>
+<br/>
 
 [Heap 특성](https://1ilsang.dev/2019-10-21/algorithm/heap) ━ *1ilsang*
+</details>
 
-**자료구조 구현**
+<details>
+<summary>자료구조 구현</summary>
+<br/>
 
-[이중 연결 리스트 구현](https://makasti.tistory.com/96) ━ *두콩*
+[Doubly LinkedList 구현](https://makasti.tistory.com/96) ━ *두콩*
 
 [Heap 삭제 과정](https://www.geeksforgeeks.org/insertion-and-deletion-in-heaps/) ━ *GeeksforGeeks*
 
@@ -437,19 +442,26 @@ var lastStoneWeight = function (stones) {
 [Javascript Heap 구현](https://nyang-in.tistory.com/153) ━ *냥인*
 
 [Javascript 객체 상속](https://www.zerocho.com/category/JavaScript/post/573d812680f0b9102dc370b7) ━ *ZeroCho*
+</details>
 
-**풀이 참고**
+<details>
+<summary>풀이 참고</summary>
+<br/>
 
 [Simple Solution at 1021. 회전하는 큐](https://wiselog.tistory.com/126) ━ *지혜로운 개발로그*
 
 [Simple Solution at 11003. 최솟값 찾기](https://wooooooak.github.io/algorithm/2018/12/03/백준11003번문제/) ━ *쾌락코딩*
 
 [Simple Solution at 1046. Last Stone Weight](https://github.com/cs-study-org/algorithm-study/blob/7ad1cda101186ca7b18b2488ded242ea84d7bdc0/05/JiYongKim/Leetcode.md) ━ *Github*
+</details>
 
-**백준 제출**
+<details>
+<summary>백준 제출</summary>
+<br/>
 
 [Javascript 표준 입출력과 백준 제출 팁](https://overcome-the-limits.tistory.com/25) ━ *Plus Ultra*
 
 [Javascript 표준 입출력과 백준 이슈](https://broadway.tistory.com/entry/자바스크립트-백준-입력받는법) ━ *이너멜*
 
 [백준 제출 형식](https://velog.io/@mttw2820/백준-7662.-이중-우선순위-큐) ━ *mttw2820*
+</details>
