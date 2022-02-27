@@ -92,4 +92,20 @@ MaxHeap.prototype.delete = function(value){
   return true;
 }
 
-module.exports = MaxHeap;
+/**
+ * 
+ * @param {number} idx
+ * @param {number} value
+ * @returns {void}
+ * 
+ * time:      O(log n)
+ * space:     O(1)
+ */
+MaxHeap.prototype.updateKey = function (idx, value) {  
+  const oldValue = this.heap[idx - 1];
+
+  this.heap[idx - 1] = value;
+  oldValue > value ? this._bubbleDown() : this._bubbleUp();
+}
+
+module.exports = MaxHeap; 
