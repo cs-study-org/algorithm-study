@@ -103,4 +103,14 @@ Heap.prototype.findIndex = function (value) {
   return this._binarySearch(value, 0, this.heap.length - 1);
 }
 
+/**
+ * @returns {number}
+ * 
+ * time:      O(1)
+ * space:     O(1)
+ */
+Heap.prototype.size = function () {
+  return this.heap.length;
+}
+
 module.exports = Heap;
