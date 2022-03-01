@@ -432,7 +432,7 @@ var lastStoneWeight = function (stones) {
 
 `KthLargest`객체의 메소드 사용 중,
 
- `MinHeap`객체의 상위 객체인 `Heap`의 프로퍼티에 접근할 일 이 있었는데,
+`MinHeap`객체의 상위 객체인 `Heap`의 프로퍼티에 접근할 일이 있었는데,
 
     kth.heap.length
 
