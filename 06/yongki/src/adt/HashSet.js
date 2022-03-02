@@ -1,3 +1,6 @@
+const MyDoublyLinkedList = require('./DoublyLinkedList');
+
+
 var MyHashSet = function () {
   this.hashSet = {};
 };
@@ -6,8 +9,20 @@ MyHashSet.prototype.size = function () {
   return Object.keys(this.hashSet).length || 0;
 }
 
-MyHashSet.prototype.getHashCode = function (num) {
-  console.log(this.size());
+MyHashSet.prototype._getValue = function (key) {
+  return this.hashSet[this._getHashCode(key)];
+}
+
+MyHashSet.prototype._convertLinkedList = function (key) {
+  const doublyLinkedList = new MyDoublyLinkedList();
+
+  const prev = this._getValue(key);
+  doublyLinkedList.insertFront(prev);
+
+  this.hashSet[this._getHashCode(key)] = doublyLinkedList;
+}
+
+MyHashSet.prototype._getHashCode = function (num) {
   return num % this.size() || 0;
 }
 
@@ -18,9 +33,15 @@ MyHashSet.prototype.getHashCode = function (num) {
  * time:    O(1)
  * space:   O(1)
  */
-MyHashSet.prototype.add = function (key) {
-  console.log('HASH CODE:', this.getHashCode(key));
-  return this.hashSet[this.getHashCode(key)] = key;
+MyHashSet.prototype.add = function (key) {   
+  if (typeof this._getValue(key) === 'number')
+    this._convertLinkedList(key);
+
+  if (this._getValue(key) instanceof MyDoublyLinkedList) {
+    return this._getValue(key).insertLast(key);
+  }
+
+  return this.hashSet[this._getHashCode(key)] = key;
 };
 
 /** 
@@ -31,10 +52,17 @@ MyHashSet.prototype.add = function (key) {
  * space:   O(1)
  */
 MyHashSet.prototype.remove = function (key) {
-  if (!this.contains(key))
-    return;
+  const value = this._getValue(key);
 
-  return delete this.hashSet[this.getHashCode(key)];
+  if (typeof this._getValue(key) === 'number')
+    return delete this.hashSet[this._getHashCode(key)];
+
+  if (value instanceof MyDoublyLinkedList) {
+    const idx = value.findIndex(key);    
+    return value.deleteAtIndex(idx);
+  }  
+
+  return;
 };
 
 /** 
@@ -45,7 +73,7 @@ MyHashSet.prototype.remove = function (key) {
  * space:   O(1)
  */
 MyHashSet.prototype.contains = function (key) {
-  return this.hashSet[this.getHashCode(key)];
+
 };
 
 module.exports = MyHashSet;

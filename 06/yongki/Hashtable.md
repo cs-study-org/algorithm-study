@@ -38,7 +38,7 @@
 </details>
 
 <details>
-<summary>해시 테이블 시간복잡도가 평균 `O(1)`이 나오는 이유</summary>
+<summary>해시 테이블 시간복잡도가 평균 <code>O(1)</code>이 나오는 이유</summary>
 
     분할상환분석 기법을 통해 서술하시오.
 
@@ -61,7 +61,7 @@
 
 ### 문제 풀이
 
-> src\705.js에서 확인해볼 수 있다.
+> `src\705.js`에서 확인해볼 수 있다.
 
 </details>
 
