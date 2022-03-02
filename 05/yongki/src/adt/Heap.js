@@ -54,7 +54,7 @@ Heap.prototype.getRoot = function () {
 Heap.prototype.insert = function (value) {
   this.heap[this.heap.length] = value;
 
-  this._bubbleUp();
+  this._bubbleUp(this.heap.length - 1);
 }
 
 /**
@@ -72,24 +72,36 @@ Heap.prototype.extract = function () {
   this.heap[0] = this.heap[this.heap.length - 1];
   this.heap.pop();
 
-  this._bubbleDown();
+  this._bubbleDown(0);
   return root;
 }
 
-Heap.prototype._binarySearch = function (value, start, end) {
-  for (let i = start; i <= end; i++) {
-    const middle = Math.floor((start + end) / 2);
+Heap.prototype._binarySearch = function (value) {
+  let idx = 0;
 
-    if (this.heap[end - 1] === value)
-      return end - 1;
+  while (
+    this.getLeftChild(idx) !== undefined
+    && this.getLeftChild(idx) >= value
+    || this.getRightChild(idx) >= value
+  ) {
+    if (this.getLeftChild(idx) === value)
+      return this.getLeftChildIdx(idx);
 
-    if (this.heap[middle] > value)
-      return this._binarySearch(value, start, middle - 1);
+    if (this.getRightChild(idx) === value)
+      return this.getRightChildIdx(idx);
 
-    if (this.heap[middle] < value) {
-      return this._binarySearch(value, middle + 1, end);
-    }
+    let biggerIdx = this.getLeftChildIdx(idx);
+
+    if (
+      this.getRightChild(idx) !== undefined
+      && this.getRightChild(idx) > this.heap[biggerIdx]
+    )
+      biggerIdx = this.getRightChildIdx(idx);
+        
+    idx = biggerIdx;
   }
+
+  return;
 }
 
 /**
@@ -100,7 +112,10 @@ Heap.prototype._binarySearch = function (value, start, end) {
  * space:     O(1)
  */
 Heap.prototype.findIndex = function (value) {
-  return this._binarySearch(value, 0, this.heap.length - 1);
+  if (this.getRoot() === value)
+    return 0;
+
+  return this._binarySearch(value);
 }
 
 /**
