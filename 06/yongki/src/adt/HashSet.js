@@ -30,10 +30,13 @@ MyHashSet.prototype._getHashCode = function (num) {
  * @param {number} key
  * @return {void}
  * 
- * time:    O(1)
+ * time:    O(n)
  * space:   O(1)
  */
-MyHashSet.prototype.add = function (key) {   
+MyHashSet.prototype.add = function (key) {
+  if(this.contains())
+    return;
+
   if (typeof this._getValue(key) === 'number')
     this._convertLinkedList(key);
 
@@ -48,13 +51,16 @@ MyHashSet.prototype.add = function (key) {
  * @param {number} key
  * @return {void}
  * 
- * time:    O(1)
+ * time:    O(n)
  * space:   O(1)
  */
-MyHashSet.prototype.remove = function (key) {
+MyHashSet.prototype.remove = function (key) {  
   const value = this._getValue(key);
 
-  if (typeof this._getValue(key) === 'number')
+  if (
+    typeof this._getValue(key) === 'number'
+    && value === key
+  )
     return delete this.hashSet[this._getHashCode(key)];
 
   if (value instanceof MyDoublyLinkedList) {
@@ -69,11 +75,23 @@ MyHashSet.prototype.remove = function (key) {
  * @param {number} key
  * @return {boolean}
  * 
- * time:    O(1)
+ * time:    O(n)
  * space:   O(1)
  */
 MyHashSet.prototype.contains = function (key) {
+  const value = this._getValue(key);
 
+  if (
+    typeof this._getValue(key) === 'number'
+    && value === key
+  )
+    return this.hashSet[this._getHashCode(key)];
+
+  if (value instanceof MyDoublyLinkedList){    
+    return value.find(key);  
+  }
+
+  return false;
 };
 
 module.exports = MyHashSet;

@@ -34,6 +34,14 @@
     2. 쉽고 빠른 연산
     3. 해시 테이블에 해시 값이 균일하게 분포
 
+해시셋과 해시맵의 차이는
+
+|                                          | HashSet                  | HashMap                                                           |
+| ---------------------------------------- | ------------------------ | ----------------------------------------------------------------- |
+| Duplicates                               | No                       | Yes duplicates values are allowed but no duplicate key is allowed |
+| Objects required during an add operation | 1                        | 2                                                                 |
+| Null                                     | Have a single null value | Single null key and any number of null values                     |
+
 </details>
 
 ## 논제
@@ -115,14 +123,36 @@
 
 ### 문제 회고
 
-빌트인 자료형을 쓰면 금방 해결되니, 일반 객체의 자료구조에
+빌트인 자료형을 쓰면 금방 해결되는 문제다.
 
-1. 해시 함수를 간단히 구현해보고
-2. 충돌 시, 충돌 해결 기법 또한 구현해보기로 하였다.
+때문에 
+   1. 해시 함수를 간단히 구현해보고
+   2. 충돌 시, 충돌 해결 기법 또한 구현해보기로 하였다.
+
+해시 테이블을 교재에는 배열 자료구조를 사용했지만, 객체를 써보기로 판단했다.
+
+해시 함수는 교재에도 나온 `나눗셈 방식`을 이용했고, 
+
+원소를 처음에 한 두개를 넣고 제거할 시, size에 따라 해시 값이 동일히 나오기 때문에 
+
+해시 충돌을 일으켜 이에 대한 대응도 테스트 해보기 좋았다.
 
 ### 문제 풀이
 
+해시 충돌 해결 기법으로 `Seperate Chaining`를 사용해서 
+
+해시 테이블 최악의 시간복잡도가 나왔다.
+
+|       | `add`  | `remove` | `contains` | `_getHashCode` |
+| :---: | :----: | :------: | :--------: | :------------: |
+| time  | `O(n)` |  `O(n)`  |   `O(n)`   |     `O(1)`     |
+| space | `O(1)` |  `O(1)`  |   `O(1)`   |     `O(1)`     |
+
 > `src\705.js`에서 확인해볼 수 있다.
+
+<dl><dt>
+테스트 케이스 해결중이다.
+</dt><dl>
 
 </details>
 
@@ -135,3 +165,7 @@
 ## 참고 문헌
 
 [Hash table 이론](http://wiki.hash.kr/index.php/해시테이블) ━ *해시넷*
+
+[HashSet vs HashMap](https://www.geeksforgeeks.org/difference-between-hashmap-and-hashset/) ━ *GeeksForGeeks*
+
+[Doubly LinkedList 구현](https://github.com/cs-study-org/algorithm-study/blob/master/03/km/707-design-linked-list.py) ━ *GitHub*

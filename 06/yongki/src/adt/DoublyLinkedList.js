@@ -7,14 +7,14 @@ var MyDoublyLinkedList = function () {
   this.size = 0;
 };
 
-MyDoublyLinkedList.prototype.displayDeque = function (pointer) {
+MyDoublyLinkedList.prototype.displayLinkedList = function (pointer) {
   let head = pointer ? pointer : this.head;
   let tail = pointer ? pointer : this.tail;
 
   process.stdout.write(`[HEAD] size: ${this.size}   `);
   process.stdout.write(`elements: `);
 
-  for (let i = 0; i <= this.size; i++) {
+  for (let i = 0; i < this.size; i++) {
     process.stdout.write(`${head.value} → `);
     head = head.next;
   }
@@ -23,39 +23,66 @@ MyDoublyLinkedList.prototype.displayDeque = function (pointer) {
   process.stdout.write(`[TAIL] size: ${this.size}   `);
   process.stdout.write(`elements: `);
 
-  for (let i = 0; i <= this.size; i++) {
+  for (let i = 0; i < this.size; i++) {
     process.stdout.write(`${tail.value} → `);
     tail = tail.prev;
   }
   process.stdout.write('\n');
 }
 
+MyDoublyLinkedList.prototype.lastIndex = function () {
+  return this.size > 0 ? this.size - 1 : 0;
+}
+
+/** 
+ * @param {number} value
+ * @return {boolean}
+ * 
+ * time:      O(n)
+ * space:     O(1)
+ */
+MyDoublyLinkedList.prototype.find = function (value) {
+  if (this.isEmpty())
+    return;
+
+  if ((this.getFront() || this.getFront()) === value)
+    return true;
+
+  let cur = this.head;
+
+  while (cur.next) {
+    if (cur.value === value)
+      return true;
+
+    cur = cur.next;
+  }
+
+  return false;
+}
+
 /** 
  * @param {number} value
  * @return {number}
  * 
- * time:      O(1)
+ * time:      O(n)
  * space:     O(1)
  */
 MyDoublyLinkedList.prototype.findIndex = function (value) {
   if (this.isEmpty())
     return;
 
-  let prev = null;
   let cur = this.head;
-  
+
   let loopCnt = 0;
-  while (cur) {
-    if (prev && cur.value === value)
+  while (cur.next) {
+    if (cur.value === value)
       return loopCnt;
-    else
-      prev = cur;
 
     cur = cur.next;
     loopCnt += 1;
   }
 
-  return;
+  return cur ? loopCnt : undefined;
 }
 
 /** 
@@ -72,9 +99,11 @@ MyDoublyLinkedList.prototype.insertFront = function (value) {
     this.head = node;
     this.tail = node;
   } else {
-    node.next = this.head;    
+    node.next = this.head;
+    this.head.prev = node;
     this.head = node;
   }
+
   this.size += 1;
   return true;
 }
@@ -87,13 +116,14 @@ MyDoublyLinkedList.prototype.insertFront = function (value) {
  * space:     O(1)
  */
 MyDoublyLinkedList.prototype.insertLast = function (value) {
-  const node = new ListNode(value);  
+  const node = new ListNode(value);
 
   if (this.isEmpty()) {
     this.head = node;
     this.tail = node;
   } else {
-    node.prev = this.tail;    
+    node.prev = this.tail;
+    this.tail.next = node;
     this.tail = node;
   }
 
@@ -112,13 +142,14 @@ MyDoublyLinkedList.prototype.deleteFront = function () {
     return;
 
   const result = this.head.value;
+  let newHead = this.head.next;
 
   if (this.size === 1) {
     this.head = null;
     this.tail = null;
   } else {
-    this.head = this.head.next;
-    this.head.prev = this.tail;
+    newHead.prev = null;
+    this.head = newHead;
   }
 
   this.size -= 1;
@@ -135,14 +166,15 @@ MyDoublyLinkedList.prototype.deleteLast = function () {
   if (this.isEmpty())
     return;
 
-  const result = this.head.value;
+  const result = this.tail.value;
+  let newTail = this.tail.prev;
 
   if (this.size === 1) {
     this.head = null;
     this.tail = null;
   } else {
-    this.tail = this.tail.next;
-    this.tail.next = this.head;
+    newTail.next = null;
+    this.tail = newTail;
   }
 
   this.size -= 1;
@@ -156,32 +188,33 @@ MyDoublyLinkedList.prototype.deleteLast = function () {
  * time:      O(n)
  * space:     O(1)
  */
-MyDoublyLinkedList.prototype.deleteAtIndex = function(index) {        
-  // +++ Exception
-  if(!index){
-    this.size -= 1;
-    return this.head = this.head.next;    
-  }
-    
-  if(index > this.lastIndex())
+MyDoublyLinkedList.prototype.deleteAtIndex = function (index) {
+  if (!index) {
+    this.deleteFront();
     return;
-  
-  // +++ Start
+  }
+
+  if (index === this.lastIndex()) {
+    this.deleteLast();
+    return;
+  }
+
+  if (index > this.lastIndex())
+    return;
+
   let prev = null;
   let cur = this.head;
-  
-  let loopCnt = 0;
-  while(cur){    
-    if(prev && loopCnt === index)
-      prev.next = cur.next;      
+
+  for (let i = 0; i <= index; i++) {
+    if (prev && i === index)
+      prev.next = cur.next;
     else
       prev = cur;
-  
-    loopCnt += 1;
+
     cur = cur.next;
-  }      
-  
-  this.size -= 1;  
+  }
+
+  this.size -= 1;
 };
 
 /**
