@@ -7,6 +7,8 @@
     - [문제 회고](#문제-회고)
     - [문제 풀이](#문제-풀이)
   - [문제 리스트](#문제-리스트)
+    - [문제 회고](#문제-회고-1)
+    - [문제 풀이](#문제-풀이-1)
   - [참고 문헌](#참고-문헌)
 
 ## 이론
@@ -158,7 +160,29 @@
 
 ## 문제 리스트
 
-    ...
+<details>
+<summary>
+  Lv1. 완주하지 못한 선수
+  <a href="https://programmers.co.kr/learn/courses/30/lessons/42576">👊</a>  
+</summary>
+
+### 문제 회고
+
+`705번`과 계기는 동일하다.
+
+### 문제 풀이
+
+문제 풀이의 핵심은 
+
+- 배열 자료형의 `Search`행위의 메소드를 사용하지 않는 것이라 생각한다.
+
+> `src\Lv1.js`에서 확인해볼 수 있다.
+
+<dl><dt>
+테스트 케이스 해결중이다.
+</dt><dl>
+
+</details>
 
 <hr/>
 
@@ -169,3 +193,5 @@
 [HashSet vs HashMap](https://www.geeksforgeeks.org/difference-between-hashmap-and-hashset/) ━ *GeeksForGeeks*
 
 [Doubly LinkedList 구현](https://github.com/cs-study-org/algorithm-study/blob/master/03/km/707-design-linked-list.py) ━ *GitHub*
+
+[문자열 Hash Function](https://gyoogle.dev/blog/algorithm/Hash%20Table.html) ━ *Gyuseok Kim*
