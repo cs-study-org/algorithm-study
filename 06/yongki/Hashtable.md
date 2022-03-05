@@ -36,6 +36,25 @@
     2. 쉽고 빠른 연산
     3. 해시 테이블에 해시 값이 균일하게 분포
 
+Javascript의 해시 테이블 기반 자료형(모든 Javascript native 객체)은 다음과 같다고 한다.
+
+<dl><dt>
+In JavaScript, all non-scalar objects behave as associative arrays, a mapping from property keys to values.
+</dt><dl>
+
+여기서 associative arrays는 index-based arrays와 다르다.
+
+associativie arrays는
+
+    key-value 쌍으로 저장하는 자료형을 말한다.
+
+    이들은 추적되지 않는다고 하는데, 길이 속성이 없다는 뜻이다.
+
+    단, Object 객체를 제외한 Set, Map 등의 몇몇 객체는 길이 속성이 있는데, 
+    통념보다는 편의상 넣게 된 건지 이유는 확실하게 알지 못한다.
+
+Javascript의 해시 테이블 기반 자료형 중 Set 객체를 헤시셋, Map 객체를 해시맵이라고 생각한다.
+
 해시셋과 해시맵의 차이는
 
 |                                          | HashSet                  | HashMap                                                           |
@@ -189,6 +208,10 @@
 ## 참고 문헌
 
 [Hash table 이론](http://wiki.hash.kr/index.php/해시테이블) ━ *해시넷*
+
+[Javascript의 Hash table 기반 자료형의 구현 형태](https://www.mojavelinux.com/articles/javascript_hashes.html) ━ *MojaveLinux*
+
+[non-scalar의 의미](https://www.quora.com/What-does-it-mean-with-data-is-non-scalar) ━ *Quora*
 
 [HashSet vs HashMap](https://www.geeksforgeeks.org/difference-between-hashmap-and-hashset/) ━ *GeeksForGeeks*
 
