@@ -1,11 +1,8 @@
-const util = require('util');
-
 const MyDoublyLinkedList = require('./DoublyLinkedList');
 
 
-var HashTable = function (size) {
+var HashTable = function () {
   this.table = {};
-  this.maxSize = size;
 }
 
 HashTable.prototype._getBucket = function (key) {
@@ -13,12 +10,12 @@ HashTable.prototype._getBucket = function (key) {
 }
 
 HashTable.prototype._getHashCode = function (str) {
-  let key = 0;
+  let hash = 0;
 
   for (let i = 0; i < str.length; i++)
-    key = str.charCodeAt(i);
+    hash = 31 * hash + str.charCodeAt(i);
 
-  return (key % this.maxSize);
+  return hash;
 }
 
 HashTable.prototype._convertLinkedList = function (key) {
@@ -38,15 +35,17 @@ HashTable.prototype._convertLinkedList = function (key) {
  * space:   O(1)
  */
 HashTable.prototype.add = function (key) {
-  if (this.contains())
+  if (this.contains(key))
     return;
 
-  if (typeof this._getBucket(key) === ('number' || 'string'))
+  if (
+    typeof this._getBucket(key) === 'number'
+    && typeof this._getBucket(key) === 'string'
+  )
     this._convertLinkedList(key);
 
-  if (this._getBucket(key) instanceof MyDoublyLinkedList) {
+  if (this._getBucket(key) instanceof MyDoublyLinkedList)
     return this._getBucket(key).insertLast(key);
-  }
 
   return this.table[this._getHashCode(key)] = key;
 };
@@ -62,14 +61,14 @@ HashTable.prototype.contains = function (key) {
   const value = this._getBucket(key);
 
   if (
-    typeof this._getBucket(key) === ('number' || 'string')
+    typeof value === 'number'
+    || typeof value === 'string'
     && value === key
   )
     return this.table[this._getHashCode(key)];
 
-  if (value instanceof MyDoublyLinkedList) {
+  if (value instanceof MyDoublyLinkedList)
     return value.find(key);
-  }
 
   return false;
 };

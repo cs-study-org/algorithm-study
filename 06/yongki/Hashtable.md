@@ -169,6 +169,12 @@ Javascript의 해시 테이블 기반 자료형 중 Set 객체를 헤시셋, Map
 | time  | `O(n)` |  `O(n)`  |   `O(n)`   |     `O(1)`     |
 | space | `O(1)` |  `O(1)`  |   `O(1)`   |     `O(1)`     |
 
+체이닝의 연결리스트를 이중 연결리스트로 한 이유는
+
+    스터디를 진행하면서 구현해본 적이 없었기 때문이다.
+    
+    때문에, 단일 연결리스트로 구현해도 충분하다.
+
 > `src\705.js`에서 확인해볼 수 있다.
 
 <dl><dt>
@@ -217,4 +223,4 @@ Javascript의 해시 테이블 기반 자료형 중 Set 객체를 헤시셋, Map
 
 [Doubly LinkedList 구현](https://github.com/cs-study-org/algorithm-study/blob/master/03/km/707-design-linked-list.py) ━ *GitHub*
 
-[문자열 Hash Function](https://gyoogle.dev/blog/algorithm/Hash%20Table.html) ━ *Gyuseok Kim*
+[문자열 Hash Function](https://devday.tistory.com/entry/자바스크립트-JavaScript에서-자바-Java-문자열-String-hashCode-구현하기) ━ *개발자의 하루*
