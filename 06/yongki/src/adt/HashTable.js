@@ -1,30 +1,35 @@
-const MyDoublyLinkedList = require('./DoublyLinkedList');
+const MySinglyLinkedList = require('./SinglyLinkedList');
 
 
-var HashTable = function () {
+var HashTable = function (size) {
   this.table = {};
+  this.maxSize = size % 2 === 1 ? size : size + 1;
+}
+
+HashTable.prototype.size = function () {
+  return Object.keys(this.table).length;
 }
 
 HashTable.prototype._getBucket = function (key) {
-  return this.table[this._getHashCode(key)];
+  return this.table[this._getHash(key)];
 }
 
-HashTable.prototype._getHashCode = function (str) {
+HashTable.prototype._getHash = function (str) {
   let hash = 0;
 
   for (let i = 0; i < str.length; i++)
     hash = 31 * hash + str.charCodeAt(i);
 
-  return hash;
+  return hash % this.maxSize;
 }
 
 HashTable.prototype._convertLinkedList = function (key) {
-  const doublyLinkedList = new MyDoublyLinkedList();
+  const linkedList = new MySinglyLinkedList();
 
   const prev = this._getBucket(key);
-  doublyLinkedList.insertFront(prev);
+  linkedList.insertFirst(prev);
 
-  this.table[this._getHashCode(key)] = doublyLinkedList;
+  this.table[this._getHash(key)] = linkedList;
 }
 
 /** 
@@ -44,10 +49,10 @@ HashTable.prototype.add = function (key) {
   )
     this._convertLinkedList(key);
 
-  if (this._getBucket(key) instanceof MyDoublyLinkedList)
+  if (this._getBucket(key) instanceof MySinglyLinkedList)
     return this._getBucket(key).insertLast(key);
 
-  return this.table[this._getHashCode(key)] = key;
+  return this.table[this._getHash(key)] = key;
 };
 
 /** 
@@ -65,9 +70,9 @@ HashTable.prototype.contains = function (key) {
     || typeof value === 'string'
     && value === key
   )
-    return this.table[this._getHashCode(key)];
+    return this.table[this._getHash(key)];
 
-  if (value instanceof MyDoublyLinkedList)
+  if (value instanceof MySinglyLinkedList)
     return value.find(key);
 
   return false;

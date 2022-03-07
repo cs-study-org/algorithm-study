@@ -16,16 +16,16 @@ const HashTable = require('./adt/HashTable');
  * space:             O(ab)
  */
 function solution(participant, completion) {
-  const participantTable = new HashTable();
-  const completionTable = new HashTable();
+  const participantTable = new HashTable(participant.length);
+  const completionTable = new HashTable(completion.length);
 
-  for (const each of participant) {    
+  for (const each of participant) {
     if (!participantTable.add(each))
       return each;
   }
 
   for (const each of completion)
-    completionTable.add(each);  
+    completionTable.add(each);
 
   for (const each of participant) {
     if (!completionTable.contains(each))
