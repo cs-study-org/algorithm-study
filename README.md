@@ -6,7 +6,11 @@
 
 <div align="center">
 <a href="http://www.yes24.com/Product/Goods/91084402">
-      <img width="240" src="http://docs.likejazz.com/images/2020/book-cover.jpg">
+      <img width="220" src="http://docs.likejazz.com/images/2020/book-cover.jpg">
+</a>
+      
+<a href="http://www.yes24.com/Product/Goods/44305533">
+      <img src="https://image.yes24.com/goods/44305533/M">
 </a>
 </div>
 
