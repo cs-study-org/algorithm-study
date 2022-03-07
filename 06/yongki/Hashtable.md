@@ -16,83 +16,38 @@
 <details>
 <br/>
 
-해시(`=해시 값(hash code)`) 란
+해시란
 
-    임의 크기 원소를 고정 크기 값(hash)으로 매핑한 것이다.
-        
-    해시 함수는 이를 수행하는 역할이다.
+    임의 크기 원소(키) → 고정 크기 값(해시값)으로 매핑한 것이다.
 
-해싱은
+해시 함수란
 
-    해시 테이블에 인덱싱하기 위해 해시 함수를 사용하는 것을 말한다.
+    키를 입력받아 해시 주소를 생성하고, 이 해시 주소를 해시 테이블의 인덱스로 사용한다.
 
-여기서 인덱싱은,
-
-    해시 테이블의 키(값 기반 or 메모리 기반)에 해시 값을 사용한여 원소를 저장하는 행위라 해석하였다.    
-
-해시의 특징은
-
-    1. 해시 함수 값 충돌의 최소화
-    2. 쉽고 빠른 연산
-    3. 해시 테이블에 해시 값이 균일하게 분포
-
-Javascript의 해시 테이블 기반 자료형(모든 Javascript native 객체)은 다음과 같다고 한다.
-
-<dl><dt>
-In JavaScript, all non-scalar objects behave as associative arrays, a mapping from property keys to values.
-</dt><dl>
-
-여기서 associative arrays는 index-based arrays와 다르다.
-
-associativie arrays는
-
-    key-value 쌍으로 저장하는 자료형을 말한다.
-
-    이들은 추적되지 않는다고 하는데, 길이 속성이 없다는 뜻이다.
-
-    단, Object 객체를 제외한 Set, Map 등의 몇몇 객체는 길이 속성이 있는데, 
-    통념보다는 편의상 넣게 된 건지 이유는 확실하게 알지 못한다.
-
-Javascript의 해시 테이블 기반 자료형 중 Set 객체를 헤시셋, Map 객체를 해시맵이라고 생각한다.
-
-해시셋과 해시맵의 차이는
-
-|                                          | HashSet                  | HashMap                                                           |
-| ---------------------------------------- | ------------------------ | ----------------------------------------------------------------- |
-| Duplicates                               | No                       | Yes duplicates values are allowed but no duplicate key is allowed |
-| Objects required during an add operation | 1                        | 2                                                                 |
-| Null                                     | Have a single null value | Single null key and any number of null values                     |
-
-</details>
-
-## 논제
+해시 함수에는 조건이 있는데,
 
 <details>
-<summary>해시함수를 오버라이드 하는 상황은 어떤 상황이 있나 </summary>
-
-    - 메모리 기반 해시함수 / 값 기반 해시함수을 서술하라
-
-    - 값 기반 해시함수의 필요성을 서술하라
-
-    - 해시 테이블로 구현된 주언어의 자료형의 구현 방식을 탐색하라
-
-</details>
-
-<details>
-<summary>해시 테이블 구현 방식</summary>
+<summary>1. 충돌이 적어야 하며,</summary>
 <br/>
-
-해시 충돌을 최소화하는 일이 중요하다.
 
 해시 충돌은 
 
-    비둘기집 원리로 설명이 가능하다.
+    h()라는 해시 함수에 k1과 k2라는 두 개의 키가
+
+    h(k1) === h(k2) 되는 경우를 말한다.    
+
+해시 충돌이 최소화하는 이유는
+
+    해시 충돌이 빈번할 시, 버킷 내부에서 순차 탐색 시간이 길어져 탐색 성능이 저하된다.
+
+    이때, 해시 충돌이 버킷의 슬롯 수보다 빈번하다면,
     
-    n개 아이템을 m개 컨테이너에 넣는데, n > m이라면
-    적어도 하나의 컨테이너에는 반드시 2개 이상의 아이템이 들어 있다는 원리이다.
+    버킷에 항목을 저장할 수 없으므로, 오버플로우가 발생했다는 의미이다.
 
-    또한, 확률적으로 해시 충돌의 가능성은 매우 높다. 
+해시 충돌을 최소화하려면
 
+    a. 해시 함수를 수정하거나
+    b. 해시 테이블의 크기를 적절히 조절해야 한다.
 
 대표적인 해시 충돌 해결 기법 2가지는
 
@@ -124,6 +79,63 @@ Javascript의 해시 테이블 기반 자료형 중 Set 객체를 헤시셋, Map
 
         - 원소의 해시 값이 해시 테이블의 키와 다를 수 있다.
         - 고정된 사이즈 또는 로드 팩터(자료형의 임계점)를 넘어서는 경우 리해싱의 비용이 따른다.
+
+</details>
+
+<details>
+<summary>2. 해시 함수값이 해시 테이블 주소 영역 내에 고르게 분포되어야 하며,</summary>
+<br/>
+해시 테이블의 크기를 홀수로 지정하는 이유인데,
+
+직관적인 해시 함수인 `k(키) mod M(해시 테이블의 크기)`에서 
+
+M이 짝수, k가 메모리 기반 키라면, 짝수에만 편향된 해시 함수값이 나온다.
+M이 홀수 중 소수, k가 메모리 기반 키라면, k와 1을 약수로 가지는 수들이 해시 함수값으로 분포가 넓기 때문이다.
+</details>
+
+<details>
+<summary>3. 계산이 빨라야 한다.</summary>
+</details>
+
+
+해시의 일반화는
+
+    정리 정돈을 잘하는 사람이다. 
+
+    물건마다 고유한 위치가 있고, 그 위치에 그 물건을 보관하기 때문이다.
+
+    해시의 사용 예시는 데이터베이스 이다.
+    
+해싱은
+
+    해시 테이블을 이용한 탐색을 말한다.
+
+    조금 더 풀어쓰면, 어떤 항목의 키만을 가지고 항목이 들어 있는 배열의 인덱스를 탐색할 수 있는 기법이다.
+
+해싱에서 자료 구조는 
+
+    배열을 사용한다.
+
+해시셋과 해시맵의 차이는
+
+|                                          | HashSet                  | HashMap                                                           |
+| ---------------------------------------- | ------------------------ | ----------------------------------------------------------------- |
+| Duplicates                               | No                       | Yes duplicates values are allowed but no duplicate key is allowed |
+| Objects required during an add operation | 1                        | 2                                                                 |
+| Null                                     | Have a single null value | Single null key and any number of null values                     |
+
+</details>
+
+## 논제
+
+<details>
+<summary>해시함수를 오버라이드 하는 상황은 어떤 상황이 있나 </summary>
+
+    - 메모리 기반 해시함수 / 값 기반 해시함수을 서술하라
+
+    - 값 기반 해시함수의 필요성을 서술하라
+
+    - 해시 테이블로 구현된 주언어의 자료형의 구현 방식을 탐색하라
 
 </details>
 
@@ -164,10 +176,10 @@ Javascript의 해시 테이블 기반 자료형 중 Set 객체를 헤시셋, Map
 
 해시 테이블 최악의 시간복잡도가 나왔다.
 
-|       | `add`  | `remove` | `contains` | `_getHashCode` |
-| :---: | :----: | :------: | :--------: | :------------: |
-| time  | `O(n)` |  `O(n)`  |   `O(n)`   |     `O(1)`     |
-| space | `O(1)` |  `O(1)`  |   `O(1)`   |     `O(1)`     |
+|       | `add`  | `remove` | `contains` | `_getHash` |
+| :---: | :----: | :------: | :--------: | :--------: |
+| time  | `O(n)` |  `O(n)`  |   `O(n)`   |   `O(1)`   |
+| space | `O(1)` |  `O(1)`  |   `O(1)`   |   `O(1)`   |
 
 체이닝의 연결리스트를 이중 연결리스트로 한 이유는
 
@@ -213,11 +225,7 @@ Javascript의 해시 테이블 기반 자료형 중 Set 객체를 헤시셋, Map
 
 ## 참고 문헌
 
-[Hash table 이론](http://wiki.hash.kr/index.php/해시테이블) ━ *해시넷*
-
-[Javascript의 Hash table 기반 자료형의 구현 형태](https://www.mojavelinux.com/articles/javascript_hashes.html) ━ *MojaveLinux*
-
-[non-scalar의 의미](https://www.quora.com/What-does-it-mean-with-data-is-non-scalar) ━ *Quora*
+[Hash table 이론](https://booksr.co.kr/html/book/book.asp?seq=697058) ━ *「C언어로 쉽게 풀어쓴 자료구조[개정3판]」*
 
 [HashSet vs HashMap](https://www.geeksforgeeks.org/difference-between-hashmap-and-hashset/) ━ *GeeksForGeeks*
 
