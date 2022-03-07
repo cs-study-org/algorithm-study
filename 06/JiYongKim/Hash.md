@@ -111,7 +111,7 @@ Ex)
 
 ### 정렬된 배열에 새로운 값 추가
 
-<img width="692" alt="스크린샷 2022-03-07 오후 6 51 27" src="https://user-images.githubusercontent.com/81874493/157008146-9f90e76a-eb8b-44b4-aabe-5ff8f405643c.png">
+ <img width="692" alt="스크린샷 2022-03-07 오후 6 51 27" src="https://user-images.githubusercontent.com/81874493/157008420-23043975-9bf1-4ae2-bf0d-5e365866c43d.png">
 
 위의 그림처럼 정렬된 배열에 새로운 값을 추가하게 될 경우
 
@@ -141,7 +141,7 @@ Ex)
     
     ⇒ 효율적 수행이 가능하다.
     
-    <img width="693" alt="스크린샷 2022-03-07 오후 6 51 43" src="https://user-images.githubusercontent.com/81874493/157008181-5d57722d-6e7f-424a-abf2-6aff60419290.png">
+   <img width="693" alt="스크린샷 2022-03-07 오후 6 51 43" src="https://user-images.githubusercontent.com/81874493/157008460-a81c308c-ede9-40a8-975d-41c228533ead.png">
 
     과정)
     
@@ -165,7 +165,7 @@ Ex)
 
 # Hash Collision
 
-<img width="729" alt="스크린샷 2022-03-07 오후 6 51 49" src="https://user-images.githubusercontent.com/81874493/157008215-ae46a9f4-9a6e-48e4-b434-61bdff5d9dfb.png">
+ <img width="729" alt="스크린샷 2022-03-07 오후 6 51 49" src="https://user-images.githubusercontent.com/81874493/157008498-0e649eb2-ba4e-4414-b903-cdd64a0e2f01.png">
 
 정의 : **충돌(Collision)** 은 서로 다른 문자열이 Hash function을 통해 Hash 한 결과가 같은 경우 (중복되는 경우)이다.
 
@@ -195,7 +195,7 @@ Ex)
 **Chainig**
 
     
-<img width="704" alt="스크린샷 2022-03-07 오후 6 51 55" src="https://user-images.githubusercontent.com/81874493/157008232-be0102fe-59ef-45ab-ba65-6b75c32be242.png">
+ <img width="704" alt="스크린샷 2022-03-07 오후 6 51 55" src="https://user-images.githubusercontent.com/81874493/157008511-58fc1501-3b42-4926-943b-bb50ee00b3b2.png">
 
 Chaining : 체이닝 기법은 동일 해시 값을 갖는 데이터를 쇠사슬 모양으로 연결 리스트를 통해 관리하는 방법이다
 
@@ -217,7 +217,7 @@ Chaining : 체이닝 기법은 동일 해시 값을 갖는 데이터를 쇠사�
 
 Open Addressing
     
-<img width="710" alt="스크린샷 2022-03-07 오후 6 52 01" src="https://user-images.githubusercontent.com/81874493/157008244-54c5e008-2c1c-4282-82c2-632f8a6c3f84.png">
+ <img width="710" alt="스크린샷 2022-03-07 오후 6 52 01" src="https://user-images.githubusercontent.com/81874493/157008533-ea02e47a-5601-420f-a151-ed1030aa1361.png">
 
   <br>
 
