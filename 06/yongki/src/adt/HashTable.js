@@ -6,11 +6,15 @@ var HashTable = function (size) {
   this.maxSize = size % 2 === 1 ? size : size + 1;
 }
 
+HashTable.prototype.getHashableSize = function () {
+  return this.size() % 2 === 1 ? this.size() : this.size() + 1;
+}
+
 HashTable.prototype.size = function () {
   return Object.keys(this.table).length;
 }
 
-HashTable.prototype._getBucket = function (key) {
+HashTable.prototype.getBucket = function (key) {
   return this.table[this._getHash(key)];
 }
 
@@ -23,15 +27,6 @@ HashTable.prototype._getHash = function (str) {
   return hash % this.maxSize;
 }
 
-HashTable.prototype._convertLinkedList = function (key) {
-  const linkedList = new MySinglyLinkedList();
-
-  const prev = this._getBucket(key);
-  linkedList.insertFirst(prev);
-
-  this.table[this._getHash(key)] = linkedList;
-}
-
 /** 
  * @param {number} key
  * @return {void}
@@ -40,19 +35,19 @@ HashTable.prototype._convertLinkedList = function (key) {
  * space:   O(1)
  */
 HashTable.prototype.add = function (key) {
-  if (this.contains(key))
+  const bucket = this.getBucket(key);
+  
+  if (!bucket) {
+    const linkedList = new MySinglyLinkedList();
+
+    linkedList.insertFront(key);
+    this.table[this._getHash(key)] = linkedList;
+
     return;
+  }
 
-  if (
-    typeof this._getBucket(key) === 'number'
-    && typeof this._getBucket(key) === 'string'
-  )
-    this._convertLinkedList(key);
-
-  if (this._getBucket(key) instanceof MySinglyLinkedList)
-    return this._getBucket(key).insertLast(key);
-
-  return this.table[this._getHash(key)] = key;
+  if (bucket instanceof MySinglyLinkedList)
+    return this.getBucket(key).insertLast(key);
 };
 
 /** 
@@ -63,17 +58,13 @@ HashTable.prototype.add = function (key) {
  * space:   O(1)
  */
 HashTable.prototype.contains = function (key) {
-  const value = this._getBucket(key);
+  const value = this.getBucket(key);
 
   if (
-    typeof value === 'number'
-    || typeof value === 'string'
-    && value === key
+    value instanceof MySinglyLinkedList
+    && value.find(key)
   )
-    return this.table[this._getHash(key)];
-
-  if (value instanceof MySinglyLinkedList)
-    return value.find(key);
+    return true;
 
   return false;
 };

@@ -2,6 +2,7 @@ const assert = require('assert');
 const util = require('util');
 
 const HashTable = require('./adt/HashTable');
+const MySinglyLinkedList = require('./adt/SinglyLinkedList');
 
 /** 
  * @param {Array[string]} participant
@@ -20,9 +21,13 @@ function solution(participant, completion) {
   const completionTable = new HashTable(completion.length);
 
   for (const each of participant) {
-    if (!participantTable.add(each))
+    participantTable.add(each);
+    
+    const bucket = participantTable.getBucket(each);
+
+    if(bucket.size > 1)
       return each;
-  }
+  }  
 
   for (const each of completion)
     completionTable.add(each);

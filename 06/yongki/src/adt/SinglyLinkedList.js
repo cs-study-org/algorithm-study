@@ -37,6 +37,53 @@ MySinglyLinkedList.prototype.lastIndex = function () {
  * @param {number} value
  * @return {boolean}
  * 
+ * time:      O(n)
+ * space:     O(1)
+ */
+MySinglyLinkedList.prototype.find = function (value) {
+  if (this.isEmpty())
+    return;
+
+  let cur = this.head;
+
+  while (cur.next) {
+    if (cur.value === value)
+      return true;
+
+    cur = cur.next;
+  }
+
+  return false;
+}
+
+/** 
+ * @param {number} value
+ * @return {number}
+ * 
+ * time:      O(n)
+ * space:     O(1)
+ */
+MySinglyLinkedList.prototype.findIndex = function (value) {
+  if (this.isEmpty())
+    return;
+
+  let cur = this.head;
+
+  let loopCnt = 0;
+  while (cur.next) {
+    if (cur.value === value)
+      return loopCnt;
+
+    cur = cur.next;
+    loopCnt += 1;
+  }
+
+  return cur ? loopCnt : undefined;
+}
+/** 
+ * @param {number} value
+ * @return {boolean}
+ * 
  * time:      O(1)
  * space:     O(1)
  */
@@ -58,7 +105,7 @@ MySinglyLinkedList.prototype.insertFront = function (value) {
  * @param {number} value
  * @return {boolean}
  * 
- * time:      O(1)
+ * time:      O(n)
  * space:     O(1)
  */
 MySinglyLinkedList.prototype.insertLast = function (value) {
@@ -79,6 +126,31 @@ MySinglyLinkedList.prototype.insertLast = function (value) {
   return true;
 };
 
+/** 
+ * @param {number} index
+ * @return {void}
+ * 
+ * time:      O(n)
+ * space:     O(1)
+ */
+MySinglyLinkedList.prototype.deleteAtIndex = function (index) {
+  if (index > this.lastIndex())
+    return;
+
+  let prev = null;
+  let cur = this.head;
+
+  for (let i = 0; i <= index; i++) {
+    if (prev && i === index)
+      prev.next = cur.next;
+    else
+      prev = cur;
+
+    cur = cur.next;
+  }
+
+  this.size -= 1;
+};
 /**
  * @return {boolean}
  * 
