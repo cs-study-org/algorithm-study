@@ -111,7 +111,7 @@ Ex)
 
 ### 정렬된 배열에 새로운 값 추가
 
-![스크린샷 2022-03-07 오후 4.00.19.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d2582045-f0ef-4f6f-9a78-9ded08efe7df/스크린샷_2022-03-07_오후_4.00.19.png)
+<img width="692" alt="스크린샷 2022-03-07 오후 6 51 27" src="https://user-images.githubusercontent.com/81874493/157008146-9f90e76a-eb8b-44b4-aabe-5ff8f405643c.png">
 
 위의 그림처럼 정렬된 배열에 새로운 값을 추가하게 될 경우
 
@@ -141,8 +141,8 @@ Ex)
     
     ⇒ 효율적 수행이 가능하다.
     
-    ![스크린샷 2022-03-07 오후 4.40.06.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ab1b685c-971c-419a-8249-a95575320df6/스크린샷_2022-03-07_오후_4.40.06.png)
-    
+    <img width="693" alt="스크린샷 2022-03-07 오후 6 51 43" src="https://user-images.githubusercontent.com/81874493/157008181-5d57722d-6e7f-424a-abf2-6aff60419290.png">
+
     과정)
     
     1. 키값을 가지고 해시함수를 통해 해시값을 구한다.
@@ -165,7 +165,7 @@ Ex)
 
 # Hash Collision
 
-![스크린샷 2022-03-07 오후 5.25.52.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/58301b3a-0b89-4f71-b08b-a38ab2023f64/스크린샷_2022-03-07_오후_5.25.52.png)
+<img width="729" alt="스크린샷 2022-03-07 오후 6 51 49" src="https://user-images.githubusercontent.com/81874493/157008215-ae46a9f4-9a6e-48e4-b434-61bdff5d9dfb.png">
 
 정의 : **충돌(Collision)** 은 서로 다른 문자열이 Hash function을 통해 Hash 한 결과가 같은 경우 (중복되는 경우)이다.
 
@@ -194,8 +194,8 @@ Ex)
 
 **Chainig**
 
-![스크린샷 2022-03-07 오후 6.21.39.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fd7b9902-f897-4654-b6ff-57784504069a/스크린샷_2022-03-07_오후_6.21.39.png)
     
+<img width="704" alt="스크린샷 2022-03-07 오후 6 51 55" src="https://user-images.githubusercontent.com/81874493/157008232-be0102fe-59ef-45ab-ba65-6b75c32be242.png">
 
 Chaining : 체이닝 기법은 동일 해시 값을 갖는 데이터를 쇠사슬 모양으로 연결 리스트를 통해 관리하는 방법이다
 
@@ -217,7 +217,7 @@ Chaining : 체이닝 기법은 동일 해시 값을 갖는 데이터를 쇠사�
 
 Open Addressing
     
-![스크린샷 2022-03-07 오후 6.39.06.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9bd29bc1-decc-4cf0-a015-21e9e449e117/스크린샷_2022-03-07_오후_6.39.06.png)
+<img width="710" alt="스크린샷 2022-03-07 오후 6 52 01" src="https://user-images.githubusercontent.com/81874493/157008244-54c5e008-2c1c-4282-82c2-632f8a6c3f84.png">
 
   <br>
 
