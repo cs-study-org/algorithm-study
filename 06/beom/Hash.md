@@ -279,3 +279,80 @@ public class HashTable {
 ```
 
 
+### Open Addressing - Linear Probing 방식
+
+```java
+public class HashItem {
+    private int key;
+    private int value;
+
+    public HashItem(int key,int value){
+        this.key = key;
+        this.value = value;
+    }
+
+    public int getKey() {
+        return key;
+    }
+    public int getValue() {
+        return value;
+    }
+}
+```
+
+```java
+//Constants 클래스 : 해시테이블의 크기를 상수로 보관
+public class Constants {
+
+    private Constants(){
+
+    }
+
+    public static final int TABLE_SIZE = 10;
+}
+```
+
+```java
+public class HashTable{
+    private HashItem[] hashTable;
+
+    //생성자
+    public HashTable(){
+        this.hashTable = new HashItem[Constants.TABLE_SIZE];
+    }
+
+    //해시 함수
+    private int hash(int key){
+        return 0;
+    }
+
+    public void put(int key, int value){
+        int genneratedIndex = hash(key);
+        System.out.println("put value : " +value + "index : " + genneratedIndex);
+
+        while(hashTable[genneratedIndex] != null){
+            genneratedIndex = (genneratedIndex +1 ) % Constants.TABLE_SIZE;
+            System.out.println("Collision !! move next index : "+ genneratedIndex);
+        }
+
+        //빈슬록에 삽입
+        System.out.println("빈슬롯에 삽입! : " + genneratedIndex);
+        hashTable[genneratedIndex] = new HashItem(key, value);
+    }
+
+    public int get(int key){
+        int generatedIndex = hash(key);
+
+        while (hashTable[generatedIndex] != null && hashTable[generatedIndex].getKey() != key){
+            generatedIndex = (generatedIndex +1 ) % Constants.TABLE_SIZE;
+            System.out.println("다음 인덱스로 이동 : " + generatedIndex);
+        }
+
+        if(hashTable[generatedIndex] == null){
+            return -1;
+        }else{
+            return hashTable[generatedIndex].getValue();
+        }
+    }
+```
+
