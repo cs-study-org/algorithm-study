@@ -1,7 +1,5 @@
 # Hash
 
-
-
 ## HashTable
 
 ### HashTable 개념
@@ -65,7 +63,7 @@ ex) HashTable 크기가 10이라면 A라는 Key의 Value를 찾을 때 HashFunct
 > 링크드 리스트의 기준과 트리의 기준을 6과 8로 잡은 것은 변경하는데 소요되는 비용을 줄이기 위함이다.
 > 예를 들어 설명하자면, 해시 버킷에 **6개**의 Key-Value 쌍이 들어있었다. 그리고 하나의 값이 추가되었다. 만약 기준이 6과 7이라면 자료구조를 링크드 리스트에서 트리로 변경해야한다. 그러다 바로 하나의 값이 삭제된다면 다시 트리에서 링크드 리스트로 자료구조를 변경해야한다.
 > 넘기는 기준이 1이라면 Switching 비용이 너무 많이 필요하기 때문에 2라는 여유를 남겨두고 기준을 잡아준 것이다.
-> 따라서 데이터의 개수가 6->7이면 Linked List일 것이고, 8->7이면 Red-Black Tree일 것이다.
+> 따라서 데이터의 개수가 **6->7이면 Linked List**일 것이고, **8->7이면 Red-Black Tree**일 것이다.
 
 **< 연결리스트를 사용하는 방식(Linked List) >**
 각각의 Bucket들을 Linked List로 만들어 충동(Collision)이 발생하면 해당 Bucket의 Linked List에 추가하는 방식이다.
@@ -142,12 +140,142 @@ System.out.println(table.get(2)); // two
 
 - HashTable
   - 동기(병렬 처리를 할 때)
-  - Thread-safe
+    - 동기화된(Synchronized) 메소드로 구성
+    - Thread-safe
   - Key-Value 값으로 null 미허용(Key가 hashcode(), equals()를 사용하기 때문)
   - 보조 Hash Function과 separating Chaining을 사용해서 비교적 충돌 덜 발생(Key의 Hash 변형)
 - HashMap
   - 비동기(병렬 처리를 하지 않을 때)
-  - Thread-safe하지 않다.
+    - Thread-safe하지 않다.
   - Key-Value 값으로 Null 허용
+
+
+## Java HashTable 구현
+### Chainiing 방식 구현
+```java
+//hashitem 클래스 : 키와 값을 저장할 클래스
+public class HashItem {
+    private int key;
+    private int value;
+    private HashItem nextHashItem;//다음 항목
+
+    //생성자
+    public HashItem(int key,int value){
+        this.key = key;
+        this.value = value;
+    }
+
+    public HashItem getNextHashItem() {
+        return nextHashItem;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setNextHashItem(HashItem nextHashItem) {
+        this.nextHashItem = nextHashItem;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public void setKey(int key) {
+        this.key = key;
+    }
+
+    public int getkey() {
+        return key;
+    }
+}
+```
+
+```java
+package algorithmStudyHashTable;
+
+//Constants 클래스 : 해시테이블의 크기를 상수로 보관
+public class Constants {
+
+    private Constants(){
+
+    }
+
+    public static final int TABLE_SIZE = 10;
+}
+```
+
+```java
+package algorithmStudyHashTable;
+
+public class HashTable {
+
+    private HashItem[] hashTable;
+
+    public HashTable(){
+        this.hashTable = new HashItem[Constants.TABLE_SIZE];
+    }
+
+    private int hash(int key){
+        //키 % 테이블 사이즈
+        return key%Constants.TABLE_SIZE;
+    }
+
+    //삽입
+    public void put(int key, int value){
+        //키를 해싱
+        int hashArrayIndex = hash(key);
+
+        //해시 테이블의 슬록이 비어 있으면 바로 삽입
+        if(hashTable[hashArrayIndex] ==null){
+            System.out.println("충돌없이 삽입!");
+            hashTable[hashArrayIndex] = new HashItem(key, value);
+        }
+        else{
+            System.out.println("충동 발생!" + key);
+            HashItem hashItem = hashTable[hashArrayIndex];//해시테이블 슬록에 저장된 첫번 째 데이터를 가져옴
+
+            //연결리스트 마지막까지 탐색을 수행
+            while(hashItem.getNextHashItem() != null){
+                hashItem = hashItem.getNextHashItem();
+                System.out.println("연결리스트로 다음 리스트에 저장" + hashItem.getValue());
+            }
+
+            //마지막으로 연결리스트 다음에 삽입
+            System.out.println("연결리스트에 삽입!");
+            hashItem.setNextHashItem(new HashItem(key, value));
+        }
+    }
+
+    //반환
+    public int get(int key){
+
+        //입력받을 키값을 해싱
+        int generatedArrayIndex = hash(key);
+
+        //해시 값에 해당하는 슬롯에 데이터가 없으면 -1 리턴
+        if(hashTable[generatedArrayIndex] ==null){
+            return -1;
+        }
+        else{ //해시 값에 해당하는 슬록에 데이터가 있는 경우
+
+            //첫번째 값 추출
+            HashItem hashItem = hashTable[generatedArrayIndex];
+
+            //입력 키 값과 항목의 키값이 일치할 때까지 탐색
+            while(hashItem != null && hashItem.getkey() != key){
+                hashItem = hashItem.getNextHashItem();
+            }
+
+            //마지막까지 탐색한 뒤 일치하는 값을 못찰을 경우 -1 리턴
+            if(hashItem == null){
+                return -1;
+            }else{
+                return hashItem.getValue();
+            }
+        }
+    }
+}
+```
 
 
