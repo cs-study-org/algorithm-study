@@ -2,7 +2,7 @@
 
 ### HashMap이란?
 
-![스크린샷 2022-03-08 오후 3.03.23.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/32fe78c0-535b-4ead-a00f-3ee38f7e7a54/스크린샷_2022-03-08_오후_3.03.23.png)
+<img width="472" alt="스크린샷 2022-03-08 오후 4 47 39" src="https://user-images.githubusercontent.com/81874493/157190632-e2353638-fc89-471b-8521-a41a51034c1e.png">
 
 정의 : HashMap은 키(Key)와 값(Value) 두 쌍으로 데이터를 보관하는 자료구조인 Map 인터페이스의 구현체로 키를 해싱하여 사용하는 자료구조 이다.
 
