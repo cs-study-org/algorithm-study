@@ -18,7 +18,7 @@ MyHashSet.prototype._getHash = function (num) {
  * @param {number} key
  * @return {boolean}
  * 
- * time:    O(n)
+ * time:    O(1)
  * space:   O(1)
  */
 MyHashSet.prototype.add = function (key) {

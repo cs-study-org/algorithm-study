@@ -22,8 +22,8 @@ HashTable.prototype._getHash = function (str) {
  * @param {number} key
  * @return {void}
  * 
- * time:    O(n)
- * space:   O(1)
+ * time :    O(1) 
+ * space:    O(1)
  */
 HashTable.prototype.add = function (key) {
   const bucket = this.getBucket(key);  
