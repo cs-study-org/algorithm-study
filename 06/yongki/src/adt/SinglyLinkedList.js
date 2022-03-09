@@ -35,29 +35,6 @@ MySinglyLinkedList.prototype.lastIndex = function () {
 
 /** 
  * @param {number} value
- * @return {boolean}
- * 
- * time:      O(n)
- * space:     O(1)
- */
-MySinglyLinkedList.prototype.find = function (value) {
-  if (this.isEmpty())
-    return;
-
-  let cur = this.head;
-
-  while (cur.next) {
-    if (cur.value === value)
-      return true;
-
-    cur = cur.next;
-  }
-
-  return false;
-}
-
-/** 
- * @param {number} value
  * @return {number}
  * 
  * time:      O(n)
@@ -69,16 +46,16 @@ MySinglyLinkedList.prototype.findIndex = function (value) {
 
   let cur = this.head;
 
-  let loopCnt = 0;
-  while (cur.next) {
+  let i;
+
+  for (i = 0; i < this.size; i++){
     if (cur.value === value)
-      return loopCnt;
-
+      return i;
+  
     cur = cur.next;
-    loopCnt += 1;
-  }
+  }  
 
-  return cur ? loopCnt : undefined;
+  return cur ? i : undefined;
 }
 /** 
  * @param {number} value

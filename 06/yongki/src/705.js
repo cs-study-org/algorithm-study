@@ -1,19 +1,30 @@
 const util = require('util');
-const assert = require('assert');
 
 const MyHashSet = require('../src/adt/HashSet');
 
 (function main() {
-  const hashSet = new MyHashSet();
+  const commands = ["MyHashSet","add","add","contains","contains","add","contains","remove","contains"]
+  const values = [[],[1],[2],[1],[3],[2],[2],[2],[2]]
 
-  hashSet.add(6);
+  let hashSet;
 
-  hashSet.remove(4);
+  const result = commands.map((command, idx) => {
+    const value = values[idx][0];
 
-  hashSet.add(17);
+    switch(command){
+      case 'MyHashSet':
+        hashSet = new MyHashSet();
+        return null;
+      case 'add':
+        return hashSet.add(value);
+      case 'contains':
+        return hashSet.contains(value);
+      case 'remove':
+        return hashSet.remove(value);
+    }
+  })
 
   console.log(util.inspect(hashSet, { showHidden: false, depth: null }));
 
-  assert.equal(hashSet.contains(6), true);
-  assert.equal(hashSet.contains(14), false);
+  console.log(result);
 })();
