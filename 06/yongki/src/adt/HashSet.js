@@ -4,7 +4,7 @@ const HashTable = require('./HashTable');
 
 var MyHashSet = function () {
   HashTable.apply(this, arguments);
-  this.maxSize = 100;   // +++ Need reason
+  this.maxSize = 100000;
 };
 
 MyHashSet.prototype = Object.create(HashTable.prototype);
@@ -31,7 +31,7 @@ MyHashSet.prototype.add = function (key) {
     const linkedList = new MySinglyLinkedList();
 
     linkedList.insertFront(key);
-    this.table[this._getHash(key)] = linkedList;    
+    this.table[this._getHash(key)] = linkedList;
   }
   else if (bucket instanceof MySinglyLinkedList)
     bucket.insertLast(key);
@@ -43,7 +43,7 @@ MyHashSet.prototype.add = function (key) {
  * @param {number} key
  * @return {void}
  * 
- * time:    O(n)
+ * time:    O(1)
  * space:   O(1)
  */
 MyHashSet.prototype.remove = function (key) {
@@ -52,10 +52,33 @@ MyHashSet.prototype.remove = function (key) {
   if (!bucket)
     return null;
 
-  const [idx, _] = bucket.find(key);
-  bucket.deleteAtIndex(idx);
+  const slot = bucket.find(key);
 
+  if (slot){
+    const [idx, _] = slot;
+    bucket.deleteAtIndex(idx);
+  }
+  
   return null;
+};
+
+/** 
+ * @param {number} key
+ * @return {boolean}
+ * 
+ * time:    O(1)
+ * space:   O(1)
+ */
+MyHashSet.prototype.contains = function (key) {
+  const bucket = this.getBucket(key);
+
+  if (
+    bucket instanceof MySinglyLinkedList
+    && bucket.find(key) !== undefined
+  )
+    return true;
+
+  return false;
 };
 
 module.exports = MyHashSet;

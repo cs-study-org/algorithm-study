@@ -4,7 +4,7 @@ const HashTable = require('./HashTable');
 
 var MyHashMap = function () {
   HashTable.apply(this, arguments);
-  this.maxSize = 100;
+  this.maxSize = 100000;
 };
 
 MyHashMap.prototype = Object.create(HashTable.prototype);
@@ -25,18 +25,22 @@ MyHashMap.prototype._getHash = function (num) {
 MyHashMap.prototype.put = function (key, value) {
   const bucket = this.getBucket(key);
 
-  if (this.contains(key)) {
-    const [idx, _] = bucket.find(key);
-    bucket.update(idx, value);
-  }
-  else if (!bucket) {
+  if (!bucket) {
     const linkedList = new MySinglyLinkedList();
 
     linkedList.insertFront(value);
     this.table[this._getHash(key)] = linkedList;
   }
-  else if (bucket instanceof MySinglyLinkedList) // +++ Will be deprecated
-    bucket.insertLast(value);
+  else if (bucket instanceof MySinglyLinkedList) {
+    const slot = bucket.find(value);
+
+    if (!slot)
+      bucket.insertLast(value);
+    else {
+      const [idx, _] = slot;
+      bucket.update(idx, value);
+    }
+  }
 
   return null;
 };
@@ -54,7 +58,12 @@ MyHashMap.prototype.get = function (key) {
   if (!bucket)
     return -1;
 
-  return bucket.head.value;
+  let cur = bucket.head;
+
+  while (cur.next)
+    cur = cur.next
+
+  return cur.value;
 };
 
 /** 

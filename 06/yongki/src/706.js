@@ -17,7 +17,7 @@ const MyHashMap = require('../src/adt/HashMap');
         return null;
       case 'put':        
         return hashMap.put(key, value);
-      case 'get':
+      case 'get':                
         return hashMap.get(key);
       case 'remove':
         return hashMap.remove(key);
@@ -25,6 +25,5 @@ const MyHashMap = require('../src/adt/HashMap');
   })
 
   console.log(util.inspect(hashMap, { showHidden: false, depth: null }));
-
   console.log(result);
 })();
