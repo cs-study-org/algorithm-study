@@ -3,7 +3,7 @@
 ## HashTable
 
 ### HashTable 개념
-- Key와 Value를 1:1로 연관지어 저장하는 자료구조( 연관배열 구조)
+- Key와 Value를 1:1로 연관지어 저장하는 자료구조(연관배열 구조)
 - Key를 이용하여 Value 도출
 
 ### HashTable 기능
@@ -19,12 +19,12 @@
 > Key, Hash Function, Hash, Value, 저장소(Buckey, Slot)로 구성
 
 - Key
-  - 고유한 값
+  - **고유한 값**
   - 저장 공간의 효율성을 위해 Hash Function에 입력하여 Hash로 변경 후 저장
     - Key는 길이가 다양하기 때문에 그대로 저장하면 다양한 길이만큼 저장소 구성이 필요
 - Hash Function
   - Key를 Hash로 바꿔주는 역할
-  - 해시 충동(서로 다른 Key가 같은 Hash가 되는 경우)이 발생할 확률을 최대한 줄이는 함수를 만드는 것이 중요
+  - 해시 충돌(서로 다른 Key가 같은 Hash가 되는 경우)이 발생할 확률을 최대한 줄이는 함수를 만드는 것이 중요
 - Hash
   - Hash Function의 결과
   - 저장소에서 Value와 매칭되어 저장
@@ -43,7 +43,7 @@ ex) HashTable 크기가 10이라면 A라는 Key의 Value를 찾을 때 HashFunct
 
 ### Hash 충돌
 - 서로 다른 Key가 Hash Function에서 중복 Hash로 나오는 경우
-- 충돌이 많아질수록 탐색의 시간 복잡도가 O(1)에서 O(n)으로 증가
+- 충돌이 많아질수록 탐색의 시간 복잡도가 **O(1)에서 O(n)으로 증가**
 
 ### Hash 충돌 해결 방법 - 해시테이블 기법 (Chaining vs Open Addressing)
 #### Separate Chaining(분리 연결법)
@@ -55,31 +55,31 @@ ex) HashTable 크기가 10이라면 A라는 Key의 Value를 찾을 때 HashFunct
 
 자바 8에서는 연결 리스트 구조를 좀 더 최적화 해서, 데이터의 개수가 많아지면 Red-Black Tree에 저장하는 형태로 병행하기로 했다.
 
-> 데이터가 많다는 것의 기준은 무엇일까?
-> 기준은 하나의 해시 버킷에 할당된 Key-Value 쌍의 개수이다.
-> 이 Key-Value의 개수가 6개 이하, 8개 이상을 기준으로 결정한다.
+> 데이터가 많다는 것의 기준은 무엇일까?</br>
+> 기준은 하나의 해시 버킷에 할당된 Key-Value 쌍의 개수이다.</br>
+> 이 Key-Value의 개수가 6개 이하, 8개 이상을 기준으로 결정한다.</br>
 > 
-> 그럼 7은 어디로 갔는가?
-> 링크드 리스트의 기준과 트리의 기준을 6과 8로 잡은 것은 변경하는데 소요되는 비용을 줄이기 위함이다.
-> 예를 들어 설명하자면, 해시 버킷에 **6개**의 Key-Value 쌍이 들어있었다. 그리고 하나의 값이 추가되었다. 만약 기준이 6과 7이라면 자료구조를 링크드 리스트에서 트리로 변경해야한다. 그러다 바로 하나의 값이 삭제된다면 다시 트리에서 링크드 리스트로 자료구조를 변경해야한다.
-> 넘기는 기준이 1이라면 Switching 비용이 너무 많이 필요하기 때문에 2라는 여유를 남겨두고 기준을 잡아준 것이다.
-> 따라서 데이터의 개수가 **6->7이면 Linked List**일 것이고, **8->7이면 Red-Black Tree**일 것이다.
+> 그럼 7은 어디로 갔는가?</br>
+> 링크드 리스트의 기준과 트리의 기준을 6과 8로 잡은 것은 변경하는데 소요되는 비용을 줄이기 위함이다.</br>
+> 예를 들어 설명하자면, 해시 버킷에 **6개**의 Key-Value 쌍이 들어있었다. 그리고 하나의 값이 추가되었다. 만약 기준이 6과 7이라면 자료구조를 링크드 리스트에서 트리로 변경해야한다. 그러다 바로 하나의 값이 삭제된다면 다시 트리에서 링크드 리스트로 자료구조를 변경해야한다.</br>
+> 넘기는 기준이 1이라면 Switching 비용이 너무 많이 필요하기 때문에 2라는 여유를 남겨두고 기준을 잡아준 것이다.</br>
+> 따라서 데이터의 개수가 **6->7이면 Linked List**일 것이고, **8->7이면 Red-Black Tree**일 것이다.</br>
 
-**< 연결리스트를 사용하는 방식(Linked List) >**
-각각의 Bucket들을 Linked List로 만들어 충동(Collision)이 발생하면 해당 Bucket의 Linked List에 추가하는 방식이다.
+**< 연결리스트를 사용하는 방식(Linked List) >**</br>
+각각의 Bucket들을 Linked List로 만들어 충동(Collision)이 발생하면 해당 Bucket의 Linked List에 추가하는 방식이다.</br>
 - 연결리스트의 특징을 그래도 이어받아 삭제, 삽입이 간단하다.
 - 작은 데이터들을 저장할 때 Linked List 자체의 오버 헤드가 부담이 된다.
 - Bucket을 계속해서 사용하는 Open Address 방식에 비해 테이블 확장을 늦출 수 있다.
 
-**< Tree를 사용하는 방식(Red-Black Tree) >**
-알고리즘은 기본 Separate Chaining 방식과 동일하며 Linked List 대신 Tree를 사용하는 방식이다. 데이터가 많아지면 Red-Black Tree 사용
+**< Tree를 사용하는 방식(Red-Black Tree) >**</br>
+알고리즘은 기본 Separate Chaining 방식과 동일하며 Linked List 대신 Tree를 사용하는 방식이다. 데이터가 많아지면 Red-Black Tree 사용</br>
 
 
 #### Open Addressing(개방 주소법)
 ![오픈 어드레싱 기법](asset/open_addressing.PNG)
 **해시 충돌이 발생하면 다른 버킷에 데이터를 삽입하는 방식(데이터의 주소값이 바뀜)**<br/>
 
-개방 주소법은 대표적으로 3가지가 있음
+개방 주소법은 대표적으로 3가지가 있음</br>
 - 선형 탐색(Linear Probing) : 해시 충돌시 다음 버켓, 혹은 몇 개를 건너 뛰어 데이터를 삽입한다.
 - 제곱 탐색(Quadratic Probing) : 해시 충돌시 제곱만큼 건너뛴 버켓에 데이터를 삽입(1,4,9,16,..)
 - 이중 해시(Double Hashing) : 해시 충돌시 다른 해시함수를 한번 더 적용한 결과를 이용한다.
@@ -355,4 +355,8 @@ public class HashTable{
         }
     }
 ```
+
+
+## 참고 문헌
+[구현 부분 참구문헌](https://doublesprogramming.tistory.com/242)
 
