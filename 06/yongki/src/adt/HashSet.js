@@ -58,27 +58,11 @@ MyHashSet.prototype.remove = function (key) {
     const [idx, _] = slot;
     bucket.deleteAtIndex(idx);
   }
+
+  if (!bucket.size)
+    delete this.table[this._getHash(key)];
   
   return null;
-};
-
-/** 
- * @param {number} key
- * @return {boolean}
- * 
- * time:    O(1)
- * space:   O(1)
- */
-MyHashSet.prototype.contains = function (key) {
-  const bucket = this.getBucket(key);
-
-  if (
-    bucket instanceof MySinglyLinkedList
-    && bucket.find(key) !== undefined
-  )
-    return true;
-
-  return false;
 };
 
 module.exports = MyHashSet;

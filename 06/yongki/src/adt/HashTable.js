@@ -40,4 +40,23 @@ HashTable.prototype.add = function (key) {
   return;
 };
 
+/** 
+ * @param {number} key
+ * @return {boolean}
+ * 
+ * time:    O(1)
+ * space:   O(1)
+ */
+HashTable.prototype.contains = function (key) {
+  const bucket = this.getBucket(key);
+
+  if (
+    bucket instanceof MySinglyLinkedList
+    && bucket.find(key) !== undefined
+  )
+    return true;
+
+  return false;
+};
+
 module.exports = HashTable;
