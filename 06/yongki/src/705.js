@@ -3,8 +3,8 @@ const util = require('util');
 const MyHashSet = require('../src/adt/HashSet');
 
 (function main() {
-  const commands = ["MyHashSet","add","add","contains","contains","add","contains","remove","contains"]
-  const values = [[],[1],[2],[1],[3],[2],[2],[2],[2]]
+  const commands = ["MyHashSet","add","add","contains","contains","add","contains","remove","contains"];
+  const values = [[],[1],[2],[1],[3],[2],[2],[2],[2]];
 
   let hashSet;
 

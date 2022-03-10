@@ -35,27 +35,28 @@ MySinglyLinkedList.prototype.lastIndex = function () {
 
 /** 
  * @param {number} value
- * @return {number}
+ * @return {Array[number, number]}
  * 
  * time:      O(n)
  * space:     O(1)
  */
-MySinglyLinkedList.prototype.findIndex = function (value) {
+MySinglyLinkedList.prototype.find = function (value) {  
   if (this.isEmpty())
     return;
 
-  let cur = this.head;
+  let cur = this.head;  
 
-  let i;
-
-  for (i = 0; i < this.size; i++){
+  for (let i = 0; i < this.size; i++) {
     if (cur.value === value)
-      return i;
-  
-    cur = cur.next;
-  }  
+      return [i, cur.value];
+    
+    if (!cur.next)
+      return undefined;
 
-  return cur ? i : undefined;
+    cur = cur.next;
+  }
+
+  return undefined;
 }
 /** 
  * @param {number} value
@@ -115,7 +116,7 @@ MySinglyLinkedList.prototype.deleteAtIndex = function (index) {
     return;
 
   let prev = null;
-  let cur = this.head;
+  let cur = this.head;  
 
   for (let i = 0; i <= index; i++) {
     if (prev && i === index)
@@ -128,6 +129,36 @@ MySinglyLinkedList.prototype.deleteAtIndex = function (index) {
 
   this.size -= 1;
 };
+
+/** 
+ * @param {number} index
+ * @param {number} value
+ * @return {boolean}
+ * 
+ * time:      O(n)
+ * space:     O(1)
+ */
+MySinglyLinkedList.prototype.update = function (index, value){    
+  if (index > this.lastIndex())
+    return false;
+
+  let cur = this.head;  
+
+  for (i = 0; i <= index; i++) {
+    if (i === index){      
+      cur.value = value;
+      return true;
+    }
+    
+    if (!cur.next)
+      return false;
+
+    cur = cur.next;
+  }
+
+  return false;
+}
+
 /**
  * @return {boolean}
  * 

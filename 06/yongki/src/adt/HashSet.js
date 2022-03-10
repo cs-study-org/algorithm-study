@@ -16,7 +16,7 @@ MyHashSet.prototype._getHash = function (num) {
 
 /** 
  * @param {number} key
- * @return {boolean}
+ * @return {void}
  * 
  * time:    O(1)
  * space:   O(1)
@@ -25,7 +25,7 @@ MyHashSet.prototype.add = function (key) {
   const bucket = this.getBucket(key);
 
   if (this.contains(key))
-    return false;
+    return null;
 
   if (!bucket) {
     const linkedList = new MySinglyLinkedList();
@@ -34,28 +34,28 @@ MyHashSet.prototype.add = function (key) {
     this.table[this._getHash(key)] = linkedList;    
   }
   else if (bucket instanceof MySinglyLinkedList)
-    this.getBucket(key).insertLast(key);
+    bucket.insertLast(key);
 
-  return true;
+  return null;
 };
 
 /** 
  * @param {number} key
- * @return {boolean}
+ * @return {void}
  * 
  * time:    O(n)
  * space:   O(1)
  */
 MyHashSet.prototype.remove = function (key) {
-  const value = this.getBucket(key);
+  const bucket = this.getBucket(key);
 
-  if (!value)
-    return false;
+  if (!bucket)
+    return null;
 
-  const idx = value.findIndex(key);
-  value.deleteAtIndex(idx);
+  const [idx, _] = bucket.find(key);
+  bucket.deleteAtIndex(idx);
 
-  return true;
+  return null;
 };
 
 module.exports = MyHashSet;

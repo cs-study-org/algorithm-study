@@ -32,13 +32,12 @@ HashTable.prototype.add = function (key) {
     const linkedList = new MySinglyLinkedList();
 
     linkedList.insertFront(key);
-    this.table[this._getHash(key)] = linkedList;
-
-    return;
+    this.table[this._getHash(key)] = linkedList;    
   }
-
-  if (bucket instanceof MySinglyLinkedList)
-    return this.getBucket(key).insertLast(key);
+  else if (bucket instanceof MySinglyLinkedList)
+    bucket.insertLast(key);
+  
+  return;
 };
 
 /** 
@@ -49,11 +48,11 @@ HashTable.prototype.add = function (key) {
  * space:   O(1)
  */
 HashTable.prototype.contains = function (key) {
-  const value = this.getBucket(key);
+  const bucket = this.getBucket(key);
 
   if (
-    value instanceof MySinglyLinkedList
-    && value.findIndex(key) !== undefined
+    bucket instanceof MySinglyLinkedList
+    && bucket.find(key) !== undefined
   )
     return true;
 
