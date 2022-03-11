@@ -13,6 +13,8 @@
     - [문제 회고](#문제-회고-2)
     - [문제 풀이](#문제-풀이-3)
     - [문제 풀이](#문제-풀이-4)
+    - [문제 회고](#문제-회고-3)
+    - [문제 풀이](#문제-풀이-5)
   - [참고 문헌](#참고-문헌)
 
 ## 이론
@@ -300,6 +302,54 @@ k가 메모리 기반 이고, M이 홀수이면, k의 약수들이 해시값이 
 
 </details>
 
+<details>
+<summary>
+  Lv3. 베스트앨범
+  <a href="https://programmers.co.kr/learn/courses/30/lessons/42579">👊</a>  
+</summary>
+
+### 문제 회고
+
+결과값을 내기 위해 취합 대상들을 가공 하다보니 
+
+시간 복잡도 추산 대상이 많아져 정확히 파악했는지 의문이 생겼다.
+
+> `src\Lv3.bestAlbum.js`에서 확인해볼 수 있다.
+
+### 문제 풀이
+
+1. 해시맵을 사용하여 genre 별 play들을 묶는다.
+
+        MyHashMap {
+        table: {
+            '335': MySinglyLinkedList {
+            head: ListNode {
+                value: 600,
+                next: ListNode { value: 2500, next: null }
+            },
+            size: 2
+            },
+            '2226': MySinglyLinkedList {
+            head: ListNode {
+                value: 500,
+                next: ListNode {
+                value: 150,
+                next: ListNode { value: 800, next: null }
+                }
+            },
+            size: 3
+            }
+        },
+        maxSize: 100000
+        }
+
+2. genre 별 play들을 nested array로 묶은 뒤, 정렬한다.
+
+        [ [ 2500, 600 ], [ 800, 500 ] ]
+
+3. array를 concat 한 뒤, plays 입력 배열에서 인덱스를 찾는다.
+
+</details>
 <hr/>
 
 ## 참고 문헌
