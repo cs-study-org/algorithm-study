@@ -2,7 +2,7 @@
 
 ## 목차
 ## 705. Design HashSet
-
+## 706. Design HashMap
 
 
 
