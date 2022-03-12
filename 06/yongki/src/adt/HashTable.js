@@ -2,7 +2,7 @@ const MySinglyLinkedList = require('./SinglyLinkedList');
 
 
 var HashTable = function (size) {
-  this.table = {};
+  this.table = [];
   this.maxSize = size % 2 === 1 ? size : size + 1;
 }
 
