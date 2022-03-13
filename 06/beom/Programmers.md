@@ -89,7 +89,6 @@ class Solution {
 
 
 
-
 ## 완주하지 못한 선수
 ### 문제 요약
 
@@ -170,3 +169,9 @@ class Solution {
 ### 시간 복잡도 공간복잡도
 
 ### 코드
+
+
+
+
+## 참고 문헌
+[주차요금계산 링크](https://velog.io/@ujone/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EC%A3%BC%EC%B0%A8-%EC%9A%94%EA%B8%88-%EA%B3%84%EC%82%B0-JAVA)
