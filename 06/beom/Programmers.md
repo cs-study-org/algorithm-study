@@ -90,12 +90,51 @@ class Solution {
 
 
 
-## 주차 요금 계산
+## 완주하지 못한 선수
 ### 문제 요약
 
+[완주하지 못한 선수 문제 링크](https://programmers.co.kr/learn/courses/30/lessons/42576)
+
 ### 시간 복잡도 공간복잡도
+| time | space |
+|------|-------|
+| O(n+m+k) | O(1)  |
 
 ### 코드
+```java
+import java.util.*;
+
+class Solution {
+    public String solution(String[] participant, String[] completion) {
+        String answer ="";
+        Map<String, Integer> completionMaraton = new HashMap<>();
+        //time : O(n)   Space : O(1)
+        for(String i :participant){
+            //참여한 마라톤 선수의 이름이 안왓다면
+            if(completionMaraton.get(i)==null){
+                completionMaraton.put(i,1);
+            }else{
+                completionMaraton.put(i,completionMaraton.get(i)+1);
+            }
+        }
+
+        //time : O(m)   Space : O(1)
+        for(String j:completion){
+            completionMaraton.put(j,completionMaraton.get(j)-1);
+        }
+        
+        //time : O(k)   Space : O(1)
+        for(String key : completionMaraton.keySet()){
+            //값이 0이상이면 완주를 못한 것
+            if(completionMaraton.get(key)>0){
+                answer = key;
+                break;
+            }
+        }
+        return answer;
+    }
+}
+```
 
 
 
