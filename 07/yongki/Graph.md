@@ -2,6 +2,7 @@
 
 - [그래프](#그래프)
   - [이론](#이론)
+  - [참고 문헌](#참고-문헌)
 
 ## 이론
 
@@ -35,3 +36,7 @@
     주로, DFS를 많이 사용하며 스택과 재귀로 구현한다.
 
 </details>
+
+## 참고 문헌
+
+[Update Javascript matrix issue](https://stackoverflow.com/questions/64669938/updating-an-element-in-javascript-2d-array-updates-entire-column) ━ *Stack overflow*
