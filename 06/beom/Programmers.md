@@ -139,6 +139,52 @@ class Solution {
 
 
 
+## 전화번호 목록
+### 문제 요약
+[전화번호 목록 문제 링크](https://programmers.co.kr/learn/courses/30/lessons/42577)
+
+### 시간 복잡도 공간복잡도
+| time | space |
+|------|-------|
+| O(n+m) | O(1)  |
+
+### 코드
+```java
+import java.util.*;
+
+class Solution {
+    public boolean solution(String[] phone_book) {
+        boolean answer = true;
+        int minLength =1000000;
+        ArrayList<String> arrayList = new ArrayList<>();
+        Set<String> set = new HashSet<>();
+        for(String i : phone_book){
+            if(minLength > i.length()){
+                minLength = i.length();
+            }
+        }
+
+        for(String j : phone_book){
+            arrayList.add(j.substring(0,minLength));
+        }
+
+        for(String k : arrayList){
+            set.add(k);
+        }
+
+        if(set.size() != arrayList.size()){
+            answer = false;
+        }
+        
+        return answer;
+    }
+}
+```
+
+
+
+
+
 ## 주차 요금 계산
 ### 문제 요약
 
@@ -150,25 +196,7 @@ class Solution {
 
 
 
-## 주차 요금 계산
-### 문제 요약
 
-### 시간 복잡도 공간복잡도
-
-### 코드
-
-
-
-
-
-
-
-## 주차 요금 계산
-### 문제 요약
-
-### 시간 복잡도 공간복잡도
-
-### 코드
 
 
 
