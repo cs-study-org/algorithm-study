@@ -185,12 +185,35 @@ class Solution {
 
 
 
-## 주차 요금 계산
+## 위장
 ### 문제 요약
+[위장 문제 링크](https://programmers.co.kr/learn/courses/30/lessons/42578)
 
 ### 시간 복잡도 공간복잡도
+| time | space |
+|------|-------|
+| O(n+m) | O(1)  |
 
 ### 코드
+```java
+import java.util.*;
+
+class Solution {
+    public int solution(String[][] clothes) {
+        int answer = 1;
+        HashMap<String, Integer> map = new HashMap<>();
+
+        for(int i=0; i<clothes.length; i++){
+            map.put(clothes[i][1],map.getOrDefault(clothes[i][1],0)+1);
+        }
+        for(String key : map.keySet()){
+            answer *= (map.get(key)+1);
+        }
+        answer -=1;
+        return answer;
+    }
+}
+```
 
 
 
