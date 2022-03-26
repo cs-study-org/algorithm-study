@@ -76,34 +76,6 @@ Heap.prototype.extract = function () {
   return root;
 }
 
-Heap.prototype._binarySearch = function (value) {
-  let idx = 0;
-
-  while (
-    this.getLeftChild(idx) !== undefined
-    && this.getLeftChild(idx) >= value
-    || this.getRightChild(idx) >= value
-  ) {
-    if (this.getLeftChild(idx) === value)
-      return this.getLeftChildIdx(idx);
-
-    if (this.getRightChild(idx) === value)
-      return this.getRightChildIdx(idx);
-
-    let biggerIdx = this.getLeftChildIdx(idx);
-
-    if (
-      this.getRightChild(idx) !== undefined
-      && this.getRightChild(idx) > this.heap[biggerIdx]
-    )
-      biggerIdx = this.getRightChildIdx(idx);
-        
-    idx = biggerIdx;
-  }
-
-  return;
-}
-
 /**
  * @param {number} value
  * @returns {number}

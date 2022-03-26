@@ -1,29 +1,7 @@
 const Heap = require('./Heap');
 
-/*
-+++ Drive ADT
 
-obj.insert(2);
-obj.insert(7);
-obj.insert(26);
-obj.insert(25);
-obj.insert(19);
-obj.insert(17);
-obj.insert(1);
-obj.insert(90);
-obj.insert(3);
-obj.insert(36);
-
-console.log(util.inspect(obj, {showHidden: true, depth: null}))
-MinHeap { heap: [ 1, 3, 2, 7, 19, 26, 17, 90, 25, 36, [length]: 10 ] }
-
-
-obj.extract();
-
-console.log(util.inspect(obj, {showHidden: true, depth: null}))
-MinHeap { heap: [ 2, 3, 17, 7, 19, 26, 36, 90, 25, [length]: 9 ] }
-*/
-var MinHeap = function() {
+var MinHeap = function () {
   Heap.apply(this, arguments);
 };
 
@@ -31,39 +9,64 @@ MinHeap.prototype = Object.create(Heap.prototype);
 MinHeap.prototype.constructor = MinHeap;
 
 
-MinHeap.prototype._bubbleUp = function(){
-  let idx = this.heap.length - 1;
+MinHeap.prototype._bubbleUp = function (idx) {
 
-  while(
+  while (
     this.getParent(idx) !== undefined
-    && this.getParent(idx) > this.heap[idx])
-  {    
+    && this.getParent(idx) > this.heap[idx]) {
     const parentIdx = this.getParentIdx(idx);
 
     this.swap(idx, parentIdx);
-    idx = parentIdx;    
+    idx = parentIdx;
   }
 }
 
-MinHeap.prototype._bubbleDown = function(){
-  let idx = 0;
+MinHeap.prototype._bubbleDown = function (idx) {
 
-  while(
+  while (
     this.getLeftChild(idx) !== undefined
     && this.getLeftChild(idx) < this.heap[idx]
     || this.getRightChild(idx) < this.heap[idx]
-  ){
+  ) {
     let smallerIdx = this.getLeftChildIdx(idx);
 
-    if(
+    if (
       this.getRightChild(idx) !== undefined
       && this.getRightChild(idx) < this.heap[smallerIdx]
     )
       smallerIdx = this.getRightChildIdx(idx)
-      
+
     this.swap(idx, smallerIdx);
     idx = smallerIdx;
   }
+}
+
+MinHeap.prototype._binarySearch = function (value) {
+  let idx = 0;
+
+  while (
+    this.getLeftChild(idx) !== undefined
+    && this.getLeftChild(idx) <= value
+    || this.getRightChild(idx) <= value
+  ) {
+    if (this.getLeftChild(idx) === value)
+      return this.getLeftChildIdx(idx);
+
+    if (this.getRightChild(idx) === value)
+      return this.getRightChildIdx(idx);
+
+    let smallerIdx = this.getLeftChildIdx(idx);
+
+    if (
+      this.getRightChild(idx) !== undefined
+      && this.getRightChild(idx) < this.heap[smallerIdx]
+    )
+      smallerIdx = this.getRightChildIdx(idx);
+
+    idx = smallerIdx;
+  }
+
+  return;
 }
 
 /**
@@ -72,22 +75,39 @@ MinHeap.prototype._bubbleDown = function(){
  * 
  * time:      O(log n)
               → findIndex:    O(log n)      
-              → swap          O(1)
-              → shift         O(1)
-              → bubbleUp:     O(log n)
+              → swap          O(1)              
 
  * space:     O(1)
  */
-MinHeap.prototype.delete = function(value){
-  const idx = this.findIndex(value);
-  
-  if(idx === undefined)
-    return false;
-  
-  this.swap(0, idx);  
-  this.heap.shift();
+MinHeap.prototype.delete = function (value) {
+  const idx = this.findIndex(value);  
 
-  this._bubbleUp();
+  if (idx === undefined)
+    return false;
+
+  this.swap(this.size() - 1, idx);
+  this.heap.splice(this.size() - 1);
+
+  return true;
+}
+
+/**
+ * 
+ * @param {number} idx
+ * @param {number} value
+ * @returns {boolean}
+ * 
+ * time:      O(log n)
+ * space:     O(1)
+ */
+MinHeap.prototype.updateKey = function (idx, value) {
+  if (idx === undefined)
+    return false;
+
+  const oldValue = this.heap[idx];
+  this.heap[idx] = value;
+
+  oldValue < value ? this._bubbleDown(idx) : this._bubbleUp(idx);
 
   return true;
 }

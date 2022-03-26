@@ -9,7 +9,7 @@ MaxHeap.prototype = Object.create(Heap.prototype);
 MaxHeap.prototype.constructor = MaxHeap;
 
 
-MaxHeap.prototype._bubbleUp = function (idx) {  
+MaxHeap.prototype._bubbleUp = function (idx) {
 
   while (
     this.getParent(idx) !== undefined
@@ -21,7 +21,7 @@ MaxHeap.prototype._bubbleUp = function (idx) {
   }
 }
 
-MaxHeap.prototype._bubbleDown = function (idx) {  
+MaxHeap.prototype._bubbleDown = function (idx) {
 
   while (
     this.getLeftChild(idx) !== undefined
@@ -41,6 +41,34 @@ MaxHeap.prototype._bubbleDown = function (idx) {
   }
 }
 
+MaxHeap.prototype._binarySearch = function (value) {
+  let idx = 0;
+
+  while (
+    this.getLeftChild(idx) !== undefined
+    && this.getLeftChild(idx) >= value
+    || this.getRightChild(idx) >= value
+  ) {
+    if (this.getLeftChild(idx) === value)
+      return this.getLeftChildIdx(idx);
+
+    if (this.getRightChild(idx) === value)
+      return this.getRightChildIdx(idx);
+
+    let biggerIdx = this.getLeftChildIdx(idx);
+
+    if (
+      this.getRightChild(idx) !== undefined
+      && this.getRightChild(idx) > this.heap[biggerIdx]
+    )
+      biggerIdx = this.getRightChildIdx(idx);
+
+    idx = biggerIdx;
+  }
+
+  return;
+}
+
 /**
  * @param {number} value
  * @returns {boolean}
@@ -52,12 +80,12 @@ MaxHeap.prototype._bubbleDown = function (idx) {
  * space:     O(1)
  */
 MaxHeap.prototype.delete = function (value) {
-  const idx = this.findIndex(value);  
+  const idx = this.findIndex(value);
 
   if (idx === undefined)
-    return false;  
-  
-  this.swap(this.size() - 1, idx);  
+    return false;
+
+  this.swap(this.size() - 1, idx);
   this.heap.splice(this.size() - 1);
 
   return true;
@@ -73,7 +101,7 @@ MaxHeap.prototype.delete = function (value) {
  * space:     O(1)
  */
 MaxHeap.prototype.updateKey = function (idx, value) {
-  if(idx === undefined)
+  if (idx === undefined)
     return false;
 
   const oldValue = this.heap[idx];
