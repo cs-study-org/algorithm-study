@@ -35,5 +35,21 @@ describe('MaxHeap', _ => {
     it('display after delete heap', () => {
       assert.deepEqual(heap.heap, [36, 26, 17, 25, 19, 7, 1, 3]);
     })    
+
+    it('delete num', () => {
+      assert.equal(heap.delete(19), true);
+    })
+
+    it('display after delete heap', () => {
+      assert.deepEqual(heap.heap, [36, 26, 17, 25, 3, 7, 1]);
+    })    
+
+    it('update num', () => {
+      assert.equal(heap.updateKey(3, 30), true);
+    })
+
+    it('display after update heap', () => {
+      assert.deepEqual(heap.heap, [36, 30, 17, 26, 3, 7, 1]);
+    })    
   })
 })

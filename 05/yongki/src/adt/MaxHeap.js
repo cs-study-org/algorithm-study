@@ -1,5 +1,3 @@
-const util = require('util');
-
 const Heap = require('./Heap');
 
 
@@ -49,9 +47,7 @@ MaxHeap.prototype._bubbleDown = function (idx) {
  * 
  * time:      O(log n)
               → findIndex:    O(log n)      
-              → swap          O(1)
-              → shift         O(1)
-              → bubbleUp:     O(log n)      
+              → swap          O(1)              
               
  * space:     O(1)
  */
@@ -59,17 +55,10 @@ MaxHeap.prototype.delete = function (value) {
   const idx = this.findIndex(value);  
 
   if (idx === undefined)
-    return false;
-
-  console.log('before swap: ', util.inspect(this.heap, {showHidden: true, depth: null}))
+    return false;  
   
-  this.swap(0, idx);
-  this.heap.shift();
-  
-  console.log('after swap: ', util.inspect(this.heap, {showHidden: true, depth: null}))  
-  
-  this._bubbleUp(idx - 1);
-  console.log('after heapify: ', util.inspect(this.heap, {showHidden: true, depth: null}))  
+  this.swap(this.size() - 1, idx);  
+  this.heap.splice(this.size() - 1);
 
   return true;
 }
@@ -78,16 +67,21 @@ MaxHeap.prototype.delete = function (value) {
  * 
  * @param {number} idx
  * @param {number} value
- * @returns {void}
+ * @returns {boolean}
  * 
  * time:      O(log n)
  * space:     O(1)
  */
 MaxHeap.prototype.updateKey = function (idx, value) {
-  const oldValue = this.heap[idx - 1];
+  if(idx === undefined)
+    return false;
 
-  this.heap[idx - 1] = value;
-  oldValue > value ? this._bubbleDown() : this._bubbleUp();
+  const oldValue = this.heap[idx];
+  this.heap[idx] = value;
+
+  oldValue > value ? this._bubbleDown(idx) : this._bubbleUp(idx);
+
+  return true;
 }
 
 module.exports = MaxHeap; 

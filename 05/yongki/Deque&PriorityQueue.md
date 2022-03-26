@@ -123,6 +123,13 @@ Insertion / Deletion의 행위에 의해 1개가 될 때 위치를 동기화하�
 - `7662.js`가 문제 제출 형식을 맞춘 파일이다.
 - `stdin-7662`는 문제에서 제공한 입력 예제이다.
     > 파일 형식을 사용한 이유는 노드 환경에서 표준 입출력을 받는 작업이 어렵기 때문이다.
+- 필수 메소드 테스트는 다음 명령어로 확인할 수 있다.
+  ```bash
+  npm install -g mocha
+
+  mocha test\MaxHeap.test.js 
+  mocha test\MinHeap.test.js 
+  ```
 
 <dl><dt>
 문제에서 제공한 출력 예제가 정상적으로 나왔지만, 제출에서 메모리 초과 오류가 있다.
