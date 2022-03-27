@@ -3,6 +3,9 @@ var AdjacencyMatrix = function () {
 }
 
 AdjacencyMatrix.prototype._resizeGraph = function (vertex) {
+  if(this.matrix && vertex < this.matrix.size)
+    return this.matrix;
+
   const map = new Map();
 
   for (let i = 0; i <= vertex; i++) {
@@ -31,13 +34,22 @@ AdjacencyMatrix.prototype.insertVertex = function (vertex) {
 /**
  * @param {number} vertexA
  * @param {number} vertexB
+ * @param {boolean} undirected
  * @return {void}
  * 
  * time:    O(1)
  * space:   O(1)
  */
-AdjacencyMatrix.prototype.insertEdge = function (vertexA, vertexB) {
+AdjacencyMatrix.prototype.insertEdge = function (
+  vertexA,
+  vertexB,
+  undirected = false
+) {
   this.matrix.get(vertexA)[vertexB] = 1;
+
+  if (undirected)
+    this.matrix.get(vertexB)[vertexA] = 1;
+
   return;
 }
 
