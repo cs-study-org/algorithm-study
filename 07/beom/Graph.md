@@ -84,7 +84,7 @@
 #### 구현
 ADT/beom/Graph/Adjacencylist.java와
 
-[AdjacencyList 연결링크](#adjacencyList)
+[AdjacencyList 연결링크](#adjacency-list)
 
 ADT/beom/Graph/ListGraph.java파일에 구현해 놓았다.
 
