@@ -1,8 +1,8 @@
-var Graph = function () {
+var AdjacencyMatrix = function () {
   this.matrix = this._resizeGraph();
 }
 
-Graph.prototype._resizeGraph = function (vertex) {
+AdjacencyMatrix.prototype._resizeGraph = function (vertex) {
   const map = new Map();
 
   for (let i = 0; i <= vertex; i++) {
@@ -22,7 +22,7 @@ Graph.prototype._resizeGraph = function (vertex) {
  * time:    O(n²)
  * space:   O(1)
  */
-Graph.prototype.insertVertex = function (vertex) {
+AdjacencyMatrix.prototype.insertVertex = function (vertex) {
   this.matrix = this._resizeGraph(vertex);
 
   return;
@@ -36,7 +36,7 @@ Graph.prototype.insertVertex = function (vertex) {
  * time:    O(1)
  * space:   O(1)
  */
-Graph.prototype.insertEdge = function (vertexA, vertexB) {
+AdjacencyMatrix.prototype.insertEdge = function (vertexA, vertexB) {
   this.matrix.get(vertexA)[vertexB] = 1;
   return;
 }
@@ -48,7 +48,7 @@ Graph.prototype.insertEdge = function (vertexA, vertexB) {
  * time:    O(1)
  * space:   O(1)
  */
-Graph.prototype.deleteVertex = function (vertex) {
+AdjacencyMatrix.prototype.deleteVertex = function (vertex) {
   this.matrix.delete(vertex);
   return;
 }
@@ -61,7 +61,7 @@ Graph.prototype.deleteVertex = function (vertex) {
  * time:    O(1)
  * space:   O(1)
  */
-Graph.prototype.deleteEdge = function (vertexA, vertexB) {
+AdjacencyMatrix.prototype.deleteEdge = function (vertexA, vertexB) {
   this.matrix.get(vertexA)[vertexB] = 0;
   return;
 }
@@ -73,8 +73,8 @@ Graph.prototype.deleteEdge = function (vertexA, vertexB) {
  * time:    O(1)
  * space:   O(1)
  */
-Graph.prototype.adjacent = function (vertex) {
+AdjacencyMatrix.prototype.adjacent = function (vertex) {
   return this.matrix.get(vertex);
 }
 
-module.exports = Graph;
+module.exports = AdjacencyMatrix;

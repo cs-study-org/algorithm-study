@@ -1,10 +1,10 @@
 const util = require('util');
 
-const Graph = require('../../../ADT/yongki/Graph');
+const AdjacencyMatrix = require('../../../ADT/yongki/Graph/AdjacencyMatrix');
 
 
 (function main() {
-  const graph = new Graph();
+  const graph = new AdjacencyMatrix();
 
   for (let i = 0; i <= 4; i++)
     graph.insertVertex(i);  

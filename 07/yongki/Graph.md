@@ -15,19 +15,28 @@
     그래프의 정점 수가 n이라면, n x n의 2차원 배열 M을 생성한다.
 
         if(간선(vertexA, vertexB)가 존재하면)
-           M[vertexA][vertexB] = 1
+          M[vertexA][vertexB] = 1
         else                                  
           M[vertexA][vertexB] = 0
 
     장점은
 
-        간선의 Search 행위에 O(1) 소요된다.        
+        정점과 간선의 Search 행위에 O(1) 소요된다.        
 
     단점은
 
         간선의 수와 무관하게 n²개의 메모리 공간이 필요하다.
 
 2. 인접 리스트
+    그래프 각각의 정점에 인접한 정점들을 연결 리스트로 표시한 것이다.
+
+    장점은
+
+        정점의 Search 행위에 O(1) 소요된다.
+
+    단점은
+
+        간선의 Search 행위에 O(n) 소요된다.
 
 그래프 순회는
 
