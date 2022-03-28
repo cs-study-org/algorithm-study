@@ -2,6 +2,9 @@
 
 - [그래프](#그래프)
   - [이론](#이론)
+  - [문제 리스트](#문제-리스트)
+    - [문제 회고](#문제-회고)
+    - [문제 풀이](#문제-풀이)
   - [참고 문헌](#참고-문헌)
 
 ## 이론
@@ -46,6 +49,32 @@
 
 </details>
 
+## 문제 리스트
+
+<details>
+<summary>1791. Find Center of Star Graph
+  <a href="https://leetcode.com/problems/find-center-of-star-graph/">👊</a>
+</summary>
+
+### 문제 회고
+
+처음 접근 방법은 인접 행렬을 사용하였다.
+
+행렬에 표시된 간선의 합이 제일 큰 배열의 정점을 구하면 된다고 생각하였다.
+
+하지만 `Time Limit Exceeded`에러가 발생하여서 인접 리스트를 사용하여 해결하였다.
+
+연결 리스트의 size 필드를 활용하면 더 간단히 해결할 수 있었다.
+
+### 문제 풀이
+
+> `src\1791.js`에서 확인할 수 있다.
+
+</details>
+
+<hr/>
+
 ## 참고 문헌
 
 [Update Javascript matrix issue](https://stackoverflow.com/questions/64669938/updating-an-element-in-javascript-2d-array-updates-entire-column) ━ *Stack overflow*
+[Simple Solution at 1791. Find Center of Star Graph](https://leetcode.com/problems/find-center-of-star-graph/discuss/1108868/JavaScript-Map-%2B-Adjacent-List) ━ *LeetCode*

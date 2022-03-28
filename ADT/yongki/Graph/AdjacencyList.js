@@ -13,21 +13,32 @@ var AdjacencyList = function () {
  * space:   O(n)
  */
 AdjacencyList.prototype.insertVertex = function (vertex) {
-  this.list.push(new SinglyLinkedList(vertex));
+  this.list[vertex] = new SinglyLinkedList(vertex);
   return;
 }
 
 /**
  * @param {number} vertexA
  * @param {number} vertexB
+ * @param {boolean} undirected
  * @return {void}
  * 
  * time:    O(1)
  * space:   O(1)
  */
-AdjacencyList.prototype.insertEdge = function (vertexA, vertexB) {
+AdjacencyList.prototype.insertEdge = function (
+  vertexA,
+  vertexB,
+  undirected = false
+) {
   const vertex = this.list[vertexA];
   vertex.insertFront(vertexB);
+
+  if (undirected) {
+    const vertex = this.list[vertexB];
+    vertex.insertFront(vertexA);
+  }
+
   return;
 }
 

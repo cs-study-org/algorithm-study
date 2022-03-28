@@ -1,11 +1,7 @@
 const assert = require('assert');
 const util = require('util');
 
-const AdjacencyMatrix = require('../../../ADT/yongki/Graph/AdjacencyMatrix');
-
-function sumArray(arr) {
-  return arr.reduce((a, b) => a + b, 0);
-}
+const AdjacencyList = require('../../../ADT/yongki/Graph/AdjacencyList');
 
 /**
  * @param {number[][]} edges
@@ -14,11 +10,11 @@ function sumArray(arr) {
 var findCenter = function (edges) {
   const vertexs = new Set([].concat(...edges));
 
-  const graph = new AdjacencyMatrix();
+  const graph = new AdjacencyList();
 
   for (const vertex of vertexs)
     graph.insertVertex(vertex);
-    
+
   for (const edge of edges) {
     const [vertexA, vertexB] = edge;
     graph.insertEdge(vertexA, vertexB, undirected = true);
@@ -27,7 +23,7 @@ var findCenter = function (edges) {
   let center = 0;
 
   for (const vertex of vertexs)
-    center = sumArray(graph.matrix.get(vertex)) > center ? vertex : center;
+    center = graph.list[vertex].size > center ? vertex : center;
 
   return center;
 };
@@ -41,5 +37,5 @@ var findCenter = function (edges) {
   assert.equal(
     findCenter([[1, 2], [5, 1], [1, 3], [1, 4]]),
     1
-  );  
+  );
 })();
