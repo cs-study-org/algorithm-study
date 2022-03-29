@@ -3,6 +3,10 @@ const util = require('util');
 
 const AdjacencyList = require('../../../ADT/yongki/Graph/AdjacencyList');
 
+var sortDescendObject = function(object){
+  return Object.entries(object).sort(([, a], [, b]) => b - a);
+}
+
 var makeTrustCounter = function (trust) {
   const trustCounter = {};
 
@@ -35,13 +39,16 @@ var isJudgeExist = function (list) {
  * @param {number[][]} trust
  * @return {number}
  * 
- * time:
- * space:
+ * a as n
+ * b as trust
+ * 
+ * time:   O(a + b)
+ * space:  O(ab)
  */
 var findJudge = function (n, trust) {
   const vertexs = n;
 
-  if (!trust.length)
+  if (!trust.length && vertexs === 1)
     return vertexs;
 
   const graph = new AdjacencyList();
@@ -54,9 +61,10 @@ var findJudge = function (n, trust) {
     graph.insertEdge(vertexA, vertexB);
   }
 
-  // console.log(util.inspect(graph, { showHidden: false, depth: null }));
-
   const trustCounter = makeTrustCounter(trust);
+
+  if(!trustCounter.length && !trust.length)
+    return -1;
 
   if (!isJudgeExist(graph.list))
     return -1;
@@ -64,17 +72,14 @@ var findJudge = function (n, trust) {
   if (isTrustEachother(trustCounter))
     return -1;
 
-  console.log(util.inspect(trustCounter, { showHidden: false, depth: null }));
-
-  const maxTrustOne = Number(Object.keys(trustCounter)[0]);
-  const maxTrustCount = Object.values(trustCounter)[0];
+  const [maxTrustOne, maxTrustCount] = sortDescendObject(trustCounter)[0];
   const maxTrustWithoutJudge = vertexs - 1;
 
   if (
-    (maxTrustWithoutJudge == maxTrustCount && trust.length === 1)
-    || maxTrustWithoutJudge == maxTrustCount
+    (maxTrustWithoutJudge === maxTrustCount && trust.length === 1)
+    || maxTrustWithoutJudge === maxTrustCount
   )
-    return maxTrustOne;
+    return Number(maxTrustOne);
 
   return -1;
 };
@@ -108,5 +113,20 @@ var findJudge = function (n, trust) {
   assert.equal(
     findJudge(4, [[1, 3], [1, 4], [2, 3]]),
     -1
+  );
+
+  assert.equal(
+    findJudge(1, []),
+    1
+  );
+
+  assert.equal(
+    findJudge(2, []),
+    -1
+  );
+
+  assert.equal(
+    findJudge(4, [[1, 2], [1, 3], [2, 1], [2, 3], [1, 4], [4, 3], [4, 1]]),
+    3
   );
 })();
