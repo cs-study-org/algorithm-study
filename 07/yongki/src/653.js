@@ -3,19 +3,43 @@ const util = require('util');
 
 const BinarySearchTree = require('../../../ADT/yongki/Tree/BinarySearchTree');
 
-var twoSum = function(nums, target) {
+var twoSum = function (nums, target) {
   const memory = {};
-  
-  for(let i = 0; i < nums.length; i++){
+
+  for (let i = 0; i < nums.length; i++) {
     const searchOne = target - nums[i];
-    
-    if(searchOne in memory)
+
+    if (searchOne in memory)
       return true;
-    
-    memory[nums[i]] = i;    
+
+    memory[nums[i]] = i;
   }
 
   return false;
+}
+
+var clusterNodesByLevel = function (node) {
+  const result = [];
+
+  var findNode = function (node, level) {
+    if (!node.value)
+      return;
+
+    if (!result[level])
+      result[level] = [];
+
+    result[level].push(node.value)
+
+    if (node.left)
+      findNode(node.left, level + 1);
+
+    if (node.right)
+      findNode(node.right, level + 1);
+  }
+
+  findNode(node, 0);
+
+  return result;
 }
 
 /**
@@ -29,24 +53,10 @@ var findTarget = function (root, k) {
   for (const value of root)
     tree.insert(value);
 
-  let treeNodeList = tree.convertPreorderList();
-  console.log(util.inspect(treeNodeList, { showHidden: false, depth: null }));
+  const cluster = clusterNodesByLevel(tree.root);
+  // console.log(util.inspect(cluster, { showHidden: false, depth: null }));  
 
-  const rootLevel = 0;
-  const clusterByLevel = [treeNodeList[rootLevel]];
-  treeNodeList = treeNodeList.slice(rootLevel + 1);
-
-  let degree = 2;
-
-  while (treeNodeList.length) {
-    const nodes = treeNodeList.slice(0, degree);
-    clusterByLevel.push(nodes);
-    
-    treeNodeList = treeNodeList.slice(degree);
-    degree *= 2;
-  }  
-
-  return clusterByLevel.some(nodes => twoSum(nodes, k));
+  return cluster.some(nodes => twoSum(nodes, k));
 };
 
 (function main() {
@@ -55,8 +65,8 @@ var findTarget = function (root, k) {
     true
   );
 
-  // assert.equal(
-  //   findTarget([5, 3, 6, 2, 4, null, 7], 28),
-  //   false
-  // );
+  assert.equal(
+    findTarget([5, 3, 6, 2, 4, null, 7], 28),
+    false
+  );
 })();

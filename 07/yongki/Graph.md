@@ -156,4 +156,6 @@ DFS를 사용하였다.
 
 [BFS 장·단점](https://mjmjmj98.tistory.com/95) ━ *Live passionate*
 
-[Tree 구현](https://www.geeksforgeeks.org/implementation-binary-search-tree-javascript/) ━ *GeeksforGeeks*
+[Implementation of Binary Search Tree in Javascript](https://www.geeksforgeeks.org/implementation-binary-search-tree-javascript/) ━ *GeeksforGeeks*
+
+[Get Level of a node in a Binary Tree](https://www.geeksforgeeks.org/get-level-of-a-node-in-a-binary-tree/) ━ *GeeksforGeeks*
