@@ -1,11 +1,13 @@
+package algorithmStudyGraph;
+
 import java.util.ArrayList;
 
 public class ListGraph {
     private ArrayList<ArrayList<Integer>> listGraph;
 
     //그래프 초기화
-    public ListGraph(int initSize){
-        this.listGraph = new ArrayList<ArrayList<Integer>>();//그래프 생성
+    public ListGraph(int initSize) {
+        this.listGraph = new ArrayList<ArrayList<Integer>>(); // 그래프 생성
 
         // 그래프 초기화
         // put(int x, int y) 에서 입력되는 정점의 값은 0 이상의 정수이나
@@ -17,30 +19,29 @@ public class ListGraph {
         // graph[1] -> 2 -> 3
         // graph[2] -> 1 -> 3 -> 4
         // graph[3] -> 1 -> 2 -> 4 -> 5
-        for(int i=0;i<initSize+1;i++){
+        for(int i=0; i<initSize+1; i++) {
             listGraph.add(new ArrayList<Integer>());
         }
     }
 
-    //그래프 return
-    public ArrayList<ArrayList<Integer>> getGraph(){
-        return this.listGraph;
+    //단방향 간선 추가
+    public void insertEdge(int vertexA, int vertexB){
+        listGraph.get(vertexA).add(vertexB);
     }
 
-    //그래프의 특정 노드 return
-    public ArrayList<Integer> getNode(int i){
-        return this.listGraph.get(i);
+    //정점 삭제
+    public void deleteVertex(int vertex){
+        listGraph.remove(Integer.valueOf(vertex));
     }
 
-    //그래프 추가(양방향)
-    public void put(int x, int y){
-        listGraph.get(x).add(y);
-        listGraph.get(y).add(x);
+    //단방향 간선 삭제
+    public void deleteEdge(int vertexA, int vertexB){
+        listGraph.get(vertexA).remove(Integer.valueOf(vertexB));
     }
 
-    //그래프 추가(단방향)
-    public void putSingle(int x, int y){
-        listGraph.get(x).add(y);
+    //정점에 인접한 정점 반환
+    public ArrayList<Integer> adjacent(int vertex){
+        return this.listGraph.get(vertex);
     }
 
     //그래프 출력(인접 리스트)
