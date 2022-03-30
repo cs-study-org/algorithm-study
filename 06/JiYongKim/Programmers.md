@@ -2,7 +2,6 @@
 
 - 구현 문제
     
-
     - 706. Design HashMap
         <details>
         <summary>Design HashMap</summary>
