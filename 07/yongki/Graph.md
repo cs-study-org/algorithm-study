@@ -19,6 +19,7 @@
 그래프는 2가지로 표현할 수 있다.
 
 1. 인접 행렬    
+   
     그래프의 정점 수가 n이라면, n x n의 2차원 배열 M을 생성한다.
 
        if(간선(vertexA, vertexB)가 존재하면)
@@ -28,7 +29,7 @@
 
     장점은
 
-       정점과 간선의 Search 행위에 O(1) 소요된다.        
+       정점과 간선의 Search 행위에 O(1) 소요된다.
 
     단점은
 
@@ -42,7 +43,6 @@
     | space |     `O(1)`     |    `O(1)`    |     `O(1)`     |    `O(1)`    |   `O(1)`   |
 
 2. 인접 리스트
-    내부 자료 구조를 배열을 사용한다.
     
     배열의 인덱스는 그래프의 정점을 나타내며
     
@@ -155,3 +155,5 @@ DFS를 사용하였다.
 [DFS 장·단점](https://mjmjmj98.tistory.com/94) ━ *Live passionate*
 
 [BFS 장·단점](https://mjmjmj98.tistory.com/95) ━ *Live passionate*
+
+[Tree 구현](https://www.geeksforgeeks.org/implementation-binary-search-tree-javascript/) ━ *GeeksforGeeks*
