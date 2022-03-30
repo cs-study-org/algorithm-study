@@ -1,17 +1,17 @@
-var AdjacencyMatrix = function () {
-  this.matrix = this._resizeGraph();
+var AdjacencyMatrix = function (vertexs) {
+  this.matrix = this._resizeGraph(vertexs)  
 }
 
-AdjacencyMatrix.prototype._resizeGraph = function (vertex) {
-  if(this.matrix && vertex < this.matrix.size)
+AdjacencyMatrix.prototype._resizeGraph = function (vertexs) {
+  if (this.matrix && vertexs < this.matrix.size)
     return this.matrix;
 
   const map = new Map();
 
-  for (let i = 0; i <= vertex; i++) {
+  for (let i = 0; i <= vertexs; i++) {
     map.set(i, []);
 
-    for (let j = 0; j <= vertex; j++)
+    for (let j = 0; j <= vertexs; j++)
       map.get(i).push(0);
   }
 

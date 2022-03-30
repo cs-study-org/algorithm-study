@@ -1,36 +1,8 @@
 const assert = require('assert');
 const util = require('util');
 
-const AdjacencyList = require('../../../ADT/yongki/Graph/AdjacencyList');
+const AdjacencyMatrix = require('../../../ADT/yongki/Graph/AdjacencyMatrix');
 
-
-Set.prototype.difference = function (setB) {
-  var difference = new Set(this);
-  for (var elem of setB) {
-    difference.delete(elem);
-  }
-  return difference;
-}
-
-var dfs = function (graph, source, destination, visited) {
-  if (!visited.has(source)) {
-    visited.add(source);
-
-    const difference = new Set(graph.adjacent(source)).difference(visited);
-
-    // console.log("ADJACENT:", util.inspect(new Set(graph.adjacent(source)), { showHidden: false, depth: null }));
-    // console.log("VISITED:", util.inspect(visited, { showHidden: false, depth: null }));
-    // console.log("DIFF:", util.inspect(difference, { showHidden: false, depth: null }));
-
-    for (const each of difference)
-      dfs(graph, each, destination, visited);
-  }  
-
-  if (visited.has(destination))
-    return true;
-
-  return false;
-}
 
 /**
  * @param {number} n
@@ -38,13 +10,16 @@ var dfs = function (graph, source, destination, visited) {
  * @param {number} source
  * @param {number} destination
  * @return {boolean}
+ * 
+ * v as vertexs
+ * e as edges
+ * 
+ * time:    O(v + e)
+ * space:   O(v + e)
  */
 var validPath = function (n, edges, source, destination) {
   const vertexs = n - 1;
-  const graph = new AdjacencyList();
-
-  for (let vertex = 0; vertex <= vertexs; vertex++)
-    graph.insertVertex(vertex);
+  const graph = new AdjacencyMatrix(vertexs);
 
   for (const edge of edges) {
     const [vertexA, vertexB] = edge;
@@ -52,8 +27,32 @@ var validPath = function (n, edges, source, destination) {
   }
 
   // console.log(util.inspect(graph, {showHidden: false, depth: null}));  
+  /**
+   * @param {AdjacencyList} graph 
+   * @param {number} source 
+   * @param {Set} visited 
+   * @returns 
+   * 
+   * time:  O(e)
+   * space: O(1)
+   */
+  return (function dfs(source, visited) {
+    if (!visited[source]) {
+      visited[source] = 1;
 
-  return dfs(graph, source, destination, new Set());
+      const neighbors = graph.adjacent(source);
+
+      neighbors.forEach((neighbor, index) => {
+        if (neighbor && !visited[index])
+          dfs(index, visited);
+      })
+    }
+
+    if (visited[destination])
+      return true;
+
+    return false;
+  })(source, new Array(n));
 };
 
 (function main() {
