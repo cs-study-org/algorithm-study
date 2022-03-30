@@ -59,7 +59,6 @@
 
 ### 번외)
 
-[https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=demonic3540&logNo=221227400125](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=demonic3540&logNo=221227400125)
 
 ### ADT(Abstract Data Type) 란??
 
