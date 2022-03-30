@@ -4,7 +4,7 @@
 
 ## 그래프의 용어
 
-![스크린샷 2022-03-30 오후 8.39.10.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6807d0d0-481b-4783-9e3b-067efa08b8b5/스크린샷_2022-03-30_오후_8.39.10.png)
+<img width="580" alt="스크린샷 2022-03-31 오전 1 41 52" src="https://user-images.githubusercontent.com/81874493/160887807-f65d9b11-1b54-4bf7-ab0e-f4e098bf103d.png">
 
 - 파란색 동그라미 : 정점 ( Vertex )
 - 검정색 실선 : 간선 ( Edge )
@@ -13,8 +13,8 @@
 
 - 방향 그래프
     
-    ![스크린샷 2022-03-30 오후 8.41.07.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/31b9f2e7-7688-4360-b421-08f7614b50b6/스크린샷_2022-03-30_오후_8.41.07.png)
-    
+    <img width="517" alt="스크린샷 2022-03-31 오전 1 42 01" src="https://user-images.githubusercontent.com/81874493/160887841-ce717f0b-14ac-4f1b-ae50-1d420ceeeb8d.png">
+
     - 방향 그래프는 간선의 방향이 존재하는 그래프
     - ex)
         - SNS 팔로우
@@ -30,8 +30,8 @@
             
 - 무방향 그래프
     
-    ![스크린샷 2022-03-30 오후 8.46.16.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/92962061-0b53-4e0f-a095-b433e2f3693b/스크린샷_2022-03-30_오후_8.46.16.png)
-    
+    <img width="492" alt="스크린샷 2022-03-31 오전 1 42 06" src="https://user-images.githubusercontent.com/81874493/160887860-9e5cf6ff-be52-4e66-a8b5-f7de8372444c.png">
+
     - 무방향 그래프는 간선의 방향이 없어 서로간 왕복이 가능한 그래프
     
 
@@ -42,8 +42,8 @@
 - 인접 리스트 기반 그래프
     - 인접 리스트 기반 그래프는 연결 리스트 배열을 만들고 다음과 같이 표현한다.
     
-    ![스크린샷 2022-03-30 오후 8.49.41.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/075656d4-c5c5-42c5-b1e6-ad19706a592d/스크린샷_2022-03-30_오후_8.49.41.png)
-    
+    <img width="689" alt="스크린샷 2022-03-31 오전 1 42 12" src="https://user-images.githubusercontent.com/81874493/160887880-26d9a7f6-484e-4ff5-835e-ef2fbe7b200d.png">
+
 - 인접 행렬 기반 그래프
     - 인접 행렬 기반 그래프는 이차원 배열을 만들고
         - 연결된 곳은 1
@@ -52,8 +52,8 @@
             ⇒ 같이 표현한다.
             
     
-    ![스크린샷 2022-03-30 오후 8.49.56.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f0c78c2d-5e7b-4754-9d8e-cf79003c0dff/스크린샷_2022-03-30_오후_8.49.56.png)
-    
+    <img width="682" alt="스크린샷 2022-03-31 오전 1 42 18" src="https://user-images.githubusercontent.com/81874493/160887925-c036f1ef-07d5-48c9-831d-a5bddbc375f8.png">
+
 
 즉 그래프를 가지고 위의 2가지 방식으로 표현이 가능하다.
 
@@ -67,17 +67,19 @@ ADT의 정의 : **순수하게 기능이 무엇인지를 나열한 것을 가리
 
 ### ADT의 사용 사례
 
-C언어    
+C언어    
 
 - 구조체를 통해 사용자 정의 자료형이 정의된다. 지갑의 예를 들어보자.
     
-    ![https://mblogthumb-phinf.pstatic.net/MjAxODAzMTJfMzcg/MDAxNTIwODUzNzI1NTA1.0cB6D2CC6cz4LJEVL4v6p3pPK80L4DNndbCN7KUQINwg.dh8cvREwEIIXAd65WjiZ0FIhmAJluWodIQ4HwPAfNEgg.PNG.demonic3540/image.png?type=w800](https://mblogthumb-phinf.pstatic.net/MjAxODAzMTJfMzcg/MDAxNTIwODUzNzI1NTA1.0cB6D2CC6cz4LJEVL4v6p3pPK80L4DNndbCN7KUQINwg.dh8cvREwEIIXAd65WjiZ0FIhmAJluWodIQ4HwPAfNEgg.PNG.demonic3540/image.png?type=w800)
-    
+
+    <img width="585" alt="스크린샷 2022-03-31 오전 1 42 24" src="https://user-images.githubusercontent.com/81874493/160887977-88f3a180-1553-4f90-9f6c-ce099239bb8b.png">
+
 
 - 위의 구조체 정의를 통해 Wallet 자료형을 정의하고 속성으로 500원 동전, 1000원 지폐가 몇 개 담겨 있느냐를 표현하였다.(그러나 Wallet자료형에는 돈을 빼는 것, 돈을 넣는 것 이라는 기능이 있을 수 있다.)
     
-    ![https://mblogthumb-phinf.pstatic.net/MjAxODAzMTJfMjU4/MDAxNTIwODUzODQ2MDQy.hpFuhI-mGb_SXqqxAVVEDLHY0T1bw5q_3fo0NTnRH3og.dT_ktwEIxxLDXowFMcG9vv7X5NwRV8IP8WmszwmsTYUg.PNG.demonic3540/image.png?type=w800](https://mblogthumb-phinf.pstatic.net/MjAxODAzMTJfMjU4/MDAxNTIwODUzODQ2MDQy.hpFuhI-mGb_SXqqxAVVEDLHY0T1bw5q_3fo0NTnRH3og.dT_ktwEIxxLDXowFMcG9vv7X5NwRV8IP8WmszwmsTYUg.PNG.demonic3540/image.png?type=w800)
-    
+
+    <img width="685" alt="스크린샷 2022-03-31 오전 1 42 32" src="https://user-images.githubusercontent.com/81874493/160888006-4a6d9a72-23ad-4553-8cf3-ee3172eea914.png">
+
     ⇒ 이 기능들을 담고 있는 함수가 구조체 아래의 두 함수이다.
     
 
