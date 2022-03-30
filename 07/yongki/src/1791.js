@@ -6,6 +6,12 @@ const AdjacencyList = require('../../../ADT/yongki/Graph/AdjacencyList');
 /**
  * @param {number[][]} edges
  * @return {number}
+ * 
+ * v as vertexs
+ * e as edges
+ * 
+ * time:  O(v + e)
+ * space: O(ve)
  */
 var findCenter = function (edges) {
   const vertexs = new Set([].concat(...edges));
