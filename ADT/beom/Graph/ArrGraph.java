@@ -1,3 +1,5 @@
+package algorithmStudyGraph;
+
 public class ArrGraph {
     private int[][] arrGraph;
 
@@ -11,19 +13,27 @@ public class ArrGraph {
         this.arrGraph = new int[initSize +1][initSize +1];
     }
 
-    //그래프 return
-    public int[][] getGraph(){
-        return this.arrGraph;
+
+    //단방향 간선 추가
+    public void insertEdge(int vertexA, int vertexB){
+        arrGraph[vertexA][vertexB] = 1;
     }
 
-    //그래프 추가(양방향)
-    public void put(int x, int y){
-        arrGraph[x][y] = arrGraph[y][x] = 1;
+    //정점 삭제
+    public void deleteVertex(int vertex){
+        for(int i=0;i<arrGraph[vertex].length;i++){
+            arrGraph[vertex][i] = 0;
+        }
     }
 
-    //그래프 추가(단방향)
-    public void putSingle(int x, int y){
-        arrGraph[x][y] = 1;
+    //단방향 간선 삭제
+    public void deleteEdge(int vertexA, int vertexB){
+        arrGraph[vertexA][vertexB] = 0;
+    }
+
+    //정점에 인접한 정점 반환
+    public int[] adjacent(int vertex){
+        return this.arrGraph[vertex];
     }
 
     //그래프 출력(인접 행렬)
