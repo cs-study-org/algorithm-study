@@ -4,6 +4,14 @@ const util = require('util');
 const AdjacencyMatrix = require('../../../ADT/yongki/Graph/AdjacencyMatrix');
 
 
+Set.prototype.difference = function (setB) {
+  var difference = new Set(this);
+  for (var elem of setB) {
+    difference.delete(elem);
+  }
+  return difference;
+}
+
 /**
  * @param {number} n
  * @param {number[][]} edges
@@ -17,42 +25,41 @@ const AdjacencyMatrix = require('../../../ADT/yongki/Graph/AdjacencyMatrix');
  * time:    O(v + e)
  * space:   O(v + e)
  */
-var validPath = function (n, edges, source, destination) {
-  const vertexs = n - 1;
-  const graph = new AdjacencyMatrix(vertexs);
+var validPath = function (n, edges, source, destination) {  
+  const graph = new AdjacencyMatrix();
 
-  for (const edge of edges) {
-    const [vertexA, vertexB] = edge;
-    graph.insertEdge(vertexA, vertexB, undirected = true);
-  }
+  for (const [vertexA, vertexB] of edges)
+    graph.insertAdjacnetVertex(vertexA, vertexB, undirected = true);
+  
+  // console.log(util.inspect(graph, {showHidden: false, depth: null})); 
 
-  // console.log(util.inspect(graph, {showHidden: false, depth: null}));  
   /**
    * @param {AdjacencyList} graph 
    * @param {number} source 
    * @param {Set} visited 
-   * @returns 
+   * @returns {boolean}
    * 
    * time:  O(e)
-   * space: O(1)
+   * space: O(e)
    */
   return (function dfs(source, visited) {
-    if (!visited[source]) {
-      visited[source] = 1;
+    if (!visited.has(source)) {
+      visited.add(source);
 
-      const neighbors = graph.adjacent(source);
-
-      neighbors.forEach((neighbor, index) => {
-        if (neighbor && !visited[index])
-          dfs(index, visited);
-      })
+      const neighbors = new Set(graph.adjacent(source));
+      const accesibleNeighbors = neighbors.difference(visited);
+      
+      // console.log("ACCESIBLE NEIGHBOR:", util.inspect(accesibleNeighbors, {showHidden: false, depth: null})); 
+      
+      for (const neighbor of accesibleNeighbors)
+        dfs(neighbor, visited);
     }
 
-    if (visited[destination])
+    if (visited.has(destination))
       return true;
 
     return false;
-  })(source, new Array(n));
+  })(source, new Set());
 };
 
 (function main() {
