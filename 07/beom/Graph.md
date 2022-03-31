@@ -153,6 +153,7 @@ ADT/beom/Graph/ArrGraph.java 파일에 구현해 놓았다.
 
 - 사용하는 경우
   - 모든 경로를 방문해야하는 경우
+  - 순환 탐지
 
 ![DFS 동작](asset/dfs.png)
 
