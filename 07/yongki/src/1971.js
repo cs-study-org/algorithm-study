@@ -2,15 +2,8 @@ const assert = require('assert');
 const util = require('util');
 
 const AdjacencyMatrix = require('../../../ADT/yongki/Graph/AdjacencyMatrix');
+const Stack = require('../../../ADT/yongki/Stack');
 
-
-Set.prototype.difference = function (setB) {
-  var difference = new Set(this);
-  for (var elem of setB) {
-    difference.delete(elem);
-  }
-  return difference;
-}
 
 /**
  * @param {number} n
@@ -22,44 +15,53 @@ Set.prototype.difference = function (setB) {
  * v as vertexs
  * e as edges
  * 
- * time:    O(v + e)
- * space:   O(v + e)
+ * time:    O(e)
+ *          → make graph:     O(e)
+ *          → iterate dfs:    O(e)
+ * 
+ * space:   O(v)
  */
-var validPath = function (n, edges, source, destination) {  
+var validPath = function (n, edges, source, destination) {
   const graph = new AdjacencyMatrix();
 
   for (const [vertexA, vertexB] of edges)
     graph.insertAdjacnetVertex(vertexA, vertexB, undirected = true);
-  
-  // console.log(util.inspect(graph, {showHidden: false, depth: null})); 
 
-  /**
-   * @param {AdjacencyList} graph 
-   * @param {number} source 
-   * @param {Set} visited 
+  /**   
    * @returns {boolean}
    * 
+   * stack is v but while O(1)?
+   * → while's loop less than v
+   * 
    * time:  O(e)
-   * space: O(e)
+   * space: O(v)
    */
-  return (function dfs(source, visited) {
-    if (!visited.has(source)) {
-      visited.add(source);
+  function dfs() {
+    const stack = new Stack(n);
+    const visited = new Array(n).fill(false);
 
-      const neighbors = new Set(graph.adjacent(source));
-      const accesibleNeighbors = neighbors.difference(visited);
+    stack.push(source);
+    visited[source] = true;
+
+    while (!stack.isEmpty()) {      
+      const top = stack.peek();      
+
+      if (top === destination)
+      return true;
       
-      // console.log("ACCESIBLE NEIGHBOR:", util.inspect(accesibleNeighbors, {showHidden: false, depth: null})); 
+      stack.pop();            
+      visited[top] = true;            
       
-      for (const neighbor of accesibleNeighbors)
-        dfs(neighbor, visited);
+      for (const neighbor of graph.adjacent(top)) {
+        if (!visited[neighbor])
+          stack.push(neighbor);        
+      }      
     }
 
-    if (visited.has(destination))
-      return true;
-
     return false;
-  })(source, new Set());
+  }
+
+  return dfs();
 };
 
 (function main() {

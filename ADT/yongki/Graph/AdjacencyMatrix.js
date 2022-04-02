@@ -31,6 +31,25 @@ AdjacencyMatrix.prototype.insertVertex = function (vertex) {
   return;
 }
 
+AdjacencyMatrix.prototype.insertAdjacnetVertex = function (
+  vertexA,
+  vertexB,
+  undirected = false
+) {
+
+  if (this.matrix.has(vertexA))
+    this.matrix.get(vertexA).push(vertexB);
+  else
+    this.matrix.set(vertexA, [vertexB]);
+
+  if (undirected) {
+    if (this.matrix.has(vertexB))
+      this.matrix.get(vertexB).push(vertexA);
+    else
+      this.matrix.set(vertexB, [vertexA]);
+  }
+}
+
 /**
  * @param {number} vertexA
  * @param {number} vertexB
@@ -51,25 +70,6 @@ AdjacencyMatrix.prototype.insertEdge = function (
     this.matrix.get(vertexB)[vertexA] = 1;
 
   return;
-}
-
-AdjacencyMatrix.prototype.insertAdjacnetVertex = function (
-  vertexA,
-  vertexB,
-  undirected = false
-) {
-
-  if (this.matrix.has(vertexA))
-    this.matrix.get(vertexA).push(vertexB);
-  else
-    this.matrix.set(vertexA, [vertexB]);
-
-  if (undirected) {
-    if (this.matrix.has(vertexB))
-      this.matrix.get(vertexB).push(vertexA);
-    else
-      this.matrix.set(vertexB, [vertexA]);
-  }
 }
 
 /**

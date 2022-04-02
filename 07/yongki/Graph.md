@@ -106,14 +106,54 @@
 
 그래프 탐색을 구현해보면서 특이점은
 
-|                                    | DFS                                                                                                      | BFS                                                 |
-| ---------------------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| 알고리즘 구현                      | 재귀 또는 스택                                                                                           | -                                                   |
-| 정점 기억 공간                     | 집합 또는 리스트                                                                                         | 큐                                                  |
-| 정점 기억 공간의 요소              | 재귀 사용시, 방문한 정점<br/> 스택 사용시, 방문하지 않은 정점                                            | 방문하지 않은 정점                                  |
-| 장점                               | 비교적 적은 정점을 기억하는 공간 필요                                                                    | 시작 정점에서 목표 정점까지 최단 경로를 보장        |
-| 단점                               | 최단 경로를 보장하지 않음<br/>  목표에 이르는 경로가 다수일 때, DFS는 경로를 찾으면 탐색을 종료하기 때문 | 경로가 매우 길 경우, 많은 정점을 기억하는 공간 필요 |  |
-| 해당 알고리즘만 사용해야 하는 경우 | 간선의 가중치가 1인 그래프에서<br/>가능한 모든 경로를 검색해야할 때                                      | 간선의 가중치가 1인 그래프에서<br/>최단 경로를 찾을 때  |
+<table>
+  <tr>
+    <th></th>    
+    <th colspan="2">DFS</th>
+    <th>BFS</th>
+  </tr>
+  <tr>
+    <td>알고리즘 구현</td>
+    <td>재귀</td>
+    <td>스택</td>
+    <td>큐</td>
+  </tr>
+  <tr>
+    <td>정점 기억 공간</td>
+    <td>집합 또는 리스트</td>
+    <td>스택 + 고정 배열</td>
+    <td>큐</td>
+  </tr>
+  <tr>
+    <td>정점 기억 공간의 요소</td>
+    <td>방문한 정점</td>    
+    <td>방문하지 않은 정점</td>
+    <td>방문하지 않은 정점</td>
+  </tr>
+  <tr>
+    <td>장점</td>
+    <td colspan="2">비교적 적은 정점을 기억하는 공간 필요</td>
+    <td>시작 정점에서 목표 정점까지 최단 경로를 보장</td>
+  </tr>
+  <tr>
+    <td>단점</td>
+    <td colspan="2">
+      최단 경로를 보장하지 않음.<br/>
+      목표에 이르는 경로가 다수일 때, DFS는 경로를 찾으면 탐색을 종료하기 때문
+    </td>
+    <td>경로가 매우 길 경우, 많은 정점을 기억하는 공간 필요</td>
+  </tr>
+  <tr>
+    <td rowspan="2">해당 알고리즘만 사용해야 하는 경우</td>
+    <td colspan="3">
+      간선의 가중치가 1인 그래프에서      
+    </td>    
+  </tr>
+  <tr>
+    <td colspan="2">가능한 모든 경로를 검색해야할 때</td>
+    <td>최단 경로를 찾을 때</td>
+  </tr>
+</table>
 
 </details>
 
@@ -172,13 +212,14 @@
 
 따라서, 절충안으로 인접 행렬을 사용하되 각 정점의 배열에는 인접한 정점을 넣게 하였다.
 
-<dl><dt>
-하지만, <code>Time Limit Exceeded</code>에러가 다시 발생되어 해결 중이다.
-</dt><dl>
 
 ### 문제 풀이
 
 DFS를 사용하였다.
+
+재귀를 사용하니 `Time Limit Exceeded`에러를 해결할 수 없었고,
+
+스택을 사용하여 해결할 수 있었다.
 
 > `src\1971.js`에서 확인할 수 있다.
 
@@ -216,6 +257,8 @@ DFS를 사용하였다.
 [Update Javascript matrix issue](https://stackoverflow.com/questions/64669938/updating-an-element-in-javascript-2d-array-updates-entire-column) ━ *Stack overflow*
 
 [Simple Solution at 1791. Find Center of Star Graph](https://leetcode.com/problems/find-center-of-star-graph/discuss/1108868/JavaScript-Map-%2B-Adjacent-List) ━ *LeetCode*
+
+[Simple Solution at 1971. Find if Path Exists in Graph](https://leetcode.com/problems/find-if-path-exists-in-graph/discuss/1407715/3-Solutions-BFS-DFS-Disjoint-set) ━ *LeetCode*
 
 [Simple Solution at 653. Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/discuss/1796620/JavaScript-98.82-Faster-Recursive-O(n)) ━ *LeetCode*
 
