@@ -21,14 +21,14 @@ var twoSum = function (nums, target) {
 var clusterNodesByLevel = function (node) {
   const result = [];
 
-  var findNode = function (node, level) {
-    if (!node.value)
+  var findNode = function (node, level) {    
+    if (!node.val)
       return;
 
     if (!result[level])
       result[level] = [];
 
-    result[level].push(node.value)
+    result[level].push(node.val);    
 
     if (node.left)
       findNode(node.left, level + 1);
@@ -48,25 +48,36 @@ var clusterNodesByLevel = function (node) {
  * @return {boolean}
  */
 var findTarget = function (root, k) {
-  const tree = new BinarySearchTree();
+  if (!root)
+    return false;  
 
-  for (const value of root)
-    tree.insert(value);
-
-  const cluster = clusterNodesByLevel(tree.root);
-  // console.log(util.inspect(cluster, { showHidden: false, depth: null }));  
-
+  const cluster = clusterNodesByLevel(root);  
   return cluster.some(nodes => twoSum(nodes, k));
 };
 
+function solutionHelper(values, output) {
+  const tree = new BinarySearchTree();
+
+  for (const value of values)
+    tree.insert(value);  
+  
+  // console.log(util.inspect(tree, { showHidden: false, depth: null }));
+  return findTarget(tree.root, output);
+}
+
 (function main() {
-  assert.equal(
-    findTarget([5, 3, 6, 2, 4, null, 7], 9),
-    true
-  );
+  // assert.equal(
+  //   solutionHelper([5, 3, 6, 2, 4, null, 7], 9),
+  //   true
+  // );
+
+  // assert.equal(
+  //   findTarget([5, 3, 6, 2, 4, null, 7], 28),
+  //   false
+  // );
 
   assert.equal(
-    findTarget([5, 3, 6, 2, 4, null, 7], 28),
-    false
+    solutionHelper([2, 1, 3], 3),
+    true
   );
 })();

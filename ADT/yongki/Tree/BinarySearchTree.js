@@ -22,7 +22,7 @@ BinarySearchTree.prototype.insert = function (value) {
 }
 
 BinarySearchTree.prototype.insertAtNode = function (node, newNode) {
-  if (node.value < newNode.value) {
+  if (node.val < newNode.val) {
     if (!node.right)
       node.right = newNode;
     else
@@ -47,15 +47,15 @@ BinarySearchTree.prototype.searchAtNode = function (node, value) {
   if (!node)
     return undefined;
 
-  if (value < node.value)
+  if (value < node.val)
     return this.searchAtNode(node.right, value)
-  else if (value > node.value)
+  else if (value > node.val)
     return this.searchAtNode(node.left, value)
   else
     return node;
 }
 
-BinarySearchTree.prototype.convertPreorderList = function () {
+BinarySearchTree.prototype.displayPreorder = function () {
   this.result = [];
 
   this.preorder(this.root);
@@ -65,7 +65,7 @@ BinarySearchTree.prototype.convertPreorderList = function () {
 
 BinarySearchTree.prototype.preorder = function (node) {
   if (node) {
-    this.result.push(node.value);
+    this.result.push(node.val);
     this.preorder(node.left);
     this.preorder(node.right);
   }
