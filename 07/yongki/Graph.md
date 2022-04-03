@@ -109,35 +109,39 @@
 <table>
   <tr>
     <th></th>    
-    <th colspan="2">DFS</th>
+    <th colspan="3">DFS</th>
     <th>BFS</th>
   </tr>
   <tr>
     <td>알고리즘 구현</td>
     <td>재귀</td>
-    <td>스택</td>
+    <td colspan="2">
+      <center>스택</center>
+    </td>
     <td>큐</td>
   </tr>
   <tr>
     <td>정점 기억 공간</td>
     <td>집합 또는 리스트</td>
-    <td>스택 + 고정 배열</td>
+    <td>스택</td>
+    <td>집합 또는 고정 배열</td>
     <td>큐</td>
   </tr>
   <tr>
     <td>정점 기억 공간의 요소</td>
     <td>방문한 정점</td>    
     <td>방문하지 않은 정점</td>
+    <td>방문한 정점</td>
     <td>방문하지 않은 정점</td>
-  </tr>
+  </tr>  
   <tr>
     <td>장점</td>
-    <td colspan="2">비교적 적은 정점을 기억하는 공간 필요</td>
+    <td colspan="3">비교적 적은 정점을 기억하는 공간 필요</td>
     <td>시작 정점에서 목표 정점까지 최단 경로를 보장</td>
   </tr>
   <tr>
     <td>단점</td>
-    <td colspan="2">
+    <td colspan="3">
       최단 경로를 보장하지 않음.<br/>
       목표에 이르는 경로가 다수일 때, DFS는 경로를 찾으면 탐색을 종료하기 때문
     </td>
@@ -145,12 +149,12 @@
   </tr>
   <tr>
     <td rowspan="2">해당 알고리즘만 사용해야 하는 경우</td>
-    <td colspan="3">
-      간선의 가중치가 1인 그래프에서      
+    <td colspan="4">
+      <center>간선의 가중치가 1인 그래프에서</center>
     </td>    
   </tr>
   <tr>
-    <td colspan="2">가능한 모든 경로를 검색해야할 때</td>
+    <td colspan="3">가능한 모든 경로를 검색해야할 때</td>
     <td>최단 경로를 찾을 때</td>
   </tr>
 </table>
@@ -260,6 +264,12 @@ DFS를 사용하였다.
 
 ### 문제 풀이
 
+만약 앞선 목차의 테스트 케이스가 맞다면, BST가 아닌 일반 트리일 경우에만 가능하다고 생각한다.
+
+일반 트리에서는 leaf가 3만 존재하는 경우가 있기 때문이다.
+
+탐색은 BFS를 사용하였다.
+
 > `src\653.js`에서 확인할 수 있다.
 
 </details>
@@ -274,7 +284,7 @@ DFS를 사용하였다.
 
 [Simple Solution at 1971. Find if Path Exists in Graph](https://leetcode.com/problems/find-if-path-exists-in-graph/discuss/1407715/3-Solutions-BFS-DFS-Disjoint-set) ━ *LeetCode*
 
-[Simple Solution at 653. Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/discuss/1796620/JavaScript-98.82-Faster-Recursive-O(n)) ━ *LeetCode*
+[Simple Solution at 653. Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/discuss/294012/Python-DFS-98-Speed) ━ *LeetCode*
 
 [DFS 장·단점](https://mjmjmj98.tistory.com/94) ━ *Live passionate*
 
