@@ -31,7 +31,7 @@ var validPath = function (n, edges, source, destination) {
    * @returns {boolean}
    * 
    * stack is v but while O(1)?
-   * → while's loop less than v
+   * → while's loop always less than v
    * 
    * time:  O(e)
    * space: O(v)
@@ -39,7 +39,7 @@ var validPath = function (n, edges, source, destination) {
   function dfs() {
     const stack = new Stack(n);
     const visited = new Array(n).fill(false);
-
+    
     stack.push(source);
     visited[source] = true;
 
@@ -47,7 +47,7 @@ var validPath = function (n, edges, source, destination) {
       const top = stack.peek();      
 
       if (top === destination)
-      return true;
+        return true;
       
       stack.pop();            
       visited[top] = true;            
