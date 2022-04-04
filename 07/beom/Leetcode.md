@@ -37,7 +37,7 @@ class Solution {
 }
 ```
 
-## 997. Find the Town Judge(틀림)
+## 997. Find the Town Judge
 ### 문제 요약
 마을 심판 찾기
 
@@ -56,16 +56,18 @@ import java.util.ArrayList;
 
 
 class Solution {
+
     public int findJudge(int n, int[][] trust) {
-        ListGraph listGraph = new ListGraph(n);
+        ListGraph listGraph1 = new ListGraph(n);
+        ListGraph listGraph2 = new ListGraph(n);
 
         for(int[] i : trust){
-            listGraph.insertEdge(i[0],i[1]);
+            listGraph1.insertEdge(i[0],i[1]);
+            listGraph2.insertEdge(i[1],i[0]);
         }
 
         for(int j=1; j<n+1;j++){
-            if(listGraph.getNode(j).size() == 0){
-                //System.out.println(j + "는 " + listGraph.getNode(j));
+            if(listGraph1.getNode(j).size() == 0 && listGraph2.getNode(j).size() == n-1){
                 return j;
             }
         }
@@ -84,11 +86,27 @@ class Solution {
 
 `L67`의 if를 타는데 j를 리턴하지 못한다...
 
+**문제 해결**
+
+위에 문제는 내가 테스트 테이스를 잘못 읽어 발생한 것 이였다.
+
+> Input: n = 3, trust = [[1,2],[2,3]]
+> Output: -1
+
+이 테스트 케이스를 돌려놓고 위에 테스트 케이스인줄 알았다.
+
+마을의 심판은 모든 사람에게 신뢰를 받아야 하므로 그래프를 하나더 만들어 그 마을 심판이 모든 사람들에게 신뢰를 받고 있는지를 추가로 검증하여 문제를 해결
+
 
 
 
 ## 997. Find the Town Judge
 ### 문제 요약
+그래프에 경로가 있는지 확인
+
+양방향 그래프가 있을 때
+
+n = 정점의 수, edges : 양방향 간선, source : 정점의 시작 번호, destination : 연결되었는지 안되었는지 확인
 ### 시간복잡도 공간 복잡도
 ### 코드
 
