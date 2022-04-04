@@ -251,7 +251,7 @@ DFS를 사용하였다.
 군집된 개체에 대한 결과값은 리트코드의 대표적 문제인 twoSum 문제를 활용하였다.
 
 <dl><dt>
-다음 테스트 케이스를 해결하지 못했다.
+처음 접근 방법에서 다음 테스트 케이스를 해결하지 못했었다.
 
 1, 3이 같은 level 일때 합은 4가 나와야 한다 생각했기 때문이다.
 
@@ -272,7 +272,18 @@ DFS를 사용하였다.
 
 탐색은 BFS를 사용하였다.
 
-> `src\653.js`에서 확인할 수 있다.
+<dl><dt>
+해당 테스트 케이스는 문제에서 Ouput이 true 였지만, 제출 과정에서 false여야 한다고 나왔는데.
+
+이는 제출 이슈가 있다고 판단하였다.
+
+    Input:     
+               root: [5,3,6,2,4,null,7]
+               k:    9
+    
+    Output:    false
+    Expected:  true
+</dt></dl>
 
 </details>
 
@@ -332,7 +343,7 @@ DFS를 사용하였다.
 
 [Simple Solution at 1971. Find if Path Exists in Graph](https://leetcode.com/problems/find-if-path-exists-in-graph/discuss/1407715/3-Solutions-BFS-DFS-Disjoint-set) ━ *LeetCode*
 
-[Simple Solution at 653. Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/discuss/294012/Python-DFS-98-Speed) ━ *LeetCode*
+[Simple Solution at 653. Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/discuss/1755863/BFS-Approach) ━ *LeetCode*
 
 [Simple Solution at 463. Island Perimeter](https://leetcode.com/problems/island-perimeter/discuss/95124/easy-javascript-solution) ━ *LeetCode*
 

@@ -33,6 +33,12 @@ var clusterNodesByLevel = function (node) {
  * @param {TreeNode} root
  * @param {number} k
  * @return {boolean}
+ * 
+ * v as vertexs
+ * e as edges
+ * 
+ * time:    O(v)
+ * space:   O(v)
  */
 var findTarget = function (root, k) {
   if (!root)
@@ -59,7 +65,6 @@ var findTarget = function (root, k) {
         queue.enQueue(front.right);
 
       queue.deQueue();
-      // console.log(util.inspect(queue, { showHidden: false, depth: null }));
     }
 
     return false;
@@ -73,8 +78,7 @@ function solutionHelper(values, output) {
 
   for (const value of values)
     tree.insert(value);
-
-  // console.log(util.inspect(tree, { showHidden: false, depth: null }));
+  
   return findTarget(tree.root, output);
 }
 
@@ -84,13 +88,13 @@ function solutionHelper(values, output) {
     true
   );
 
-  // assert.equal(
-  //   findTarget([5, 3, 6, 2, 4, null, 7], 28),
-  //   false
-  // );
+  assert.equal(
+    solutionHelper([5, 3, 6, 2, 4, null, 7], 28),
+    false
+  );
 
-  // assert.equal(
-  //   solutionHelper([2, 1, 3], 3),
-  //   true
-  // );
+  assert.equal(
+    solutionHelper([2, 1, 3], 3),
+    true
+  );
 })();
