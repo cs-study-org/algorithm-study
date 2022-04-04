@@ -1,4 +1,4 @@
-const SinglyLinkedList = require('../../../ADT/yongki/LinkedList/SinglyLinkedList');
+const SinglyLinkedList = require('../LinkedList/SinglyLinkedList');
 
 
 var AdjacencyList = function () {
