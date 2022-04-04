@@ -2,6 +2,8 @@
 
 ## 목차
 ## 1791. Find Center of Star Graph
+## 997. Find the Town Judge
+## 1971. Find if Path Exists in Graph
 
 
 ## 1791. Find Center of Star Graph
@@ -100,20 +102,58 @@ class Solution {
 
 
 
-## 997. Find the Town Judge
+## 1971. Find if Path Exists in Graph
 ### 문제 요약
 그래프에 경로가 있는지 확인
 
 양방향 그래프가 있을 때
 
-n = 정점의 수, edges : 양방향 간선, source : 정점의 시작 번호, destination : 연결되었는지 안되었는지 확인
+n = 정점의 수, edges : 양방향 간선, source : 정점의 시작 번호, destination : 정점의 끝 번호
+
+시작에 끝으로 끝나면 true, 아니면 false를 반환해라
+
 ### 시간복잡도 공간 복잡도
+| time | space |
+|------|-------|
+| O(n^2) | O(n)  |
+
 ### 코드
+```java
+class Solution {
+    public boolean validPath(int n, int[][] edges, int source, int destination) {
+        if(edges.length == 0)
+            return true;
 
+        ListGraph listGraph = new ListGraph(n);
 
+        for(int[] edge : edges){
+            listGraph.put(edge[0],edge[1]);
+        }
 
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(source);
 
+        boolean[] visited = new boolean[n];
 
+        while (!queue.isEmpty()){
+            int node = queue.remove();
+            visited[node] = true;
+
+            for(Integer i : listGraph.getNode(node)){
+                if(i == destination){
+                    return true;
+                }
+                if(!visited[i]){
+                    queue.add(i);
+                }
+            }
+        }
+        return false;
+    }
+
+    //Graph 클래스 생략 => 해당 클래스 위치 : ADT/ListGraph.java
+}
+```
 
 
 
