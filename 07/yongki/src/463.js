@@ -1,55 +1,37 @@
 const assert = require('assert');
-const util = require('util');
-
-const Stack = require('../../../ADT/yongki/Stack');
 
 /**
  * @param {number[][]} grid
  * @return {number}
+ * 
+ * time:    O(n²)
+ * space:   O(1)
  */
 var islandPerimeter = function (grid) {
-  const vertexs = grid.length;
+  const rows = grid.length - 1;
+  const cols = grid[0].length - 1;
+
   let perimeter = 0;
 
-  (function dfs(source) {
-    const stack = new Stack(vertexs);
-    const visited = new Array(vertexs).fill(false);
+  for (let row = 0; row <= rows; row++) {
+    for (let col = 0; col <= cols; col++) {
+      if (grid[row][col]) {
+        perimeter += 4;
 
-    stack.push(source);
-    visited[source] = true;
+        if (row < rows && grid[row + 1][col])
+          perimeter--;
 
-    while (!stack.isEmpty()) {
-      const top = stack.pop();
+        if (col < cols && grid[row][col + 1])
+          perimeter--;
 
-      visited[top] = true;
+        if (row && grid[row - 1][col])
+          perimeter--;
 
-      for (let vertex = 0; vertex < vertexs; vertex++) {
-        const isNeighbor = grid[top][vertex];
-
-        if (isNeighbor && !visited[vertex]) {
-          perimeter += 4;
-
-          if (top < vertexs - 1 && grid[top + 1][vertex])
-            perimeter--;
-
-          if (top < vertexs - 1 && grid[top][vertex + 1])
-            perimeter--;
-
-          if (top && grid[top - 1][vertex])
-            perimeter--;
-
-          if (vertex && grid[top][vertex - 1])
-            perimeter--;
-
-          stack.push(vertex);
-        }
+        if (col && grid[row][col - 1])
+          perimeter--;
       }
-
-      console.log(util.inspect(visited, { showHidden: false, depth: null }));
     }
-
-    return;
-  })(0);
+  }
 
   return perimeter;
 };

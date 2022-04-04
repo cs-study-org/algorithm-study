@@ -11,6 +11,8 @@
     - [문제 풀이](#문제-풀이-2)
     - [문제 회고](#문제-회고-3)
     - [문제 풀이](#문제-풀이-3)
+    - [문제 회고](#문제-회고-4)
+    - [문제 풀이](#문제-풀이-4)
   - [참고 문헌](#참고-문헌)
 
 ## 이론
@@ -274,6 +276,52 @@ DFS를 사용하였다.
 
 </details>
 
+<details>
+<summary>463. Island Perimeter
+  <a href="https://leetcode.com/problems/island-perimeter/">👊</a>
+</summary>
+
+### 문제 회고
+
+해당 문제는 그래프 탐색을 사용할 수 없었다.
+
+행렬의 요소를 모두 순회 해야하는데, 그래프는 정점의 개수만 순회한다.
+
+주어진 Input을 다음과 같이 그래프로 변환 해보았을 때, 
+
+<table>
+  <tr>
+    <th>Input</th>
+    <th>그래프</th>
+  </tr>
+  <tr>
+    <td>
+<p>
+
+    [
+      [0, 1, 0, 0], 
+      [1, 1, 1, 0], 
+      [0, 1, 0, 0], 
+      [1, 1, 0, 0]
+    ]
+</p>
+    </td>
+    <td><center><img src="assets/463.jpg"/></center></td>
+  </tr>
+</table>
+
+그래프 탐색으로 탐색 정점의 인접 정점을 파악할 수 있어도,
+
+행렬 구조에서 보이는 같은 행 또는 같은 열 간의 관계로 만들어진 Ouput을 
+
+그래프에서 그대로 도출하기 힘들다고 판단하였다.
+
+### 문제 풀이
+
+> `src\463.js`에서 확인할 수 있다.
+
+</details>
+
 <hr/>
 
 ## 참고 문헌
@@ -285,6 +333,8 @@ DFS를 사용하였다.
 [Simple Solution at 1971. Find if Path Exists in Graph](https://leetcode.com/problems/find-if-path-exists-in-graph/discuss/1407715/3-Solutions-BFS-DFS-Disjoint-set) ━ *LeetCode*
 
 [Simple Solution at 653. Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/discuss/294012/Python-DFS-98-Speed) ━ *LeetCode*
+
+[Simple Solution at 463. Island Perimeter](https://leetcode.com/problems/island-perimeter/discuss/95124/easy-javascript-solution) ━ *LeetCode*
 
 [DFS 장·단점](https://mjmjmj98.tistory.com/94) ━ *Live passionate*
 
