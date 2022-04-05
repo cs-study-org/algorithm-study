@@ -1,6 +1,10 @@
 const util = require('util');
 
-
+/** 
+ * @param {number[]} distances 
+ * @param {boolean[]} visited 
+ * @returns {number}
+ */
 function findShortestVertexIdx(distances, visited) {
   let shortest = undefined;
   let shortestDistance = 0;
@@ -8,7 +12,7 @@ function findShortestVertexIdx(distances, visited) {
   for (let i = 0; i < distances.length; i++) {
     const isShortest = !shortest || distances[i] < shortestDistance;
 
-    if (isShortest && !visited[i]){
+    if (isShortest && !visited[i]) {
       shortest = i;
       shortestDistance = distances[i];
     }
@@ -17,47 +21,78 @@ function findShortestVertexIdx(distances, visited) {
   return shortest;
 }
 
+/** 
+ * @param {string[]} vertexs 
+ * @param {number[][]} graph 
+ * @param {number} srcIdx 
+ * @param {number} destIdx 
+ * @returns {Object}
+ * 
+ * time:    O(n²)
+ * space:   O(n)
+ */
 function findShortestPath(vertexs, graph, srcIdx, destIdx) {
+  /**   
+   * @param {string[]} parents 
+   * @returns {string[]}
+   * 
+   * time:    O(n²)
+   * space:   O(1)
+   */
+  function makePathBySrc(parents) {
+    const pathBySrc = [vertexs[destIdx]];
+    let parent = parents[destIdx];
+
+    while (parent) {
+      pathBySrc.push(parent);
+      parent = parents[vertexs.indexOf(parent)];
+    }
+
+    pathBySrc.push(vertexs[srcIdx]);
+    return [...pathBySrc].reverse();
+  }
+
   const vtxSize = vertexs.length;
   const src = vertexs[srcIdx];
   const distances = graph[src];
-  const paths = new Array(vtxSize).fill(undefined);
+  const parents = new Array(vtxSize).fill(undefined);
   const visited = new Array(vtxSize).fill(false);
-  
-  paths[srcIdx] = src;
-  visited[srcIdx] = true;  
 
-  console.log("distances:", util.inspect(distances, { showHidden: false, depth: null }));
+  parents[srcIdx] = src;
+  visited[srcIdx] = true;
 
-  while(true){        
-    const shortestIdx = findShortestVertexIdx(distances, visited);
+  let shortestIdx = findShortestVertexIdx(distances, visited);
+
+  while (vertexs[shortestIdx]) {
     const shortestVtx = vertexs[shortestIdx];
 
-    if(shortestIdx === destIdx)
-      break;
-  
     visited[shortestIdx] = true;
-    console.log("shortest:", util.inspect(shortestVtx, { showHidden: false, depth: null }));    
 
     const distance = distances[shortestIdx];
-    const neighbors = graph[shortestVtx];    
+    const neighbors = graph[shortestVtx];
 
     for (let neighborIdx = 0; neighborIdx < vtxSize; neighborIdx++) {
-      if(neighborIdx === srcIdx)
+      const neighbor = neighbors[neighborIdx];
+
+      if (neighborIdx === srcIdx)
         continue;
 
-      const newDistance = distance + neighbors[neighborIdx];
+      if (neighbor === Infinity)
+        continue;
+
+      const newDistance = distance + neighbor;
 
       if (!visited[neighborIdx] && distances[neighborIdx] > newDistance) {
         distances[neighborIdx] = newDistance
-        paths[neighborIdx] = shortestVtx;
+        parents[neighborIdx] = shortestVtx;
       }
-    }        
-  }  
+    }
+    shortestIdx = findShortestVertexIdx(distances, visited);
+  }
 
   return {
     distance: distances[destIdx],
-    path: paths
+    path: makePathBySrc(parents)
   };
 }
 
