@@ -16,9 +16,11 @@
     정점 수 만큼의 고정 배열이 아닌 
 
         {
-          A: [0, 4, 1, Infinity, Infinity]
-          B: [Infinity, 0, Infinity, Infinity, 4]
-          ...
+          'A': [0, 4, 1, Infinity, Infinity],
+          'B': [Infinity, 0, Infinity, Infinity, 4],
+          'C': [Infinity, 2, 0, 4, Infinity],
+          'D': [Infinity, Infinity, Infinity, 0, 4],
+          'E': [Infinity, Infinity, Infinity, Infinity, 0]
         }
         
     인접한 정점만 나타낸 객체를 사용하였다.
