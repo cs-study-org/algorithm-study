@@ -1,17 +1,21 @@
-var AdjacencyMatrix = function (vertexs) {
-  this.matrix = this._resizeGraph(vertexs)
+var AdjacencyMatrix = function (vertexs, startWith) {
+  this.matrix = this._resizeGraph(vertexs, startWith)
 }
 
-AdjacencyMatrix.prototype._resizeGraph = function (vertexs) {
+AdjacencyMatrix.prototype._resizeGraph = function (
+  vertexs,
+  startWith = 0
+) {
   if (this.matrix && vertexs < this.matrix.size)
     return this.matrix;
 
   const map = new Map();
+  const lastIdx = startWith ? vertexs : vertexs - 1;
 
-  for (let i = 0; i <= vertexs; i++) {
+  for (let i = startWith; i <= lastIdx; i++) {
     map.set(i, []);
 
-    for (let j = 0; j <= vertexs; j++)
+    for (let j = startWith; j <= lastIdx; j++)
       map.get(i).push(0);
   }
 
@@ -62,12 +66,13 @@ AdjacencyMatrix.prototype.insertAdjacnetVertex = function (
 AdjacencyMatrix.prototype.insertEdge = function (
   vertexA,
   vertexB,
+  weight = 1,
   undirected = false
 ) {
-  this.matrix.get(vertexA)[vertexB] = 1;
+  this.matrix.get(vertexA)[vertexB] = weight;
 
   if (undirected)
-    this.matrix.get(vertexB)[vertexA] = 1;
+    this.matrix.get(vertexB)[vertexA] = weight;
 
   return;
 }
