@@ -16,7 +16,7 @@ AdjacencyMatrix.prototype._resizeGraph = function (
     map.set(i, []);
 
     for (let j = startWith; j <= lastIdx; j++)
-      map.get(i).push(0);
+      i === j ? map.get(i).push(0): map.get(i).push(Infinity);
   }
 
   return map;
