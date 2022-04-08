@@ -28,6 +28,23 @@ var networkDelayTime = function (times, n, k) {
   const distances = new Array(n).fill(0);
   const parents = new Array(n).fill(undefined);
 
+  function sumDelayTime(parents) {
+    const destNode = parents.indexOf(max(...parents)) + 1;
+    let parent = destNode;
+    let time = 0;
+
+    while (parent) {
+      const distance = distances[parent - 1];
+
+      if (distance)
+        time += distance;
+
+      parent = parents[parent - 1];
+    }
+
+    return time;
+  }
+
   function dfs() {
     const stack = new Stack(n);
     const visited = new Array(n).fill(false);
@@ -53,27 +70,15 @@ var networkDelayTime = function (times, n, k) {
         }
       }
 
-      console.log(util.inspect(stack, { showHidden: false, depth: null }))
+      // console.log(util.inspect(stack, { showHidden: false, depth: null }))
     }
   }
   dfs();
 
-  console.log(util.inspect(distances, { showHidden: false, depth: null }))
-  console.log(util.inspect(parents, { showHidden: false, depth: null }))
+  console.log("DISTANCES:", util.inspect(distances, { showHidden: false, depth: null }))
+  console.log("PARENTS:", util.inspect(parents, { showHidden: false, depth: null }))
 
-  const destNode = max(...parents);
-  let parent = destNode;
-  let time = distances[parent - 1];
-
-  while (parent) {
-    const distance = distances[parent - 1];
-
-    if (distance)
-      time += distance;
-
-    parent = parents[parent - 1];
-  }
-
+  const time = sumDelayTime(parents);
   return time ? time : -1;
 };
 
@@ -87,14 +92,14 @@ var networkDelayTime = function (times, n, k) {
   //   2
   // );
 
-  assert.equal(
-    networkDelayTime(
-      [[1, 2, 1], [2, 1, 3]],
-      2,
-      2
-    ),
-    3
-  );
+  // assert.equal(
+  //   networkDelayTime(
+  //     [[1, 2, 1], [2, 1, 3]],
+  //     2,
+  //     2
+  //   ),
+  //   3
+  // );
 
   // assert.equal(
   //   networkDelayTime(
@@ -104,4 +109,13 @@ var networkDelayTime = function (times, n, k) {
   //   ),
   //   3
   // );
+
+  assert.equal(
+    networkDelayTime(
+      [[1, 2, 1], [2, 3, 2], [1, 3, 2]],
+      3,
+      1
+    ),
+    2
+  );
 })();
