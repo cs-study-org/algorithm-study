@@ -157,11 +157,42 @@ class Solution {
 
 
 
-## 997. Find the Town Judge
+## 653. Two Sum IV - Input is a BST
 ### 문제 요약
-### 시간복잡도 공간 복잡도
-### 코드
+주어진 유효한 이진검색트리에서 두개의 요소의 합이 k가 되는 경우가 있는지 여부를 반환하는 문제
 
+
+### 시간복잡도 공간 복잡도
+| time | space |
+|------|-------|
+| O(n) | O(1)  |
+
+### 코드
+```java
+class Solution {
+    //BFS를 통한 풀이
+    public boolean findTarget(TreeNode root, int k) {
+        Queue<TreeNode> queue = new LinkedList<>();//지나간 곳을 저장
+        Set<Integer> set = new HashSet<>();//값을 비교하는 공간
+
+        queue.offer(root);
+        while (!queue.isEmpty()){
+            TreeNode nowVertex = queue.poll();
+            if(set.contains(k-nowVertex.val)){
+                return true;
+            }
+            set.add(nowVertex.val);
+            if(nowVertex.left != null){
+                queue.offer(nowVertex.left);
+            }
+            if(nowVertex.right != null){
+                queue.offer(nowVertex.right);
+            }
+        }
+        return false;
+    }
+}
+```
 
 
 
