@@ -198,7 +198,42 @@ class Solution {
 
 
 
-## 997. Find the Town Judge
+## 463. Island Perimeter
 ### 문제 요약
+섬의 길이를 구하시오
+
 ### 시간복잡도 공간 복잡도
+| time | space |
+|------|-------|
+| O(n^2) | O(1)  |
+
 ### 코드
+```java
+class Solution {
+
+    public int islandPerimeter(int[][] grid) {
+        int x = grid[0].length;//섬의 가로
+        int y = grid.length;//섬의 세로
+        int res =0;
+
+        for(int i=0;i<y;i++){
+            for(int j=0;j<x;j++){
+                if(grid[i][j] ==1) {
+                    int val = 4;
+                    if(i - 1 >= 0 && grid[i - 1][j] == 1){ // top
+                        val--;
+                    } if(j + 1 < grid[0].length && grid[i][j + 1] == 1){ // right
+                        val--;
+                    } if(i + 1 < grid.length && grid[i + 1][j] == 1){ // down
+                        val--;
+                    } if(j - 1 >= 0 && grid[i][j - 1] == 1){ // left
+                        val--;
+                    }
+                    res += val;
+                }
+            }
+        }
+        return res;
+    }
+}
+```
