@@ -32,7 +32,7 @@
 
 - 다익스트라 알고리즘    
 
-    1. 3가지 배열 자료구조가 필요하다.
+    a. 3가지 배열 자료구조가 필요하다.
 
         - 시작 정점에서 모든 정점까지 최단 경로를 저장하는 배열.
 
@@ -48,7 +48,9 @@
 
               parents = [ 'A', 'C', undefined, 'C', 'B' ]
 
-    2. 루프를 돌면서, 간선의 가중치에 따라 최단 경로가 되는 정점을 갱신한다.
+    b. 루프를 돌면서, 간선의 가중치에 따라 최단 경로가 되는 정점을 갱신한다.
+
+    동작과정은 [링크](https://slides.com/kimyongki/deck-2a92f9/fullscreen)에서 확인하자.
 
 - 플로이드 알고리즘      
   
@@ -75,9 +77,13 @@
 
 <center><img width="30%" src="assets/743.jpg"/></center>
 
-내가 접근한 DFS는 이동할 노드를 선정 기준에 가중치는 고려하지 않았다.
+내가 접근한 DFS는 이동할 노드를 선정 기준에 가중치를 고려하지 않았다.
 
 이 부분에서 다익스트라 알고리즘으로 접근이 필요함을 느꼈다.
+
+<dl><dt>
+<code>findShortestVertexIdx()</code> 함수에서 정확한 값이 리턴되지 않는 이슈가 있다.
+</dt></dl>
 
 ### 문제 풀이
 
@@ -92,3 +98,5 @@
 [Dijkstra 구현](https://levelup.gitconnected.com/finding-the-shortest-path-in-javascript-dijkstras-algorithm-8d16451eea34) ━ *Level Up Coding*
 
 [Math.max with undefined](https://stackoverflow.com/questions/12957405/math-max-and-math-min-nan-on-undefined-entry) ━ *StackOverflow*
+
+[Simple Solution at 743. Network Delay Time](https://leetcode.com/problems/network-delay-time/discuss/1561144/Java-Solution-and-JavaScript-Solution) ━ *LeetCode*

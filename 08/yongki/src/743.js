@@ -3,23 +3,15 @@ const util = require('util');
 
 const AdjacencyMatrix = require('../../../ADT/yongki/Graph/AdjacencyMatrix');
 
-
-function isDestVertex(vertex, graph) {
-  const neighbor = graph.adjacent(vertex);
-  return neighbor.every(neighbor => neighbor === Infinity || !neighbor);
-}
-
 /** 
  * @param {number[]} distances 
  * @param {boolean[]} visited 
  * @returns {number}
  */
-function findLongestVertexIdx(distances, visited) {  
+function findLongestVertexIdx(distances, visited) {
   let longest = undefined;
-  let longestDistance = 0;  
+  let longestDistance = 0;
 
-  console.log("DISTANCES:", util.inspect(distances, { showHidden: false, depth: null }))
-  
   for (const [idx, distance] of distances.entries()) {
     const isLongest = isFinite(distance)
       && (!longest || distance > longestDistance);
@@ -33,9 +25,9 @@ function findLongestVertexIdx(distances, visited) {
   return longest;
 }
 
-function sumDelayTime(distances, parents, dest) {
-  let parent = parents[dest - 1];
-  let time = distances[dest - 1];
+function sumDelayTime(distances, parents, destIdx) {
+  let parent = parents[destIdx];
+  let time = distances[destIdx];
 
   while (parent) {
     let parentIdx = parent - 1;
@@ -46,7 +38,6 @@ function sumDelayTime(distances, parents, dest) {
 
     parent = parents[parentIdx];
   }
-
   return time;
 }
 
@@ -60,39 +51,49 @@ var networkDelayTime = function (times, n, src) {
   const graph = new AdjacencyMatrix(n, startWith = 1);
 
   for (const [srcNode, destNode, weight] of times)
-    graph.insertEdge(srcNode, destNode - 1, weight);    
-  
+    graph.insertEdge(srcNode, destNode - 1, weight);
+
+  // console.log("GRAPH:", util.inspect(graph, { showHidden: false, depth: null }))
+
   const distances = graph.adjacent(src);
   const parents = new Array(n).fill(undefined);
   const visited = new Array(n).fill(false);
 
   const srcIdx = src - 1;
-  let dest = undefined;
-  
+  let destIdx = n - 1;
+
   visited[srcIdx] = true;
+
+  for (const [neighborIdx, neighbor] of distances.entries()) {
+    if (neighborIdx === srcIdx || !isFinite(neighbor))
+      continue;
+
+    parents[neighborIdx] = src;
+  }
 
   function findLongestPath() {
     const vtxs = Array.from(graph.matrix.keys());
-    let longestIdx = findLongestVertexIdx(distances, visited);
-    parents[longestIdx] = src;
+    let longestIdx = srcIdx;
 
-    while (vtxs[longestIdx]) {
-      visited[longestIdx] = true;
+    while (longestIdx !== destIdx) {
+      longestIdx = findLongestVertexIdx(distances, visited);
       const longestVtx = vtxs[longestIdx];
 
-      console.log("longestVtx:", util.inspect(longestVtx, { showHidden: false, depth: null }))
+      if(!longestVtx)
+        return;
+
+      console.log("LONGEST:", util.inspect(longestVtx, { showHidden: false, depth: null }))
+      console.log("DISTANCES:", util.inspect(distances, { showHidden: false, depth: null }))
+      console.log("PARENTS:", util.inspect(parents, { showHidden: false, depth: null }))
+      console.log("VISITED:", util.inspect(visited, { showHidden: false, depth: null }))
+
+      visited[longestIdx] = true;      
 
       const distance = distances[longestIdx];
-      const neighbors = graph.adjacent(longestVtx);
-      const isDestVtx = isDestVertex(longestVtx, graph);
-
-      if (isDestVtx) {
-        dest = longestVtx;
-        break;
-      }
+      const neighbors = graph.adjacent(longestVtx);                  
 
       for (const [neighborIdx, neighbor] of neighbors.entries()) {
-        if (neighbor === Infinity)
+        if (neighborIdx === srcIdx || !isFinite(neighbor))
           continue;
 
         const newDistance = distance + neighbor;
@@ -101,21 +102,17 @@ var networkDelayTime = function (times, n, src) {
           distances[neighborIdx] = newDistance;
           parents[neighborIdx] = longestVtx
         }
-      }
-
-      longestIdx = findLongestVertexIdx(distance, visited, parents);
+      }      
     }
-  }
+  }  
 
-  console.log("DISTANCES:", util.inspect(distances, { showHidden: false, depth: null }))
-  console.log("PARENTS:", util.inspect(parents, { showHidden: false, depth: null }))
-  
   findLongestPath();
 
   console.log("DISTANCES:", util.inspect(distances, { showHidden: false, depth: null }))
   console.log("PARENTS:", util.inspect(parents, { showHidden: false, depth: null }))
+  console.log("VISITED:", util.inspect(visited, { showHidden: false, depth: null }))
 
-  const time = sumDelayTime(distances, parents, dest);
+  const time = sumDelayTime(distances, parents, destIdx);
   return time ? time : -1;
 };
 
