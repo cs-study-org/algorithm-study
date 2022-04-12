@@ -1,6 +1,6 @@
 const util = require('util');
 
-const findShortestPath = require('../../../ADT/yongki/Graph/Dijkstra');
+const { findShortestPath } = require('../../../ADT/yongki/Graph/Dijkstra');
 
 (function main() {
   const vertexs = ['A', 'B', 'C', 'D', 'E'];
@@ -10,7 +10,7 @@ const findShortestPath = require('../../../ADT/yongki/Graph/Dijkstra');
     'C': [Infinity, 2, 0, 4, Infinity],
     'D': [Infinity, Infinity, Infinity, 0, 4],
     'E': [Infinity, Infinity, Infinity, Infinity, 0]
-  };
+  };  
 
   console.log(util.inspect(
     findShortestPath(vertexs, graph, 0, 4),
