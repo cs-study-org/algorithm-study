@@ -31,7 +31,8 @@ Ex) 특정 도시에서 다른 도시로 갈 수 있는지 없는지, 전자 회
 
 **※ 깊이 우선 탐색(DFS)의 과정**
 
-[https://t1.daumcdn.net/cfile/tistory/9983A7335BD0156910](https://t1.daumcdn.net/cfile/tistory/9983A7335BD0156910)
+
+<img width="734" alt="스크린샷 2022-04-16 오후 4 56 58" src="https://user-images.githubusercontent.com/81874493/163667161-6b46096b-c309-4d86-a7fa-9af08b094f79.png">
 
 <br>
 
@@ -76,13 +77,14 @@ ex) 지구 상에 존재하는 모든 친구 관계를 그래프로 표현한 �
 
 - 깊이가 1인 모든 노드를 방문하고 나서 그 다음에는 깊이가 2인 모든 노드를, 그 다음에는 깊이가 3인 모든 노드를 방문하는 식으로 계속 방문하다가 더 이상 방문할 곳이 없으면 탐색을 마친다.
 
-[https://t1.daumcdn.net/cfile/tistory/99960F405BD01A8D18](https://t1.daumcdn.net/cfile/tistory/99960F405BD01A8D18)
+
+<img width="546" alt="스크린샷 2022-04-16 오후 4 57 04" src="https://user-images.githubusercontent.com/81874493/163667168-3a85c176-b68c-417b-bb8f-3aa5885f44e6.png">
 
 <br>
 
 **※ DFS 와 BFS 의 차이**
 
-[https://t1.daumcdn.net/cfile/tistory/997C3C3E5BD01AF41D](https://t1.daumcdn.net/cfile/tistory/997C3C3E5BD01AF41D)
+997C3C3E5BD01AF41D](https://t1.daumcdn.net/cfile/tistory/997C3C3E5BD01AF41D)
 
 <br>
 
