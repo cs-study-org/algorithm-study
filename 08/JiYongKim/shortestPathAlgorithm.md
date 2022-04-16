@@ -16,7 +16,8 @@
 
 ## 가중치 그래프(Weighted Graph)
 
-![스크린샷 2022-04-16 오후 10.52.55.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ed4c2d56-14a8-433e-8437-9e1bc909a50c/스크린샷_2022-04-16_오후_10.52.55.png)
+
+<img width="521" alt="스크린샷 2022-04-17 오전 12 30 11" src="https://user-images.githubusercontent.com/81874493/163681018-c6e947ad-6ffc-4478-85e8-61db0abc2961.png">
 
 그래프의 간선에 가중치가 있는 그래프
 
@@ -40,7 +41,8 @@ G = (V,E, w)
 
 ## ****다익스트라(Dijkstra) 알고리즘****
 
-![스크린샷 2022-04-16 오후 10.58.50.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/94e9f651-17d4-4de5-884e-17553529bfab/스크린샷_2022-04-16_오후_10.58.50.png)
+
+<img width="696" alt="스크린샷 2022-04-17 오전 12 30 18" src="https://user-images.githubusercontent.com/81874493/163681029-59e290e6-4381-4a00-889b-45b2fe517ed4.png">
 
 - 다익스트라의 최단 경로 알고리즘은 가장 유명한 그래프 알고리즘 중 하나이며, 단일 시작점 최단 경로 알고리즘으로, 시작 정점 s에서부터 다른 정점들 까지의 최단 거리를 계산한다.
 - DP를 활용한 최단경로 탐색 알고리즘으로 흔히 인공위성 GPS 소프트웨어에서 가장 많이 사용된다.
@@ -49,7 +51,7 @@ G = (V,E, w)
 
 <Dijkstra 알고리즘을 통해 하나의 정점에서 다른 모든 정점의 최단 경로를 구해보기>
 
-![스크린샷 2022-04-16 오후 11.19.49.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/932172dd-e217-4593-8f0e-4dbbc6321aa5/스크린샷_2022-04-16_오후_11.19.49.png)
+<img width="516" alt="스크린샷 2022-04-17 오전 12 30 24" src="https://user-images.githubusercontent.com/81874493/163681037-e48b3e31-28f9-4743-a2fb-f542f79f5064.png">
 
 <특정 노드에서 다른 노드로가는 그래프>
 
@@ -180,7 +182,7 @@ public int compareTo(Node o) {
 
 ## ****플로이드 와샬(Floyd Warshall) 알고리즘****
 
-![스크린샷 2022-04-16 오후 11.36.32.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4e12ed9f-a23c-4539-9e19-6618ab2ff95b/스크린샷_2022-04-16_오후_11.36.32.png)
+<img width="670" alt="스크린샷 2022-04-17 오전 12 30 36" src="https://user-images.githubusercontent.com/81874493/163681049-8b3a5f3a-a45e-4ca9-aa8f-0a42aec0bcd2.png">
 
 - **Floyd Warshall 알고리즘**은 **모든 정점**에서 **다른 모든 정점**으로의 최단 경로를 구하는 알고리즘이다.
 - Floyd Warshall 알고리즘의 핵심 아이디어는 애초에 거쳐가는 정점을 하나씩 다 설정을 하여 직접 확인하는 방법, 즉 **거쳐가는 정점을 기준으로 최단 거리를 구하도록** 구성되어있다.
@@ -194,7 +196,7 @@ public int compareTo(Node o) {
 
 ⇒ u와 v를 직접 연결하는 간선이 없거나, 다른 정점을 경유해서 가는 편이 전체 경로가 더 짧아 질때 이와 같은 경로를 거쳐가는 정점들을 **경유점**이라 한다.
 
-![스크린샷 2022-04-17 오전 12.01.39.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8463bf5d-abe9-40a1-b8e3-4b5b903642bd/스크린샷_2022-04-17_오전_12.01.39.png)
+<img width="513" alt="스크린샷 2022-04-17 오전 12 30 52" src="https://user-images.githubusercontent.com/81874493/163681057-116f785e-3841-4577-8040-31833afd5c9e.png">
 
 다른 정점으로 가는 비용을 **이차원 배열**로 출력
 
