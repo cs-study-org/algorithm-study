@@ -62,12 +62,14 @@
 
 ## 문제 풀이 리스트
 
-<!-- <details> -->
+<details>
 <summary>743. Network Delay Time
   <a href="https://leetcode.com/problems/network-delay-time/">👊</a>
 </summary>
 
 ### 문제 회고
+
+**첫번째 시행착오**
 
 문제에서 요구하는 바는 DFS라고 판단하였다.
 
@@ -75,15 +77,27 @@
 
 다만, 다음과 같은 테스트 케이스가 있었다.
 
-<center><img width="30%" src="assets/743.jpg"/></center>
+<div align="center"><img width="30%" src="assets/743.jpg"/></div>
 
 내가 접근한 DFS는 이동할 노드를 선정 기준에 가중치를 고려하지 않았다.
 
-이 부분에서 다익스트라 알고리즘으로 접근이 필요함을 느꼈다.
+이 부분에서 BFS기반의 다익스트라 알고리즘으로 접근이 필요함을 느꼈다.
 
-<dl><dt>
-<code>findShortestVertexIdx()</code> 함수에서 정확한 값이 리턴되지 않는 이슈가 있다.
-</dt></dl>
+또한, BFS기반이라 최단거리의 노드를 찾아도 모든 노드는 탐색해야하는 점을 알게되었다.
+
+**두번째 시행착오**
+
+<div align="center"><img width="30%" src="assets/743(Example1).jpg"/></div>
+
+다익스트라 알고리즘을 사용하되, `Example1`의 그림을 보고 최장거리를 구하는 것으로 착각하였다.
+
+단순히 먼 노드의 최단거리를 구하는 것이었다.
+
+이외에도 `3개의 고정배열을 사용한 다익스트라 구현`은 코드를 참조해도 여럿 테스트케이스에서 막히는 이슈가 있었다.
+
+**해결점**
+
+가독성이 좋은 `우선순위 큐를 사용한 다익스트라 구현` 코드를 참조해서 해결할 수 있었다.
 
 ### 문제 풀이
 
@@ -97,6 +111,6 @@
 
 [Dijkstra 구현](https://levelup.gitconnected.com/finding-the-shortest-path-in-javascript-dijkstras-algorithm-8d16451eea34) ━ *Level Up Coding*
 
-[Math.max with undefined](https://stackoverflow.com/questions/12957405/math-max-and-math-min-nan-on-undefined-entry) ━ *StackOverflow*
+[Dijkstra 구현 (우선순위 큐 ver)](https://github.com/cs-study-org/algorithm-study/blob/df81c8b783f8ff888ece1d41a937306bf0c85e16/08/JiYongKim/shortestPathAlgorithm.md) ━ *LeetCode*
 
-[Simple Solution at 743. Network Delay Time](https://leetcode.com/problems/network-delay-time/discuss/1561144/Java-Solution-and-JavaScript-Solution) ━ *LeetCode*
+[Math.max with undefined](https://stackoverflow.com/questions/12957405/math-max-and-math-min-nan-on-undefined-entry) ━ *StackOverflow*
