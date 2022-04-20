@@ -1,8 +1,9 @@
 const Queue = require('./Queue');
 
-var PriorityQueueNode = function (element, priority) {
+var PriorityQueueNode = function (element, priority, ...args) {
   this.element = element;
   this.priority = priority;
+  this.args = args;
 }
 
 var PriorityQueue = function () {
@@ -17,8 +18,8 @@ PriorityQueue.prototype.constructor = PriorityQueue;
  * @param {number} priority 
  * @returns 
  */
-PriorityQueue.prototype.enQueue = function (element, priority) {
-  const node = new PriorityQueueNode(element, priority);
+PriorityQueue.prototype.enQueue = function (element, priority, ...args) {
+  const node = new PriorityQueueNode(element, priority, ...args);
   let isContain = false;
 
   for (var i = 0; i < this.queue.length; i++) {
@@ -34,16 +35,5 @@ PriorityQueue.prototype.enQueue = function (element, priority) {
 
   return;
 }
-
-/** 
- * @returns {PriorityQueueNode} 
- */
-PriorityQueue.prototype.deQueue = function () {
-  if (this.isEmpty())
-    return;
-
-  return this.queue.shift();
-}
-
 
 module.exports = PriorityQueue;

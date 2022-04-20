@@ -19,10 +19,17 @@ Queue.prototype.deQueue = function () {
   return true;
 };
 
-Queue.prototype.Front = function() {
-  if(this.isEmpty())
+Queue.prototype.poll = function () {
+  if (this.isEmpty())
+    return false;
+
+  return this.queue.shift();
+}
+
+Queue.prototype.Front = function () {
+  if (this.isEmpty())
     return -1;
-  
+
   return this.queue[0];
 };
 

@@ -111,6 +111,8 @@
 
 [Dijkstra 구현](https://levelup.gitconnected.com/finding-the-shortest-path-in-javascript-dijkstras-algorithm-8d16451eea34) ━ *Level Up Coding*
 
-[Dijkstra 구현 (우선순위 큐 ver)](https://github.com/cs-study-org/algorithm-study/blob/df81c8b783f8ff888ece1d41a937306bf0c85e16/08/JiYongKim/shortestPathAlgorithm.md) ━ *LeetCode*
+[Dijkstra 구현 (우선순위 큐 ver)](https://leetcode.com/problems/network-delay-time/discuss/863787/Javascript-Using-Dijikstra-Algorithm-and-Priority-Queue-(faster-than-88.14-of-js-submissions)) ━ *LeetCode*
 
 [Math.max with undefined](https://stackoverflow.com/questions/12957405/math-max-and-math-min-nan-on-undefined-entry) ━ *StackOverflow*
+
+[Simple Solution at 787. Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/discuss/181943/Readable-Javascript-Solution) ━ *LeetCode*
