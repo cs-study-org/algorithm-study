@@ -2,22 +2,19 @@ const assert = require('assert');
 const util = require('util');
 
 const AdjacencyMatrix = require('../../../ADT/yongki/Graph/AdjacencyMatrix');
-// const Queue = require('../../../ADT/yongki/Queue');
 const PriorityQueue = require('../../../ADT/yongki/PriorityQueue');
-
-var QueueNode = function (element, priority, stops) {
-  this.element = element;
-  this.priority = priority;
-  this.stops = stops;
-}
 
 /**
  * @param {number} n
  * @param {number[][]} flights
  * @param {number} src
  * @param {number} dst
- * @param {number} k
+ * @param {number} stops
  * @return {number}
+ * 
+ * 
+ * time:    O((n - 1)n)
+ * space:   O(n² + (n - 1))
  */
 var findCheapestPrice = function (n, flights, src, dst, stops) {
   const graph = new AdjacencyMatrix(n);
@@ -27,8 +24,6 @@ var findCheapestPrice = function (n, flights, src, dst, stops) {
 
   const queue = new PriorityQueue();
   queue.enQueue(src, 0, stops + 1);
-
-  // console.log("GRAPH:", util.inspect(graph, { showHidden: false, depth: null }));
 
   while (!queue.isEmpty()) {
     console.log("QUEUE:", util.inspect(queue, { showHidden: false, depth: null }));
@@ -41,17 +36,16 @@ var findCheapestPrice = function (n, flights, src, dst, stops) {
 
     if (!stops)
       continue;
-
+          
     const neighbors = graph.adjacent(element);    
 
-    for (const [neighborIdx, neighborCost] of neighbors.entries()) {
-      const newCost = priority + neighborCost;
-      const nextNode = neighborIdx + 1;
-
-      if(!isFinite(neighborCost))
+    for (const [neighbor, neighborCost] of neighbors.entries()) {
+      if(!isFinite(neighborCost) || element === neighbor)
         continue;
+
+      const newCost = priority + neighborCost;      
         
-      queue.enQueue(nextNode, newCost, stops - 1);
+      queue.enQueue(neighbor, newCost, stops - 1);
     }
   }
 
