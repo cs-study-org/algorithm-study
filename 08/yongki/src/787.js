@@ -1,7 +1,7 @@
 const assert = require('assert');
 const util = require('util');
 
-const AdjacencyMatrix = require('../../../ADT/yongki/Graph/AdjacencyMatrix');
+const AdjacencyList = require('../../../ADT/yongki/Graph/AdjacencyList');
 const PriorityQueue = require('../../../ADT/yongki/PriorityQueue');
 
 /**
@@ -12,40 +12,47 @@ const PriorityQueue = require('../../../ADT/yongki/PriorityQueue');
  * @param {number} stops
  * @return {number}
  * 
+ * v as vertexs
+ * e as edges
  * 
- * time:    O((n - 1)n)
- * space:   O(n² + (n - 1))
+ * time:    O(ve)
+ * space:   O(ve)
  */
 var findCheapestPrice = function (n, flights, src, dst, stops) {
-  const graph = new AdjacencyMatrix(n);
+  const graph = new AdjacencyList(n);
+
+  for (let i = 0; i < n; i++)
+    graph.insertVertex(i);
 
   for (const [srcNode, dstNode, weight] of flights)
-    graph.insertEdge(srcNode, dstNode, weight);
+    graph.insertEdge(srcNode, { dstNode, weight });
 
   const queue = new PriorityQueue();
-  queue.enQueue(src, 0, stops + 1);
+  queue.enQueue(element = src, priority = 0, stops = stops + 1);
+
+  // console.log("GRAPH:", util.inspect(graph, { showHidden: false, depth: null }));
 
   while (!queue.isEmpty()) {
     console.log("QUEUE:", util.inspect(queue, { showHidden: false, depth: null }));
     const node = queue.poll();
     const { element, priority, args } = Object(node);
     const stops = args[0];
-        
+
     if (element === dst)
       return priority;
 
     if (!stops)
       continue;
-          
+
     const neighbors = graph.adjacent(element);    
 
-    for (const [neighbor, neighborCost] of neighbors.entries()) {
-      if(!isFinite(neighborCost) || element === neighbor)
+    for (const {dstNode, weight} of neighbors) {      
+      if (!isFinite(weight) || element === dstNode)
         continue;
 
-      const newCost = priority + neighborCost;      
-        
-      queue.enQueue(neighbor, newCost, stops - 1);
+      const newCost = priority + weight;
+
+      queue.enQueue(dstNode, newCost, stops - 1);
     }
   }
 
