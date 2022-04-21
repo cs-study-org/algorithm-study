@@ -17,6 +17,12 @@ PriorityQueue.prototype.constructor = PriorityQueue;
  * @param {*} element 
  * @param {number} priority 
  * @returns 
+ * 
+ * time:    O(n²)
+ *          → for         O(n)
+ *          →   splice    O(n)
+ * 
+ * space:   O(n)
  */
 PriorityQueue.prototype.enQueue = function (element, priority, ...args) {
   const node = new PriorityQueueNode(element, priority, ...args);

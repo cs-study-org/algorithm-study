@@ -40,8 +40,10 @@ function findShortestVertexIdx(distances, visited) {
  * @param {number} destIdx 
  * @returns {Object}
  * 
- * time:    O(n²)
- * space:   O(n)
+ * v as vertexs
+ * 
+ * time:    O(v²)
+ * space:   O(v)
  */
 function findShortestPath(vertexs, graph, srcIdx, destIdx) {  
   const src = vertexs[srcIdx];
