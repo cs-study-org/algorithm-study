@@ -1,8 +1,6 @@
-class ListNode {
-  constructor(value) {
-    this.value = value;
-    this.next = null;
-  }
+var ListNode = function (value) {
+  this.value = value;
+  this.next = null;
 }
 
 module.exports = ListNode;

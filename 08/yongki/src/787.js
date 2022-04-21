@@ -2,7 +2,46 @@ const assert = require('assert');
 const util = require('util');
 
 const AdjacencyList = require('../../../ADT/yongki/Graph/AdjacencyList');
-const PriorityQueue = require('../../../ADT/yongki/PriorityQueue');
+const MinHeap = require('../../../ADT/yongki/Heap/MinHeap');
+
+var HeapNode = function (value, cost, stops) {
+  this.value = value;
+  this.cost = cost;
+  this.stops = stops;
+}
+
+MinHeap.prototype._bubbleUp = function (idx) {
+
+  while (
+    this.getParent(idx) !== undefined
+    && this.getParent(idx).cost > this.heap[idx].cost) {
+    const parentIdx = this.getParentIdx(idx);
+
+    this.swap(idx, parentIdx);
+    idx = parentIdx;
+  }
+}
+
+MinHeap.prototype._bubbleDown = function (idx) {  
+
+  while (
+    this.getLeftChild(idx) !== undefined
+    && this.getRightChild(idx) !== undefined
+    &&
+    (this.getLeftChild(idx).cost < this.heap[idx].cost
+      || this.getRightChild(idx).cost < this.heap[idx].cost)
+  ) {
+    let smallerIdx = this.getLeftChildIdx(idx);
+
+    if (
+      this.getRightChild(idx).cost < this.heap[smallerIdx].cost
+    )
+      smallerIdx = this.getRightChildIdx(idx)
+
+    this.swap(idx, smallerIdx);
+    idx = smallerIdx;
+  }
+}
 
 /**
  * @param {number} n
@@ -15,8 +54,8 @@ const PriorityQueue = require('../../../ADT/yongki/PriorityQueue');
  * v as vertexs
  * e as edges
  * 
- * time:    O(ve)
- * space:   O(ve)
+ * time:    O(v + (v·e)logv)
+ * space:   O(ve + v)
  */
 var findCheapestPrice = function (n, flights, src, dst, stops) {
   const graph = new AdjacencyList(n);
@@ -27,32 +66,30 @@ var findCheapestPrice = function (n, flights, src, dst, stops) {
   for (const [srcNode, dstNode, weight] of flights)
     graph.insertEdge(srcNode, { dstNode, weight });
 
-  const queue = new PriorityQueue();
-  queue.enQueue(element = src, priority = 0, stops = stops + 1);
+  const heap = new MinHeap();
 
-  // console.log("GRAPH:", util.inspect(graph, { showHidden: false, depth: null }));
+  heap.insert(new HeapNode(src, 0, stops + 1));
 
-  while (!queue.isEmpty()) {
-    console.log("QUEUE:", util.inspect(queue, { showHidden: false, depth: null }));
-    const node = queue.poll();
-    const { element, priority, args } = Object(node);
-    const stops = args[0];
+  while (heap.size()) {
+    console.log("HEAP:", util.inspect(heap, { showHidden: false, depth: null }));
+    const node = heap.extract();
+    const { value, cost, stops } = Object(node);
 
-    if (element === dst)
-      return priority;
+    if (value === dst)
+      return cost;
 
     if (!stops)
       continue;
 
-    const neighbors = graph.adjacent(element);    
+    const neighbors = graph.adjacent(value);
 
-    for (const {dstNode, weight} of neighbors) {      
-      if (!isFinite(weight) || element === dstNode)
+    for (const { dstNode, weight } of neighbors) {
+      if (!isFinite(weight) || value === dstNode)
         continue;
 
-      const newCost = priority + weight;
+      const newCost = cost + weight;
 
-      queue.enQueue(dstNode, newCost, stops - 1);
+      heap.insert(new HeapNode(dstNode, newCost, stops - 1));
     }
   }
 
