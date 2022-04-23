@@ -1,19 +1,18 @@
 const assert = require('assert');
-const util = require('util');
 
 const BinarySearchTree = require('../../../ADT/yongki/Tree/BinarySearchTree');
 
 
-describe('BinarySearchTreeTraversal', () => { 
+describe('BinarySearchTreeTraversal', () => {
   describe('nodes', () => {
     const nums = [30, 25, 90, 19, 26, 77, 99, 5];
     const tree = new BinarySearchTree();
 
     it('insert node', () => {
-      for(const num of nums)
-        tree.insert(num);      
+      for (const num of nums)
+        tree.insert(num);
     })
-    
+
     it('display inorder', () => {
       assert.deepEqual(
         tree.display('inorder'),
@@ -38,17 +37,15 @@ describe('BinarySearchTreeTraversal', () => {
     it('delete node', () => {
       assert.equal(
         tree.delete(90),
-        90
+        true
       )
     })
-    
-    it('display levelorder', () => {      
-      console.log(util.inspect(tree.display('levelorder'), { showHidden: true, depth: null }))
 
+    it('display levelorder', () => {
       assert.deepEqual(
         tree.display('levelorder'),
         [30, 25, 99, 19, 26, 77, 5]
       )
     })
   })
-})
+});

@@ -4,12 +4,14 @@
   - [이론](#이론)
     - [배열 표현](#배열-표현)
     - [링크 표현](#링크-표현)
+  - [구현](#구현)
   - [참고 문헌](#참고-문헌)
 
 ## 이론
 
 <details>
 <summary>트리 종류</summary>
+<br/>
 
 트리란
 
@@ -46,7 +48,7 @@
 
 배열 항목 사이에 빈칸이 발생하지 않기 때문이다.
 
-    단, 경사 이진 트리는 빈칸이 많이 발생한다.
+    이와 반대로, 경사 이진 트리는 빈칸이 많이 발생한다.
 
 어떤 노드의 인덱스를 알면 
 
@@ -56,16 +58,77 @@
 
     오른쪽 자식 인덱스 =      2i + 1  알 수 있다.
 
-> 이전 `우선순위 큐` 주제때 힙을 사용해보았는데, 이를 배열 기반으로 하였다.
- 완전 이진 트리의 일부인 힙을 사용해보았으니 배열 기반은 적절한 선택이라 볼 수 있다.
-
 ### 링크 표현
+
+두개의 링크를 담는 구조체를 활용한다.
+
+```js
+var TreeNode = function (value, left, right) {
+  this.value;
+  this.left;
+  this.right;
+}
+```
+> 이번 주제의 구현 문제는 모두 링크 표현으로 진행한다.
+
+</details>
+
+## 구현
+
+<!-- <details> -->
+<br/>
 
 <div align="center"><img width="60%" src="assets/tree-example.jpg"/></div>
 
-이번 주제의 구현 문제는 링크 표현으로 진행한다.
+필수메소드와 빅오는 다음과 같다.
 
-> `test\BinarySearchTree.test.js`에서 확인할 수 있다.
+- time(worst)는 이진 트리에 적용되고,
+
+- time(avg)는 완전 이진 트리에 적용된다.
+
+|             |  `insert`  |   `delete`  | `_getMinValueAtRightSubtree` |
+|:-----------:|:----------:|:----------:|:---------------------------:|
+| time(worst) |   `O(n)`   |   `O(n)`   |            `O(n)`           |
+|  time(avg)  | `O(log n)` | `O(log n)` |            `O(1)`           |
+|    space    |   `O(1)`   |   `O(1)`   |            `O(1)`           |
+
+`delete` 메소드 같은 경우 까다로운 경우가 있다.
+
+예로, 90을 삭제했을 때, 해당 노드로 올라올 계승자를 선정해야한다.
+
+이 부분을 우측 서브트리에서 찾는다. (`_getMinValueAtRightSubtree`)
+
+또한, `delete` 메소드는 최적화가 가능하다.
+
+여기서 최적화는 재귀를 최소화함을 의미한다. 자바스크립트 언어에서는 특히 중요하다고 판단한다.
+
+```js
+BinarySearchTree.prototype._deleteAtNode = function (node, deleteValue) {
+  // +++ node.value === deleteValue
+  else {
+    ...
+    // +++ left, right all exist
+    node.value = this._getMinValueAtRightSubtree(node.right);
+    node.right = this._deleteAtNode(node.right, node.value);
+  }
+
+  return node;
+}
+```
+
+```js
+
+```
+
+트리 순회 관련 메소드와 빅오는 다음과 같다.
+
+- `n`은 트리의 모든 노드의 수를 의미한다.
+- `L`은 트리의 level 수를 의미한다.
+
+|       | `display` | `inorder` | `preorder` | `postorder` | `levelorder` |
+|:-----:|:---------:|:---------:|:----------:|:-----------:|:------------:|
+|  time |   `O(1)`  |   `O(1)`  |   `O(1)`   |    `O(1)`   |    `O(L)`    |
+| space |   `O(n)`  |   `O(1)`  |   `O(1)`   |    `O(1)`   |    `O(L)`    |
 
 </details>
 
