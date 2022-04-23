@@ -5,6 +5,9 @@
     - [배열 표현](#배열-표현)
     - [링크 표현](#링크-표현)
   - [구현](#구현)
+  - [문제 리스트](#문제-리스트)
+  - [문제 회고](#문제-회고)
+  - [문제 풀이](#문제-풀이)
   - [참고 문헌](#참고-문헌)
 
 ## 이론
@@ -75,7 +78,7 @@ var TreeNode = function (value, left, right) {
 
 ## 구현
 
-<!-- <details> -->
+<details>
 <br/>
 
 <div align="center"><img width="60%" src="assets/tree-example.jpg"/></div>
@@ -132,6 +135,61 @@ BinarySearchTree.prototype._deleteAtNode = function (node, deleteValue) {
 
 </details>
 
+## 문제 리스트
+
+<details>
+<summary>112. Path Sum
+  <a href="https://leetcode.com/problems/path-sum/">👊</a>
+</summary>
+
+## 문제 회고
+
+입력값으로 주어진 이진 트리는 이진 탐색 트리가 아니라서 별도의 에디터에서 그대로 구현하기 어려웠다.
+
+따라서, 별도의 문제 파일로 빼지 못하고, 문제 에디터에서 바로 해결하였다.
+
+> 단, 문제에서 사용되는 자료구조는 구현해본 코드를 사용하였다.
+
+## 문제 풀이
+
+```js
+/**
+ * @param {TreeNode} root
+ * @param {number} targetSum
+ * @return {boolean}
+ * 
+ * time:    O(n - 1)
+ * space:   O(n)
+ */
+var hasPathSum = function (root, targetSum) {
+  if (!root)
+    return false;
+
+  const stack = new Stack();
+  stack.push({ 'node': root, 'remainValue': targetSum });
+
+  while (!stack.isEmpty()) {
+    const { node, remainValue } = stack.pop();
+
+    if (
+      !node.left
+      && !node.right
+      && node.val === remainValue
+    )
+      return true;
+
+    if (node.left)
+      stack.push({ 'node': node.left, 'remainValue': remainValue - node.val });
+
+    if (node.right)
+      stack.push({ 'node': node.right, 'remainValue': remainValue - node.val });
+  }
+  return false;
+};
+```
+
+</details>
+
 <hr/>
 
 ## 참고 문헌
@@ -139,3 +197,5 @@ BinarySearchTree.prototype._deleteAtNode = function (node, deleteValue) {
 [트리 이론](https://namu.wiki/w/트리(그래프)#s-4.1.1) ━ *나무위키*
 
 [트리 delete 구현](https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/) ━ *GeeksforGeeks*
+
+[Simple Solution at 112. Path Sum](https://leetcode.com/problems/path-sum/discuss/36581/My-Python-iterative-DFS-solution) ━ *LeetCode*
