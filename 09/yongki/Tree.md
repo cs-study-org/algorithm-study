@@ -8,6 +8,8 @@
   - [이월된 문제 리스트](#이월된-문제-리스트)
     - [문제 풀이](#문제-풀이)
     - [문제 풀이](#문제-풀이-1)
+    - [문제 풀이 1/2 (`#Recursive DFS`)](#문제-풀이-12-recursive-dfs)
+    - [문제 풀이 2/2 (`#BFS`)](#문제-풀이-22-bfs)
   - [참고 문헌](#참고-문헌)
 
 ## 이론
@@ -126,12 +128,12 @@ BinarySearchTree.prototype._deleteAtNode = function (node, deleteValue) {
 트리 순회 관련 메소드와 빅오는 다음과 같다.
 
 - `n`은 트리의 모든 노드의 수를 의미한다.
-- `L`은 트리의 level 수를 의미한다.
+- `l`은 트리의 level 수를 의미한다.
 
 |       | `display` | `inorder` | `preorder` | `postorder` | `levelorder` |
 |:-----:|:---------:|:---------:|:----------:|:-----------:|:------------:|
-|  time |   `O(1)`  |   `O(1)`  |   `O(1)`   |    `O(1)`   |    `O(L)`    |
-| space |   `O(n)`  |   `O(1)`  |   `O(1)`   |    `O(1)`   |    `O(L)`    |
+|  time |   `O(1)`  |   `O(1)`  |   `O(1)`   |    `O(1)`   |    `O(n)`    |
+| space |   `O(n)`  |   `O(1)`  |   `O(1)`   |    `O(1)`   |    `O(l)`    |
 
 </details>
 
@@ -142,6 +144,8 @@ BinarySearchTree.prototype._deleteAtNode = function (node, deleteValue) {
 따라서, 별도의 문제 파일로 빼지 못하고, 문제 에디터에서 바로 해결하였다.
 
 > 단, 문제에서 사용되는 자료구조는 구현해본 코드를 사용하였다.
+
+**[조건: DFS 풀이]**
 
 <details>
 <summary>112. Path Sum
@@ -237,7 +241,99 @@ var binaryTreePaths = function (root) {
   return result;
 };
 ```
+</details>
+<br/>
 
+**[조건: BFS 풀이]**
+
+<details>
+<summary>104. Maximum Depth of Binary Tree
+  <a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/">👊</a>
+</summary>
+
+### 문제 풀이 1/2 (`#Recursive DFS`)
+
+직관적으로 떠오른 풀이다.
+
+함수를 노드의 자식을 발견할 때마다 
+
+깊이를 1 더한 매개변수와 함께 재귀적 호출한다.
+
+리턴된 값들에서 최댓값이 결과값이다.
+
+```js
+var getMaxDepth = function(node, level){
+  let curDepth = level;
+  let left = 1;
+  let right = 1;
+  
+  if(!node)
+    return curDepth;
+  
+  if(node.left)
+    left = getMaxDepth(node.left, level + 1);
+
+  if(node.right)
+    right = getMaxDepth(node.right, level + 1);  
+  
+  return Math.max(curDepth, left, right);
+}
+
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ * 
+ * time:    O(n)
+ * space:   O(n)
+ */
+var maxDepth = function(root) {
+  if(!root)
+    return 0;
+    
+  return getMaxDepth(root, 1);
+};
+```
+
+### 문제 풀이 2/2 (`#BFS`)
+
+```js
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ * 
+ * time:    O(n)
+ * space:   O(n)
+ */
+var maxDepth = function(root) {
+  if(!root)
+    return 0;
+  
+  let result = 1;
+  
+  const queue = new Queue();
+  queue.enQueue({'node': root, 'depth': 1});
+  
+  while(!queue.isEmpty()){
+    const {node, depth} =  queue.Front();        
+    
+    if(!node)
+      continue;
+    
+    if(!node.left && !node.right)
+      result = Math.max(result, depth);
+    
+    if (node.left)
+      queue.enQueue({'node': node.left, 'depth': depth + 1});
+    
+    if (node.right)
+      queue.enQueue({'node': node.right, 'depth': depth + 1});
+    
+    queue.deQueue();
+  }
+  
+  return result;
+};
+```
 </details>
 
 <hr/>
