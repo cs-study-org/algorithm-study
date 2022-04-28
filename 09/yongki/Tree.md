@@ -78,6 +78,55 @@ var TreeNode = function (value, left, right) {
 
 </details>
 
+<details>
+<summary>사용 사례</summary>
+<br/>
+
+Node.js의 패키지 의존성이 직관적으로 떠올랐다.
+
+Node.js는 패키지가 어딨는지 알지 못해 패키지의 모듈이 필요 할 때, 매번 `readdir` 시스템 콜을 날려 탐색한다.
+
+이때 아래와 같은 탐색 알고리즘을 사용한다.
+
+<div align="center"><img width="60%" src="assets/node-module-search-alg.jpg"/></div>
+
+`node_modules 폴더`에는 의존성이 동기화된 패키지만 설치된다.
+
+즉, 같은 이름인 패키지의 다른 버전의 모듈들이 설치되지 않는다.
+
+어떻게 동기화했을까?
+
+다음은 최상위 경로인 프로젝트에서 명시한 `package.json`이다.
+
+```json
+  "dependencies": {        
+    "body-parser": "^1.19.0",
+    ...
+  }
+```
+
+실제 설치는 다른 패키지의 버전이 설치되었다.
+
+`body-parser`를 의존하는 `express`패키지의 버전이 더 major 하기 때문이다.
+
+```shell
+├─┬ body-parser@1.19.2
+├─┬ express@4.17.3
+│ ├── body-parser@1.19.2 deduped
+```
+
+어떤 패키지가 의존하는 패키지는 각 패키지의 `package.json`에 명시된다.
+
+패키지 간의 의존성을 `package.json`에 명시된 패키지를 트리의 노드로 생각하여 의존성 트리가 구성되었다고 생각하자.
+
+<div align="center"><img width="100%" src="assets/node-module-tree.drawio.svg"/></div>
+
+현재 설치된 `body-parser`와 다른 버전을 설치한다고 했을 때, 
+
+트리에서 `body-parser`노드를 찾아 버전을 확인한뒤, 동기화를 맞춘다.
+
+</details>
+
 ## 구현
 
 <details>
@@ -91,11 +140,11 @@ var TreeNode = function (value, left, right) {
 
 - time(avg)는 완전 이진 트리에 적용된다.
 
-|             |  `insert`  |   `delete`  | `_getMinValueAtRightSubtree` |
-|:-----------:|:----------:|:----------:|:---------------------------:|
-| time(worst) |   `O(n)`   |   `O(n)`   |            `O(n)`           |
-|  time(avg)  | `O(log n)` | `O(log n)` |            `O(1)`           |
-|    space    |   `O(1)`   |   `O(1)`   |            `O(1)`           |
+|             |  `insert`  |  `delete`  | `_getMinValueAtRightSubtree` |
+| :---------: | :--------: | :--------: | :--------------------------: |
+| time(worst) |   `O(n)`   |   `O(n)`   |            `O(n)`            |
+|  time(avg)  | `O(log n)` | `O(log n)` |            `O(1)`            |
+|    space    |   `O(1)`   |   `O(1)`   |            `O(1)`            |
 
 `delete` 메소드 같은 경우 까다로운 경우가 있다.
 
@@ -128,12 +177,12 @@ BinarySearchTree.prototype._deleteAtNode = function (node, deleteValue) {
 트리 순회 관련 메소드와 빅오는 다음과 같다.
 
 - `n`은 트리의 모든 노드의 수를 의미한다.
-- `l`은 트리의 level 수를 의미한다.
+- `L`은 트리의 level 수를 의미한다.
 
 |       | `display` | `inorder` | `preorder` | `postorder` | `levelorder` |
-|:-----:|:---------:|:---------:|:----------:|:-----------:|:------------:|
-|  time |   `O(1)`  |   `O(1)`  |   `O(1)`   |    `O(1)`   |    `O(n)`    |
-| space |   `O(n)`  |   `O(1)`  |   `O(1)`   |    `O(1)`   |    `O(l)`    |
+| :---: | :-------: | :-------: | :--------: | :---------: | :----------: |
+| time  |  `O(n)`   |  `O(n)`   |   `O(n)`   |   `O(n)`    |    `O(n)`    |
+| space |  `O(n)`   |  `O(1)`   |   `O(1)`   |   `O(1)`    |    `O(L)`    |
 
 </details>
 
@@ -341,6 +390,10 @@ var maxDepth = function(root) {
 ## 참고 문헌
 
 [트리 이론](https://namu.wiki/w/트리(그래프)#s-4.1.1) ━ *나무위키*
+
+[Node.js의 모듈 검색 알고리즘 예시 사진](https://www.youtube.com/watch?v=EncMFNfuBw0&list=PLYpU5pCXtxyhLiu0YoBeQq_SSQg8BA2-C&index=5&ab_channel=온라인코딩스쿨코드잇) ━ *코드잇*
+
+[`package-lock.json` 역할](https://junwoo45.github.io/2019-10-02-package-lock/) ━ *박준우 블로그*
 
 [이진 탐색 트리 `delete 메소드` 구현](https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/) ━ *GeeksforGeeks*
 
