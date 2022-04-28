@@ -152,8 +152,8 @@ public class BinTree<K, V> {
     private void preOrder(Node node){
         if(node != null){
             System.out.print(node.data + " " );
-            preOrder(node.left);
-            preOrder(node.right);
+            if(node.left != null) preOrder(node.left);
+            if(node.right != null) preOrder(node.right);
         }
     }
 
@@ -163,9 +163,9 @@ public class BinTree<K, V> {
 
     private void inOrder(Node node){
         if(node != null){
-            inOrder(node.left);
+            if(node.left != null) inOrder(node.left);
             System.out.print(node.data + " ");
-            inOrder(node.right);
+            if(node.right != null) inOrder(node.right);
         }
     }
 
@@ -175,8 +175,8 @@ public class BinTree<K, V> {
 
     private void postOrder(Node node){
         if(node != null){
-            postOrder(node.left);
-            postOrder(node.right);
+            if(node.left != null) postOrder(node.left);
+            if(node.right != null) postOrder(node.right);
             System.out.print(node.data + " ");
         }
     }
@@ -188,20 +188,17 @@ public class BinTree<K, V> {
     private void levelOrder(Node a){
         Queue<Node> queue= new LinkedList<>();
         queue.offer(a);
-        Node<K,V> p = root;
 
         while(!queue.isEmpty()){
             Node node = queue.poll();
             System.out.print(node.getData()+ " ");
 
             if(node.left != null){
-                p = p.left;
-                queue.offer(p);
+                queue.offer(node.left);
             }
 
             if(node.right != null){
-                p = p.right;
-                queue.offer(p);
+                queue.offer(node.right);
             }
         }
     }
@@ -212,5 +209,6 @@ public class BinTree<K, V> {
 
 
 }
+
 
 ```
