@@ -472,4 +472,66 @@ class MyCircularDeque {
 
 <br>
 
-- [(백준) 7662번 이중 우선순위 큐](https://www.acmicpc.net/problem/7662)
+<details>
+<summary>(백준) 7662번 이중 우선순위 큐]</summary>
+
+- (백준) 7662번 이중 우선순위 큐
+```java
+
+// 시간복잡도 : O(logn) .. n = t
+// 공간 복잡도 : O(n) ... n = t
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        StringTokenizer st = null;
+
+        int t = Integer.parseInt(br.readLine());
+
+        while(t-- > 0) {
+            TreeMap<Integer, Integer> treeMap = new TreeMap<>();
+            int n = Integer.parseInt(br.readLine());
+
+            while(n-- > 0) {
+                str = new StringTokenizer(br.readLine());
+                String str = str.nextToken();
+                int num = Integer.parseInt(str.nextToken());
+
+                switch(str) {
+                    case "I" :
+                        treeMap.put(num, treeMap.getOrDefault(num, 0) + 1);
+                        break;
+
+                    case "D" :
+                        if(treeMap.isEmpty()) break;
+                        if(num == -1) {
+                            int minKey = treeMap.firstKey();
+                            if(treeMap.get(minKey) == 1) {
+                                treeMap.remove(minKey);
+                            }else {
+                                treeMap.put(minKey, treeMap.get(minKey) - 1);
+                            }
+
+                        }else {
+                            int maxKey = treeMap.lastKey();
+                            if(treeMap.get(maxKey) == 1) {
+                                treeMap.remove(maxKey);
+                            }else {
+                                treeMap.put(maxKey, treeMap.get(maxKey) - 1);
+                            }
+                        }
+                        break;
+                }
+            }
+
+            if(treeMap.isEmpty()) {
+                sb.append("EMPTY");
+            }else {
+                sb.append(treeMap.lastKey() + " " + treeMap.firstKey() );
+            }
+        }
+        System.out.println(sb.toString());
+    }
+}
+```
