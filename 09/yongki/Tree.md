@@ -1,16 +1,6 @@
 # 트리
 
-- [트리](#트리)
-  - [이론](#이론)
-    - [배열 표현](#배열-표현)
-    - [링크 표현](#링크-표현)
-  - [구현](#구현)
-  - [이월된 문제 리스트](#이월된-문제-리스트)
-    - [문제 풀이](#문제-풀이)
-    - [문제 풀이](#문제-풀이-1)
-    - [문제 풀이 1/2 (`#Recursive DFS`)](#문제-풀이-12-recursive-dfs)
-    - [문제 풀이 2/2 (`#BFS`)](#문제-풀이-22-bfs)
-  - [참고 문헌](#참고-문헌)
+<hr/>
 
 ## 이론
 
@@ -143,7 +133,7 @@ Node.js는 패키지가 어딨는지 알지 못해 패키지의 모듈이 필요
 |             |  `insert`  |  `delete`  | `_getMinValueAtRightSubtree` |
 | :---------: | :--------: | :--------: | :--------------------------: |
 | time(worst) |   `O(n)`   |   `O(n)`   |            `O(n)`            |
-|  time(avg)  | `O(log n)` | `O(log n)` |            `O(1)`            |
+|  time(avg)  | `O(log n)` | `O(log n)` |            `O(n)`            |
 |    space    |   `O(1)`   |   `O(1)`   |            `O(1)`            |
 
 `delete` 메소드 같은 경우 까다로운 경우가 있다.
@@ -151,10 +141,6 @@ Node.js는 패키지가 어딨는지 알지 못해 패키지의 모듈이 필요
 예로, 90을 삭제했을 때, 해당 노드로 올라올 계승자를 선정해야한다.
 
 이 부분을 우측 서브트리에서 찾는다. (`_getMinValueAtRightSubtree`)
-
-또한, `delete` 메소드는 최적화가 가능하다.
-
-여기서 최적화는 재귀를 최소화함을 의미한다. 자바스크립트 언어에서는 특히 중요하다고 판단한다.
 
 ```js
 BinarySearchTree.prototype._deleteAtNode = function (node, deleteValue) {
@@ -169,9 +155,17 @@ BinarySearchTree.prototype._deleteAtNode = function (node, deleteValue) {
   return node;
 }
 ```
-
 ```js
+BinarySearchTree.prototype._getMinValueAtRightSubtree = function (node) {
+  let min = node.value;
 
+  while (node.left) {
+    min = node.left.value;
+    node = node.left;
+  }
+
+  return min;
+}
 ```
 
 트리 순회 관련 메소드와 빅오는 다음과 같다.
@@ -192,7 +186,7 @@ BinarySearchTree.prototype._deleteAtNode = function (node, deleteValue) {
 
 따라서, 별도의 문제 파일로 빼지 못하고, 문제 에디터에서 바로 해결하였다.
 
-> 단, 문제에서 사용되는 자료구조는 구현해본 코드를 사용하였다.
+> 단, 문제에서 사용되는 자료구조는 ADT를 활용하였다.
 
 **[조건: DFS 풀이]**
 
@@ -300,7 +294,7 @@ var binaryTreePaths = function (root) {
   <a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/">👊</a>
 </summary>
 
-### 문제 풀이 1/2 (`#Recursive DFS`)
+### 문제 풀이 1/2 (`#Recursive BFS`)
 
 직관적으로 떠오른 풀이다.
 
@@ -332,8 +326,10 @@ var getMaxDepth = function(node, level){
  * @param {TreeNode} root
  * @return {number}
  * 
+ * w as width
+ * 
  * time:    O(n)
- * space:   O(n)
+ * space:   O(w)
  */
 var maxDepth = function(root) {
   if(!root)
@@ -343,7 +339,7 @@ var maxDepth = function(root) {
 };
 ```
 
-### 문제 풀이 2/2 (`#BFS`)
+### 문제 풀이 2/2 (`#Iterative BFS`)
 
 ```js
 /**
@@ -385,6 +381,105 @@ var maxDepth = function(root) {
 ```
 </details>
 
+<details>
+<summary>101. Symmetric Tree
+  <a href="https://leetcode.com/problems/symmetric-tree/submissions/">👊</a>
+</summary>
+
+### 문제 회고
+
+구현해놓은 순회 메소드 중 `inorder`를 좌측, 우측 버전으로 변형한 뒤,
+
+각 순회 결과 리스트를 비교하면 된다 생각했다.
+
+이는 공간 복잡도가 생기고,
+
+`null`을 체크하지 못해 각 순회 결과는 동일하되 대칭은 아닌 테스트케이스를 통과하지 못했다.
+
+    Input:  [1,2,2,null,3,null,3]
+    Output: false
+
+### 문제 풀이 1/2 [`#Recursive BFS`]
+
+```js
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ * 
+ * w as width
+ * 
+ * time:    O(n)
+ * space:   O(w)
+ */
+var isSymmetric = function(root) {
+  if(!root)
+    return true;
+  
+  return isMirror(root.left, root.right);
+};
+
+var isMirror = function(nodeA, nodeB){
+  if(!nodeA && !nodeB)
+    return true;
+  
+  if(!nodeA || !nodeB)
+    return false;
+  
+  if(nodeA.val != nodeB.val)
+    return false;
+  
+  return isMirror(nodeA.right, nodeB.left)
+      && isMirror(nodeA.left, nodeB.right);
+}
+```
+
+### 문제 풀이 2/2 [`#Iterative BFS`]
+
+```js
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ * 
+ * w as width
+ * 
+ * time:    O(n)
+ * space:   O(w)
+ */
+var isSymmetric = function(root) {
+  if(!root)
+    return true;
+  
+  const queue = new Queue();
+  
+  queue.enQueue(root.left);
+  queue.enQueue(root.right);
+  
+  while(!queue.isEmpty()){    
+    const nodeA = queue.poll();
+    const nodeB = queue.poll();
+    
+    if(!nodeA && !nodeB)
+      continue;
+    
+    if(!nodeA || !nodeB)
+      return false;
+    
+    if(nodeA.val !== nodeB.val)
+      return false;
+        
+    queue.enQueue(nodeA.left);
+    queue.enQueue(nodeB.right);
+
+    queue.enQueue(nodeA.right);
+    queue.enQueue(nodeB.left);     
+  }
+  
+  return true;
+};
+```
+
+</details>
+
 <hr/>
 
 ## 참고 문헌
@@ -400,3 +495,5 @@ var maxDepth = function(root) {
 [이진 트리 DFS vs BFS](https://www.geeksforgeeks.org/bfs-vs-dfs-binary-tree/) ━ *GeeksforGeeks*
 
 [Simple Solution at 112. Path Sum](https://leetcode.com/problems/path-sum/discuss/36581/My-Python-iterative-DFS-solution) ━ *LeetCode*
+
+[Simple Solution at 101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/discuss/433170/isMirror-DFS-(Recursion-OneTwo-Stacks)-%2B-BFS-(Queue)-Solution-in-Java) ━ *LeetCode*
