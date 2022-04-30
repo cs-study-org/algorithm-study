@@ -193,7 +193,7 @@ BinarySearchTree.prototype._getMinValueAtRightSubtree = function (node) {
   <a href="https://leetcode.com/problems/path-sum/">👊</a>
 </summary>
 
-### 문제 풀이
+### 문제 풀이 1/2 [`#Iterative BFS`]
 
 ```js
 /**
@@ -201,11 +201,10 @@ BinarySearchTree.prototype._getMinValueAtRightSubtree = function (node) {
  * @param {number} targetSum
  * @return {boolean}
  * 
- * n is all nodes
- * h is tree's height
+ * w as width
  *
  * time:    O(n)
- * space:   O(h)
+ * space:   O(w)
  */
 var hasPathSum = function (root, targetSum) {
   if (!root)
@@ -233,6 +232,8 @@ var hasPathSum = function (root, targetSum) {
   return false;
 };
 ```
+### 문제 풀이 2/2 [`#Iterative DFS`]
+
 </details>
 
 <details>
@@ -240,19 +241,17 @@ var hasPathSum = function (root, targetSum) {
   <a href="https://leetcode.com/problems/binary-tree-paths/">👊</a>
 </summary>
 
-### 문제 풀이
+### 문제 풀이 1/2 [`#Iterative BFS`]
 
 ```js
 /**
  * @param {TreeNode} root
  * @return {string[]}
- * 
- * n is all nodes
- * h is tree's height
- * w is tree's width
+ *  
+ * w as width
  * 
  * time:    O(n)
- * space:   O(h + w)
+ * space:   O(w)
  */
 var binaryTreePaths = function (root) {
   const result = [];
@@ -282,6 +281,8 @@ var binaryTreePaths = function (root) {
   return result;
 };
 ```
+### 문제 풀이 2/2 [`#Iterative DFS`]
+
 </details>
 <br/>
 
@@ -324,7 +325,6 @@ var getMaxDepth = function(node, level){
  * @param {TreeNode} root
  * @return {number}
  * 
- * w as width
  * 
  * time:    O(n)
  * space:   O(w)
@@ -345,7 +345,7 @@ var maxDepth = function(root) {
  * @return {number}
  * 
  * time:    O(n)
- * space:   O(n)
+ * space:   O(w)
  */
 var maxDepth = function(root) {
   if(!root)
@@ -404,8 +404,6 @@ var maxDepth = function(root) {
  * @param {TreeNode} root
  * @return {boolean}
  * 
- * w as width
- * 
  * time:    O(n)
  * space:   O(w)
  */
@@ -436,9 +434,7 @@ var isMirror = function(nodeA, nodeB){
 ```js
 /**
  * @param {TreeNode} root
- * @return {boolean}
- * 
- * w as width
+ * @return {boolean} 
  * 
  * time:    O(n)
  * space:   O(w)
@@ -488,7 +484,7 @@ var isSymmetric = function(root) {
 
 링크 표현에서 swap을 해야해서 접근하기 어려웠던 문제였다.
 
-### 문제 풀이 1/2 [`#Recursive Inorder` `#space O(n)`]
+### 문제 풀이 1/3 [`#Recursive Inorder` `#BFS` `#space O(n)`]
 
 참고한 코드는 inorder의 순회를 활용하였다.
 
@@ -500,7 +496,15 @@ var isSymmetric = function(root) {
 
 이전 순회한 노드를 기억하면서 swap 대상이 되는 노드A와 노드B를 도출한다.
 
-<div align="center"><img width="50%" src="assets/99-solution-process.jpg"/></div>
+<table>
+  <tr>
+    <td>
+      <div align="center">
+        <img src="assets/99-recursive-solution.jpg"/>
+      </div>
+    </td>
+    <td>
+<p>
 
 ```js
 /**
@@ -508,7 +512,7 @@ var isSymmetric = function(root) {
  * @return {void} Do not return anything, modify root in-place instead.
  *
  * time:    O(n)
- * space:   O(n)
+ * space:   O(w)
  */
 var recoverTree = function(root) {  
   let nodeA = null;
@@ -527,13 +531,11 @@ var recoverTree = function(root) {
     
     inorderWithMemory(node.left);
     
-    if(!nodeA && (!prevNode || prevNode.val >= node.val)){
+    if(!nodeA && (!prevNode || prevNode.val >= node.val))
       nodeA = prevNode;
-    }
     
-    if(nodeA && prevNode.val >= node.val){
-      nodeB = node;
-    }
+    if(nodeA && prevNode.val >= node.val)
+      nodeB = node;    
     
     prevNode = node;    
     
@@ -544,9 +546,75 @@ var recoverTree = function(root) {
   swap(nodeA, nodeB);
 };
 ```
+</p>
+    </td>
+  </tr>
+</table>
 
-### 문제 풀이 2/2 [`#Non-recursive Inorder` `#space O(1)`]
 
+### 문제 풀이 2/3 [`#Iterative Inorder` `#DFS` `#space O(n)`]
+
+<table>
+  <tr>
+    <td>
+      <div align="center">
+        <img src="assets/99-iterative-solution.png"/>
+      </div>
+    </td>
+    <td>
+<p>
+
+```js
+/**
+ * @param {TreeNode} root
+ * @return {void} Do not return anything, modify root in-place instead.
+ *
+ * time:    O(n)
+ * space:   O(h)
+ */
+var recoverTree = function(root) {    
+  let nodeA = null;
+  let nodeB = null;
+  
+  function swap(nodeA, nodeB){
+    let temp = nodeA.val;
+    nodeA.val = nodeB.val;
+    nodeB.val = temp;
+  }
+  
+  let cur = root;
+  let prev = null;
+  const stack = new Stack();
+  
+  while(!stack.isEmpty() || cur){
+    if(cur){          // +++ visit cur's left subtree
+      stack.push(cur);
+      cur = cur.left;
+    }else{            // +++ cur's left subtree is done
+      cur = stack.pop();
+      
+      if(prev && cur.val <= prev.val){
+        if(!nodeA)
+          nodeA = prev;
+        
+        nodeB = cur;
+      }
+      
+      // +++ visit cur's right subtree
+      prev = cur;
+      cur = cur.right;
+    }
+  }
+  
+  swap(nodeA, nodeB);
+};
+```
+</p>
+    </td>
+  </tr>
+</table>
+
+### 문제 풀이 3/3 [`#Non-recursive Inorder` `#space O(1)`]
 
 </details>
 
@@ -568,4 +636,6 @@ var recoverTree = function(root) {
 
 [Simple Solution at 101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/discuss/433170/isMirror-DFS-(Recursion-OneTwo-Stacks)-%2B-BFS-(Queue)-Solution-in-Java) ━ *LeetCode*
 
-[Simple Solution at 99. Recover Binary Search Tree](https://leetcode.com/problems/recover-binary-search-tree/discuss/32535/No-Fancy-Algorithm-just-Simple-and-Powerful-In-Order-Traversal) ━ *LeetCode*
+[Simple Solution at 99. Recover Binary Search Tree](https://leetcode.com/problems/recover-binary-search-tree/discuss/32562/Share-my-solutions-and-detailed-explanation-with-recursiveiterative-in-order-traversal-and-Morris-traversal) ━ *LeetCode*
+
+[What is Morris traversal?](https://www.educative.io/edpresso/what-is-morris-traversal) ━ *LeetCode*
