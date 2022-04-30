@@ -1,7 +1,5 @@
 # 트리
 
-<hr/>
-
 ## 이론
 
 <details>
@@ -176,7 +174,7 @@ BinarySearchTree.prototype._getMinValueAtRightSubtree = function (node) {
 |       | `display` | `inorder` | `preorder` | `postorder` | `levelorder` |
 | :---: | :-------: | :-------: | :--------: | :---------: | :----------: |
 | time  |  `O(n)`   |  `O(n)`   |   `O(n)`   |   `O(n)`    |    `O(n)`    |
-| space |  `O(n)`   |  `O(1)`   |   `O(1)`   |   `O(1)`    |    `O(L)`    |
+| space |  `O(n)`   |  `O(n)`   |   `O(n)`   |   `O(n)`    |    `O(nL)`    |
 
 </details>
 
@@ -477,7 +475,14 @@ var isSymmetric = function(root) {
   return true;
 };
 ```
+</details>
 
+## 문제 리스트
+
+<!-- <details> -->
+<summary>99. Recover Binary Search Tree
+  <a href="https://leetcode.com/problems/recover-binary-search-tree/">👊</a>
+</summary>
 </details>
 
 <hr/>
