@@ -479,10 +479,75 @@ var isSymmetric = function(root) {
 
 ## 문제 리스트
 
-<!-- <details> -->
+<details>
 <summary>99. Recover Binary Search Tree
   <a href="https://leetcode.com/problems/recover-binary-search-tree/">👊</a>
 </summary>
+
+### 문제 회고
+
+링크 표현에서 swap을 해야해서 접근하기 어려웠던 문제였다.
+
+### 문제 풀이 1/2 [`#Recursive Inorder` `#space O(n)`]
+
+참고한 코드는 inorder의 순회를 활용하였다.
+
+정상적인 이진 탐색 트리는 inorder시, 오름차순이 유지된다.
+
+따라서 오름차순 유지가 되지 않은 노드들을 기억하면된다.
+
+트리를 순회할 때마다 
+
+이전 순회한 노드를 기억하면서 swap 대상이 되는 노드A와 노드B를 도출한다.
+
+<div align="center"><img width="50%" src="assets/99-solution-process.jpg"/></div>
+
+```js
+/**
+ * @param {TreeNode} root
+ * @return {void} Do not return anything, modify root in-place instead.
+ *
+ * time:    O(n)
+ * space:   O(n)
+ */
+var recoverTree = function(root) {  
+  let nodeA = null;
+  let nodeB = null;
+  let prevNode = null;
+  
+  function swap(nodeA, nodeB){
+    let temp = nodeA.val;
+    nodeA.val = nodeB.val;
+    nodeB.val = temp;
+  }
+  
+  function inorderWithMemory(node) {
+    if(!node)
+      return;    
+    
+    inorderWithMemory(node.left);
+    
+    if(!nodeA && (!prevNode || prevNode.val >= node.val)){
+      nodeA = prevNode;
+    }
+    
+    if(nodeA && prevNode.val >= node.val){
+      nodeB = node;
+    }
+    
+    prevNode = node;    
+    
+    inorderWithMemory(node.right);     
+  }
+  
+  inorderWithMemory(root);  
+  swap(nodeA, nodeB);
+};
+```
+
+### 문제 풀이 2/2 [`#Non-recursive Inorder` `#space O(1)`]
+
+
 </details>
 
 <hr/>
@@ -502,3 +567,5 @@ var isSymmetric = function(root) {
 [Simple Solution at 112. Path Sum](https://leetcode.com/problems/path-sum/discuss/36581/My-Python-iterative-DFS-solution) ━ *LeetCode*
 
 [Simple Solution at 101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/discuss/433170/isMirror-DFS-(Recursion-OneTwo-Stacks)-%2B-BFS-(Queue)-Solution-in-Java) ━ *LeetCode*
+
+[Simple Solution at 99. Recover Binary Search Tree](https://leetcode.com/problems/recover-binary-search-tree/discuss/32535/No-Fancy-Algorithm-just-Simple-and-Powerful-In-Order-Traversal) ━ *LeetCode*
