@@ -180,20 +180,28 @@ BinarySearchTree.prototype._getMinValueAtRightSubtree = function (node) {
 
 ## 이월된 문제 리스트
 
-입력값으로 주어진 이진 트리는 이진 탐색 트리가 아니라서 별도의 에디터에서 그대로 구현하기 어려웠다.
-
-따라서, 별도의 문제 파일로 빼지 못하고, 문제 에디터에서 바로 해결하였다.
-
+> 입력값으로 주어진 이진 트리는 이진 탐색 트리가 아니라서 별도의  에디터에서 그대로 구현하기 어려웠다.
+>
+> 따라서, 별도의 문제 파일로 빼지 못하고, 문제 에디터에서 바로 해결하였다.
+>
 > 단, 문제에서 사용되는 자료구조는 ADT를 활용하였다.
 
 **[조건: DFS 풀이]**
+
+두 문제는 BFS로 밖에 풀수 없는 유형이다.
+
+다음 예로 `112번` 문제의 그림을 보면 DFS에서 스택을 사용할 뿐 
+
+넓이 우선 탐색을 하기 때문에 DFS라고 볼 수 없다.
+
+<div align="center"><img width="60%" src="assets/112-dfs&bfs-difference-issue.jpg"/></div>
 
 <details>
 <summary>112. Path Sum
   <a href="https://leetcode.com/problems/path-sum/">👊</a>
 </summary>
 
-### 문제 풀이 1/2 [`#Iterative BFS`]
+### 문제 풀이 [`#Iterative BFS`]
 
 ```js
 /**
@@ -232,7 +240,6 @@ var hasPathSum = function (root, targetSum) {
   return false;
 };
 ```
-### 문제 풀이 2/2 [`#Iterative DFS`]
 
 </details>
 
@@ -241,7 +248,7 @@ var hasPathSum = function (root, targetSum) {
   <a href="https://leetcode.com/problems/binary-tree-paths/">👊</a>
 </summary>
 
-### 문제 풀이 1/2 [`#Iterative BFS`]
+### 문제 풀이 [`#Iterative BFS`]
 
 ```js
 /**
@@ -281,7 +288,6 @@ var binaryTreePaths = function (root) {
   return result;
 };
 ```
-### 문제 풀이 2/2 [`#Iterative DFS`]
 
 </details>
 <br/>
@@ -616,6 +622,18 @@ var recoverTree = function(root) {
 
 ### 문제 풀이 3/3 [`#Non-recursive Inorder` `#space O(1)`]
 
+`Non-recursive Inorder`은  `Morris traversal` 알고리즘이라고 한다.
+
+간단히 설명하면,
+
+    1. cur를 root로 초기화한다.
+    2. cur이 null이 아니면, cur에 왼쪽 자식이 있는지 탐색한다.
+    3. cur에 왼쪽 자식이 없으면 cur의 오른쪽 노드를 가리키도록 바꾼다.
+       또는,  cur를 cur의 왼쪽 하위 트리에서 가장 큰 노드로 바꾼다.
+    4. cur를 왼쪽 노드로 바꾼다.
+
+```js
+```
 </details>
 
 <hr/>
