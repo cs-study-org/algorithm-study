@@ -636,6 +636,103 @@ var recoverTree = function(root) {
 ```
 </details>
 
+<!-- <details> -->
+<summary>222. Count Complete Tree Nodes
+  <a href="https://leetcode.com/problems/count-complete-tree-nodes/">👊</a>
+</summary>
+
+### 문제 회고
+
+처음 접근 방법은 BFS하는 것이었다.
+
+단, 시간복잡도가 `O(n)`이 나온다.
+
+문제가 `medium`인 이유는 이 시간복잡도를 `O(n)`보다 적게 나오게 하는 것이다.
+
+### 문제 풀이 [`#time O(log n²)`]
+
+트리의 높이는 
+
+    왼쪽 노드로만 가면 알 수 있다.
+
+높이의 노드의 개수는
+
+    2^height - 1
+
+    즉, (1 << height - 1)로 알아낸다.
+
+오른쪽 하위 트리의 높이가 전체 트리보다 한 개 작은지 확인한다.
+
+즉, 왼쪽 하위 트리와 오른쪽 하위 트리의 높이가 같은지 확인한다.
+
+높이가 같다면
+
+    해당 높이의 노드의 개수를 더한다.
+
+아닐 경우 
+
+    한 노드를 제외한 해당 높이의 노드의 개수를 더한다.
+
+<table>
+  <tr>
+    <td>
+      <img src="assets/222-time-reduce-solution.png"/>
+    </td>
+    <td>
+<p>
+
+```js
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ *
+ * time:  O(log n²)
+ * space: O(1)
+ */
+var countNodes = function(root) {  
+  if(!root)
+    return 0;
+    
+  let nodes = 0;  
+  
+  while(root){         
+    const leftHeight = getHeight(root.left);
+    const rightHeight = getHeight(root.right); 
+    
+    if(leftHeight === rightHeight){
+      nodes += (1 << leftHeight);
+      root = root.right;
+    }else{
+      nodes += (1 << leftHeight) - 1;
+      root = root.left;
+    }    
+        
+    console.log(leftHeight, rightHeight);
+    console.log("NODES:", nodes);
+  }
+  
+  return nodes;
+};
+
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ *
+ * time:  O(log n)
+ * space: O(1)
+ */
+var getHeight = function(root) {
+  return root ? getHeight(root.left) + 1 : 0;
+};
+```
+</p>
+    </td>
+  </tr>
+</table>
+
+> 🤔 첫 loop 때 오른쪽 서브트리가 불완전한데, 포화된 높이의 노드의 개수를 채우는 이슈
+</details>
+
 <hr/>
 
 ## 참고 문헌
@@ -657,3 +754,5 @@ var recoverTree = function(root) {
 [Simple Solution at 99. Recover Binary Search Tree](https://leetcode.com/problems/recover-binary-search-tree/discuss/32562/Share-my-solutions-and-detailed-explanation-with-recursiveiterative-in-order-traversal-and-Morris-traversal) ━ *LeetCode*
 
 [What is Morris traversal?](https://www.educative.io/edpresso/what-is-morris-traversal) ━ *LeetCode*
+
+[Simple Solution at 222. Count Complete Tree Nodes](https://leetcode.com/problems/count-complete-tree-nodes/discuss/61958/Concise-Java-solutions-O(log(n)2)) ━ *LeetCode*
