@@ -1,7 +1,133 @@
 ## < Hash >
 
 - 구현 문제
-    
+    - 705. Design HashSet
+        <details>
+        <summary>Design HashSet</summary>
+        
+        ```java
+
+        // 시간 복잡도 add : O(1) , remove : O(1), contains : O(n).. n = chaing 연결 노드 갯수, isEmpty : O(1)
+        // 공간 복잡도 O(n) ... n = size
+         
+        class MyHashSet {
+
+
+            private Node[] bucket;
+
+            private int size;
+
+            MyHashSet() {
+                this.size = 10;
+                bucket = new Node[10];
+            }
+
+            ;
+
+            MyHashSet(int size) {
+                this.size = size;
+                bucket = new Node[size];
+            }
+
+            ;
+            
+            public void add(int key) {
+                Node node = new Node(key);
+                int hash = String.valueOf(key).hashCode() % size;
+
+                if (isEmpty(key)) {
+
+                    bucket[hash] = node;
+                } else {
+
+                    while (bucket[hash].next != null) {
+                        if (bucket[hash].data == key) {
+                            break;
+                        }
+                        bucket[hash] = bucket[hash].next;
+                    }
+
+                    if (bucket[hash].data != key) {
+                        bucket[hash].next = node;
+                    }
+                }
+            }
+
+            ;
+
+            public void remove(int key) {
+                int hash = String.valueOf(key).hashCode() % size;
+                if (isEmpty(key)) {
+
+                } else {
+                    while (bucket[hash].next != null) {
+
+                        if (bucket[hash].data == key) {
+                            break;
+                        }
+                        bucket[hash] = bucket[hash].next;
+                    }
+                    if (bucket[hash].data == key)
+                        bucket[hash].data = -1;
+                }
+            }
+
+            public boolean contains(int key) {
+                if (isEmpty(key)) {
+                    return false;
+                } else {
+                    int hash = String.valueOf(key).hashCode() % size;
+                    while (bucket[hash].next != null) {
+                        if (bucket[hash].data == key) {
+                            break;
+                        }
+                        bucket[hash] = bucket[hash].next;
+                    }
+                    if (bucket[hash].data == key) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            public boolean isEmpty(int key) {
+                if (bucket[String.valueOf(key).hashCode() % size] != null) {
+                    return false;
+                }
+                return true;
+            }
+
+            public static void main(String[] args) {
+                MyHashSet set = new MyHashSet();
+                set.add(10);
+                set.add(12);
+
+                System.out.println(set.contains(10));
+                System.out.println(set.contains(12));
+
+                set.remove(10);
+                set.remove(12);
+                System.out.println(set.contains(10));
+                System.out.println(set.contains(12));
+
+            }
+
+        }
+
+        class Node {
+            // 데이터가 저장될 필드
+            public Integer data;
+            // 다음 노드를 가리키는 필드
+            public Node next;
+
+            public Node(int input) {
+                this.data = input;
+                this.next = null;
+            }
+        }  
+        ```
+        </details>
+
     - 706. Design HashMap
         <details>
         <summary>Design HashMap</summary>
