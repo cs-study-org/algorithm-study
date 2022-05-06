@@ -636,7 +636,7 @@ var recoverTree = function(root) {
 ```
 </details>
 
-<!-- <details> -->
+<details> 
 <summary>222. Count Complete Tree Nodes
   <a href="https://leetcode.com/problems/count-complete-tree-nodes/">👊</a>
 </summary>
@@ -649,34 +649,65 @@ var recoverTree = function(root) {
 
 문제가 `medium`인 이유는 이 시간복잡도를 `O(n)`보다 적게 나오게 하는 것이다.
 
-### 문제 풀이 [`#time O(log n²)`]
-
-트리의 높이는 
-
-    왼쪽 노드로만 가면 알 수 있다.
-
-높이의 노드의 개수는
-
-    2^height - 1
-
-    즉, (1 << height - 1)로 알아낸다.
-
-오른쪽 하위 트리의 높이가 전체 트리보다 한 개 작은지 확인한다.
-
-즉, 왼쪽 하위 트리와 오른쪽 하위 트리의 높이가 같은지 확인한다.
-
-높이가 같다면
-
-    해당 높이의 노드의 개수를 더한다.
-
-아닐 경우 
-
-    한 노드를 제외한 해당 높이의 노드의 개수를 더한다.
+### 문제 풀이 1/2 [🤔 `#time O(log n²)` `#Recursive`]
 
 <table>
   <tr>
     <td>
       <img src="assets/222-time-reduce-solution.png"/>
+    </td>
+    <td>
+<p>
+
+```js
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ *
+ * time:  O(log n²)
+ *        → recursive   O(log n)
+ *        → getHeight   O(log n) 
+ * space: O(n)
+ */
+var countNodes = function(root) {    
+  if(!root)
+    return 0;  
+    
+  const leftHeight = getLeftHeight(root);
+  const rightHeight = getRightHeight(root); 
+
+  if(leftHeight === rightHeight)
+    return (1 << leftHeight) - 1;
+    
+  return countNodes(root.left) + countNodes(root.right) + 1;
+};
+
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ *
+ * time:  O(log n)
+ * space: O(1)
+ */
+var getLeftHeight = function(node) {
+  return node ? getLeftHeight(node.left) + 1 : 0;
+};
+
+var getRightHeight = function(node) {
+  return node ? getRightHeight(node.right) + 1 : 0;
+};
+
+```
+</p>
+    </td>
+  </tr>
+</table>
+
+### 문제 풀이 2/2 [`#time O(log n²)` `#Iterative`]
+
+<table>
+  <tr>
+    <td>      
     </td>
     <td>
 <p>
@@ -729,13 +760,15 @@ var getHeight = function(root) {
     </td>
   </tr>
 </table>
-
-> 🤔 첫 loop 때 오른쪽 서브트리가 불완전한데, 포화된 높이의 노드의 개수를 채우는 이슈
 </details>
 
 <hr/>
 
 ## 참고 문헌
+
+<details>
+<summary>자료구조 이론 및 구현</summary>
+<br/>
 
 [트리 이론](https://namu.wiki/w/트리(그래프)#s-4.1.1) ━ *나무위키*
 
@@ -747,12 +780,20 @@ var getHeight = function(root) {
 
 [이진 트리 DFS vs BFS](https://www.geeksforgeeks.org/bfs-vs-dfs-binary-tree/) ━ *GeeksforGeeks*
 
+[What is Morris traversal?](https://www.educative.io/edpresso/what-is-morris-traversal) ━ *LeetCode*
+</details>
+
+<details>
+<summary>풀이 참고</summary>
+<br/>
+
 [Simple Solution at 112. Path Sum](https://leetcode.com/problems/path-sum/discuss/36581/My-Python-iterative-DFS-solution) ━ *LeetCode*
 
 [Simple Solution at 101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/discuss/433170/isMirror-DFS-(Recursion-OneTwo-Stacks)-%2B-BFS-(Queue)-Solution-in-Java) ━ *LeetCode*
 
 [Simple Solution at 99. Recover Binary Search Tree](https://leetcode.com/problems/recover-binary-search-tree/discuss/32562/Share-my-solutions-and-detailed-explanation-with-recursiveiterative-in-order-traversal-and-Morris-traversal) ━ *LeetCode*
 
-[What is Morris traversal?](https://www.educative.io/edpresso/what-is-morris-traversal) ━ *LeetCode*
-
 [Simple Solution at 222. Count Complete Tree Nodes](https://leetcode.com/problems/count-complete-tree-nodes/discuss/61958/Concise-Java-solutions-O(log(n)2)) ━ *LeetCode*
+
+[Simple Solution at 222. Count Complete Tree Nodes](https://www.youtube.com/watch?v=4wPlA_InnGY&ab_channel=CodingBeats) ━ *CodingBeats*
+</details>
