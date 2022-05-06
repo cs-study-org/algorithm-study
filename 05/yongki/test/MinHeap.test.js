@@ -1,5 +1,5 @@
 const assert = require('assert');
-const MinHeap = require('../src/adt/MinHeap');
+const MinHeap = require('../../../ADT/yongki/Heap/MinHeap');
 
 
 describe('MinHeap', _ => {

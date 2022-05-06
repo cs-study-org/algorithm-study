@@ -1,5 +1,5 @@
 const assert = require('assert');
-const MaxHeap = require('../src/adt/MaxHeap');
+const MaxHeap = require('../../../ADT/yongki/Heap/MaxHeap');
 
 
 describe('MaxHeap', _ => {
