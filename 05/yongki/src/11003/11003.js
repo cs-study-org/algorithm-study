@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const MyCircularDeque = require('../adt/CircularDeque');
+const CircularDeque = require('../../../../ADT/yongki/Deque/CircularDeque');
 
 
 function handleInput(path) {
@@ -37,19 +37,19 @@ function handleInput(path) {
   const [_, limit, ...nums] = handleInput(__dirname + '/stdin-11003');
 
   // +++ Start
-  const circularDeque = new MyCircularDeque(limit);
+  const circularDeque = new CircularDeque(limit);
   const result = [];
 
   for (const [idx, num] of nums.entries()) {
     let curMinIdx = idx - limit + 1;
     curMinIdx = curMinIdx <= 0 ? 0 : curMinIdx;
 
-    const curMinRange = nums.slice(curMinIdx, idx + 1);    
+    const curMinRange = nums.slice(curMinIdx, idx + 1);
 
     if (circularDeque.getFront() < nums[curMinIdx]
       && !curMinRange.includes(circularDeque.getFront())
-    ) 
-      circularDeque.deleteFront();    
+    )
+      circularDeque.deleteFront();
 
     while (circularDeque.getRear() >= num)
       circularDeque.deleteLast();
@@ -60,5 +60,5 @@ function handleInput(path) {
     result.push(circularDeque.getFront());
   }
 
-  console.log(result.join(' '));  
+  console.log(result.join(' '));
 })();

@@ -1,11 +1,11 @@
-const util = require('util');
+const ListNode = require('../LinkedList/ListNode');
 
-const ListNode = require('./ListNode');
+ListNode.prototype.prev = null;
 
 /**
  * @param {number} k
  */
-var MyCircularDeque = function (k) {
+var CircularDeque = function (k) {
   this.head = new ListNode();
   this.tail = new ListNode();
 
@@ -19,7 +19,7 @@ var MyCircularDeque = function (k) {
   this.maxSize = k;
 };
 
-MyCircularDeque.prototype.displayDeque = function (pointer) {
+CircularDeque.prototype.displayDeque = function (pointer) {
   let head = pointer ? pointer : this.head;
   let tail = pointer ? pointer : this.tail;
 
@@ -49,7 +49,7 @@ MyCircularDeque.prototype.displayDeque = function (pointer) {
  * time:      O(n)
  * space:     O(1)
  */
-MyCircularDeque.prototype.getIndex = function (value) {
+CircularDeque.prototype.getIndex = function (value) {
   if (this.isEmpty())
     return false;
 
@@ -74,7 +74,7 @@ MyCircularDeque.prototype.getIndex = function (value) {
  * time:      O(1)
  * space:     O(1)
  */
-MyCircularDeque.prototype.insertFront = function (value) {
+CircularDeque.prototype.insertFront = function (value) {
   if (this.isFull())
     return false;
 
@@ -100,7 +100,7 @@ MyCircularDeque.prototype.insertFront = function (value) {
  * time:      O(1)
  * space:     O(1)
  */
-MyCircularDeque.prototype.insertLast = function (value) {
+CircularDeque.prototype.insertLast = function (value) {
   if (this.isFull())
     return false;
 
@@ -125,11 +125,11 @@ MyCircularDeque.prototype.insertLast = function (value) {
  * time:      O(1)
  * space:     O(1)
  */
-MyCircularDeque.prototype.deleteFront = function () {
+CircularDeque.prototype.deleteFront = function () {
   if (this.isEmpty())
     return;
 
-  const result = this.head.next.value;  
+  const result = this.head.next.value;
 
   const prevNode = this.head;
   const nextNode = this.head.next.next;
@@ -147,11 +147,11 @@ MyCircularDeque.prototype.deleteFront = function () {
  * time:      O(1)
  * space:     O(1)
  */
-MyCircularDeque.prototype.deleteLast = function () {
+CircularDeque.prototype.deleteLast = function () {
   if (this.isEmpty())
     return;
 
-  const result = this.tail.prev.value;  
+  const result = this.tail.prev.value;
 
   const prevNode = this.tail.prev.prev;
   const nextNode = this.tail.prev.prev.next.next;
@@ -169,7 +169,7 @@ MyCircularDeque.prototype.deleteLast = function () {
  * time:      O(1)
  * space:     O(1)
  */
-MyCircularDeque.prototype.getFront = function () {
+CircularDeque.prototype.getFront = function () {
   if (this.isEmpty())
     return -1;
 
@@ -182,7 +182,7 @@ MyCircularDeque.prototype.getFront = function () {
  * time:      O(1)
  * space:     O(1)
  */
-MyCircularDeque.prototype.getRear = function () {
+CircularDeque.prototype.getRear = function () {
   if (this.isEmpty())
     return -1;
 
@@ -195,7 +195,7 @@ MyCircularDeque.prototype.getRear = function () {
  * time:      O(1)
  * space:     O(1)
  */
-MyCircularDeque.prototype.isEmpty = function () {
+CircularDeque.prototype.isEmpty = function () {
   return this.head && !this.head.next.value
     || this.tail && !this.tail.prev.value;
 };
@@ -206,8 +206,8 @@ MyCircularDeque.prototype.isEmpty = function () {
  * time:      O(1)
  * space:     O(1)
  */
-MyCircularDeque.prototype.isFull = function () {
+CircularDeque.prototype.isFull = function () {
   return this.size === this.maxSize;
 };
 
-module.exports = MyCircularDeque;
+module.exports = CircularDeque;

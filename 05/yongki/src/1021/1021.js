@@ -1,10 +1,9 @@
-const util = require('util');
 const fs = require('fs');
 
-const MyCircularDeque = require('../adt/CircularDeque');
+const CircularDeque = require('../../../../ADT/yongki/Deque/CircularDeque');
 
 /**
- * @param {MyCircularDeque} circularDeque 
+ * @param {CircularDeque} circularDeque 
  * @param {Number} rotateCnt 
  * 
  * a as circularDeque
@@ -13,17 +12,17 @@ const MyCircularDeque = require('../adt/CircularDeque');
  * time:    O(b)
  * space:   O(1)
  */
-function rotateLeft(circularDeque, rotateCnt) {  
-  while(rotateCnt--){    
+function rotateLeft(circularDeque, rotateCnt) {
+  while (rotateCnt--) {
     const value = circularDeque.deleteFront();
-    circularDeque.insertLast(value);  
-  }  
+    circularDeque.insertLast(value);
+  }
 
   circularDeque.deleteFront();
 }
 
 /**
- * @param {MyCircularDeque} circularDeque 
+ * @param {CircularDeque} circularDeque 
  * @param {Number} rotateCnt 
  * 
  * a as circularDeque
@@ -33,11 +32,11 @@ function rotateLeft(circularDeque, rotateCnt) {
  * space:   O(1)
  */
 function rotateRight(circularDeque, rotateCnt) {
-  while(rotateCnt--){
+  while (rotateCnt--) {
     const value = circularDeque.deleteLast();
-    circularDeque.insertFront(value);      
-  }  
-  
+    circularDeque.insertFront(value);
+  }
+
   circularDeque.deleteFront();
 }
 
@@ -51,34 +50,34 @@ function rotateRight(circularDeque, rotateCnt) {
   // +++ Processcing
   const [size, _, ...targets] = fs.readFileSync(__dirname + '/stdin-1021')
     .toString()
-    .replace('\n', '') 
+    .replace('\n', '')
     .split(/\s/)
-    .map(each => Number(each));  
-  
-  const circularDeque = new MyCircularDeque(size);  
-  
-  for(let i = 1; i <= size; i++)
-    circularDeque.insertLast(i);  
+    .map(each => Number(each));
+
+  const circularDeque = new CircularDeque(size);
+
+  for (let i = 1; i <= size; i++)
+    circularDeque.insertLast(i);
 
   // +++ Start
   let result = 0;
-  
-  for(const target of targets){    
+
+  for (const target of targets) {
     circularDeque.displayDeque();
 
-    const middle = Math.ceil(circularDeque.size  / 2);
-    const idx = circularDeque.getIndex(target);       
-    
-    let moveCnt = 0;                                  
+    const middle = Math.ceil(circularDeque.size / 2);
+    const idx = circularDeque.getIndex(target);
 
-    if(middle > idx){
+    let moveCnt = 0;
+
+    if (middle > idx) {
       moveCnt = idx;
       rotateLeft(circularDeque, moveCnt);
-    }else{      
-      moveCnt = circularDeque.size - idx;      
+    } else {
+      moveCnt = circularDeque.size - idx;
       rotateRight(circularDeque, moveCnt);
-    }        
-    result += moveCnt; 
+    }
+    result += moveCnt;
   }
 
   console.log(result);

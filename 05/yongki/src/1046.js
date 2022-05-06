@@ -1,6 +1,4 @@
-const util = require('util');
-
-const MaxHeap = require('./adt/MaxHeap');
+const MaxHeap = require('../../../ADT/yongki/Heap/MaxHeap');
 
 
 /**
