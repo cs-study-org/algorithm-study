@@ -506,7 +506,7 @@ var isSymmetric = function(root) {
   <tr>
     <td>
       <div align="center">
-        <img src="assets/99-recursive-solution.jpg"/>
+        <img src="assets/99-recursive-solution.png"/>
       </div>
     </td>
     <td>
@@ -780,7 +780,7 @@ var getHeight = function(root) {
 
 [이진 트리 DFS vs BFS](https://www.geeksforgeeks.org/bfs-vs-dfs-binary-tree/) ━ *GeeksforGeeks*
 
-[What is Morris traversal?](https://www.educative.io/edpresso/what-is-morris-traversal) ━ *LeetCode*
+[What is Morris traversal?](https://www.educative.io/edpresso/what-is-morris-traversal) ━ *educative*
 </details>
 
 <details>
