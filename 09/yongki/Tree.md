@@ -629,11 +629,80 @@ var recoverTree = function(root) {
     1. cur를 root로 초기화한다.
     2. cur이 null이 아니면, cur에 왼쪽 자식이 있는지 탐색한다.
     3. cur에 왼쪽 자식이 없으면 cur의 오른쪽 노드를 가리키도록 바꾼다.
-       또는,  cur를 cur의 왼쪽 하위 트리에서 가장 큰 노드로 바꾼다.
-    4. cur를 왼쪽 노드로 바꾼다.
+       또는,  cur를 cur의 왼쪽 하위 트리에서 가장 큰 노드로 바꾼다.    
+
+<table>
+  <tr>
+    <td>
+      <div align="center">
+        <img src="assets/99-non-recursive-solution.png"/>
+      </div>
+    </td>
+    <td>
+<p>
 
 ```js
+/**
+ * @param {TreeNode} root
+ * @return {void} Do not return anything, modify root in-place instead.
+ * 
+ * time:    O(n)
+ * space:   O(1)
+ */
+var recoverTree = function(root) {
+  let nodeA = null;
+  let nodeB = null;
+  
+  function swap(nodeA, nodeB){
+    let temp = nodeA.val;
+    nodeA.val = nodeB.val;
+    nodeB.val = temp;
+  }
+    
+  let pred = null;
+  let prev = null;  
+  let cur = root;
+  
+  while(cur){
+    // +++ Recover
+    if(prev && cur.val <= prev.val){
+      if(!nodeA)
+        nodeA = prev;
+      
+      nodeB = cur;
+    }
+        
+    if(!cur.left){
+      prev = cur;
+      cur = cur.right;
+    }else{
+      // +++ Find pred in left subtree
+      pred = cur.left;
+      
+      while(pred.right && pred.right != cur)
+        pred = pred.right;
+      
+      // +++ Make cur as right child of its prev
+      if(pred.right != cur){
+        pred.right = cur;
+        cur = cur.left;
+      }     
+      // +++ Fix right child of prev
+      else{        
+        prev.right = null;
+        prev = cur;
+        cur = cur.right;
+      }            
+    }
+  }
+  
+  swap(nodeA, nodeB);
+};
 ```
+</p>
+  </tr>
+</table>
+
 </details>
 
 <details> 
