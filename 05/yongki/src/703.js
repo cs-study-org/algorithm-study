@@ -1,7 +1,7 @@
 const util = require('util');
 const assert = require('assert')
 
-const MinHeap = require('./adt/MinHeap');
+const MinHeap = require('../../../ADT/yongki/Heap/MinHeap');
 
 
 /**

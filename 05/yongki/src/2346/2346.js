@@ -1,11 +1,10 @@
-const util = require('util');
 const fs = require('fs');
 
-const MyCircularDeque = require('../adt/CircularDeque');
+const CircularDeque = require('../../../../ADT/yongki/Deque/CircularDeque');
 
 
 function rotate(circularDeque, rotateCnt) {
-  circularDeque.deleteFront();  
+  circularDeque.deleteFront();
   rotateCnt--;
 
   while (rotateCnt--) {
@@ -27,7 +26,7 @@ function rotate(circularDeque, rotateCnt) {
     .split(/\s/)
     .map(each => Number(each));
 
-  const circularDeque = new MyCircularDeque();
+  const circularDeque = new CircularDeque();
 
   for (let i = 0; i < size; i++)
     circularDeque.insertLast(targets[i]);
@@ -42,7 +41,7 @@ function rotate(circularDeque, rotateCnt) {
     front < 0
       ? rotate(circularDeque, (circularDeque.size - front))
       : rotate(circularDeque, front);
-    
+
     result.push(targets.indexOf(front) + 1);
   }
 

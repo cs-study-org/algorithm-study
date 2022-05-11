@@ -17,7 +17,7 @@ Heap.prototype.swap = function (a, b) {
 }
 
 Heap.prototype.getParentIdx = function (idx) {
-  return !idx ? 0 : Math.floor((idx - 1) / 2);
+  return !idx ? 0 : Math.floor((idx - 1) / 2);  
 }
 
 Heap.prototype.getParent = function (idx) {
