@@ -35,15 +35,3 @@ class ListGraph {
         listGraph.get(x).add(y);
     }
     
-    // 그래프 출력 (인접리스트)
-    public void printGraph() {
-        for(int i=1; i<listGraph.size(); i++) {
-            System.out.print("정점 " + i + "의 인접리스트");
-            
-            for(int j=0; j<listGraph.get(i).size(); j++) {
-                System.out.print(" -> " + listGraph.get(i).get(j));
-            }
-            System.out.println();
-        }
-    }
-}
