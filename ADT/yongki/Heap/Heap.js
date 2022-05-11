@@ -1,3 +1,5 @@
+const Stack = require('../Stack');
+
 /**
  * N:              index
  * me:             N
@@ -80,22 +82,32 @@ Heap.prototype.extract = function () {
  * @param {number} value
  * @returns {number}
  * 
- * time:      O(log n)              
- * space:     O(1)
+ * time:      O(n)
+ * space:     O(w)
  */
 Heap.prototype.findIndex = function (value) {
   if (this.getRoot() === value)
-    return 0;
+    return;
 
-  return this._binarySearch(value);
+  const stack = new Stack();
+  stack.push(0);
+
+  while (!stack.isEmpty()) {
+    const idx = stack.pop();
+
+    if (this.heap[idx] === value)
+      return idx;
+
+    if (this.getLeftChild(idx))
+      stack.push(this.getLeftChildIdx(idx));
+
+    if (this.getRightChild(idx))
+      stack.push(this.getRightChildIdx(idx));
+  }
+
+  return;
 }
 
-/**
- * @returns {number}
- * 
- * time:      O(1)
- * space:     O(1)
- */
 Heap.prototype.size = function () {
   return this.heap.length;
 }

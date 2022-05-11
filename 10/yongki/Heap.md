@@ -63,18 +63,17 @@
           <th></th>
           <th><code>insert</code></th>
           <th><code>extract</code></th>
-          <th><code>delete</code></th>          
-          <th><code>find</code></th>
+          <th><code>find</code></th>                 
           <th><code>swap</code></th>
         </tr>
         <tr>
           <td>time</td>
-          <td align="center" colspan="4"><code>O(log n)</code></td>
+          <td align="center" colspan="3"><code>O(log n)</code></td>          
           <td><code>O(1)</code></td>
         </tr>
         <tr>
           <td>space</td>
-          <td align="center" colspan="4"><code>O(log n)</code></td>
+          <td align="center" colspan="3"><code>O(1)</code></td>          
           <td><code>O(1)</code></td>
         </tr>
       </table>    
@@ -85,18 +84,20 @@
       <table>
         <tr>
           <th></th>
+          <th><code>delete</code></th>
           <th><code>update</code></th>
           <th><code>_bubbleUp</code></th>
-          <th><code>_bubbleDown</code></th>
-          <th><code>_binarySearch</code></th>
+          <th><code>_bubbleDown</code></th>   
         </tr>
         <tr>
           <td>time</td>
-          <td align="center" colspan="4"><code>O(log n)</code></td>
+          <td><code>O(n)</code></td>
+          <td align="center" colspan="3"><code>O(log n)</code></td>
         </tr>
         <tr>
           <td>space</td>
-          <td align="center" colspan="4"><code>O(1)</code></td>
+          <td><code>O(w)</code></td>
+          <td align="center" colspan="3"><code>O(1)</code></td>
         </tr>
       </table>
     </td>
@@ -104,18 +105,20 @@
       <table>
         <tr>
           <th></th>
+          <th><code>delete</code></th>
           <th><code>update</code></th>
           <th><code>_bubbleUp</code></th>
-          <th><code>_bubbleDown</code></th>
-          <th><code>_binarySearch</code></th>
+          <th><code>_bubbleDown</code></th>          
         </tr>
         <tr>
           <td>time</td>
-          <td align="center" colspan="4"><code>O(log n)</code></td>
+          <td><code>O(n)</code></td>
+          <td align="center" colspan="3"><code>O(log n)</code></td>
         </tr>
         <tr>
           <td>space</td>
-          <td align="center" colspan="4"><code>O(1)</code></td>
+          <td><code>O(w)</code></td>
+          <td align="center" colspan="3"><code>O(1)</code></td>
         </tr>
       </table>
     </td>
@@ -128,10 +131,19 @@
 <br>
 
 <div align="center">
-  <img src="assets/heap-delete-issue.png">
+  <img width="80%" src="assets/heap-delete-issue.png">
 </div>
+
+이전 우선순위 큐 주제때 이를 이진 탐색 한 뒤 삭제한 코드를 짰었다.
+
+좌우 조건이 없는 힙에는 필요없는 메소드였다.
+
+이를 해결할 방법은 DFS 방법밖에 없다고 생각하였다.
+
 </details>
 
 ## 참고 문헌
 
 [Why in a heap implemented by array the index 0 is left unused?](https://stackoverflow.com/questions/22900388/why-in-a-heap-implemented-by-array-the-index-0-is-left-unused) ━ *Stack overflow*
+
+[Deleting a node (at a specific location) from a heap](http://www.mathcs.emory.edu/~cheung/Courses/171/Syllabus/9-BinTree/heap-delete.html) ━ *Emory College*

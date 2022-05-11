@@ -3,8 +3,8 @@ const MinHeap = require('../../../ADT/yongki/Heap/MinHeap');
 
 
 describe('MinHeap', _ => {
-  describe('level 1 order', () => {
-    const nums = [2, 7, 4, 1, 8, 1];    
+  describe('left node < right node', () => {
+    const nums = [2, 7, 4, 1, 8, 1];
     const heap = new MinHeap();
 
     it('insert nums', () => {
@@ -13,7 +13,7 @@ describe('MinHeap', _ => {
     })
 
     it('display all set up heap', () => {
-      assert.deepEqual(heap.heap, [1, 2, 1, 7, 8, 4]);      
+      assert.deepEqual(heap.heap, [1, 2, 1, 7, 8, 4]);
     })
 
     it('get root num', () => {
@@ -25,27 +25,19 @@ describe('MinHeap', _ => {
     })
 
     it('display after extract heap', () => {
-      assert.deepEqual(heap.heap, [1, 2, 4, 7, 8]);      
+      assert.deepEqual(heap.heap, [1, 2, 4, 7, 8]);
     })
 
     it('delete num', () => {
       assert.equal(heap.delete(2), true);
     })
 
-    it('display after delete heap', () => {      
+    it('display after delete heap', () => {
       assert.deepEqual(heap.heap, [1, 7, 4, 8]);
     })
-
-    // it('update num', () => {
-    //   assert.equal(heap.updateKey(1, 10), true);
-    // })
-
-    // it('display after update heap', () => {
-    //   assert.deepEqual(heap.heap, [1, 8, 4, 10]);
-    // })
   })
 
-  describe('level 1 not order', () => {    
+  describe('left node > right node', () => {
     const nums = [1, 1, 2, 7, 8, 4];
     const heap = new MinHeap();
 
@@ -54,7 +46,7 @@ describe('MinHeap', _ => {
         heap.insert(num);
     })
 
-    it('display all set up heap', () => {      
+    it('display all set up heap', () => {
       assert.deepEqual(heap.heap, [1, 1, 2, 7, 8, 4]);
     })
 
@@ -66,7 +58,7 @@ describe('MinHeap', _ => {
       assert.equal(heap.extract(), 1);
     })
 
-    it('display after extract heap', () => {      
+    it('display after extract heap', () => {
       assert.deepEqual(heap.heap, [1, 4, 2, 7, 8]);
     })
 
@@ -74,16 +66,32 @@ describe('MinHeap', _ => {
       assert.equal(heap.delete(4), true);
     })
 
-    it('display after delete heap', () => {      
+    it('display after delete heap', () => {
       assert.deepEqual(heap.heap, [1, 7, 2, 8]);
     })
+  })
 
-    // it('update num', () => {
-    //   assert.equal(heap.updateKey(1, 10), true);
-    // })
+  describe('delete heapify and update', () => {
+    const nums = [1, 5, 6, 9, 11, 8, 15, 17, 21];
+    const heap = new MinHeap();
 
-    // it('display after update heap', () => {
-    //   assert.deepEqual(heap.heap, [1, 8, 2, 10]);
-    // })
+    for (const num of nums)
+      heap.insert(num);
+
+    it('delete num', () => {
+      assert.equal(heap.delete(5), true);
+    })
+
+    it('display after delete heap', () => {
+      assert.deepEqual(heap.heap, [1, 9, 6, 17, 11, 8, 15, 21])
+    })
+
+    it('update num', () => {
+      assert.equal(heap.updateKey(2, 33), true);
+    })
+
+    it('display after update heap', () => {
+      assert.deepEqual(heap.heap, [1, 9, 15, 17, 11, 21, 33]);
+    })
   })
 })
