@@ -1,6 +1,5 @@
 const Heap = require('./Heap');
 
-
 var MinHeap = function () {
   Heap.apply(this, arguments);
 };
@@ -12,7 +11,7 @@ MinHeap.prototype.constructor = MinHeap;
 MinHeap.prototype._bubbleUp = function (idx) {
 
   while (
-    this.getParent(idx) !== undefined
+    this.getParent(idx)
     && this.getParent(idx) > this.heap[idx]) {
     const parentIdx = this.getParentIdx(idx);
 
@@ -24,14 +23,14 @@ MinHeap.prototype._bubbleUp = function (idx) {
 MinHeap.prototype._bubbleDown = function (idx) {
 
   while (
-    this.getLeftChild(idx) !== undefined
+    this.getLeftChild(idx)
     && this.getLeftChild(idx) < this.heap[idx]
     || this.getRightChild(idx) < this.heap[idx]
   ) {
     let smallerIdx = this.getLeftChildIdx(idx);
 
     if (
-      this.getRightChild(idx) !== undefined
+      this.getRightChild(idx)
       && this.getRightChild(idx) < this.heap[smallerIdx]
     )
       smallerIdx = this.getRightChildIdx(idx)
@@ -45,7 +44,7 @@ MinHeap.prototype._binarySearch = function (value) {
   let idx = 0;
 
   while (
-    this.getLeftChild(idx) !== undefined
+    this.getLeftChild(idx)
     && this.getLeftChild(idx) <= value
     || this.getRightChild(idx) <= value
   ) {
@@ -58,8 +57,8 @@ MinHeap.prototype._binarySearch = function (value) {
     let smallerIdx = this.getLeftChildIdx(idx);
 
     if (
-      this.getRightChild(idx) !== undefined
-      && this.getRightChild(idx) < this.heap[smallerIdx]
+      this.getRightChild(idx)
+      && this.getRightChild(idx) <= this.heap[smallerIdx]
     )
       smallerIdx = this.getRightChildIdx(idx);
 
@@ -80,7 +79,7 @@ MinHeap.prototype._binarySearch = function (value) {
  * space:     O(1)
  */
 MinHeap.prototype.delete = function (value) {
-  const idx = this.findIndex(value);  
+  const idx = this.findIndex(value);    
 
   if (idx === undefined)
     return false;

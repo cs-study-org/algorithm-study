@@ -9,9 +9,7 @@
 
     완전 이진 트리 기반의 자료구조다.
 
-    주로 배열로 구현한다.
-
-사용 사례는
+적용해볼 사례는
 
     이전 주차에서 진행했던 다익스트라 알고리즘의 
     
@@ -31,6 +29,20 @@
 ## 구현
 
 <details>
+<summary>필수메소드와 빅오</summary>
+<br/>
+
+주로 배열로 구현한다.
+
+이때, 여러 매체에서 주로 1번 인덱스부터 사용하는데, 
+
+0번 인덱스부터 사용과 큰 차이는 없다. 필자는 0번 인덱스로 사용하였다.
+
+                      root at 0       root at 1
+    Left child        index*2 + 1     index*2
+    Right child       index*2 + 2     index*2 + 1
+    Parent            (index-1)/2     index/2
+
 <table>
   <tr>
     <th>최대힙</th>
@@ -109,5 +121,17 @@
     </td>
   </tr>
 </table>
-
 </details>
+
+<details>
+<summary>테스트 시 발견한 <code>delete</code> 이슈</summary>
+<br>
+
+<div align="center">
+  <img src="assets/heap-delete-issue.png">
+</div>
+</details>
+
+## 참고 문헌
+
+[Why in a heap implemented by array the index 0 is left unused?](https://stackoverflow.com/questions/22900388/why-in-a-heap-implemented-by-array-the-index-0-is-left-unused) ━ *Stack overflow*

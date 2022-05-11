@@ -12,7 +12,7 @@ MaxHeap.prototype.constructor = MaxHeap;
 MaxHeap.prototype._bubbleUp = function (idx) {
 
   while (
-    this.getParent(idx) !== undefined
+    this.getParent(idx)
     && this.getParent(idx) < this.heap[idx]) {
     const parentIdx = this.getParentIdx(idx);
 
@@ -24,14 +24,14 @@ MaxHeap.prototype._bubbleUp = function (idx) {
 MaxHeap.prototype._bubbleDown = function (idx) {
 
   while (
-    this.getLeftChild(idx) !== undefined
+    this.getLeftChild(idx)
     && this.getLeftChild(idx) > this.heap[idx]
     || this.getRightChild(idx) > this.heap[idx]
   ) {
     let biggerIdx = this.getLeftChildIdx(idx);
 
     if (
-      this.getRightChild(idx) !== undefined
+      this.getRightChild(idx)
       && this.getRightChild(idx) > this.heap[biggerIdx]
     )
       biggerIdx = this.getRightChildIdx(idx)
@@ -45,7 +45,7 @@ MaxHeap.prototype._binarySearch = function (value) {
   let idx = 0;
 
   while (
-    this.getLeftChild(idx) !== undefined
+    this.getLeftChild(idx)
     && this.getLeftChild(idx) >= value
     || this.getRightChild(idx) >= value
   ) {
@@ -55,15 +55,15 @@ MaxHeap.prototype._binarySearch = function (value) {
     if (this.getRightChild(idx) === value)
       return this.getRightChildIdx(idx);
 
-    let biggerIdx = this.getLeftChildIdx(idx);
+    let biggerIdx = this.getLeftChildIdx(idx);    
 
     if (
-      this.getRightChild(idx) !== undefined
-      && this.getRightChild(idx) > this.heap[biggerIdx]
+      this.getRightChild(idx)
+      && this.getRightChild(idx) >= this.heap[biggerIdx]
     )
       biggerIdx = this.getRightChildIdx(idx);
 
-    idx = biggerIdx;
+    idx = biggerIdx;    
   }
 
   return;
