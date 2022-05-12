@@ -12,7 +12,8 @@ MinHeap.prototype._bubbleUp = function (idx) {
 
   while (
     this.getParent(idx)
-    && this.getParent(idx) > this.heap[idx]) {
+    && this.getParent(idx) > this.heap[idx]
+  ) {
     const parentIdx = this.getParentIdx(idx);
 
     this.swap(idx, parentIdx);
@@ -78,7 +79,7 @@ MinHeap.prototype.updateKey = function (idx, value) {
   const oldValue = this.heap[idx];
   this.heap[idx] = value;
 
-  oldValue > value ? this._bubbleDown(idx) : this._bubbleUp(idx);
+  oldValue < value ? this._bubbleDown(idx) : this._bubbleUp(idx);
 
   return true;
 }

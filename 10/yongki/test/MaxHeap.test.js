@@ -91,7 +91,7 @@ describe('MaxHeap', _ => {
     })
 
     it('display after update heap', () => {
-      assert.deepEqual(heap.heap, [21, 15, 11, 9, 6, 5, 8, 1, 3]);
+      assert.deepEqual(heap.heap, [21, 15, 11, 3, 6, 9, 8, 1]);
     })
   })
 })

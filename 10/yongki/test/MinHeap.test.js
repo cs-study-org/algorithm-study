@@ -91,7 +91,7 @@ describe('MinHeap', _ => {
     })
 
     it('display after update heap', () => {
-      assert.deepEqual(heap.heap, [1, 9, 15, 17, 11, 21, 33]);
+      assert.deepEqual(heap.heap, [1, 9, 8, 17, 11, 33, 15, 21]);
     })
   })
 })

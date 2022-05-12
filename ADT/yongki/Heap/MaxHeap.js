@@ -57,7 +57,7 @@ MaxHeap.prototype.delete = function (value) {
   this.heap.splice(this.size() - 1);
 
   const oldValue = this.heap[idx];
-  oldValue < value ? this._bubbleDown(idx) : this._bubbleUp(idx);
+  oldValue > value ? this._bubbleDown(idx) : this._bubbleUp(idx);
 
   return true;
 }
@@ -78,9 +78,9 @@ MaxHeap.prototype.updateKey = function (idx, value) {
   const oldValue = this.heap[idx];
   this.heap[idx] = value;
 
-  oldValue < value ? this._bubbleDown(idx) : this._bubbleUp(idx);
+  oldValue > value ? this._bubbleDown(idx) : this._bubbleUp(idx);
 
   return true;
 }
 
-module.exports = MaxHeap; 
+module.exports = MaxHeap;
