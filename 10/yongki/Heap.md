@@ -142,6 +142,23 @@
 
 </details>
 
+## 문제 리스트
+
+<details>
+<summary>506. Relative Ranks
+  <a href="https://leetcode.com/problems/relative-ranks/">👊</a>
+</summary>
+
+### 문제 풀이 1/2 [`#time O(n²)`]
+
+최대힙을 통해 랭커들을 도출하기는 쉬웠다.
+
+단, 랭킹을 본래 `scores` 배열 위치에 넣는 작업에서 `O(n²)`을 소요하였다.
+
+> [`src/506.js`](https://github.com/cs-study-org/algorithm-study/blob/master/10/yongki/src/506.js) 를 눌러 확인할 수 있다.
+
+</details>
+
 ## 참고 문헌
 
 [Why in a heap implemented by array the index 0 is left unused?](https://stackoverflow.com/questions/22900388/why-in-a-heap-implemented-by-array-the-index-0-is-left-unused) ━ *Stack overflow*
