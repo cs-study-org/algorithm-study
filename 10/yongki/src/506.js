@@ -1,16 +1,56 @@
 const assert = require('assert');
+const util = require('util');
 
 const MaxHeap = require('../../../ADT/yongki/Heap/MaxHeap');
+
+MaxHeap.prototype._bubbleUp = function (idx) {
+
+  while (
+    this.getParent(idx)
+    && this.getParent(idx).score
+    && this.getParent(idx).score < this.heap[idx].score) {
+    const parentIdx = this.getParentIdx(idx);
+
+    this.swap(idx, parentIdx);
+    idx = parentIdx;
+  }
+}
+
+MaxHeap.prototype._bubbleDown = function (idx) {
+
+  while (
+    this.getLeftChild(idx)
+    && this.getLeftChild(idx).score
+    && this.getLeftChild(idx).score > this.heap[idx].score
+    || (
+      this.getRightChild(idx)
+      && this.getRightChild(idx).score
+      && this.getRightChild(idx).score > this.heap[idx].score
+    )
+  ) {
+    let biggerIdx = this.getLeftChildIdx(idx);
+
+    if (
+      this.getRightChild(idx)
+      && this.getRightChild(idx).score
+      && this.getRightChild(idx).score > this.heap[biggerIdx].score
+    )
+      biggerIdx = this.getRightChildIdx(idx)
+
+    this.swap(idx, biggerIdx);
+    idx = biggerIdx;
+  }
+}
 
 /**
  * @param {number[]} scores
  * @return {string[]}
  * 
- * time:    O(n²)
+ * time:    O(n)
  *          → heap setting    O(n)
  *          → for             O(n)
  *            → indexOf       O(n)
- * space:   O(n)
+ * space:   O(n²)
  */
 var findRelativeRanks = function (scores) {
   const rankCode = {
@@ -22,14 +62,15 @@ var findRelativeRanks = function (scores) {
   const heap = new MaxHeap();
   const result = [...scores];
 
-  for (const score of scores)
-    heap.insert(score);  
+  for (const [curIdx, score] of scores.entries())
+    heap.insert({ curIdx, score });
+
+  console.log(util.inspect(heap.heap, { showHidden: false, depth: null }))
 
   for (let rank = 0; rank < scores.length; rank++) {
-    const score = heap.extract();
-    const idx = scores.indexOf(score);
+    const { curIdx, _ } = heap.extract();
 
-    result[idx] = rankCode[rank] ? rankCode[rank] : String(rank + 1);
+    result[curIdx] = rankCode[rank] ? rankCode[rank] : String(rank + 1);
   }
 
   return result;
