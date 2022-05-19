@@ -174,6 +174,23 @@ time은 줄였지만 space를 늘리게 되었다.
 
 </details>
 
+<details>
+<summary>1464. Maximum Product of Two Elements in an Array
+  <a href="https://leetcode.com/problems/maximum-product-of-two-elements-in-an-array/">👊</a>
+</summary>
+
+### 문제 풀이
+
+간단하다.
+
+문제에서 product를 계산하는 i, j를 brute force로 취한뒤,최대힙에 모두 넣고, 최대값을 꺼내면된다.
+
+brute force로 i, j를 도출할 시, j는 i 다음 인덱스부터 탐색하도록하여, i가 탐색한 요소는 줄일 수 있다.
+
+> [`src/1464.js`](https://github.com/cs-study-org/algorithm-study/blob/master/10/yongki/src/1464.js) 를 눌러 확인할 수 있다.
+
+</details>
+
 ## 참고 문헌
 
 [Why in a heap implemented by array the index 0 is left unused?](https://stackoverflow.com/questions/22900388/why-in-a-heap-implemented-by-array-the-index-0-is-left-unused) ━ *Stack overflow*
