@@ -158,13 +158,13 @@
   <a href="https://leetcode.com/problems/relative-ranks/">👊</a>
 </summary>
 
-### 문제 풀이 1/2 [`#time O(n²)`, `#space O(n)`]
+### 문제 풀이 1/2 [`#time increae, space reduce`]
 
 최대힙을 통해 랭커들을 도출하기는 쉬웠다.
 
 단, 랭킹을 본래 `scores` 배열 위치에 넣는 작업에서 `O(n²)`을 소요하였다.
 
-### 문제 풀이 2/2 [`#time O(n)`, `#space O(n²)`]
+### 문제 풀이 2/2 [`#time reduce, space increase`]
 
 ADT에 넣는 데이터를 객체 형태로 넣음으로써 
 
@@ -196,3 +196,5 @@ brute force로 i, j를 도출할 시, j는 i 다음 인덱스부터 탐색하도
 [Why in a heap implemented by array the index 0 is left unused?](https://stackoverflow.com/questions/22900388/why-in-a-heap-implemented-by-array-the-index-0-is-left-unused) ━ *Stack overflow*
 
 [Deleting a node (at a specific location) from a heap](http://www.mathcs.emory.edu/~cheung/Courses/171/Syllabus/9-BinTree/heap-delete.html) ━ *Emory College*
+
+[Simple Solution at 1337. The K Weakest Rows in a Matrix](https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/discuss/523705/JavaScript-Heap-%2B-Binary-Search) ━ *LeetCode*

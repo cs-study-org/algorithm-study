@@ -1,14 +1,9 @@
 const assert = require('assert');
-const util = require('util');
-
 const MaxHeap = require('../../../ADT/yongki/Heap/MaxHeap');
 
 MaxHeap.prototype._bubbleUp = function (idx) {
 
-  while (
-    this.getParent(idx)
-    && this.getParent(idx).score
-    && this.getParent(idx).score < this.heap[idx].score) {
+  while (this.getParent(idx)?.score < this.heap[idx].score) {
     const parentIdx = this.getParentIdx(idx);
 
     this.swap(idx, parentIdx);
@@ -19,22 +14,12 @@ MaxHeap.prototype._bubbleUp = function (idx) {
 MaxHeap.prototype._bubbleDown = function (idx) {
 
   while (
-    this.getLeftChild(idx)
-    && this.getLeftChild(idx).score
-    && this.getLeftChild(idx).score > this.heap[idx].score
-    || (
-      this.getRightChild(idx)
-      && this.getRightChild(idx).score
-      && this.getRightChild(idx).score > this.heap[idx].score
-    )
+    this.getLeftChild(idx)?.score > this.heap[idx]?.score
+    || this.getRightChild(idx)?.score > this.heap[idx]?.score    
   ) {
     let biggerIdx = this.getLeftChildIdx(idx);
 
-    if (
-      this.getRightChild(idx)
-      && this.getRightChild(idx).score
-      && this.getRightChild(idx).score > this.heap[biggerIdx].score
-    )
+    if (this.getRightChild(idx)?.score > this.heap[biggerIdx]?.score)
       biggerIdx = this.getRightChildIdx(idx)
 
     this.swap(idx, biggerIdx);
@@ -46,10 +31,9 @@ MaxHeap.prototype._bubbleDown = function (idx) {
  * @param {number[]} scores
  * @return {string[]}
  * 
- * time:    O(n)
- *          → heap setting    O(n)
- *          → for             O(n)
- *            → indexOf       O(n)
+ * time:    O(n log n)
+ *          → heap setting    O(n log n)
+ *          → for             O(n log n)
  * space:   O(n²)
  */
 var findRelativeRanks = function (scores) {
@@ -63,9 +47,7 @@ var findRelativeRanks = function (scores) {
   const result = [...scores];
 
   for (const [curIdx, score] of scores.entries())
-    heap.insert({ curIdx, score });
-
-  console.log(util.inspect(heap.heap, { showHidden: false, depth: null }))
+    heap.insert({ curIdx, score });  
 
   for (let rank = 0; rank < scores.length; rank++) {
     const { curIdx, _ } = heap.extract();

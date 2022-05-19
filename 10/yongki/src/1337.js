@@ -1,12 +1,16 @@
 const assert = require('assert');
 const util = require('util');
-
 const MinHeap = require('../../../ADT/yongki/Heap/MinHeap');
+
+MinHeap.prototype.comparator = function (a, b) {
+  return a?.soldiers !== b?.soldiers
+    ? b?.soldiers - a?.soldiers
+    : b?.curIdx - a?.curIdx;
+}
 
 MinHeap.prototype._bubbleUp = function (idx) {
 
-  while (
-    this.getParent(idx)?.soldiers > this.heap[idx]?.soldiers) {
+  while (this.getParent(idx)?.soldiers > this.heap[idx]?.soldiers) {
     const parentIdx = this.getParentIdx(idx);
 
     this.swap(idx, parentIdx);
@@ -17,27 +21,22 @@ MinHeap.prototype._bubbleUp = function (idx) {
 MinHeap.prototype._bubbleDown = function (idx) {
 
   while (
-    this.getLeftChild(idx)?.soldiers < this.heap[idx]?.soldiers
-    ||
-    this.getRightChild(idx)?.soldiers < this.heap[idx]?.soldiers
-
+    this.getLeftChild(idx)?.soldiers <= this.heap[idx]?.soldiers
+    || this.getRightChild(idx)?.soldiers <= this.heap[idx]?.soldiers
   ) {
-    let smallerIdx = this.getLeftChildIdx(idx);
+    let smallerIdx = idx;    
 
-    if (
-      this.getRightChild(idx)?.soldiers === this.heap[smallerIdx]?.soldiers
-    ) {
-      smallerIdx = this.getRightChild(idx).curIdx > this.getLeftChild(idx).curIdx
-        ? this.getLeftChildIdx(idx)
-        : this.getRightChildIdx(idx);
+    if (this.comparator(this.getLeftChild(idx), this.heap[smallerIdx]) < 0)
+      smallerIdx = this.getLeftChildIdx(idx);
 
-    } else if (
-      this.getRightChild(idx)?.soldiers < this.heap[smallerIdx]?.soldiers
-    )
-      smallerIdx = this.getRightChildIdx(idx)
+    if (this.comparator(this.getRightChild(idx), this.heap[smallerIdx]) < 0)
+      smallerIdx = this.getRightChildIdx(idx);
+
+    if (idx === smallerIdx)
+      break;
 
     this.swap(idx, smallerIdx);
-    idx = smallerIdx;
+    idx = smallerIdx;    
   }
 }
 
@@ -57,9 +56,11 @@ var kWeakestRows = function (mat, k) {
   for (const [curIdx, soldiers] of soldiersList.entries())
     heap.insert({ curIdx, soldiers });
 
-  console.log(util.inspect(heap.heap, { showHidden: false, depth: null }))
-
   for (let i = 0; i < k; i++) {
+    console.log(
+      util.inspect(heap.getRoot(), { showHidden: false, depth: null })
+    );
+
     const { curIdx, _ } = heap.extract();
     result.push(curIdx);
   }
@@ -69,6 +70,7 @@ var kWeakestRows = function (mat, k) {
 
 (function main() {
   // assert.deepEqual(
+  //   // +++ Right node curIdx < cur node curIdx
   //   kWeakestRows(
   //     [
   //       [1, 1, 0, 0, 0],
@@ -95,11 +97,20 @@ var kWeakestRows = function (mat, k) {
   //   [0, 2]
   // );
 
+  // assert.deepEqual(
+  //   // +++ Right node curIdx > cur node curIdx
+  //   kWeakestRows(
+  //     [[1, 0], [0, 0], [1, 0]],
+  //     2
+  //   ),
+  //   [1, 0]
+  // );
+
   assert.deepEqual(
     kWeakestRows(
-      [[1, 0], [0, 0], [1, 0]],
-      2
+      [[1, 1, 0], [1, 1, 0], [1, 1, 1], [1, 1, 1], [0, 0, 0], [1, 1, 1], [1, 0, 0]],
+      6,
     ),
-    [1, 0]
+    [[4, 6, 0, 1, 2, 3]]
   );
 })();
