@@ -175,11 +175,26 @@ time은 줄였지만 space를 늘리게 되었다.
 </details>
 
 <details>
+<summary>1337. The K Weakest Rows in a Matrix
+  <a href="https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/">👊</a>
+</summary>
+
+### 문제 회고
+
+우선순위의 기준이 여러 개인 문제이다.
+
+때문에 가독성을 위해 이를 계산하는 comparator라는 메소드를 추가하였다.
+
+> [`src/1464.js`](https://github.com/cs-study-org/algorithm-study/blob/master/10/yongki/src/1337.js) 를 눌러 확인할 수 있다.
+
+</details>
+
+<details>
 <summary>1464. Maximum Product of Two Elements in an Array
   <a href="https://leetcode.com/problems/maximum-product-of-two-elements-in-an-array/">👊</a>
 </summary>
 
-### 문제 풀이
+### 문제 회고
 
 간단하다.
 

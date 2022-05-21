@@ -1,11 +1,10 @@
 const assert = require('assert');
-const util = require('util');
 const MinHeap = require('../../../ADT/yongki/Heap/MinHeap');
 
 MinHeap.prototype.comparator = function (a, b) {
   return a?.soldiers !== b?.soldiers
-    ? b?.soldiers - a?.soldiers
-    : b?.curIdx - a?.curIdx;
+    ? a?.soldiers - b?.soldiers
+    : a?.curIdx - b?.curIdx;
 }
 
 MinHeap.prototype._bubbleUp = function (idx) {
@@ -24,7 +23,7 @@ MinHeap.prototype._bubbleDown = function (idx) {
     this.getLeftChild(idx)?.soldiers <= this.heap[idx]?.soldiers
     || this.getRightChild(idx)?.soldiers <= this.heap[idx]?.soldiers
   ) {
-    let smallerIdx = idx;    
+    let smallerIdx = idx;
 
     if (this.comparator(this.getLeftChild(idx), this.heap[smallerIdx]) < 0)
       smallerIdx = this.getLeftChildIdx(idx);
@@ -36,7 +35,7 @@ MinHeap.prototype._bubbleDown = function (idx) {
       break;
 
     this.swap(idx, smallerIdx);
-    idx = smallerIdx;    
+    idx = smallerIdx;
   }
 }
 
@@ -57,10 +56,6 @@ var kWeakestRows = function (mat, k) {
     heap.insert({ curIdx, soldiers });
 
   for (let i = 0; i < k; i++) {
-    console.log(
-      util.inspect(heap.getRoot(), { showHidden: false, depth: null })
-    );
-
     const { curIdx, _ } = heap.extract();
     result.push(curIdx);
   }
@@ -69,48 +64,24 @@ var kWeakestRows = function (mat, k) {
 };
 
 (function main() {
-  // assert.deepEqual(
-  //   // +++ Right node curIdx < cur node curIdx
-  //   kWeakestRows(
-  //     [
-  //       [1, 1, 0, 0, 0],
-  //       [1, 1, 1, 1, 0],
-  //       [1, 0, 0, 0, 0],
-  //       [1, 1, 0, 0, 0],
-  //       [1, 1, 1, 1, 1]
-  //     ],
-  //     3
-  //   ),
-  //   [2, 0, 3]
-  // );
-
-  // assert.deepEqual(
-  //   kWeakestRows(
-  //     [
-  //       [1, 0, 0, 0],
-  //       [1, 1, 1, 1],
-  //       [1, 0, 0, 0],
-  //       [1, 0, 0, 0]
-  //     ],
-  //     2
-  //   ),
-  //   [0, 2]
-  // );
-
-  // assert.deepEqual(
-  //   // +++ Right node curIdx > cur node curIdx
-  //   kWeakestRows(
-  //     [[1, 0], [0, 0], [1, 0]],
-  //     2
-  //   ),
-  //   [1, 0]
-  // );
+  assert.deepEqual(
+    kWeakestRows(
+      [
+        [1, 0, 0, 0],
+        [1, 1, 1, 1],
+        [1, 0, 0, 0],
+        [1, 0, 0, 0]
+      ],
+      2
+    ),
+    [0, 2]
+  );
 
   assert.deepEqual(
     kWeakestRows(
       [[1, 1, 0], [1, 1, 0], [1, 1, 1], [1, 1, 1], [0, 0, 0], [1, 1, 1], [1, 0, 0]],
       6,
     ),
-    [[4, 6, 0, 1, 2, 3]]
+    [4, 6, 0, 1, 2, 3]
   );
 })();
