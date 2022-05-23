@@ -2,6 +2,7 @@
 ## 목차
 - 99. Recover Binary Search Tree
 - 222. Count Complete Tree Nodes
+- 112. Path Sum
 
 
 ## 99. Recover Binary Search Tree
@@ -104,15 +105,54 @@ class Solution {
 
 
 
-
-
-## 705. Design HashSet
+## 112. Path Sum
 ### 문제 요약
+주어진 이진트리를 root부터 leaf 노드까지 탐색하여 targetSum과 일치하는 값이 있는지 찾아가는 문제입니다.
 
 ### 시간 복잡도 공간복잡도
+| time | space |
+|------|-------|
+| O(log2 n) | O(n)  |
 
 ### 코드
+```java
+class Solution {
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
 
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if(root == null){
+            return false;
+        }
+        if(root.left == null && root.right == null){
+            if(targetSum == root.val){
+                return true;
+            }else{
+               return false;
+            }
+        }
+
+        int requiredSum = targetSum - root.val;
+        return hasPathSum(root.left, requiredSum) || hasPathSum(root.right, requiredSum);
+    }
+}
+```
 
 
 ## 705. Design HashSet
