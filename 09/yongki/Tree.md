@@ -188,20 +188,15 @@ BinarySearchTree.prototype._getMinValueAtRightSubtree = function (node) {
 
 **[조건: DFS 풀이]**
 
-두 문제는 BFS로 밖에 풀수 없는 유형이다.
-
-다음 예로 `112번` 문제의 그림을 보면 DFS에서 스택을 사용할 뿐 
-
-넓이 우선 탐색을 하기 때문에 DFS라고 볼 수 없다.
-
-<div align="center"><img width="60%" src="assets/112-dfs&bfs-difference-issue.jpg"/></div>
 
 <details>
 <summary>112. Path Sum
   <a href="https://leetcode.com/problems/path-sum/">👊</a>
 </summary>
 
-### 문제 풀이 [`#Iterative BFS`]
+### 문제 풀이 [`#Iterative DFS`]
+
+<div align="center"><img width="60%" src="assets/112-dfs&bfs-difference-issue.jpg"/></div>
 
 ```js
 /**
@@ -209,10 +204,10 @@ BinarySearchTree.prototype._getMinValueAtRightSubtree = function (node) {
  * @param {number} targetSum
  * @return {boolean}
  * 
- * w as width
+ * h as height
  *
  * time:    O(n)
- * space:   O(w)
+ * space:   O(H)
  */
 var hasPathSum = function (root, targetSum) {
   if (!root)
@@ -248,17 +243,17 @@ var hasPathSum = function (root, targetSum) {
   <a href="https://leetcode.com/problems/binary-tree-paths/">👊</a>
 </summary>
 
-### 문제 풀이 [`#Iterative BFS`]
+### 문제 풀이 [`#Iterative DFS`]
 
 ```js
 /**
  * @param {TreeNode} root
  * @return {string[]}
  *  
- * w as width
+ * h as height
  * 
  * time:    O(n)
- * space:   O(w)
+ * space:   O(h)
  */
 var binaryTreePaths = function (root) {
   const result = [];
@@ -299,7 +294,7 @@ var binaryTreePaths = function (root) {
   <a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/">👊</a>
 </summary>
 
-### 문제 풀이 1/2 (`#Recursive BFS`)
+### 문제 풀이 1/2 (`#Recursive DFS`)
 
 직관적으로 떠오른 풀이다.
 
@@ -490,7 +485,7 @@ var isSymmetric = function(root) {
 
 링크 표현에서 swap을 해야해서 접근하기 어려웠던 문제였다.
 
-### 문제 풀이 1/3 [`#Recursive Inorder` `#BFS` `#space O(n)`]
+### 문제 풀이 1/3 [`#Recursive Inorder` `#DFS` `#space O(n)`]
 
 참고한 코드는 inorder의 순회를 활용하였다.
 
