@@ -1,6 +1,7 @@
 # Tree
 ## 목차
 - 99. Recover Binary Search Tree
+- 222. Count Complete Tree Nodes
 
 
 ## 99. Recover Binary Search Tree
@@ -45,12 +46,62 @@ class Solution {
 ```
 
 
-## 705. Design HashSet
+## 222. Count Complete Tree Nodes
 ### 문제 요약
+완전 이진 트리의 루트 노드가 입력으로 주어지면 트리의 노드 수를 반환해라
 
 ### 시간 복잡도 공간복잡도
+| time | space |
+|------|-------|
+| O(log2 n) | O(n)  |
+
+
 
 ### 코드
+```java
+class Solution {
+    int count = 0;
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+    public int countNodes(TreeNode root) {
+        if(root == null) return 0;
+
+        fixCount(root);
+        return count;
+    }
+
+    public void fixCount(TreeNode node){
+        count++;
+
+        if(node.left != null){
+            fixCount(node.left);
+        }
+
+        if(node.right != null){
+            fixCount(node.right);
+        }
+    }
+
+}
+```
+
 
 
 
