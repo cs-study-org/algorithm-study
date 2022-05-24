@@ -206,6 +206,23 @@ brute force로 i, j를 도출할 시, j는 i 다음 인덱스부터 탐색하도
 
 </details>
 
+<details>
+<summary>2099. Find Subsequence of Length K With the Largest Sum
+  <a href="https://leetcode.com/problems/find-subsequence-of-length-k-with-the-largest-sum/">👊</a>
+</summary>
+
+### 문제 회고
+
+Input 양이 많은 테스트케이스에서 막혔지만,
+
+이전 `1337번` 문제 내부에서 객체에 대한 힙 정렬 조건과 같게함으로써 해결하였다.
+
+이로써 힙 정렬 메소드는 충분히 고도화 되었다고 판단한다.
+
+> [`src/2099.js`](https://github.com/cs-study-org/algorithm-study/blob/master/10/yongki/src/2099.js) 를 눌러 확인할 수 있다.
+
+</details>
+
 ## 참고 문헌
 
 [Why in a heap implemented by array the index 0 is left unused?](https://stackoverflow.com/questions/22900388/why-in-a-heap-implemented-by-array-the-index-0-is-left-unused) ━ *Stack overflow*

@@ -10,10 +10,7 @@ MinHeap.prototype.constructor = MinHeap;
 
 MinHeap.prototype._bubbleUp = function (idx) {
 
-  while (
-    this.getParent(idx)
-    && this.getParent(idx) > this.heap[idx]
-  ) {
+  while (this.getParent(idx) > this.heap[idx]) {
     const parentIdx = this.getParentIdx(idx);
 
     this.swap(idx, parentIdx);
@@ -24,16 +21,12 @@ MinHeap.prototype._bubbleUp = function (idx) {
 MinHeap.prototype._bubbleDown = function (idx) {
 
   while (
-    this.getLeftChild(idx)
-    && this.getLeftChild(idx) < this.heap[idx]
+    this.getLeftChild(idx) < this.heap[idx]
     || this.getRightChild(idx) < this.heap[idx]
   ) {
     let smallerIdx = this.getLeftChildIdx(idx);
 
-    if (
-      this.getRightChild(idx)
-      && this.getRightChild(idx) < this.heap[smallerIdx]
-    )
+    if (this.getRightChild(idx) < this.heap[smallerIdx])
       smallerIdx = this.getRightChildIdx(idx)
 
     this.swap(idx, smallerIdx);

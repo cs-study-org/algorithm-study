@@ -10,10 +10,7 @@ MaxHeap.prototype.constructor = MaxHeap;
 
 MaxHeap.prototype._bubbleUp = function (idx) {
 
-  while (
-    !isNaN(this.getParent(idx))
-    && this.getParent(idx) < this.heap[idx]
-  ) {
+  while (this.getParent(idx) < this.heap[idx]) {
     const parentIdx = this.getParentIdx(idx);
 
     this.swap(idx, parentIdx);
@@ -24,15 +21,13 @@ MaxHeap.prototype._bubbleUp = function (idx) {
 MaxHeap.prototype._bubbleDown = function (idx) {
 
   while (
-    !isNaN(this.getLeftChild(idx))
-    && this.getLeftChild(idx) > this.heap[idx]
-    || this.getRightChild(idx) > this.heap[idx]
+    this.getLeftChild(idx) >= this.heap[idx]
+    || this.getRightChild(idx) >= this.heap[idx]
   ) {
     let biggerIdx = this.getLeftChildIdx(idx);
 
     if (
-      !isNaN(this.getRightChild(idx))
-      && this.getRightChild(idx) > this.heap[biggerIdx]
+      this.getRightChild(idx) >= this.heap[biggerIdx]
     )
       biggerIdx = this.getRightChildIdx(idx)
 
