@@ -485,7 +485,7 @@ var isSymmetric = function(root) {
 
 링크 표현에서 swap을 해야해서 접근하기 어려웠던 문제였다.
 
-### 문제 풀이 1/3 [`#Recursive Inorder` `#DFS` `#space O(n)`]
+### 문제 풀이 1/2 [`#Recursive Inorder` `#DFS` `#space O(n)`]
 
 참고한 코드는 inorder의 순회를 활용하였다.
 
@@ -553,7 +553,7 @@ var recoverTree = function(root) {
 </table>
 
 
-### 문제 풀이 2/3 [`#Iterative Inorder` `#DFS` `#space O(n)`]
+### 문제 풀이 2/2 [`#Iterative Inorder` `#DFS` `#space O(n)`]
 
 <table>
   <tr>
@@ -612,89 +612,6 @@ var recoverTree = function(root) {
 ```
 </p>
     </td>
-  </tr>
-</table>
-
-### 문제 풀이 3/3 [`#Non-recursive Inorder` `#space O(1)`]
-
-`Non-recursive Inorder`은  `Morris traversal` 알고리즘이라고 한다.
-
-간단히 설명하면,
-
-    1. cur를 root로 초기화한다.
-    2. cur이 null이 아니면, cur에 왼쪽 자식이 있는지 탐색한다.
-    3. cur에 왼쪽 자식이 없으면 cur의 오른쪽 노드를 가리키도록 바꾼다.
-       또는,  cur를 cur의 왼쪽 하위 트리에서 가장 큰 노드로 바꾼다.    
-
-<table>
-  <tr>
-    <td>
-      <div align="center">
-        <img src="assets/99-non-recursive-solution.png"/>
-      </div>
-    </td>
-    <td>
-<p>
-
-```js
-/**
- * @param {TreeNode} root
- * @return {void} Do not return anything, modify root in-place instead.
- * 
- * time:    O(n)
- * space:   O(1)
- */
-var recoverTree = function(root) {
-  let nodeA = null;
-  let nodeB = null;
-  
-  function swap(nodeA, nodeB){
-    let temp = nodeA.val;
-    nodeA.val = nodeB.val;
-    nodeB.val = temp;
-  }
-    
-  let pred = null;
-  let prev = null;  
-  let cur = root;
-  
-  while(cur){
-    // +++ Recover
-    if(prev && cur.val <= prev.val){
-      if(!nodeA)
-        nodeA = prev;
-      
-      nodeB = cur;
-    }
-        
-    if(!cur.left){
-      prev = cur;
-      cur = cur.right;
-    }else{
-      // +++ Find pred in left subtree
-      pred = cur.left;
-      
-      while(pred.right && pred.right != cur)
-        pred = pred.right;
-      
-      // +++ Make cur as right child of its prev
-      if(pred.right != cur){
-        pred.right = cur;
-        cur = cur.left;
-      }     
-      // +++ Fix right child of prev
-      else{        
-        prev.right = null;
-        prev = cur;
-        cur = cur.right;
-      }            
-    }
-  }
-  
-  swap(nodeA, nodeB);
-};
-```
-</p>
   </tr>
 </table>
 
