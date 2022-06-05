@@ -6,6 +6,7 @@ pull_request_rules:
     actions:
       label:
         add: ["approval + 1"]
+
   - name: Add Label approval + 2
     conditions:
       - "#approved-reviews-by=2"
