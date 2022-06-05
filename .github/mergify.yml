@@ -3,15 +3,14 @@ pull_request_rules:
     conditions:
       - "#approved-reviews-by>=2"
       - "#changes-requested-reviews-by=0"
-      - base=master
+      - base=main
       - and:
         - label=approval + 2
-        - label!=WIP
-      - check-success=my favorite ci
+        - label!=WIP      
     actions:
       merge:
         method: merge
-      delete_head_branch:
+      delete_head_branch: {}
       label:
         remove: ["needs review"]
 
@@ -32,7 +31,7 @@ pull_request_rules:
         add: ["approval + 2"]
         remove: ["approval + 1"]
 
-  - name: Add Label needs reveiw
+  - name: Add Label needs review
     conditions:
       - "#changes-requested-reviews-by=0"
       - label!=WIP
