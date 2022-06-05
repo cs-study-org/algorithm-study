@@ -2,12 +2,14 @@ pull_request_rules:
   - name: Add Label approval + 1
     conditions:
       - "#approved-reviews-by=1"
+      - label!=WIP
     actions:
       label:
         add: ["approval + 1"]
   - name: Add Label approval + 2
     conditions:
       - "#approved-reviews-by=2"
+      - label!=WIP
     actions:
       label:
         add: ["approval + 2"]
