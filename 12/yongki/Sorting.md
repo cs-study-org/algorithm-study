@@ -34,7 +34,7 @@ in place한 방법은
 
 즉, 앞으로 기술할 정렬 알고리즘이 안정적이냐 in place 하냐에 해당한다면 장점이 된다.
 
-<!-- <details> -->
+<details>
 <summary>안정 정렬</summary>
 
 빅오는 다음과 같다.
@@ -169,6 +169,10 @@ in place한 방법은
 
 ### 퀵 정렬 (in-place)
 
+<center>
+<img width="40%" src="assets/quick-sort-process.png">
+</center>
+
 어떻게 분할하는가?
 
     1. low와 high를 왼쪽과 오른쪽에서 출발시켜서 부적절한 데이터를 만나게 되면 교환하고 
@@ -185,11 +189,26 @@ in place한 방법은
 
 단점은
 
-    🤔 불균형 분할일 경우 정렬된 리스트에 대해서 수행시간이 더 많이 걸린다.
+<table>
+    <tr>
+        <th>최선 시나리오</th>
+        <th>최악 시나리오</th>
+    </tr>
+    <tr>
+        <td>
+            <img src="assets/quick-best-case.jpg">
+        </td>
+        <td>
+            <img src="assets/quick-worst-case.jpg">
+        </td>
+    </tr>
+</table>
 
-어떻게 시간복잡도 `n²`이 나오는가?
+    불균형 분할에서 최악으로 발생하며
 
-    ...
+    이미 정렬된 경우나 역순을 재정렬하는 경우 발생한다.
+
+    피벗을 랜덤으로 설정하는 랜덤화된 퀵소트로 극복한다.    
 
 ### 힙 정렬
 
@@ -205,4 +224,8 @@ in place한 방법은
 
 [퀵 정렬 특징](https://im-developer.tistory.com/135) ━ *tistory*
 
+[퀵 정렬 구현](https://stackabuse.com/quicksort-in-javascript/) ━ *StackAbuse*
+
 [버블/삽입/선택 정렬 특징](https://im-developer.tistory.com/133?category=846746) ━ *tistory*
+
+[퀵 정렬 vs 버블 정렬](https://www.interviewbit.com/tutorial/quicksort-algorithm/) ━ *InterviewBit*

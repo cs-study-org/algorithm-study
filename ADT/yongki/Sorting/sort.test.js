@@ -33,19 +33,19 @@ describe('sort test', () => {
     );
   })
 
-  it('quick sort', () => {
+  it('quick sort recursive', () => {
     assert.deepEqual(
-      sort.quick([...nums]),
+      sort.quickSortRecursive([...nums]),
       [1, 2, 3, 5, 7, 8]
     );
   })
 
-  it('quick sort stable', () => {
+  it('quick sort iterative', () => {
     assert.deepEqual(
-      sort.quickStable([...nums]),
+      sort.quickSortIterative([...nums]),
       [1, 2, 3, 5, 7, 8]
     );
-  })
+  })  
 
   it('heap sort', () => {
     assert.deepEqual(
