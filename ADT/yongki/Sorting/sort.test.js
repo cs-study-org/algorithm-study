@@ -12,6 +12,20 @@ describe('sort test', () => {
     );
   })
 
+  it('bubble sort', () => {
+    assert.deepEqual(
+      sort.bubble([...nums]),
+      [1, 2, 3, 5, 7, 8]
+    );
+  })
+
+  it('merge sort', () => {
+    assert.deepEqual(
+      sort.merge([...nums]),
+      [1, 2, 3, 5, 7, 8]
+    );
+  })
+
   it('selection sort', () => {
     assert.deepEqual(
       sort.selection([...nums]),
@@ -22,6 +36,13 @@ describe('sort test', () => {
   it('quick sort', () => {
     assert.deepEqual(
       sort.quick([...nums]),
+      [1, 2, 3, 5, 7, 8]
+    );
+  })
+
+  it('quick sort stable', () => {
+    assert.deepEqual(
+      sort.quickStable([...nums]),
       [1, 2, 3, 5, 7, 8]
     );
   })
