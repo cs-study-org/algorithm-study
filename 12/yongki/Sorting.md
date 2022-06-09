@@ -28,14 +28,15 @@ swap의 횟수와 move의 횟수는 서로 비례하지 않는다.
 
     중복된 값을 입력 순서와 동일하지 않게 정렬한다.
 
-in place한 방법은
+in-place한 방법은
 
     추가 메모리 공간을 사용하지 않는다.
 
-즉, 앞으로 기술할 정렬 알고리즘이 안정적이냐 in place 하냐에 해당한다면 장점이 된다.
+즉, 앞으로 기술할 정렬 알고리즘이 안정적이냐 in-place 하냐에 해당한다면 장점이 된다.
 
 <details>
 <summary>안정 정렬</summary>
+<br/>
 
 빅오는 다음과 같다.
 
@@ -95,6 +96,10 @@ in place한 방법은
 
 ### 병합 정렬
 
+<center>
+<img width="40%" src="assets/merge-sort-process.png">
+</center>
+
 어떻게 분할하는가?
 
     1. 같은 크기의 2개의 리스트로 분할한다.
@@ -129,6 +134,7 @@ in place한 방법은
 
 <details>
 <summary>불안정 정렬</summary>
+<br/>
 
 빅오는 다음과 같다.
 
@@ -226,6 +232,10 @@ in place한 방법은
 
 [퀵 정렬 구현](https://stackabuse.com/quicksort-in-javascript/) ━ *StackAbuse*
 
-[버블/삽입/선택 정렬 특징](https://im-developer.tistory.com/133?category=846746) ━ *tistory*
+[퀵 정렬 공간복잡도](https://en.wikipedia.org/wiki/Quicksort) ━ *StackAbuse*
+
+[버블/삽입/선택 정렬 특징](https://im-developer.tistory.com/133?category=846746) ━ *Wikipedia*
 
 [퀵 정렬 vs 버블 정렬](https://www.interviewbit.com/tutorial/quicksort-algorithm/) ━ *InterviewBit*
+
+[Merge sort a linked list](https://learnersbucket.com/examples/algorithms/merge-sort-a-linked-list/) ━ *LearnersBucket*

@@ -19,12 +19,20 @@ describe('sort test', () => {
     );
   })
 
-  it('merge sort', () => {
+  it('merge sort not in-place', () => {
     assert.deepEqual(
-      sort.merge([...nums]),
+      sort.mergeSort([...nums]),
       [1, 2, 3, 5, 7, 8]
     );
   })
+
+  it('merge sort inplace', () => {
+    assert.deepEqual(
+      sort.mergeSortInplace([...nums]),
+      [1, 2, 3, 5, 7, 8]
+    );
+  })
+  
 
   it('selection sort', () => {
     assert.deepEqual(
@@ -33,16 +41,16 @@ describe('sort test', () => {
     );
   })
 
-  it('quick sort recursive', () => {
+  it('quick sort in-place', () => {
     assert.deepEqual(
-      sort.quickSortRecursive([...nums]),
+      sort.quickSortInPlace([...nums]),
       [1, 2, 3, 5, 7, 8]
     );
   })
 
-  it('quick sort iterative', () => {
+  it('quick sort not in-place', () => {
     assert.deepEqual(
-      sort.quickSortIterative([...nums]),
+      sort.quickSortNotInPlace([...nums]),
       [1, 2, 3, 5, 7, 8]
     );
   })  

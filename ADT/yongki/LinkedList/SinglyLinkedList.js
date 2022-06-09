@@ -29,6 +29,31 @@ SinglyLinkedList.prototype.insertFront = function (value) {
 
 /** 
  * @param {number} value
+ * @return {boolean}
+ * 
+ * time:      O(n)
+ * space:     O(1)
+ */
+SinglyLinkedList.prototype.insertLast = function (value) {
+  const node = new ListNode(value);
+
+  if (this.isEmpty())
+    this.head = node;
+  else {
+    let cur = this.head;
+
+    while (cur.next)
+      cur = cur.next;
+
+    cur.next = node;
+  }
+
+  this.size += 1;
+  return true;
+};
+
+/** 
+ * @param {number} value
  * @return {void}
  * 
  * time:      O(n)
