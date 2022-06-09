@@ -9,9 +9,17 @@ stable 정렬은 중복된 키 값이 있을 때 이를 순서대로 정렬하�
 
 <img width="741" alt="스크린샷 2022-06-10 오전 5 56 47" src="https://user-images.githubusercontent.com/81874493/172943873-84e0af70-4742-4e5c-aaff-4588498a5554.png">
 
+<br>
+
 ## in-place vs not in - place
 
 in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저장 공간만을 더 사용하는 정렬 알고리즘을 뜻한다.not in-place 정렬은 원소들의 개수에 비례하여 저장 공간을 더 사용하는 정렬 알고리즘을 뜻한다.
+
+<br>
+
+* * *
+
+<br>
 
 - [선택정렬](https://blog.kakaocdn.net/dn/bKguwV/btq7BF3ZhM3/cIHJV8VUykHeZpuhioKth0/img.gif)
     
@@ -28,13 +36,17 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
         <img width="517" alt="스크린샷 2022-06-10 오전 5 57 41" src="https://user-images.githubusercontent.com/81874493/172943969-3c46daa4-5a25-4bff-a7cf-bc5318bb5bbf.png">
 
 
-        
+        <br>
+
     - 특징
         - 하나의 배열에서 값을 변경하는 식으로 동작하기 때문에 공간 복잡도 O(1)이다.
         - swap시 임시 변수 하나 공간 정도가 더 필요하기 때문에 in-place 정렬이다.
         - 탐색은 (n ~ 1),(n ~ 2),(n ~ 3) … 1 번 진행 되므로  시간 복잡도는 O(n^2) 이다.
         - 중복 키 값이 순서대로 바뀌지 않을 수 있기 때문에 not -stable 하다.
             - 예시)  {7, 7, 1} 선택 정렬
+    
+    <br>
+
     - 코드
         
         ```java
@@ -55,14 +67,20 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
             }
         }
         ```
+<br>
         
+* * *
+
+<br>
 
 - [버블 정렬](https://blog.kakaocdn.net/dn/QHsaE/btq7CSWefxM/t87BtVJscdmlWJu4LKubPK/img.gif)
     
     버블 정렬은 현재 원소와 다음 원소릴 비교하여 교환하는 식의 정렬 알고리즘 이다.
     
-    ⇒ 원소가 거품처럼 올라오는 듯 하여 버블 정렬이라는 이름이 붙음
+    >⇒ 원소가 거품처럼 올라오는 듯 하여 버블 정렬이라는 이름이 붙음
     
+    <br>
+
     - 과정
 
         <img width="591" alt="스크린샷 2022-06-10 오전 5 58 01" src="https://user-images.githubusercontent.com/81874493/172944038-b5344bf4-e415-420b-929f-b543ca830d7e.png">
@@ -73,12 +91,15 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
 
         <img width="678" alt="스크린샷 2022-06-10 오전 5 58 20" src="https://user-images.githubusercontent.com/81874493/172944201-cd6f3616-2579-4046-9e98-f7eb023118c9.png">
 
-        
+        <br>
+
     - 특징
         - 버블 정렬은 하나의 배열에서 값을 변경 하는 식으로 동작하므로 공간 복잡도는 O(1)이다.
         - 선택 정렬과 마찬가지로 swap 시에 필요한 임시 변수 정도의 추가 공간만 있으면 되므로 in-place 정렬이다.
         - 탐색은 (n ~ 1),(n ~ 2),(n ~ 3) … 1 번 진행 되므로  시간 복잡도는 O(n^2) 이다.
         - 버블 정렬은 중복된 키 값의 순서가 정렬 이후에도 유지되므로 stable 정렬이다.
+        
+        <br>
         
     - 코드
         
@@ -96,12 +117,19 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
         	}
         }
         ```
-        
+
+<br>
+
+* * *
+
+<br>        
 
 - [삽입 정렬](https://blog.kakaocdn.net/dn/bIjyVs/btq7DTGJzJE/PEek4jtFIF9jQSyEz9cnA0/img.gif)
     
     삽입 정렬은 두번째 원소부터 시작하여 그 앞의 원소들과 비교하여 삽입할 위치를 지정하고, 원소를 뒤로 옮기고 지정 자리에 자료를 삽입하는 정렬 알고리즘 이다.
     
+    <br>
+
     - 과정
         
         <img width="674" alt="스크린샷 2022-06-10 오전 5 58 29" src="https://user-images.githubusercontent.com/81874493/172944280-fe8d6707-d802-4ba4-9739-208ce978c786.png">
@@ -113,13 +141,17 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
         <img width="617" alt="스크린샷 2022-06-10 오전 5 58 58" src="https://user-images.githubusercontent.com/81874493/172944359-27224684-7c2f-493b-a24e-f94b79dd0c7e.png">
 
         
-    
+    <br>
+
     - 특징
         - 배열 내에서 교환하는 방식이므로 공간복잡도는 O(1) 이다.
         - 임시 변수 정도의 추가 공간만 필요하므로 in-place 정렬이다.
         - 삽입 정렬은 중복된 키 값의 순서가 정렬 후에도 유지되므로 stable 정렬이다.
         - 평균과 최악의 시간 복잡도는 O(n^2) 이다.
         - 선택 정렬이나 버블 정렬에 비해 상대적 빠름
+    
+    <br>
+
     - 코드
         
         ```java
@@ -140,21 +172,31 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
            }
         }
         ```
-        
+<br>
+
+* * *
+
+<br>
 
 - [병합 정렬](https://blog.kakaocdn.net/dn/Ey9jN/btq7Ee461B4/KczCXqoUkQ9daqDM2Odb6K/img.gif)
+
 병합 정렬은 분할 정복의 대표적인 예로,
     
-    n개의 데이터를 가진 배열을 오름 차순으로 정렬하기 위해 병합정렬 사용시
+n개의 데이터를 가진 배열을 오름 차순으로 정렬하기 위해 병합정렬 사용시
     
-    아래와 같은 3단계 과정을 거치게 된다.
+아래와 같은 3단계 과정을 거치게 된다.
     
-    - 과정
-        1. Divide(분할) : n개의 원소를 갖는 배열을 n/2 개의 원소를 갖는 작은 배열 2개로 나눈다.
-        2. Conquer(정복) : 각 작은 배열을 정렬한다.
-        3. Combine(병합) : 정렬된 작은 배열들을 병합한다.
+<br>
+
+- 과정
+
+    1. Divide(분할) : n개의 원소를 갖는 배열을 n/2 개의 원소를 갖는 작은 배열 2개로 나눈다.
+    2. Conquer(정복) : 각 작은 배열을 정렬한다.
+    3. Combine(병합) : 정렬된 작은 배열들을 병합한다.
         
-        <img width="644" alt="스크린샷 2022-06-10 오전 5 59 03" src="https://user-images.githubusercontent.com/81874493/172944421-fa54655d-64bc-4372-b033-9ae7897287e0.png">
+    <img width="644" alt="스크린샷 2022-06-10 오전 5 59 03" src="https://user-images.githubusercontent.com/81874493/172944421-fa54655d-64bc-4372-b033-9ae7897287e0.png">
+
+    <br>
 
     - 특징
         - 병합 정렬은 분할한 작은 배열을 위한 저장공간이 따로 필요하기 때문에
@@ -166,6 +208,8 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
         - 시간 복잡도는 O(nlogn) 이다.
         - 병합 정렬은 중복된 키 값의 순서가 정렬 후에도 유지되기에 stable 정렬이다.
     
+    <br>
+
     - 코드
         
         ```java
@@ -213,38 +257,47 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
         }
         ```
         
+<br>
+
+* * *
+
+<br>
 
 - [퀵 정렬](https://blog.kakaocdn.net/dn/tBBW4/btq7EzBbhg8/kSIpggnLpcinwhgjL1FMR1/img.gif)
 퀵 정렬은 병합 정렬과 비슷하게 분할정복(Divide and Conquer) 알고리즘 이다.
-    
     평균적 매우 빠른 수행 속도를 자랑하는 정렬 방법 이다.
     
-    - 과정
-        1. **리스트 안에 있는 한 요소를 선택한다. 이렇게 고른 원소를 pivot(피벗) 이라고 한다.**
-        2. **pivot을 기준으로 pivot보다 작은 요소들은 모두 pivot의 왼쪽으로 옮기고 pivot보다 큰 요소들은 모두 pivot의 오른쪽으로 옮긴다.**
-        3. **pivot을 제외한 왼쪽 리스트와 오른쪽 리스트를 다시 정렬한다.**
+<br>
+
+  - 과정
+    1. **리스트 안에 있는 한 요소를 선택한다. 이렇게 고른 원소를 pivot(피벗) 이라고 한다.**
+    2. **pivot을 기준으로 pivot보다 작은 요소들은 모두 pivot의 왼쪽으로 옮기고 pivot보다 큰 요소들은 모두 pivot의 오른쪽으로 옮긴다.**
+    3. **pivot을 제외한 왼쪽 리스트와 오른쪽 리스트를 다시 정렬한다.**
             
-            **3-1) 분할된 왼쪽 리스트와 오른쪽 리스트도 다시 pivot을 정하고 pivot을 기준으로 2개의 부분리스트로 나눈다.**
+        **3-1) 분할된 왼쪽 리스트와 오른쪽 리스트도 다시 pivot을 정하고 pivot을 기준으로 2개의 부분리스트로 나눈다.**
             
-            **3-2) 재귀를 사용하여 부분 리스트들이 더이상 분할이 불가능 할 때까지 반복한다.**
-            
-            <img width="687" alt="스크린샷 2022-06-10 오전 5 59 16" src="https://user-images.githubusercontent.com/81874493/172944458-c7b80a81-b692-415d-901b-0570c44ec3b5.png">
+        **3-2) 재귀를 사용하여 부분 리스트들이 더이상 분할이 불가능 할 때까지 반복한다.**
 
-            <img width="627" alt="스크린샷 2022-06-10 오전 5 59 21" src="https://user-images.githubusercontent.com/81874493/172944503-76d12d61-1cf5-4ee7-93bd-54792438f9b3.png">
+          <br>
 
-            <img width="613" alt="스크린샷 2022-06-10 오전 5 59 30" src="https://user-images.githubusercontent.com/81874493/172944528-6dd9f3e8-e7e4-4adb-9aa6-9c23a7072a34.png">
+        <img width="687" alt="스크린샷 2022-06-10 오전 5 59 16" src="https://user-images.githubusercontent.com/81874493/172944458-c7b80a81-b692-415d-901b-0570c44ec3b5.png">
 
-            <img width="648" alt="스크린샷 2022-06-10 오전 5 59 36" src="https://user-images.githubusercontent.com/81874493/172944550-d4454856-fd6c-4f45-92e7-1f309596f1f0.png">
+        <img width="627" alt="스크린샷 2022-06-10 오전 5 59 21" src="https://user-images.githubusercontent.com/81874493/172944503-76d12d61-1cf5-4ee7-93bd-54792438f9b3.png">
 
-            <img width="631" alt="스크린샷 2022-06-10 오전 5 59 45" src="https://user-images.githubusercontent.com/81874493/172944581-e537d834-11a4-4641-bc9d-2dd7b2d13453.png">
+        <img width="613" alt="스크린샷 2022-06-10 오전 5 59 30" src="https://user-images.githubusercontent.com/81874493/172944528-6dd9f3e8-e7e4-4adb-9aa6-9c23a7072a34.png">
 
-            <img width="624" alt="스크린샷 2022-06-10 오전 5 59 50" src="https://user-images.githubusercontent.com/81874493/172944606-f457edb6-66e3-44f0-8a1e-ffbef2eb41e6.png">
+        <img width="648" alt="스크린샷 2022-06-10 오전 5 59 36" src="https://user-images.githubusercontent.com/81874493/172944550-d4454856-fd6c-4f45-92e7-1f309596f1f0.png">
 
-            
+        <img width="631" alt="스크린샷 2022-06-10 오전 5 59 45" src="https://user-images.githubusercontent.com/81874493/172944581-e537d834-11a4-4641-bc9d-2dd7b2d13453.png">
+
+        <img width="624" alt="스크린샷 2022-06-10 오전 5 59 50" src="https://user-images.githubusercontent.com/81874493/172944606-f457edb6-66e3-44f0-8a1e-ffbef2eb41e6.png">
+
+           <br>
+
     - 특징
         - 퀵정렬은 재귀적으로 정의되므로 재귀 호출에 따른 스택이 사용된다. 이때 스택의 깊이는 n개의 원소에 대해 logn에 비례하므로 공간복잡도는 O(nlogn)이다.
             
-            ⇒ 따라서 in-place 정렬이라고 하기 힘들지만, 실용적으로는 상대적으로 작은 메모리만을 사용하므로 **흔히 in-place 정렬**이라고 기술하기도 한다.
+            >⇒ 따라서 in-place 정렬이라고 하기 힘들지만, 실용적으로는 상대적으로 작은 메모리만을 사용하므로 **흔히 in-place 정렬**이라고 기술하기도 한다.
             
         - 퀵정렬은 **최악의 경우** pivot이 배열 내에서 가장 작은 값 또는 가장 큰 값으로 설정된다면 원소 n개에 대해서 n번, (n-1)번, (n-2)번...1번 의 비교가 필요하므로 **시간 복잡도가** **O(n^2)** 된다.
         - 하지만 **평균 시간 복잡도는 O(nlogn)**으로 매우 빠르다.
@@ -252,7 +305,9 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
         - 퀵 정렬은 중복된 키값이 순서대로 바뀌지 않을 수 있어 **not-stable**
             
             ⇒  {7,7,1}을 오름차순으로 퀵정렬의 경우
-            
+
+         <br>
+
     - 코드
         
         ```java
@@ -277,7 +332,12 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
             }
         }
         ```
-        
+<br>
+
+* * *
+
+<br>
+
 - [힙 정렬](https://blog.kakaocdn.net/dn/cg3RAx/btq7Fhtx0B6/vR7HDXUHBHLwqXUxTu9ax0/img.gif)
     - 과정
         
@@ -286,7 +346,11 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
         1. 주어진 배열을 heapify 하여 배열을 업데이트 하고
         2. 힙에서 삭제를 반복하여 배열에 가장 뒷 인덱스부터 차례로 구성한다.
         
+        <br>
+
         <img width="626" alt="스크린샷 2022-06-10 오전 6 00 02" src="https://user-images.githubusercontent.com/81874493/172944623-d0787da3-9c16-4a00-b5ff-81c45097c506.png">
+
+    <br>
 
     - 특징
         - Heap sort는 추가적인 메모리를 사용하지 않고 하나의 array로 sorting을 하기 때문에 in-place알고리즘이다. 반면에, unstable 하다.
@@ -295,7 +359,9 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
             ⇒ 시간 복잡도는 데이터를 넣을 때도 O(lgN)이고 뺄 때도 O(lgN)이라 고른 성능을 보인다.
             
             ⇒  N개의 데이터를 모두 빼면 정렬이 되기 때문에 힙 정렬의 시간 복잡도는 O(NlgN)이 된다.
-            
+          
+          <br>  
+          
     - 코드
         
         ```java
