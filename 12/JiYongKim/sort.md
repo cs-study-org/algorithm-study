@@ -7,7 +7,7 @@ stable 정렬은 중복된 키 값이 있을 때 이를 순서대로 정렬하�
 이것을 어떠한 정렬 알고리즘으로 정렬 했을 때 중복 된 키 값이 처음 순서대로 정렬 되었다면 stable sort 라고 한다.
 반대로 어떠한 정렬 알고리즘으로 정렬 했을 때 중복 된 키 값이 처음 순서와 다르다면 not-stable sort 라고 한다.
 
-![스크린샷 2022-06-10 오전 3.33.02.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/17f30473-c940-4edb-b3a9-4e2a2d932997/스크린샷_2022-06-10_오전_3.33.02.png)
+<img width="741" alt="스크린샷 2022-06-10 오전 5 56 47" src="https://user-images.githubusercontent.com/81874493/172943873-84e0af70-4742-4e5c-aaff-4588498a5554.png">
 
 ## in-place vs not in - place
 
@@ -25,13 +25,9 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
         
         {7,5,1,4,3} 정렬시
         
-        ![스크린샷 2022-06-10 오전 3.40.05.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/646743cb-23c9-444b-bef0-051c2eaa13ec/스크린샷_2022-06-10_오전_3.40.05.png)
-        
-        ![스크린샷 2022-06-10 오전 3.40.14.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a628f280-2dac-4181-a41f-b6af05c12022/스크린샷_2022-06-10_오전_3.40.14.png)
-        
-        ![스크린샷 2022-06-10 오전 3.40.26.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/659fe46e-f76d-4998-92d4-19fbc47ce9b3/스크린샷_2022-06-10_오전_3.40.26.png)
-        
-        ![스크린샷 2022-06-10 오전 3.40.33.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a1dc33dc-c7ef-4f21-88e0-2554596c49a8/스크린샷_2022-06-10_오전_3.40.33.png)
+        <img width="517" alt="스크린샷 2022-06-10 오전 5 57 41" src="https://user-images.githubusercontent.com/81874493/172943969-3c46daa4-5a25-4bff-a7cf-bc5318bb5bbf.png">
+
+
         
     - 특징
         - 하나의 배열에서 값을 변경하는 식으로 동작하기 때문에 공간 복잡도 O(1)이다.
@@ -68,16 +64,15 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
     ⇒ 원소가 거품처럼 올라오는 듯 하여 버블 정렬이라는 이름이 붙음
     
     - 과정
+
+        <img width="591" alt="스크린샷 2022-06-10 오전 5 58 01" src="https://user-images.githubusercontent.com/81874493/172944038-b5344bf4-e415-420b-929f-b543ca830d7e.png">
         
-        ![스크린샷 2022-06-10 오전 3.51.17.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a5c8d54d-7835-4caf-932d-ebd77b17ee7d/스크린샷_2022-06-10_오전_3.51.17.png)
-        
-        ![스크린샷 2022-06-10 오전 3.51.37.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/95d11123-bcb9-4321-a217-ab35a90fda35/스크린샷_2022-06-10_오전_3.51.37.png)
-        
-        ![스크린샷 2022-06-10 오전 3.51.49.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c8f058ce-e8c8-41f3-b587-ec8ed1562c5a/스크린샷_2022-06-10_오전_3.51.49.png)
-        
-        ![스크린샷 2022-06-10 오전 3.52.09.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/908a5bcb-0202-4eff-ba03-fc1a52392626/스크린샷_2022-06-10_오전_3.52.09.png)
-        
-        ![스크린샷 2022-06-10 오전 3.52.53.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d424209a-f7c6-4db0-8e14-e5fb7afb89bc/스크린샷_2022-06-10_오전_3.52.53.png)
+        <img width="662" alt="스크린샷 2022-06-10 오전 5 58 08" src="https://user-images.githubusercontent.com/81874493/172944141-6b3a17fa-93f6-4c2b-bba7-a2b6cab3017c.png">
+
+        <img width="655" alt="스크린샷 2022-06-10 오전 5 58 13" src="https://user-images.githubusercontent.com/81874493/172944180-0b83e869-86ba-422d-8686-4097c9d6fc13.png">
+
+        <img width="678" alt="스크린샷 2022-06-10 오전 5 58 20" src="https://user-images.githubusercontent.com/81874493/172944201-cd6f3616-2579-4046-9e98-f7eb023118c9.png">
+
         
     - 특징
         - 버블 정렬은 하나의 배열에서 값을 변경 하는 식으로 동작하므로 공간 복잡도는 O(1)이다.
@@ -109,15 +104,14 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
     
     - 과정
         
-        ![스크린샷 2022-06-10 오전 4.32.17.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d0ba0d27-d627-47a7-8485-298eefdd10ef/스크린샷_2022-06-10_오전_4.32.17.png)
-        
-        ![스크린샷 2022-06-10 오전 4.32.29.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/dee3c13e-3a33-4217-920c-043af46419e2/스크린샷_2022-06-10_오전_4.32.29.png)
-        
-        ![스크린샷 2022-06-10 오전 4.32.59.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c85cd655-08d0-4e8e-a266-7b50f47eeca9/스크린샷_2022-06-10_오전_4.32.59.png)
-        
-        ![스크린샷 2022-06-10 오전 4.33.43.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4179a400-114e-402f-b7ca-bb2f74211d69/스크린샷_2022-06-10_오전_4.33.43.png)
-        
-        ![스크린샷 2022-06-10 오전 4.34.04.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b2062e6e-bdd2-41d4-94ce-96ea156e05df/스크린샷_2022-06-10_오전_4.34.04.png)
+        <img width="674" alt="스크린샷 2022-06-10 오전 5 58 29" src="https://user-images.githubusercontent.com/81874493/172944280-fe8d6707-d802-4ba4-9739-208ce978c786.png">
+
+        <img width="664" alt="스크린샷 2022-06-10 오전 5 58 40" src="https://user-images.githubusercontent.com/81874493/172944320-e32aaf4c-5fd5-4774-80c0-c648a1c35b2a.png">
+
+        <img width="600" alt="스크린샷 2022-06-10 오전 5 58 50" src="https://user-images.githubusercontent.com/81874493/172944333-c6ed3b3f-afe4-4664-8882-1be4a50ea76b.png">
+
+        <img width="617" alt="스크린샷 2022-06-10 오전 5 58 58" src="https://user-images.githubusercontent.com/81874493/172944359-27224684-7c2f-493b-a24e-f94b79dd0c7e.png">
+
         
     
     - 특징
@@ -160,8 +154,8 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
         2. Conquer(정복) : 각 작은 배열을 정렬한다.
         3. Combine(병합) : 정렬된 작은 배열들을 병합한다.
         
-        ![스크린샷 2022-06-10 오전 4.40.05.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5d03f9a2-f248-4928-8c31-7ff2bb3de539/스크린샷_2022-06-10_오전_4.40.05.png)
-        
+        <img width="644" alt="스크린샷 2022-06-10 오전 5 59 03" src="https://user-images.githubusercontent.com/81874493/172944421-fa54655d-64bc-4372-b033-9ae7897287e0.png">
+
     - 특징
         - 병합 정렬은 분할한 작은 배열을 위한 저장공간이 따로 필요하기 때문에
             
@@ -234,19 +228,18 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
             
             **3-2) 재귀를 사용하여 부분 리스트들이 더이상 분할이 불가능 할 때까지 반복한다.**
             
-            ![스크린샷 2022-06-10 오전 4.44.40.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/04f8d7f0-c56d-4191-a6e9-5537c1bae436/스크린샷_2022-06-10_오전_4.44.40.png)
-            
-            ![스크린샷 2022-06-10 오전 4.44.57.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7562faa0-fa4c-4551-a228-86194713e590/스크린샷_2022-06-10_오전_4.44.57.png)
-            
-            ![스크린샷 2022-06-10 오전 4.45.09.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4a42cb4f-5e81-4fd1-9a8e-8b899171fc47/스크린샷_2022-06-10_오전_4.45.09.png)
-            
-            ![스크린샷 2022-06-10 오전 4.45.18.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8df11761-9390-4174-94b9-5cb070503592/스크린샷_2022-06-10_오전_4.45.18.png)
-            
-            ![스크린샷 2022-06-10 오전 4.45.26.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3bd7bd0b-0c97-410a-993a-d8e7794d72b1/스크린샷_2022-06-10_오전_4.45.26.png)
-            
-            ![스크린샷 2022-06-10 오전 4.45.49.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/bc73f931-3451-4f13-b73c-8e2cec16afeb/스크린샷_2022-06-10_오전_4.45.49.png)
-            
-            ![스크린샷 2022-06-10 오전 4.46.17.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/75edfc4a-779b-443c-a8f9-52719c41fa3d/스크린샷_2022-06-10_오전_4.46.17.png)
+            <img width="687" alt="스크린샷 2022-06-10 오전 5 59 16" src="https://user-images.githubusercontent.com/81874493/172944458-c7b80a81-b692-415d-901b-0570c44ec3b5.png">
+
+            <img width="627" alt="스크린샷 2022-06-10 오전 5 59 21" src="https://user-images.githubusercontent.com/81874493/172944503-76d12d61-1cf5-4ee7-93bd-54792438f9b3.png">
+
+            <img width="613" alt="스크린샷 2022-06-10 오전 5 59 30" src="https://user-images.githubusercontent.com/81874493/172944528-6dd9f3e8-e7e4-4adb-9aa6-9c23a7072a34.png">
+
+            <img width="648" alt="스크린샷 2022-06-10 오전 5 59 36" src="https://user-images.githubusercontent.com/81874493/172944550-d4454856-fd6c-4f45-92e7-1f309596f1f0.png">
+
+            <img width="631" alt="스크린샷 2022-06-10 오전 5 59 45" src="https://user-images.githubusercontent.com/81874493/172944581-e537d834-11a4-4641-bc9d-2dd7b2d13453.png">
+
+            <img width="624" alt="스크린샷 2022-06-10 오전 5 59 50" src="https://user-images.githubusercontent.com/81874493/172944606-f457edb6-66e3-44f0-8a1e-ffbef2eb41e6.png">
+
             
     - 특징
         - 퀵정렬은 재귀적으로 정의되므로 재귀 호출에 따른 스택이 사용된다. 이때 스택의 깊이는 n개의 원소에 대해 logn에 비례하므로 공간복잡도는 O(nlogn)이다.
@@ -293,8 +286,8 @@ in-place 정렬은 원소들의 개수에 비해 충분히 무시할 만한 저�
         1. 주어진 배열을 heapify 하여 배열을 업데이트 하고
         2. 힙에서 삭제를 반복하여 배열에 가장 뒷 인덱스부터 차례로 구성한다.
         
-        ![스크린샷 2022-06-10 오전 5.22.56.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/dc2aed1c-f5b9-4c27-9802-db2185378b40/스크린샷_2022-06-10_오전_5.22.56.png)
-        
+        <img width="626" alt="스크린샷 2022-06-10 오전 6 00 02" src="https://user-images.githubusercontent.com/81874493/172944623-d0787da3-9c16-4a00-b5ff-81c45097c506.png">
+
     - 특징
         - Heap sort는 추가적인 메모리를 사용하지 않고 하나의 array로 sorting을 하기 때문에 in-place알고리즘이다. 반면에, unstable 하다.
         - 시간복잡도는 O(nlgn)이다.
