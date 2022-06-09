@@ -1,20 +1,19 @@
 const { swap } = require('../utils');
 
-function selectionSort(input) {
-  const result = [...input];
+function selectionSort(input) {  
 
-  for (let i = 0; i < result.length - 1; i++) {
+  for (let i = 0; i < input.length - 1; i++) {
     let least = i;
 
-    for (let j = i + 1; j < result.length; j++) {
-      if (result[j] < result[least])
+    for (let j = i + 1; j < input.length; j++) {
+      if (input[j] < input[least])
         least = j;
     }
     if (i !== least)
-      swap(i, least, result);
+      swap(i, least, input);
   }
 
-  return result;
+  return input;
 }
 
 module.exports = selectionSort;

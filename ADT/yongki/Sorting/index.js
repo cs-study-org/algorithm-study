@@ -1,14 +1,20 @@
 const {
-  quickSortRecursive,
-  quickSortIterative, 
+  mergeSort,
+  mergeSortInplace
+} = require('./merge');
+
+const {
+  quickSortInPlace,
+  quickSortNotInPlace,
 } = require('./quick');
 
 module.exports = {
   insertion: require('./insertion'),
   bubble: require('./bubble'),
-  merge: require('./merge'),
+  mergeSort,
+  mergeSortInplace,
   selection: require('./selection'),
-  quickSortRecursive,
-  quickSortIterative,  
+  quickSortInPlace,
+  quickSortNotInPlace,
   heap: require('./heap')
 };

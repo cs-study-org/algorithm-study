@@ -15,23 +15,22 @@ function getPartition(list, low, high) {
   return partition;
 }
 
-function quickSortRecursive(
+function quickSortInPlace(
   input,
   left = 0,
   right = input.length - 1,
-  depth = 1
 ) {
   if (left >= right)
     return;
 
   const partition = getPartition(input, left, right);
-  quickSortRecursive(input, left, partition - 1, depth + 1);
-  quickSortRecursive(input, partition + 1, right, depth + 1);
+  quickSortInPlace(input, left, partition - 1);
+  quickSortInPlace(input, partition + 1, right);
 
   return input;
 }
 
-function quickSortIterative(input) {
+function quickSortNotInPlace(input) {
   if (input.length <= 1)
     return input;
 
@@ -50,13 +49,13 @@ function quickSortIterative(input) {
       pivot.push(target);
   }
 
-  return quickSortIterative(leftList).concat(
+  return quickSortNotInPlace(leftList).concat(
     pivot,
-    quickSortIterative(rightList)
+    quickSortNotInPlace(rightList)
   );
 }
 
 module.exports = {
-  quickSortRecursive,
-  quickSortIterative
+  quickSortInPlace,
+  quickSortNotInPlace,
 };
