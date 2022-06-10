@@ -1,22 +1,5 @@
 # 해시 테이블
 
-- [해시 테이블](#해시-테이블)
-  - [이론](#이론)
-  - [논제](#논제)
-  - [구현 문제 리스트](#구현-문제-리스트)
-    - [문제 회고](#문제-회고)
-    - [문제 풀이](#문제-풀이)
-    - [문제 풀이](#문제-풀이-1)
-  - [문제 리스트](#문제-리스트)
-    - [문제 회고](#문제-회고-1)
-    - [문제 풀이](#문제-풀이-2)
-    - [문제 회고](#문제-회고-2)
-    - [문제 풀이](#문제-풀이-3)
-    - [문제 풀이](#문제-풀이-4)
-    - [문제 회고](#문제-회고-3)
-    - [문제 풀이](#문제-풀이-5)
-  - [참고 문헌](#참고-문헌)
-
 ## 이론
 
 <details>
@@ -321,26 +304,26 @@ k가 메모리 기반 이고, M이 홀수이면, k의 약수들이 해시값이 
 1. 해시맵을 사용하여 genre 별 play들을 묶는다.
 
         MyHashMap {
-        table: {
-            '335': MySinglyLinkedList {
-            head: ListNode {
-                value: 600,
-                next: ListNode { value: 2500, next: null }
-            },
-            size: 2
-            },
-            '2226': MySinglyLinkedList {
-            head: ListNode {
-                value: 500,
-                next: ListNode {
-                value: 150,
-                next: ListNode { value: 800, next: null }
+            table: {
+                '335': MySinglyLinkedList {
+                head: ListNode {
+                    value: 600,
+                    next: ListNode { value: 2500, next: null }
+                },
+                size: 2
+                },
+                '2226': MySinglyLinkedList {
+                head: ListNode {
+                    value: 500,
+                    next: ListNode {
+                    value: 150,
+                    next: ListNode { value: 800, next: null }
+                    }
+                },
+                size: 3
                 }
             },
-            size: 3
-            }
-        },
-        maxSize: 100000
+            maxSize: 100000 
         }
 
 2. genre 별 play들을 nested array로 묶은 뒤, 정렬한다.
