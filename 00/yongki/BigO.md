@@ -119,29 +119,28 @@ function fibonacci(n){
 <br/>
   
 ```javascript
-let arr = []; 
-function log(key, start, end){ 
-  for(let i = start; i <= end; i++){ 
-    arr.push(i); 
-    let middle = (start + end) / 2; 
+var binarySearch = function(start, end){ 
+  if(start > end)
+    return start;
+  
+  const middle = Math.floor((start + end) / 2);      
 
-    if(arr[middle] === key){ 
-      console.log(middle) 
-    } else if(arr[middle]> key){ 
-      return log(key, start, middle - 1); 
-    } else{ 
-      return log(key, middle + 1, end) 
-    } 
-  } 
+  if(nums[middle] === target)
+    return middle;
+
+  if(nums[middle] > target)      
+    return binarySearch(start, middle - 1);      
+  else   
+    return binarySearch(middle + 1, end);
 }
 ```
 대표적으로 이진 탐색을 예시로 들 수 있다.
 
-정렬된 배열에서 특정 숫자를 찾을 때, 이진 검색을 이용한다면 배열의 `middle` 값과 `key` 값을 비교한다.
+정렬된 배열에서 특정 숫자를 찾을 때, 이진 검색을 이용한다면 배열의 `middle` 값과 `target` 값을 비교한다.
 
-만약 배열의 `middle` 값이 `key` 값보다 작다면, `key` 값보다 작은 값들은 볼 필요가 없다.
+만약 배열의 `middle` 값이 `target` 값보다 작다면, `target` 값보다 작은 값들은 볼 필요가 없다.
 
-그러면 다시 없어진 배열 값을 제외한 요소 중에서 중간값을 찾아서 `key` 값과 비교한다.
+그러면 다시 없어진 배열 값을 제외한 요소 중에서 중간값을 찾아서 `target` 값과 비교한다.
 
 이렇게 한번 처리할 때마다 검색해야 하는 데이터의 양이 절반씩 떨어지는 알고리즘을 말한다.
 
