@@ -1,5 +1,7 @@
 # 이진 탐색
 
+> 이론은 10주차 트리때 이진 트리로 진행하여 제외합니다.
+
 ## 문제 리스트
 
 <details>
@@ -105,7 +107,83 @@ var binarySearch = function (start, end, nums, target) {
     return binarySearch(middle + 1, end, nums, target);
 }
 ```
+</details>
 
+<details>
+<summary>350. Intersection of Two Arrays II
+  <a href="https://leetcode.com/problems/intersection-of-two-arrays-ii/">👊</a>
+</summary>
+
+### 문제 회고
+
+`349번`과 비교하여 본 문제는 탐색 대상인 nums2의 인덱스를 기억해야한다.
+
+따라서 이진 탐색을 마친 요소는 marking을 해두어야하는데,
+
+처음 접근을 `undefined`로 매겼지만 이진 탐색시 탐색 대상에서 제외시키지 못했다.
+
+따라서, `-Infinity`를 주어 해결하였다.
+
+### 문제 풀이
+
+```js
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ * 
+ * m as nums1
+ * n as nums2
+ *
+ * time:    O(mn log n)
+ *          for             →     O(m)
+ *            binarySearch  →     O(log n)
+ *            sort          →     O(n log n)
+ * space:   O(n)
+ */
+var intersect = function (nums1, nums2) {
+  nums1.sort((a, b) => a - b);
+  nums2.sort((a, b) => a - b);
+
+  const result = [];
+
+  for (const num of nums1) {
+    const idx = binarySearch(
+      start = 0,
+      end = nums2.length - 1,
+      nums = nums2,
+      target = num
+    );
+
+    if (isNaN(idx))
+      continue;
+
+    nums2[idx] = -Infinity;
+    nums2.sort((a, b) => a - b);
+    result.push(num);
+  }
+
+  return result;
+};
+
+var binarySearch = function (start, end, nums, target) {
+  if (start > end)
+    return;
+
+  const middle = Math.floor((start + end) / 2);
+
+  if (isNaN(nums[middle]))
+    return;
+
+  if (nums[middle] === target)
+    return middle;
+
+  if (nums[middle] > target)
+    return binarySearch(start, middle - 1, nums, target);
+  else
+    return binarySearch(middle + 1, end, nums, target);
+}
+```
 </details>
 
 <hr/>
@@ -113,3 +191,5 @@ var binarySearch = function (start, end, nums, target) {
 ## 참고 문헌
 
 [이진 탐색 구현](https://www.geeksforgeeks.org/binary-search-in-javascript/) ━ *GeeksforGeeks*
+
+[Simple Solution at 350. Intersection of Two Arrays II](https://leetcode.com/problems/intersection-of-two-arrays-ii/discuss/2154281/Javascript-TIPs-for-Binary-Search) ━ *Leetcode*
