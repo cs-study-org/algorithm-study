@@ -1,7 +1,7 @@
 ## 목차
 - 704. Binary Search
 - 349. Intersection of Two Arrays
-
+- 350. Intersection of Two Arrays II
 
 
 ## 704. Binary Search
@@ -109,3 +109,73 @@ class Solution {
 
 Treeset을 하나로 줄이는 것도 힘들었는데... 더 노력하자...
 
+
+
+## 350. Intersection of Two Arrays II
+### 문제 요약
+num1과 num2배열에서 교집합을 반환해라.
+
+중복은 허용하나 한번 교집합이 난 것들은 제거해준다.
+
+### 시간복잡도 공간 복잡도
+| time | space |
+|------|-------|
+| O(n^2) | O(1)  |
+
+### 코드
+```java
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        ArrayList<Integer> arrayList1 = new ArrayList<>();
+        ArrayList<Integer> arrayList2 = new ArrayList<>();
+
+        for(int i: nums2){
+            arrayList1.add(i);
+        }
+
+        for (int i: nums1){
+            if (arrayList1.contains(i)) {
+                arrayList2.add(i);
+                for(int j=0;j<arrayList1.size();j++){
+                    if(Objects.equals(arrayList1.get(j), i)){
+                        arrayList1.remove(j);
+                        break;
+                    }
+                }
+            }
+        }
+
+        int[] result = new int[arrayList2.size()];
+        for(int i=0;i<arrayList2.size();i++){
+            result[i] = arrayList2.get(i);
+        }
+        return result;
+    }
+}
+```
+
+### 다른 사람의 잘푼 코드
+```java
+public int[] intersect(int[] nums1, int[] nums2) {
+    Arrays.sort(nums1);
+    Arrays.sort(nums2);
+    List<Integer> res = new ArrayList<>();
+    int i=0, j=0;
+    while (i<nums1.length && j<nums2.length) {
+        if (nums1[i] == nums2[j]) {
+            res.add(nums1[i]);
+            i++;
+            j++;
+        } else if (nums1[i] > nums2[j]) {
+            j++;
+        } else {
+            i++;
+        }
+    }
+    int count[] = new int[res.size()];
+    for (i =0; i< res.size(); i++) {
+        count[i] = res.get(i);
+    }
+    return count;
+}
+```
