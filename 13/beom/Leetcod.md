@@ -2,6 +2,7 @@
 - 704. Binary Search
 - 349. Intersection of Two Arrays
 - 350. Intersection of Two Arrays II
+- 1346. Check If N and Its Double Exist
 
 
 ## 704. Binary Search
@@ -177,5 +178,43 @@ public int[] intersect(int[] nums1, int[] nums2) {
         count[i] = res.get(i);
     }
     return count;
+}
+```
+
+## 1346. Check If N and Its Double Exist
+
+## 문제 요약
+arr의 한 요소(N)와 다른 요소(M)가 `N=M*2`를 만족하면 `True` 아니면 `False`를 반환하세요.
+
+## 시간복잡도, 공간복잡도
+| time | space |
+|------|-------|
+| O(n log n) | O(n)  |
+
+
+## 내가 푼 코드
+```java
+class Solution {
+    public boolean checkIfExist(int[] arr) {
+        Arrays.sort(arr);
+        for(int i=0;i<arr.length;i++){
+            int exist = 2*arr[i];
+
+            int low = 0, high = arr.length-1;
+            while(low <= high){
+                int mid = (low + high)/2;
+                if(arr[mid] == exist && i != mid){
+                    return true;
+                }
+                else if(arr[mid] < exist){
+                    low = mid+1;
+                }
+                else{
+                    high = mid-1;
+                }
+            }
+        }
+        return false;
+    }
 }
 ```
