@@ -186,6 +186,75 @@ var binarySearch = function (start, end, nums, target) {
 ```
 </details>
 
+<details>
+<summary>1346. Check If N and Its Double Exist
+  <a href="https://leetcode.com/problems/check-if-n-and-its-double-exist/">👊</a>
+</summary>
+
+### 문제 회고
+
+다음과 같은 테스트케이스에서 막혔었다.
+
+    [-2,0,10,-19,4,6,-8]는 1번 인덱스의 0을 곱한 대상과 같이 본 테스트케이스라 false가 나와야했고,
+
+    [2,3,3,0,0]는 여타 다른 테스트케이스처럼 true여야했다.
+
+`350번` 접근처럼 marking을 해도 해결되지 않았다.
+
+이진 탐색 이전에 정렬을 해둔 것을 활용하여 0이 이어질 시 true 처리하였다.
+
+### 문제 풀이
+
+```js
+/**
+ * @param {number[]} arr
+ * @return {boolean}
+ *
+ * time:  O(n log n)
+ * space: O(log n)
+ */
+var checkIfExist = function (arr) {
+  arr.sort((a, b) => a - b);
+
+  for (const [idx, num] of arr.entries()) {
+    if (!arr[idx] && !arr[idx + 1])
+      return true;
+
+    const findIdx = binarySearch(
+      start = 0,
+      end = arr.length - 1,
+      nums = arr,
+      target = num * 2
+    );
+
+    if (num && !isNaN(findIdx))
+      return true;
+  }
+
+  return false;
+};
+
+var binarySearch = function (start, end, nums, target) {
+  if (start > end)
+    return;
+
+  const middle = Math.floor((start + end) / 2);
+
+  if (isNaN(nums[middle]))
+    return;
+
+  if (nums[middle] === target)
+    return middle;
+
+  if (nums[middle] > target)
+    return binarySearch(start, middle - 1, nums, target);
+  else
+    return binarySearch(middle + 1, end, nums, target);
+}
+```
+
+</details>
+
 <hr/>
 
 ## 참고 문헌
@@ -193,3 +262,5 @@ var binarySearch = function (start, end, nums, target) {
 [이진 탐색 구현](https://www.geeksforgeeks.org/binary-search-in-javascript/) ━ *GeeksforGeeks*
 
 [Simple Solution at 350. Intersection of Two Arrays II](https://leetcode.com/problems/intersection-of-two-arrays-ii/discuss/2154281/Javascript-TIPs-for-Binary-Search) ━ *Leetcode*
+
+[Simple Solution at 1346. Check If N and Its Double Exist](https://leetcode.com/problems/check-if-n-and-its-double-exist/discuss/1947320/JavaScript-Binary-Search) ━ *Leetcode*
