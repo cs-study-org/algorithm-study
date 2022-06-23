@@ -3,6 +3,7 @@
 - 349. Intersection of Two Arrays
 - 350. Intersection of Two Arrays II
 - 1346. Check If N and Its Double Exist
+- 1608. Special Array With X Elements Greater Than or Equal X
 
 
 ## 704. Binary Search
@@ -183,16 +184,16 @@ public int[] intersect(int[] nums1, int[] nums2) {
 
 ## 1346. Check If N and Its Double Exist
 
-## 문제 요약
+### 문제 요약
 arr의 한 요소(N)와 다른 요소(M)가 `N=M*2`를 만족하면 `True` 아니면 `False`를 반환하세요.
 
-## 시간복잡도, 공간복잡도
+### 시간복잡도, 공간복잡도
 | time | space |
 |------|-------|
 | O(n log n) | O(n)  |
 
 
-## 내가 푼 코드
+### 내가 푼 코드
 ```java
 class Solution {
     public boolean checkIfExist(int[] arr) {
@@ -218,3 +219,53 @@ class Solution {
     }
 }
 ```
+
+
+## 1608. Special Array With X Elements Greater Than or Equal X
+
+### 문제 요약
+nums라는 배열이 주어지고, 특별한 수 X가 있다. 이 X는 배열의 요소보다 작거나 같은 경우의 수와 X가 동일하다면 X를 return한다.
+
+X가 존재하지 않는다면 -1을 리턴한다.
+
+### 시간복잡도, 공간복잡도
+| time | space |
+|------|-------|
+| O(n^2) | O(1)  |
+
+
+### 내가 푼 코드
+```java
+class Solution {
+    public int specialArray(int[] nums) {
+        for(int i = 0; i< nums.length+1;i++){
+            int count = 0;
+            for(int j : nums){
+                if(i <= j){
+                    count++;
+                }
+            }
+            if(count == i){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+```
+
+### 다른사람의 잘푼 코드
+```java
+class Solution {      
+     public int specialArray(int[] nums) {
+         Arrays.sort(nums);
+         for(int i = 0, len = nums.length; i < len; i++) {
+             int x = len - i;                          
+             if(nums[i] >= x && (i == 0 || nums[i - 1] < x)) return x;             
+         }
+         return -1;
+    }
+}
+```
+
+내가 원했던 코드인 것같다..
