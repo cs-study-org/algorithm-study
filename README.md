@@ -1,4 +1,4 @@
-# algorithm-study
+# Algorithm Study
 
 서류 통과를 위한 알고리즘 스터디 저장소입니다.
 
@@ -6,13 +6,122 @@
 
 <div align="center">
 <a href="http://www.yes24.com/Product/Goods/91084402">
-      <img width="220" src="http://docs.likejazz.com/images/2020/book-cover.jpg">
+      <img width="220" src="assets/images/main-textbook.jpg">
 </a>
       
 <a href="http://www.yes24.com/Product/Goods/44305533">
-      <img src="https://image.yes24.com/goods/44305533/M">
+      <img src="assets/images/sub-textbook.jpg">
 </a>
 </div>
+
+<details>
+<summary><b>주차별 주제</b></summary>
+<div align="center">
+<table>
+      <tr>
+            <th colspan="4">공통</th>
+      </tr>
+      <tr>
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/00">0주차</a>
+            </td>
+            <td colspan="3">빅오</td>
+      </tr>
+      <tr>
+            <th colspan="2">자료구조</th>
+            <th colspan="2">알고리즘</th>
+      </tr>
+      <tr>
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/01">1주차</a>
+            </td>
+            <td>문자열 조작</td>
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/12">12주차</a>
+            </td>
+            <td>정렬</td>
+      </tr>
+      <tr>
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/02">2주차</a>
+            </td>
+            <td>배열</td>
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/13">13주차</a>
+            </td>
+            <td>이진 탐색</td>
+      </tr>
+      <tr>
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/03">3주차</a>
+            </td>
+            <td>연결리스트</td>
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/14">14주차</a>
+            </td>
+            <td>비트 조작</td>
+      </tr>
+      <tr>
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/04">4주차</a>
+            </td>
+            <td>스택, 큐</td>
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/15">15주차</a>
+            </td>
+            <td>슬라이딩 윈도우</td>
+      </tr>
+      <tr>
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/05">5주차</a>
+            </td>
+            <td>데크, 우선순위 큐</td>
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/16">16주차</a>
+            </td>
+            <td>그리디</td>
+      </tr>
+      <tr>
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/06">6주차</a>
+            </td>
+            <td>해시 테이블</td>
+            <td align="center" rowspan="6" colspan="2">-</td>   
+      </tr>
+      <tr>
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/07">7주차</a>
+            </td>
+            <td>그래프</td>            
+      </tr>
+      <tr>
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/08">8주차</a>
+            </td>
+            <td>최단 경로</td>
+      </tr>
+      <tr>
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/09">9주차</a>
+            </td>
+            <td>트리</td>            
+      </tr>      
+      <tr>            
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/10">10주차</a>
+            </td>
+            <td>힙</td>                       
+      </tr>
+      <tr>            
+            <td>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/11">11주차</a>
+            </td>
+            <td>트라이</td>            
+      </tr>
+</table>      
+</div>
+
+</details>
 
 ## 규칙
 1. 스터디원들은 PR이 올라오면 바로바로 피드백 답글을 남긴다.
