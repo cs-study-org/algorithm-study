@@ -255,12 +255,84 @@ var binarySearch = function (start, end, nums, target) {
 
 </details>
 
+<details>
+<summary>1608. Special Array With X Elements Greater Than or Equal X
+  <a href="https://leetcode.com/problems/special-array-with-x-elements-greater-than-or-equal-x/">👊</a>
+</summary>
+
+### 문제 회고
+
+처음 접근 방법은 상황에 맞게 count해주는 것이었다.
+
+중복된 숫자가 나오며 인덱스를 2칸 이동함과 동시에 count를 다음 요소만큼 증가하는 것이었다.
+
+    nums[i] === nums[i + 1]
+      i += 2;
+
+    while(count < nums[i + 1])
+      count += 1;
+
+문제는 lowerBound라는 알고리즘을 요구하는 것이었고, 이는 이진 탐색의 기출 변형 문제였다.
+
+lowerBound란
+
+    찾고자 하는 key 이상의 첫번째 위치를 반환하는 알고리즘이다.
+
+    arr = [1, 3, 3, 5, 7], 찾고자하는 key의 요소는 3이라고 할때
+
+    lowerBound는 1번 인덱스를 반환한다.
+
+### 문제 풀이
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ *
+ * time:    O(n log n)
+ * space:   O(1)
+ */
+var specialArray = function (nums) {
+  const N = nums.length;
+  nums.sort((a, b) => a - b);
+
+  for (let idx = 0; idx <= N; idx++) {
+    if (lowerBound(nums, idx) === (N - idx))
+      return idx;
+  }
+  return -1;
+};
+
+var lowerBound = function (nums, key) {
+  const N = nums.length;
+
+  let start = 0;
+  let end = N;
+
+  while (start < end) {
+    const mid = Math.floor((start + end) / 2);
+    if (nums[mid] < key)
+      start = mid + 1;
+    else
+      end = mid;
+  }
+
+  return start;
+}
+```
+
+</details>
+
 <hr/>
 
 ## 참고 문헌
 
 [이진 탐색 구현](https://www.geeksforgeeks.org/binary-search-in-javascript/) ━ *GeeksforGeeks*
 
+[lowerBound 알고리즘 설명](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=occidere&logNo=221045300639) ━ *네이버 블로그*
+
 [Simple Solution at 350. Intersection of Two Arrays II](https://leetcode.com/problems/intersection-of-two-arrays-ii/discuss/2154281/Javascript-TIPs-for-Binary-Search) ━ *Leetcode*
 
 [Simple Solution at 1346. Check If N and Its Double Exist](https://leetcode.com/problems/check-if-n-and-its-double-exist/discuss/1947320/JavaScript-Binary-Search) ━ *Leetcode*
+
+[Simple Solution at 1608. Special Array With X Elements Greater Than or Equal X](https://leetcode.com/problems/special-array-with-x-elements-greater-than-or-equal-x/discuss/877706/Javascript-Python3-C%2B%2B-Lower-Bound-(ie.-Binary-Search)) ━ *Leetcode*
