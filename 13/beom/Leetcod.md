@@ -4,6 +4,7 @@
 - 350. Intersection of Two Arrays II
 - 1346. Check If N and Its Double Exist
 - 1608. Special Array With X Elements Greater Than or Equal X
+- 2089. Find Target Indices After Sorting Array
 
 
 ## 704. Binary Search
@@ -269,3 +270,99 @@ class Solution {
 ```
 
 내가 원했던 코드인 것같다..
+
+
+
+## 2089. Find Target Indices After Sorting Array
+
+[Leetcode 링크](https://leetcode.com/problems/find-target-indices-after-sorting-array/)
+
+## 문제 요약
+정렬한 nums배열에서 target과 같은 값이 있는 인덱스를 list에 넣어서 반환해라
+
+## 시간복잡도, 공간복잡도
+| time | space |
+|------|-------|
+| O(n log n) | O(n)  |
+
+
+## 내가 푼 코드
+```java
+class Solution {
+    public List<Integer> targetIndices(int[] nums, int target) {
+        Arrays.sort(nums);
+        List<Integer> result = new ArrayList<>();
+        
+        for(int i = 0; i< nums.length;i++){
+            if(nums[i] == target){
+                result.add(i);
+            }
+        }
+        return result;
+    }
+}
+```
+
+## 다른 사람의 잘푼 코드
+```java
+```class Solution {
+    public List<Integer> targetIndices(int[] nums, int target) {
+        int len = nums.length;
+        quicksort(nums, 0, len-1);
+       // Arrays.sort(nums);
+        // int x = binarysearch(  nums, target , 0,len-1 );
+        List<Integer> list = new ArrayList<> ();
+         for(int i =0; i < len; i++)
+         {
+             if(nums[i] == target )
+             {
+                 list.add(i);
+             }
+             if(list.size() > 0 && nums[i] != target)
+             {
+                 return list;
+             }
+         }
+        return list;
+    }
+    
+    int partition(int [] nums , int left , int right){
+        int piviot = nums[left];
+        int i = left;
+        int j= right;
+        
+        while( i <j)
+        {
+            while(i<= right-1 && nums[i] <= piviot) i++;
+            while(j>= left  && nums[j] > piviot) j--;
+        
+            if(i < j)
+                swap (nums, i , j);
+         }
+        swap(nums, left , j);
+        return j;
+    }
+    
+    void swap(int nums[],  int i , int j)
+    {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+    
+    void quicksort(int nums[] , int left , int right)
+    {
+        if(left < right){
+        int piviot =  partition(nums ,  left ,  right);
+        
+        quicksort(nums,left , piviot-1);
+        quicksort(nums, piviot+1, right);
+        }
+     
+    }
+}
+```
+
+quick sort로 구현했다.
+
+sort메소드 말고 더 효율적인 탐색 알고리즘을 사용하도록 노력해보자
