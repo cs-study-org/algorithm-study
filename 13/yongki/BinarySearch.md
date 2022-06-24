@@ -266,11 +266,17 @@ var binarySearch = function (start, end, nums, target) {
 
 중복된 숫자가 나오며 인덱스를 2칸 이동함과 동시에 count를 다음 요소만큼 증가하는 것이었다.
 
-    nums[i] === nums[i + 1]
-      i += 2;
+```js
 
-    while(count < nums[i + 1])
-      count += 1;
+while(idx < nums.length){
+  if(nums[i] === nums[i + 1])
+    idx += 2;
+
+  while(count < nums[i + 1])
+    count += 1;
+  ...
+}
+```
 
 문제는 lowerBound라는 알고리즘을 요구하는 것이었고, 이는 이진 탐색의 기출 변형 문제였다.
 
@@ -323,6 +329,67 @@ var lowerBound = function (nums, key) {
 
 </details>
 
+<details>
+<summary>2089. Find Target Indices After Sorting Array
+  <a href="https://leetcode.com/problems/find-target-indices-after-sorting-array/">👊</a>
+</summary>
+
+
+### 문제 회고
+
+처음 접근 방법은 `350번`과 같이 marking을 해주면 쉽게 해결되어보였지만,
+
+index를 요구하는 문제라 marking 이후 재정렬시 인덱스가 재조정되는 문제가 있었다.
+
+때문에 이진 탐색 알고리즘 내부에서 처리해주어야했다.
+
+### 문제 풀이
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ * 
+ * time:  O(n log n)
+ * space: O(n)
+ */
+var targetIndices = function (nums, target) {
+  var binarySearch = function (start, end) {
+    if (start > end)
+      return;
+
+    const middle = Math.floor((start + end) / 2);
+
+    if (nums[middle] === target) {
+      binarySearch(start, middle - 1);
+      result.push(middle);
+      binarySearch(middle + 1, end);
+    }
+    else if (nums[middle] > target)
+      binarySearch(start, middle - 1);
+    else
+      binarySearch(middle + 1, end);
+  }
+
+  const N = nums.length;
+  const result = [];
+
+  nums.sort((a, b) => a - b);
+
+  binarySearch(
+    start = 0,
+    end = N - 1,
+    nums,
+    target
+  );
+
+  return result;
+};
+```
+
+</details>
+
 <hr/>
 
 ## 참고 문헌
@@ -336,3 +403,5 @@ var lowerBound = function (nums, key) {
 [Simple Solution at 1346. Check If N and Its Double Exist](https://leetcode.com/problems/check-if-n-and-its-double-exist/discuss/1947320/JavaScript-Binary-Search) ━ *Leetcode*
 
 [Simple Solution at 1608. Special Array With X Elements Greater Than or Equal X](https://leetcode.com/problems/special-array-with-x-elements-greater-than-or-equal-x/discuss/877706/Javascript-Python3-C%2B%2B-Lower-Bound-(ie.-Binary-Search)) ━ *Leetcode*
+
+[Simple Solution at 2089. Find Target Indices After Sorting Array](https://leetcode.com/problems/find-target-indices-after-sorting-array/discuss/1745180/Easy-C%2B%2B-solution-or-Binary-Search-or-Explained) ━ *Leetcode*
