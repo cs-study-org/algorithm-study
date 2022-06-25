@@ -31,14 +31,16 @@ function quickSortInPlace(
 }
 
 function quickSortNotInPlace(input) {
-  if (input.length <= 1)
+  const N = input.length;
+
+  if (N <= 1)
     return input;
 
   const pivot = [input[0]];
   const leftList = [];
   const rightList = [];
 
-  for (let i = 1; i < input.length; i++) {
+  for (let i = 1; i < N; i++) {
     const target = input[i];
 
     if (target < pivot)
