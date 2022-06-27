@@ -49,7 +49,7 @@ SinglyLinkedList.prototype.mergeSort = function (head) {
   return this.merge(left, right);
 }
 
-function mergeSortInplace(input) {
+function mergeSortLinkedList(input) {
   const list = new SinglyLinkedList();
   const result = [];
 
@@ -80,10 +80,12 @@ function merge(leftList, rightList) {
 }
 
 function mergeSort(input) {
-  if (input.length === 1)
+  const N = input.length;
+
+  if (N === 1)
     return input;
 
-  const mid = Math.floor((input.length) / 2);
+  const mid = Math.floor(N / 2);
 
   const leftList = input.slice(0, mid);
   const rightList = input.slice(mid);
@@ -93,5 +95,5 @@ function mergeSort(input) {
 
 module.exports = {
   mergeSort,
-  mergeSortInplace
+  mergeSortLinkedList
 };

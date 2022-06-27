@@ -4,6 +4,12 @@ function swap(a, b, list) {
   list[b] = temp;
 }
 
+function isSorted(arr) {
+  return arr.every((v, i, a) => !i || a[i - 1] <= v);
+}
+
+
 module.exports = {
-  swap
+  swap,
+  isSorted
 }

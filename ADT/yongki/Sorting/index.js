@@ -1,6 +1,6 @@
 const {
   mergeSort,
-  mergeSortInplace
+  mergeSortLinkedList
 } = require('./merge');
 
 const {
@@ -12,7 +12,7 @@ module.exports = {
   insertion: require('./insertion'),
   bubble: require('./bubble'),
   mergeSort,
-  mergeSortInplace,
+  mergeSortLinkedList,
   selection: require('./selection'),
   quickSortInPlace,
   quickSortNotInPlace,
