@@ -5,6 +5,7 @@
 - 1346. Check If N and Its Double Exist
 - 1608. Special Array With X Elements Greater Than or Equal X
 - 2089. Find Target Indices After Sorting Array
+- 1385. Find the Distance Value Between Two Arrays
 
 
 ## 704. Binary Search
@@ -366,3 +367,67 @@ class Solution {
 quick sort로 구현했다.
 
 sort메소드 말고 더 효율적인 탐색 알고리즘을 사용하도록 노력해보자
+
+
+
+## 1385. Find the Distance Value Between Two Arrays
+
+[Leetcode 링크](https://leetcode.com/problems/find-the-distance-value-between-two-arrays/)
+
+## 문제 요약
+|arr[i]-arr2[j]| <= d를 만족하지 않는 arr1[i]의 요소 갯수를 구하시오.
+
+## 시간복잡도, 공간복잡도
+| time | space |
+|------|-------|
+| O(n^2) | O(1)  |
+
+
+## 내가 푼 코드
+```java
+class Solution {
+    public int findTheDistanceValue(int[] arr1, int[] arr2, int d) {
+        int count = arr1.length;
+
+        for(int  i: arr1){
+            for(int j: arr2){
+                if(Math.abs(i-j) <= d){
+                    count--;
+                    break;
+                }
+            }
+        }
+        return count;
+    }
+}
+```
+
+## 다른 사람의 잘푼 코드
+```java
+class Solution {
+    public int findTheDistanceValue(int[] arr1, int[] arr2, int d) {
+        int n = arr1.length, m = arr2.length, res = 0;
+        Arrays.sort(arr2);
+		
+		// We will just search if there exist any number between range x-d & x+d in arr2 using binary search
+        for(int x : arr1){
+            if(!binarySearch(x-d, x+d, m, arr2)) res++;
+        }
+        return res;
+    }
+    
+    public boolean binarySearch(int r1, int r2, int n, int[] arr){
+        int l = 0, r = n-1;
+        while(l<=r){
+            int mid = l + (r-l)/2;
+            if(arr[mid] >= r1 && arr[mid]<=r2) return true;
+            else if(arr[mid] < r1) l = mid + 1;
+            else r = mid - 1;
+        }
+        return false;
+    }
+    
+}
+```
+
+음수와 양수를 처리할 때는 &&를 사용하여 처리해주자!
