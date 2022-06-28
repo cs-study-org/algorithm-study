@@ -390,6 +390,55 @@ var targetIndices = function (nums, target) {
 
 </details>
 
+<details>
+<summary>1385. Find the Distance Value Between Two Arrays
+  <a href="https://leetcode.com/problems/find-the-distance-value-between-two-arrays/">👊</a>
+</summary>
+
+### 문제 회고
+
+`2089번`과 같이 이진 탐색을 수행하는 함수를 커스터마이징 하는 문제였다.
+
+본 문제를 풀면서 커스텀할때는 반복을 쓰는게 더 편리함을 알게됬다.
+
+### 문제 풀이
+
+```js
+/**
+ * @param {number[]} arr1
+ * @param {number[]} arr2
+ * @param {number} d
+ * @return {number}
+ *
+ * time:  O(n log n)
+ * space: O(1)
+ */
+var findTheDistanceValue = function (arr1, arr2, d) {
+  arr2.sort((a, b) => a - b);
+
+  return arr1.filter(each => binarySearch(arr2, each, d)).length;
+};
+
+var binarySearch = function (arr, target, d) {
+  let start = 0;
+  let end = arr.length - 1;
+
+  while (start <= end) {
+    const middle = Math.floor((start + end) / 2);
+
+    if (Math.abs(arr[middle] - target) <= d)
+      return false
+    else if (arr[middle] > target)
+      end = middle - 1;
+    else
+      start = middle + 1;
+  }
+  return true;
+}
+```
+
+</details>
+
 <hr/>
 
 ## 참고 문헌
@@ -405,3 +454,5 @@ var targetIndices = function (nums, target) {
 [Simple Solution at 1608. Special Array With X Elements Greater Than or Equal X](https://leetcode.com/problems/special-array-with-x-elements-greater-than-or-equal-x/discuss/877706/Javascript-Python3-C%2B%2B-Lower-Bound-(ie.-Binary-Search)) ━ *Leetcode*
 
 [Simple Solution at 2089. Find Target Indices After Sorting Array](https://leetcode.com/problems/find-target-indices-after-sorting-array/discuss/1745180/Easy-C%2B%2B-solution-or-Binary-Search-or-Explained) ━ *Leetcode*
+
+[Simple Solution at 1385. Find the Distance Value Between Two Arrays](https://leetcode.com/problems/find-the-distance-value-between-two-arrays/discuss/732007/Javascript-Binary-search-beats-80-runtime) ━ *Leetcode*
