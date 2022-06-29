@@ -38,6 +38,8 @@ function quickSortInPlace(
 
   if(isSorted([...input]) && !depth){    
     console.log("Compare:",compareCount, "Swap:", swapCount);
+    compareCount = 0;
+    swapCount = 0;
   }
 
   return input;
