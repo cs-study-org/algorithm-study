@@ -94,6 +94,48 @@ function maxSum(arr, k) {
 
 ## 문제 리스트
 
+<details>
+<summary>219. Contains Duplicate II
+  <a href="https://leetcode.com/problems/contains-duplicate-ii/">👊</a>
+</summary>
+
+### 문제 회고
+
+이전 해결했던 이력이 있었다.
+
+다만 슬라이딩 윈도우를 푼것인지도 몰랐다.
+
+이론에서 다룬 형태외에도 Map을 사용한 형태도 해당됨을 알게되었다.
+
+### 문제 풀이
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {boolean}
+ *
+ * time:  O(n)
+ * space: O(k)
+ */
+var containsNearbyDuplicate = function (nums, k) {
+  const window = new Map();
+
+  for (const [idx, num] of nums.entries()) {
+    if (
+      window.has(num)
+      && Math.abs(idx - window.get(num)) <= k
+    )
+      return true;
+
+    window.set(num, idx);
+  }
+  return false;
+};
+```
+
+</details>
+
 <hr/>
 
 ## 참고 문헌
