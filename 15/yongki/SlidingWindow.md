@@ -136,6 +136,48 @@ var containsNearbyDuplicate = function (nums, k) {
 
 </details>
 
+<details>
+<summary>643. Maximum Average Subarray I
+  <a href="https://leetcode.com/problems/maximum-average-subarray-i/submissions/">👊</a>
+</summary>
+
+### 문제 회고
+
+이론에서 다룬 형태와 같아 고민없이 풀 수 있었다.
+
+자바스크립트에서 `Math.avg`는 없는것도 알 수 있었다.
+
+### 문제 풀이
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ *
+ * time:  O(n)
+ * space: O(1)
+ */
+var findMaxAverage = function (nums, k) {
+  let max = 0;
+  let sum = 0;
+
+  for (let i = 0; i < k; i++) {
+    sum += nums[i];
+    max = sum / k;
+  }
+
+  for (let i = k; i < nums.length; i++) {
+    sum += nums[i] - nums[i - k];
+    max = Math.max(max, (sum / k));
+  }
+
+  return max;
+};
+```
+
+</details>
+
 <hr/>
 
 ## 참고 문헌
