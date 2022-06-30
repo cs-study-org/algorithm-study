@@ -1,19 +1,5 @@
 # 배열
 
-- [배열](#배열)
-  - [문제 리스트](#문제-리스트)
-    - [문제 회고](#문제-회고)
-    - [문제 풀이 1/2 [`재귀적 호출`]](#문제-풀이-12-재귀적-호출)
-    - [문제 풀이 2/2 [`하나의 루프에서 범위 재조정`]](#문제-풀이-22-하나의-루프에서-범위-재조정)
-    - [이슈](#이슈)
-    - [문제 회고](#문제-회고-1)
-    - [문제 풀이 1/3 [`Brute force`]](#문제-풀이-13-brute-force)
-    - [문제 풀이 2/3 [`Kadane's Algorithm`]](#문제-풀이-23-kadanes-algorithm)
-    - [문제 풀이 3/3 [`divide and conquer`]](#문제-풀이-33-divide-and-conquer)
-    - [문제 회고](#문제-회고-2)
-    - [문제 풀이 [`Brute force`]](#문제-풀이-brute-force)
-  - [참고문헌](#참고문헌)
-
 ## 문제 리스트
 
 > 각 문제의 👊를 클릭하면 문제로 이동합니다.
@@ -28,7 +14,7 @@
 
 문제 조건에 시간 복잡도 `O(log n)`을 만족하라고 나와있었다.
 
-즉, 이진 탐색 트리를 사용해서 풀어야했다.
+즉, 이진 탐색을 사용해서 풀어야했다.
 
 이진 탐색 트리를 구현한 코드를 참고해서 
 문제에서 요구하는 결과값을 도출할 수 있게 약간의 수정만 하면된다고 생각했다.
@@ -44,79 +30,36 @@
 
 ### 문제 풀이 1/2 [`재귀적 호출`]
 
-<table>
-  <tr>
-    <th>풀이 설명</th>
-    <th>코드</th>
-  </tr>
-  <tr>
-    <td>
-<pre>
-
-    time: O(log n)
-
-    1. 주어진 배열의 중간 인덱스값(이하 middle 값)가 
-       target을 찾을때까지 루프를 돈다.
-    2. middle 값을 기준으로 target이 작은 범위냐 큰 범위냐에 있으면 
-       그 반대편 범위는 탐색 대상에서 제외한다.
-    3. 그렇게 범위를 재조정했으면, 
-       범위 안에서 middle 값을 찾아 target을 계속 찾는다.
-</pre>
-    </td>
-    <td>
-<pre>
-
 ```js
 /**
 * @param {number[]} nums
 * @param {number} target
 * @return {number}
+*
+* time:   O(log n)
+* space:  O(log n)
 */
-var searchInsert = function(nums, target) {
-  var binarySearch = function(startIdx, endIdx, target){  
-    while(startIdx <= endIdx){
-      const midIdx = startIdx + Math.floor((endIdx - startIdx) / 2);
+var searchInsert = function (nums, target) {
+  var binarySearch = function (start, end) {
+    if (start > end)
+      return start;
 
-      if(nums[midIdx] === target)
-        return midIdx;
+    const middle = Math.floor((start + end) / 2);
 
-      if(nums[midIdx] < target)      
-        return binarySearch(midIdx + 1, endIdx, target);
-      else      
-        return binarySearch(startIdx, midIdx - 1, target);
-    }
-  
-    return startIdx;
+    if (nums[middle] === target)
+      return middle;
+
+    if (nums[middle] > target)
+      return binarySearch(start, middle - 1);
+    else
+      return binarySearch(middle + 1, end);
   }
-  const endIdx = nums.length - 1;
-  return binarySearch(startIdx=0, endIdx, target);
+
+  return binarySearch(0, nums.length - 1);
 };
 ```
-</pre>
-    </td>
-  </tr>
-</table>
 
 ### 문제 풀이 2/2 [`하나의 루프에서 범위 재조정`]
-
-좀 더 이해하기 쉬운 풀이이다.
-
-<table>
-  <tr>
-    <th>풀이 설명</th>
-    <th>코드</th>
-  </tr>
-  <tr>
-    <td>
-<pre>
-
-    time: O(log n) 
-    
-      🤔 (확실하지 않다.)    
-</pre>
-    </td>
-    <td>
-<pre>
 
 ```js
 /**
@@ -147,11 +90,6 @@ var searchInsert = function(nums, target) {
   return binarySearch(nums, target);
 };
 ```
-</pre>
-    </td>
-  </tr>
-</table>
-
 
 ### 이슈
 하지만, 수행 시간에서 차이가 극명했다.
