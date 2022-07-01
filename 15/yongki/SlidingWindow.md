@@ -178,6 +178,52 @@ var findMaxAverage = function (nums, k) {
 
 </details>
 
+<details>
+<summary>2269. Find the K-Beauty of a Number
+  <a href="https://leetcode.com/problems/find-the-k-beauty-of-a-number/">👊</a>
+</summary>
+
+### 문제 풀이
+
+```js
+/**
+ * @param {number} num
+ * @param {number} k
+ * @return {number}
+ *
+ * time:  O(n)
+ * space: O(n)
+ */
+var divisorSubstrings = function (num, k) {
+  const letterList = num.toString().split('');
+
+  let cur = '';
+  let cnt = 0;
+
+  for (let i = 0; i < k; i++)
+    cur += letterList[i];
+
+  if (isZeroDivisor(num, parseInt(cur)))
+    cnt += 1;
+
+  for (let i = k; i < letterList.length; i++) {
+    cur = cur.substring(1);
+    cur += letterList[i];
+
+    if (isZeroDivisor(num, parseInt(cur)))
+      cnt += 1;
+  }
+
+  return cnt;
+};
+
+var isZeroDivisor = function (num, target) {
+  return (num % target) === 0;
+};
+```
+
+</details>
+
 <hr/>
 
 ## 참고 문헌
