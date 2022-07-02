@@ -2,7 +2,7 @@
 
 ## 목차
 ## 219. Contains Duplicate II
-
+## 643. Maximum Average Subarray I
 
 
 
@@ -60,3 +60,44 @@ class Solution {
 		return false;
 	};
 ```
+
+
+# 643. Maximum Average Subarray I
+
+## 코딩테스트 대비 문제 풀기!
+
+[Leetcode 링크](https://leetcode.com/problems/maximum-average-subarray-i/submissions/)
+
+## 문제 요약
+
+nums에서 k개의 숫자의 평균이 가장 큰 것을 더하세요
+
+
+## 시간복잡도, 공간복잡도
+| time | space |
+|------|-------|
+| O(n) | O(1)  |
+
+
+## 내가 푼 코드
+```java
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        double sum = 0, max = 0;
+
+        for(int i = 0; i<k; i++){
+            sum += nums[i];
+        }
+
+        max = sum;
+
+        for(int i=k;i< nums.length;i++){
+            sum = sum + nums[i] - nums[i-k];
+            max = Math.max(sum, max);
+        }
+
+        return max/k;
+    }
+}
+```
+
