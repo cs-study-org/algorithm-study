@@ -224,6 +224,83 @@ var isZeroDivisor = function (num, target) {
 
 </details>
 
+<details>
+<summary>1763. Longest Nice Substring
+  <a href="https://leetcode.com/problems/longest-nice-substring/">👊</a>
+</summary>
+
+### 문제 회고
+
+가변적인 결과값이 예상되어 `슬라이딩 윈도우`보단 `투 포인터` 알고리즘이 필요하다고 판단하였다.
+
+현재 동일한 알파벳의 niceSubstring은 완성하지만
+
+    Input:   "dDzeE"
+    Output:  "dD"
+
+여러 알파벳의 niceSubstring은 찾지 못했다.
+
+    Input:    "cChH"
+    Output:   "cC"
+    Expected: "cChH"
+
+### 문제 풀이
+
+```js
+/**
+ * @param {string} s
+ * @return {string}
+ *
+ * time:  O(n²)
+ * space: O(n)
+ */
+var longestNiceSubstring = function (s) {
+  var getLongestSubstring = function (...args) {
+    return args.reduce((a, b) => {
+      return (a.length === b.length) ? a
+        : (a.length > b.length) ? a
+          : b;
+    });
+  }
+
+  var getNiceSubstring = function (left, right) {
+    let cur = '';
+
+    while (
+      left >= 0
+      && right < N
+      && s[left].toLowerCase() === s[right].toLowerCase()
+    ) {
+      cur = s.substring(left, right + 1);
+      right += 1;
+    }
+
+    return cur;
+  }
+
+  /// +++ start  
+  const N = s.length;
+  let result = '';
+
+  if (N < 2)
+    return result;
+
+  for (let i = 0; i < N; i++) {
+    const niceSubstring = getNiceSubstring(i, i);
+
+    if (niceSubstring.length === 1)
+      continue;
+
+    result = getLongestSubstring(result, niceSubstring);
+    console.log(result);
+  }
+
+  return result;
+};
+```
+
+</details>
+
 <hr/>
 
 ## 참고 문헌
