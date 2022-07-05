@@ -115,7 +115,7 @@ num이 있고 길이를 의미하는 k가 있을 때 num 중 k만큼의 수로 n
 ## 시간복잡도, 공간복잡도
 | time | space |
 |------|-------|
-| O(n) | O(1)  |
+| O(n) | O(n)  |
 
 
 ## 내가 푼 코드
@@ -141,5 +141,51 @@ class Solution {
 }
 
 ```
+
+# 1876. Substrings of Size Three with Distinct Characters
+
+## 코딩테스트 대비 문제 풀기!
+
+[Leetcode 링크](https://leetcode.com/problems/substrings-of-size-three-with-distinct-characters/)
+
+## 문제 요약
+
+s에서 중복되지 않는 3개의 문자가 있는 경우를 카운트하세요!
+
+## 시간복잡도, 공간복잡도
+| time | space |
+|------|-------|
+| O(n) | O(1)  |
+
+
+## 내가 푼 코드
+```java
+class Solution {
+    public int countGoodSubstrings(String s) {
+        Set<Character> set = new HashSet<>();
+        int start = 0, end = 0;
+        int count = 0;
+
+        while (end < s.length()){
+            if(!set.contains(s.charAt(end))){
+                set.add(s.charAt(end));
+                end++;
+                if(set.size() == 3){
+                    count++;
+                    set.remove(s.charAt(start));
+                    start++;
+                }
+            }else{
+                set.remove(s.charAt(start));
+                start++;
+            }
+        }
+
+        return count;
+    }
+}
+
+```
+
 
 
