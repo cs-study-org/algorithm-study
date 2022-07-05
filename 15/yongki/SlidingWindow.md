@@ -301,6 +301,43 @@ var longestNiceSubstring = function (s) {
 
 </details>
 
+<details>
+<summary>1876. Substrings of Size Three with Distinct Characters
+  <a href="https://leetcode.com/problems/substrings-of-size-three-with-distinct-characters/">👊</a>
+</summary>
+
+### 문제 풀이
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ *
+ * time:  O(n)
+ * space: O(1)
+ */
+var countGoodSubstrings = function (s) {
+  var isGoodSubstrings = function (s) {
+    return s === [...new Set(s.split(''))].join('');
+  }
+
+  // +++ Start
+  const L = 3;
+  let result = 0;
+
+  for (let i = 0; i < s.length; i++) {
+    const substring = s.substring(i, i + L);
+
+    if (substring.length === L && isGoodSubstrings(substring))
+      result += 1;
+  }
+  return result;
+};
+```
+
+
+</details>
+
 <hr/>
 
 ## 참고 문헌
