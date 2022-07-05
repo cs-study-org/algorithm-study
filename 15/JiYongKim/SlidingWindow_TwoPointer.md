@@ -16,7 +16,7 @@
 
 <br>
 
-![스크린샷 2022-07-05 오후 7.50.48.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cc85f404-0d2d-4469-9c7c-26e7a622a1ae/스크린샷_2022-07-05_오후_7.50.48.png)
+<img width="530" alt="스크린샷 2022-07-05 오후 8 13 37" src="https://user-images.githubusercontent.com/81874493/177315392-9a9b89ff-459b-4639-96e8-fd7cacc4bd40.png">
 
 1) 크기가 3인 윈도우 생성
 
@@ -45,7 +45,7 @@
 
 <br>
 
-![스크린샷 2022-07-05 오후 8.01.23.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ebd30a9a-97c4-4299-b7f5-19f0a8008871/스크린샷_2022-07-05_오후_8.01.23.png)
+<img width="538" alt="스크린샷 2022-07-05 오후 8 13 43" src="https://user-images.githubusercontent.com/81874493/177315413-28fc7dca-e132-4e01-8019-9a32af4db4d3.png">
 
 1) 포인터 first 와 second 생성
 
@@ -65,4 +65,4 @@
 
 ## 투 포인터 vs 슬라이딩 윈도우
 
-![스크린샷 2022-07-05 오후 7.53.21.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/28f9ef7d-8bd7-449c-b2ad-4f7883ee9483/스크린샷_2022-07-05_오후_7.53.21.png)
+<img width="539" alt="스크린샷 2022-07-05 오후 8 13 48" src="https://user-images.githubusercontent.com/81874493/177315428-26540559-ed21-412a-929c-57dc5d0c677f.png">
