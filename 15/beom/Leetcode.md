@@ -4,6 +4,9 @@
 ## 219. Contains Duplicate II
 ## 643. Maximum Average Subarray I
 ## 2269. Find the K-Beauty of a Number
+## 1876. Substrings of Size Three with Distinct Characters
+## 1763. Longest Nice Substring(틀림)
+
 
 
 
@@ -188,4 +191,47 @@ class Solution {
 ```
 
 
+# 1763. Longest Nice Substring(틀림)
+
+## 코딩테스트 대비 문제 풀기!
+
+[Leetcode 링크](https://leetcode.com/problems/substrings-of-size-three-with-distinct-characters/)
+
+## 문제 요약
+
+정확한 이해는 못함..........
+
+문자의 대문자 소문자가 동시에 나왔을 때 더 긴 문자열 반환??
+
+## 시간복잡도, 공간복잡도
+| time | space |
+|------|-------|
+| O(n^2) | O(n)  |
+
+
+## 다른 사람의 풀이
+```java
+class Solution {
+    public String longestNiceSubstring(String s) {
+        Set<Character> set = new HashSet<>();
+
+        for(int i = 0;i<s.length();i++){
+            set.add(s.charAt(i));
+        }
+
+        for(int i=0;i<s.length();i++){
+            if(set.contains(Character.toUpperCase(s.charAt(i))) && set.contains(Character.toLowerCase(s.charAt(i)))){
+                continue;
+            }
+
+            String s1 = longestNiceSubstring(s.substring(0,i));
+            String s2 = longestNiceSubstring(s.substring(i+1));
+            return s1.length()>= s2.length() ? s1 : s2;
+        }
+
+        return s;
+    }
+}
+
+```
 
