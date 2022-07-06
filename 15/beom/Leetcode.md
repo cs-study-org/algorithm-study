@@ -235,3 +235,42 @@ class Solution {
 
 ```
 
+
+# 1984. Minimum Difference Between Highest and Lowest of K Scores
+
+## 코딩테스트 대비 문제 풀기!
+
+[Leetcode 링크](https://leetcode.com/problems/minimum-difference-between-highest-and-lowest-of-k-scores/)
+
+## 문제 요약
+
+nums의 배열안에서 k의 공간이 있을 때 공간안의 최대값과 최소값의 차가 가장 작은 것을 반환
+
+## 시간복잡도, 공간복잡도
+| time | space |
+|------|-------|
+| O(n log n) | O(1)  |
+
+
+## 내가 푼 코드
+```java
+class Solution {
+    public int minimumDifference(int[] nums, int k) {
+        Arrays.sort(nums);
+        int min = 100000;
+        int start = 0, end = k-1;
+
+        if(nums.length == 1){
+            return 0;
+        }
+        while (end < nums.length){
+            min = Math.min(min, nums[end] - nums[start]);
+            start++;
+            end++;
+        }
+
+        return min;
+    }
+}
+
+```
