@@ -334,7 +334,41 @@ var countGoodSubstrings = function (s) {
   return result;
 };
 ```
+</details>
 
+<details>
+<summary>1984. Minimum Difference Between Highest and Lowest of K Scores
+  <a href="https://leetcode.com/problems/minimum-difference-between-highest-and-lowest-of-k-scores/">👊</a>
+</summary>
+
+### 문제 풀이
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ *
+ * time:  O(n)
+ * space: O(1)
+ */
+var minimumDifference = function (nums, k) {
+  nums.sort((a, b) => a - b);
+
+  const kIdx = k - 1;
+
+  let highScore = nums[kIdx];
+  let lowScore = nums[0];
+  let min = highScore - lowScore;  
+
+  for (let i = kIdx; i < nums.length; i++) {
+    const diffScore = nums[i] - nums[i - kIdx];
+    min = Math.min(min, diffScore);
+  }
+
+  return min;
+};
+```
 
 </details>
 
