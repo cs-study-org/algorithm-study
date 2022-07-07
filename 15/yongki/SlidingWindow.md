@@ -379,9 +379,7 @@ var minimumDifference = function (nums, k) {
 
 ### 문제 회고
 
-제시된 예제는 패스했지만, 제출시 테스트케이스는 해결하지 못했다.
-
-### 문제 풀이
+처음 접근은 다음과 같다.
 
 ```js
 /*
@@ -406,6 +404,89 @@ function solution(gems) {
 }
 ```
 
+해당 테스트케이스는 해결하지 못했다.
+
+    ["A","B","B","B","B","B","B","C","B","A"] [8,10]
+
+    Output:   [1, 8]
+    Expected: [8, 10]
+
+### 문제 풀이
+
+문제 풀이자는 범위를 모두 기억해둔 뒤, 적은 범위 순대로 정렬을 해두었다.
+
+    // +++ map by for loop
+    Map(1) { 'A' => 0 }
+    Map(2) { 'A' => 0, 'B' => 1 }
+    Map(2) { 'A' => 0, 'B' => 2 }
+    Map(2) { 'A' => 0, 'B' => 3 }
+    Map(2) { 'A' => 0, 'B' => 4 }
+    Map(2) { 'A' => 0, 'B' => 5 }
+    Map(2) { 'A' => 0, 'B' => 6 }
+    Map(3) { 'A' => 0, 'B' => 6, 'C' => 7 }
+    Map(3) { 'A' => 0, 'C' => 7, 'B' => 8 }
+    Map(3) { 'C' => 7, 'B' => 8, 'A' => 9 }
+    
+    // +++ ranges
+    [ 
+      { start: 1, end: 8 }, 
+      { start: 1, end: 9 }, 
+      { start: 8, end: 10 } 
+    ]
+
+    // +++ sort by compact ranges
+    [ 
+      { start: 8, end: 10 }   // +++ result!
+      { start: 1, end: 8 }, 
+      { start: 1, end: 9 }, 
+    ]
+
+인상적인 것은 map의 values의 순서를 오름차순으로 맞추도록 key를 갱신하는 작업이 있었다는 것이다.
+
+이는 범위를 추가할때, 어디가 start인지 end인지를 찾는 작업을 없애주었다.
+
+또한, 범위의 start를 찾을 때 다음과 같은 방법외에
+
+    start: [...gemMap.values()][0] + 1,
+
+이터레이터를 활용했다는 점이 인상깊었다.
+
+    start: gemMap.values().next().value + 1,
+
+```js
+/*
+* time:     O(n)
+* space:    O(n)
+*/
+function solution(gems) {
+  const gemTypeLength = new Set(gems).size;
+  const gemMap = new Map();
+  const gemRanges = [];
+
+  for (const [idx, gem] of gems.entries()) {
+    gemMap.delete(gem);
+    gemMap.set(gem, idx);
+
+    if (gemTypeLength === gemMap.size)
+      gemRanges.push({        
+        start: gemMap.values().next().value + 1,
+        end: idx + 1
+      });    
+  }  
+
+  gemRanges.sort((a, b) => {
+    return (a.end - a.start) === (b.end - b.start)
+      ? a.end - b.end
+      : (a.end - a.start) - (b.end - b.start);
+  })
+
+  return [
+    gemRanges[0].start,
+    gemRanges[0].end
+  ];
+}
+```
+
 </details>
 
 <hr/>
@@ -413,3 +494,5 @@ function solution(gems) {
 ## 참고 문헌
 
 [Window Sliding Technique](https://www.geeksforgeeks.org/window-sliding-technique/) ━ *GeeksforGeeks*
+
+[Simple Solution at 보석 쇼핑](https://school.programmers.co.kr/learn/courses/30/lessons/67258/solution_groups?language=javascript&type=all) ━ *Programmers*
