@@ -372,6 +372,42 @@ var minimumDifference = function (nums, k) {
 
 </details>
 
+<details>
+<summary>보석 쇼핑
+  <a href="https://school.programmers.co.kr/learn/courses/30/lessons/67258">👊</a>
+</summary>
+
+### 문제 회고
+
+제시된 예제는 패스했지만, 제출시 테스트케이스는 해결하지 못했다.
+
+### 문제 풀이
+
+```js
+/*
+* time:     O(n)
+* space:    O(n)
+*/
+function solution(gems) {
+  const gemTypeLength = new Set([...gems]).size;
+  const window = new Map();
+
+  for (const [idx, gem] of gems.entries()) {
+    window.set(gem, idx + 1);
+
+    if (gemTypeLength === [...window.values()].length)
+      break;
+  }
+
+  return [
+    Math.min(...window.values()),
+    Math.max(...window.values())
+  ];
+}
+```
+
+</details>
+
 <hr/>
 
 ## 참고 문헌
