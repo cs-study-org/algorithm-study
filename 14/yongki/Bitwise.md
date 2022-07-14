@@ -51,6 +51,52 @@ var count1Bits = function (number) {
 
 </details>
 
+<details>
+<summary>비밀지도
+  <a href="https://school.programmers.co.kr/learn/courses/30/lessons/17681">👊</a>
+</summary>
+
+### 문제 풀이
+
+```js
+/**
+ * time:    O(n²log n)
+ * space:   O(n)
+ */
+function solution(n, arr1, arr2) {
+  return arr1
+    .map((value, idx) => value | arr2[idx])
+    .map(number => convertEncryptCode(number, n));
+}
+
+/**
+ * time:  O(nlog n) 
+ * space: O(n)
+ */
+function convertEncryptCode(number, n) {
+  const result = [];
+
+  let convertCnt = 0;
+
+  while (number) {
+    if (number & 1)
+      result.push('#');
+    else
+      result.push(' ');
+
+    number >>= 1;
+    convertCnt += 1;
+  }  
+
+  while (convertCnt++ < n)
+    result.push(' ');
+
+  return result.reverse().join('');
+}
+```
+
+</details>
+
 ## 참고 문헌
 
 [로그 곱 계산](https://www.quora.com/Difference-between-log-2-n-log-log-n-and-log-n-2) ━ *Quora*
