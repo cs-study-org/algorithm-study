@@ -1,6 +1,74 @@
 # 비트 연산
 
+## 이론
+
+<details>
+
+Douglas Crockford는 비트 연산자가 Javascript의 단점 중 하나라고 생각한다.
+
+Java에서는 비트 연산자가 정수로 작동합니다.
+
+JavaScript에는 정수(Integer)가 없습니다. Double만 있습니다.
+
+비트 연산자는 정수에서 작동하기 때문에 
+
+Javascript는 피연산자를 정수로 변환하고 비트 연산을 수행한 다음 다시 Double로 변환합니다.
+
+대부분의 언어에서 이러한 연산자는 하드웨어에 매우 가깝고 매우 빠릅니다.
+
+때문에, JavaScript에서는 하드웨어와 거리가 멀고 속도가 매우 느립니다.
+
+즉, JavaScript는 비트 조작에 거의 사용되지 않습니다.
+
+</details>
+
 ## 문제 리스트
+
+<details>
+<summary>191. Number of 1 Bits
+  <a href="https://leetcode.com/problems/number-of-1-bits/">👊</a>
+</summary>
+
+### 문제 회고
+
+`>>>` 연산자를 처음 쓰게 되었다.
+
+`>>>`는 시프트 연산 이후 버려진 오른쪽 비트만큼 왼쪽은 0으로 채워지고
+
+`<<`는 시프트 연산 이후 버려진 오른쪽 비트만큼 왼쪽은 부호 비트로 채워져, 정수가 유지된다.
+
+즉, 양수일때는 둘의 결과는 같다. 음수일때는 다르다.
+
+    -9₂                     = 11111111111111111111111111110111
+
+    -9 >>> 2 = 1073741821₂  = 00111111111111111111111111111101
+
+    -9 << 2  = -3₂          = 11111111111111111111111111111101
+
+
+### 문제 풀이
+
+```js
+/**
+ * @param {number} n - a positive integer
+ * @return {number}
+ *
+ * time:  O(n)
+ * space: O(1)
+ */
+var hammingWeight = function (n) {  
+  let cnt = 0;
+
+  while (n) {
+    cnt += n & 1;
+    n >>>= 1;
+  }
+
+  return cnt;
+};
+```
+
+</details>
 
 <details>
 <summary>1356. Sort Integers by The Number of 1 Bits
@@ -100,3 +168,9 @@ function convertEncryptCode(number, n) {
 ## 참고 문헌
 
 [로그 곱 계산](https://www.quora.com/Difference-between-log-2-n-log-log-n-and-log-n-2) ━ *Quora*
+
+[Javascript 비트 연산에서 단점](https://stackoverflow.com/questions/1908492/unsigned-integer-in-javascript) ━ *Stack overflow*
+
+[Javascript >>> 연산자](https://www.geeksforgeeks.org/what-is-javascript-operator-and-how-to-use-it/) ━ *GeeksforGeeks*
+
+[Simple Solution at ](https://leetcode.com/problems/number-of-1-bits/discuss/427069/Javascript-solution) ━ *Leetcode*
