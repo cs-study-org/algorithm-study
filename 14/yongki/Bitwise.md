@@ -120,6 +120,58 @@ var count1Bits = function (number) {
 </details>
 
 <details>
+<summary>2개 이하로 다른 비트
+  <a href="https://school.programmers.co.kr/learn/courses/30/lessons/77885">👊</a>
+</summary>
+
+### 문제 풀이
+
+```js
+/**
+ * m as numbers.length
+ * n as numberCnt 
+ * 
+ * time:  O(mn²)
+ * space: O(1)
+ */
+function solution(numbers) {
+  return numbers.map(number => {
+    if (number % 2 == 0)
+      return ++number;
+
+    return oddNumberSolution(number);
+  });
+}
+
+function oddNumberSolution(number) {
+  let numberCnt = number;
+  let minBitCnt = Infinity;
+
+  while (++numberCnt) {
+    let copiedNumCnt = numberCnt;
+    let copiedNum = number;
+    let curBitCnt = 0;
+
+    while (copiedNumCnt) {
+      if ((copiedNumCnt & 1) ^ (copiedNum & 1))
+        curBitCnt += 1;
+
+      copiedNumCnt >>= 1;
+      copiedNum >>= 1;
+    }
+
+    minBitCnt = Math.min(minBitCnt, curBitCnt);
+
+    if (minBitCnt <= 2)
+      break;
+  }
+
+  return numberCnt;
+}
+```
+</details>
+
+<details>
 <summary>비밀지도
   <a href="https://school.programmers.co.kr/learn/courses/30/lessons/17681">👊</a>
 </summary>
