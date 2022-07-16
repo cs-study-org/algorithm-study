@@ -244,8 +244,6 @@ var isZeroDivisor = function (num, target) {
     Output:   "cC"
     Expected: "cChH"
 
-### 문제 풀이
-
 ```js
 /**
  * @param {string} s
@@ -297,6 +295,69 @@ var longestNiceSubstring = function (s) {
 
   return result;
 };
+```
+
+### 문제 풀이
+
+분할 정복 방법으로 해결하는 풀이었다.    
+
+```js
+/**
+ * @param {string} s
+ * @return {string}
+ *
+ * m as nice substring
+ * n as string
+ * 
+ * time:  O(n²)
+ * space: O(mn)
+ */
+var longestNiceSubstring = function (s) {
+  const N = s.length;
+  const set = new Set();
+  let longestSize = 0;
+
+  for (let i = 0; i < N; i++) {
+    for (let j = i; j < N; j++) {
+      const substring = s.slice(i, j + 1);
+
+      if (isNiceSubstring(substring)) {
+        set.add(substring);
+        longestSize = Math.max(longestSize, substring.length);
+      }
+    }
+  }
+
+  for (const each of set) {
+    if (each.length === longestSize)
+      return each;
+  }
+
+  return '';
+};
+
+function isNiceSubstring(letters) {
+  let lower = new Set();
+  let upper = new Set();
+
+  for (const letter of letters) {
+    isLowerCaseLetter(letter) ? lower.add(letter) : upper.add(letter);
+  }
+
+  for (const each of lower) {
+    if (!upper.has(each.toUpperCase())) return false;
+  }
+
+  for (const each of upper) {
+    if (!lower.has(each.toLowerCase())) return false;
+  }
+
+  return true;
+}
+
+function isLowerCaseLetter(letter) {
+  return letter === letter.toLowerCase();
+}
 ```
 
 </details>
@@ -494,5 +555,7 @@ function solution(gems) {
 ## 참고 문헌
 
 [Window Sliding Technique](https://www.geeksforgeeks.org/window-sliding-technique/) ━ *GeeksforGeeks*
+
+[Simple Solution at 1763. Longest Nice Substring](https://leetcode.com/problems/longest-nice-substring/discuss/1076734/javascript-direct-way-200ms) ━ *Leetcode*
 
 [Simple Solution at 보석 쇼핑](https://school.programmers.co.kr/learn/courses/30/lessons/67258/solution_groups?language=javascript&type=all) ━ *Programmers*
