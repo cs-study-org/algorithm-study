@@ -124,7 +124,9 @@ var count1Bits = function (number) {
   <a href="https://school.programmers.co.kr/learn/courses/30/lessons/77885">👊</a>
 </summary>
 
-### 문제 풀이
+### 문제 회고
+
+문자열 비교를 하지 않고 풀어보았지만, 여전히 테스트케이스에 막힌 풀이다.
 
 ```js
 /**
@@ -169,6 +171,45 @@ function oddNumberSolution(number) {
   return numberCnt;
 }
 ```
+
+### 문제 풀이
+
+정답자는 문자열 비교를 했으며 특징을 찾았던 것같다.
+
+    Input element:   7₂  = 0111
+    Output element: 11₂  = 1011
+
+과 같이 MSB 방향의 두 비트만 swap 되는 특징을 보인다.
+
+```js
+function solution(numbers) {
+  return numbers.map(number => {
+    if (number % 2 == 0)
+      return evenNumberSolution(number);
+
+    return oddNumberSolution(number);
+  });
+}
+
+function evenNumberSolution(number) {
+  return ++number;
+}
+
+function oddNumberSolution(number) {
+  const bits = ['0', ...number.toString(2).split('')];
+
+  for (let i = bits.length - 1; i >= 0; i--) {
+    if (bits[i] == '0') {
+      bits[i] = '1';
+      bits[i + 1] = '0';
+      break;
+    }
+  }  
+
+  return parseInt(bits.join(''), 2);
+}
+```
+
 </details>
 
 <details>
