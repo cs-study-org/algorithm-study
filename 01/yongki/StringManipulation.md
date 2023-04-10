@@ -6,7 +6,7 @@
 <summary>125. Valid Palindrome</summary>
 <br/>
 
-**이슈**
+### 이슈
 
 테스트 코드에서 제출 오류가 있었다.
 
@@ -15,7 +15,7 @@
   
 테스트 코드의 형태가 Palindrome이 아니라서 테스트 코드 오류가 아닌가 싶다.
 
-**문제 풀이**
+### 문제 풀이
 
     1. 정규표현식을 이용해 문자열을 전처리해준다.
 
@@ -42,6 +42,24 @@
           'c', 'a', 'n', 'a', 'l',
           'p', 'a', 'n', 'a', 'm'
         ]
+
+### 시·공간 복잡도
+
+time:   O(n)
+```
+문자열의 길이에 비례하는 antiPattern 변수와 arr 배열을 생성하는데 O(n)의 시간이 소요된다.
+이후에는 while문에서 arr배열의 길이가 1 이하가 될 때까지 앞과 뒤에서부터 문자를 비교하면서 반복하므로, while문의 수행 시간은 문자열의 길이에 비례하게 된다.
+
+따라서 이 코드의 시간 복잡도는 O(n)이다.
+```
+space:  O(n)
+```
+코드 내에서 가장 많은 공간을 차지하는 것은 arr배열인데, 이 배열의 길이는 문자열의 길이와 같거나 더 작을 수 있다.
+
+따라서 이 코드의 공간 복잡도는 O(n)이다.
+```
+
+### 코드
 
 ```javascript
 /**
@@ -83,7 +101,7 @@ var isPalindrome = function(s) {
 <summary>344. Reverse String</summary>
 <br/>
 
-**문제 풀이**
+### 이슈
 
 반환 조건을 보면, 함수 인자 자체를 바꾸라고 나와있다.
 
@@ -100,6 +118,25 @@ var reverseString = function(s) {
 ```
 때문에 가급적 얕은 복사를 사용해야 함을 배웠다.
 
+### 시·공간 복잡도
+
+time:   O(n)
+```
+s를 spread operator를 사용하여 배열로 변환하고, 그 배열을 reverse() 메소드로 뒤집은 후 반환한다.
+spread operator를 사용하여 배열로 변환하는 시간 복잡도는 O(n)이고,
+reverse() 메소드는 배열의 원소를 뒤집는 시간 복잡도가 O(n)이다.
+
+따라서 이 코드의 시간 복잡도는 O(n)이다.
+```
+space:  O(n)
+```
+s를 spread operator를 사용하여 배열로 변환하는데, 배열의 크기는 s의 길이와 같다.
+
+따라서 이 코드의 공간 복잡도는 O(n)이다.
+```
+
+### 코드
+
 ```javascript
 var reverseString = function(s) {
   return [...s].reverse();
@@ -111,7 +148,7 @@ var reverseString = function(s) {
 <summary>937. Reorder Data in Log Files</summary>
 <br/>
 
-**이슈**
+### 이슈
 
 최근 테스트 케이스의 조건이 추가된듯하다.
 
@@ -140,7 +177,7 @@ var reverseString = function(s) {
 
 해당 테스트 케이스는 아직 해결중이다.
 
-**문제 풀이**
+### 문제 풀이
 
     1. 주어진 Input을 letter와 digit 타입의 배열로 나눈다.
 
@@ -153,6 +190,25 @@ var reverseString = function(s) {
         비교대상이 되는 1번째 문자열
         → 동일할 시     2번째 문자열
         → 동일할 시     식별자의 문자열
+
+### 시·공간 복잡도
+
+time:   O(n log n)
+```
+이 코드는 입력 배열 logs의 크기에 비례하는 시간복잡도를 갖는다.
+logs 배열을 한 번 순회하고,순회 도중 각 로그를 판별하기 위해 문자열의 split, match, localeCompare 등의 함수가 사용되어 시간복잡도가 증가한다.
+
+따라서 이 코드의 시간복잡도는 O(n log n)이라고 할 수 있다.
+```
+space:  O(n)
+```
+주어진 배열 logs를 정렬하여 저장하기 위한 letterArray, digitArray 변수의 크기에 따라 달라진다.
+배열의 크기는 입력 배열의 크기와 비례하므로
+
+이 코드의 공간복잡도는 O(n)이다.
+```
+
+### 코드
 
 ```javascript
 /**
@@ -193,7 +249,7 @@ var reorderLogFiles = function(logs) {
 <summary>819. Most Common Word</summary>
 <br/>
 
-**문제 풀이**
+### 문제 풀이
 
     Input: 
       paragraph = "Bob hit a ball, the hit BALL flew far after it was hit."
@@ -228,6 +284,30 @@ var reorderLogFiles = function(logs) {
        객체에서 제일 큰 value를 같는 key를 반환한다.
 
 자바스크립트에는 `getKeyByValue`와 같이 빌트인 메서드로 있슴직한 메서드들이 없어서 불편하였다.
+
+### 시·공간 복잡도
+
+time:   O(n + m log m)
+```
+n은 문자열의 길이이고, m은 금지된 단어의 수이다.
+주요 연산은 문자열을 소문자로 변환하고, 구두점으로 문자열을 분할하며, 금지된 단어를 검색하며, 단어 수를 계산한다.
+
+이 중 문자열 분할은 O(n) 시간이 걸리고,
+금지된 단어 검색과 단어 수 계산은 O(m) 시간이 걸리며,
+단어 수 계산에 사용되는 해시맵은 최악의 경우 O(n) 시간이 걸린다.
+마지막으로 해시맵의 값을 기준으로 최빈값을 계산하므로, 해시맵을 정렬하는 데 O(m log m) 시간이 걸린다.
+
+따라서 총 시간복잡도는 O(n + m log m)이다.
+```
+space:  O(n + m)
+```
+금지된 단어를 저장하는 배열과 단어 수를 저장하는 해시맵이 필요하며,
+문자열과 단어를 저장하는데 각각 O(n)의 공간이 필요하다.
+
+따라서 총 공간복잡도는 O(n + m)이다.
+```
+
+### 코드
 
 ```javascript
 /**
@@ -271,17 +351,12 @@ var mostCommonWord = function(paragraph, banned) {
 <summary>49. Group Anagrams</summary>
 <br/>
 
-**문제 3줄 요약**    
-
-    1. Input: strs = ["eat","tea","tan","ate","nat","bat"]       
-
-    2. Output: [["bat"],["nat","tan"],["ate","eat","tea"]]    
-
-**문제 풀이 1/2**
+### 문제 풀이 1/2
 
 다음은 처음 접근했던 방법이다.
 
     Input: strs = ["eat","tea","tan","ate","nat","bat"]
+    Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
 
     1. strs 배열의 문자열 요소들을 하나의 단락(paragraph)을 만든다. 
        이 단락은 루프를 돌면서 문자열 선별작업의 대상이 되고,
@@ -304,6 +379,31 @@ var mostCommonWord = function(paragraph, banned) {
         Test Case B: ["","b"]
 
        위와 같이 빈 문자열을 선별하는 테스트 케이스를 통과할 수 없었다.
+
+### 시·공간 복잡도 1/2
+
+time:   O(n²m)
+```
+주어진 문자열들을 모두 하나의 문자열로 합쳐 paragraph 변수에 저장한 후,
+배열 strs를 순회하며 각각의 문자열이 그룹화한 결과 배열에 들어갈 수 있는지 검사하고,
+그룹화한 결과를 result 배열에 push 한다.
+
+이 때, 각 문자열을 검사하는데 소요되는 시간복잡도는 O(nm)이고,
+전체 strs 배열을 순회하는데 O(n)의 시간이 소요되기 때문에,
+
+총 시간복잡도는 O(n²m)이 된다.
+```
+space:  O(nm)
+```
+result 배열을 사용하는데, 이 배열의 크기는 최대 strs 배열의 크기만큼 될 수 있으므로, 공간복잡도는 O(nm)이 된다.
+단, paragraph 변수에는 strs 배열의 각 원소를 모두 합쳐서 저장하고 있기 때문에,
+paragraph 변수가 차지하는 공간복잡도도 고려해야 한다.
+이 변수는 모든 문자열을 모두 합친 결과이므로,
+
+공간복잡도는 O(nm)이다.
+```
+
+### 코드 1/2
 
 ```javascript
 /**
@@ -340,10 +440,11 @@ var groupAnagrams = function(strs) {
 };
 ```
 
-**문제 풀이 2/2**
+### 문제 풀이 2/2
 따라서, 리트코드 내에서 좋은 풀이를 참고하였다.
 
     Input: strs = ["eat","tea","tan","ate","nat","bat"]
+    Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
 
     1. 배열의 갯수만큼 루프를 도는데,
        배열의 요소 마다 알파벳 순으로 정렬한다.
@@ -362,6 +463,24 @@ var groupAnagrams = function(strs) {
           ant: [ 'tan', 'nat' ], 
           abt: [ 'bat' ] 
         }
+
+### 시·공간 복잡도 2/2
+
+time:   O(n)
+```
+해시맵을 이용하므로 탐색 시간이 O(1)로 상수시간에 가능하며,
+strs 배열의 모든 단어를 한 번씩 탐색하므로 
+
+시간복잡도는 O(n)이다.
+```
+space:  O(n)
+```
+해시맵의 크기는 strs 배열의 길이 n과 알파벳 길이(26)의 곱인 O(n * 26)이 되며,
+
+결과적으로 공간복잡도도 O(n)이다.
+```
+
+### 코드 2/2
 
 ```js
 /**
@@ -390,7 +509,7 @@ var groupAnagrams = function(strs) {
 <summary>5. Longest Palindromic Substring</summary>
 <br/>
 
-**문제 풀이**
+### 문제 풀이
 
 교재에 나온 투 포인터 방법을 
 자바스크립트 버전으로 바꾸고, 약간의 가독성을 높여 사용하였다.
@@ -400,6 +519,25 @@ var groupAnagrams = function(strs) {
 파이썬처럼 `key 옵션`이 지원되지 않아 단순히 수를 돌려주는 메서드였다. 
 
 때문에 함수를 구현해줘야 했다.
+
+### 시·공간 복잡도
+
+time:   O(n²)
+```
+이 코드는 먼저 s 문자열의 길이에 따라 반복문을 O(n)번 돌게 된다.
+그리고 각 반복에서는 helper 함수를 호출하게 되는데, helper 함수의 최악의 시간복잡도는 O(n)이다.
+이는 최악의 경우에는 문자열의 양 끝까지 비교해야 하기 때문이다.
+
+그러므로 이 코드의 전체 시간복잡도는 O(n²)이다.
+```
+space:  O(1)
+```
+이 코드는 입력값의 크기에 상관없이 일정한 공간만 사용한다.
+
+따라서 공간복잡도는 입력값의 크기에 무관하게 O(1)이다.
+```
+
+### 코드
 
 ```javascript
 /**
@@ -537,8 +675,7 @@ var longestPalindrome = function(s) {
 
 ### 추가 문제
 
-- 테스트 케이스까지 통과한 문제만 시간 복잡도를 기록해두었습니다.
-- 각 문제의 👊를 클릭하면 문제로 이동합니다.
+각 문제의 👊를 클릭하면 문제로 이동합니다.
 
 <details>
 <summary>
@@ -547,7 +684,7 @@ var longestPalindrome = function(s) {
 </summary>
 <br/>
 
-**문제 풀이 1/2**
+### 문제 풀이 1/2
 
 처음에 접근한 방법이다.
 
@@ -576,13 +713,30 @@ var longestPalindrome = function(s) {
 
     substring을 찾아내는 함수가 적절하지 못했다.
 
+### 시·공간 복잡도 1/2
+
+time:   O(n²)
+```
+문자열의 모든 요소에 대해 반복문을 실행하고,
+그 다음 각 반복에서 또 다른 반복문을 사용하여 현재 인덱스로부터 시작하여 중복이 없는 가장 긴 부분 문자열을 찾기 때문이다.
+
+따라서 이 코드의 시간복잡도는 O(n²)이다.
+```
+space:  O(1)
+```
+문자열의 길이에 상관없이 고정된 공간을 사용하기 때문이다.
+
+따라서 이 코드의 공간복잡도는 O(1)이다.
+```
+
+### 코드 1/2
+
 ```js
 /**
  * @param {string} s
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
-  
   // +++ Exception
   if(new Set(s).size === 1)
     return 1;
@@ -628,20 +782,13 @@ var lengthOfLongestSubstring = function(s) {
 };
 ```
 
-**문제 풀이 2/2**
+### 문제 풀이 2/2
 
 따라서, 리트코드의 많은 풀이를 참고했지만, 이를 이해하기 힘들었다.
 
 이 문제는 `sliding window`라는 알고리즘 기법으로 해결한다고 하는데, 관련 easy 난이도를 풀어도 기법을 이해하지 못했다.
 
 `sliding window` 기법은 아니지만 가장 직관적인 풀이를 찾을 수 있었다.
-
-    time:  O(n^2)
-
-      for       → O(n)
-        indexOf → O(n)    
-
-    ---------------------
 
     Input: s = "abcabcbb"
 
@@ -661,6 +808,28 @@ var lengthOfLongestSubstring = function(s) {
         current = bc + a = bca
     
     4. 또한, current의 length가 제일 길었을 때 longest에 넣어 기억해둔다.
+
+### 시·공간 복잡도 2/2
+
+time:   O(n)
+```
+문자열 s를 한 글자씩 순회하면서 각 글자를 기준으로 현재 부분 문자열을 만들어나간다.
+
+이 때, 현재 부분 문자열에 글자를 추가하는 경우와 추가하지 않는 경우 두 가지로 나뉘게 된다.
+글자를 추가하는 경우에는 현재 부분 문자열의 길이가 1씩 증가하게 되며,
+추가하지 않는 경우에는 현재 부분 문자열의 시작 위치가 다음 글자로 옮겨지게 된다.
+
+따라서 이 코드의 시간복잡도는 O(n)이 된다.
+```
+space:  O(n)
+```
+이 코드에서 사용되는 추가적인 메모리는 현재 부분 문자열을 저장하기 위한 변수와
+결과 부분 문자열을 저장하기 위한 변수이다.
+
+따라서, 이 코드의 공간복잡도는 O(n)이 된다.
+```
+
+### 코드 2/2
 
 ```js
 /**
@@ -699,7 +868,7 @@ var lengthOfLongestSubstring = function(s) {
 </summary>
 <br/>
 
-**문제 풀이 1/2**
+### 문제 풀이 1/2
 
     Input: s = "ababcbacadefegdehijhklij"
     Output: [9,7,8]
@@ -763,6 +932,26 @@ var lengthOfLongestSubstring = function(s) {
 
         [9,7,13,8]
 
+### 시·공간 복잡도 1/2
+
+time:   O(n²)
+```
+indexOf() 메서드는 문자열의 처음부터 끝까지 순회하면서 값을 찾으므로, 문자열의 길이가 n이고 이를 m번 호출하면 전체적인 시간복잡도는 O(nm)이 된다.
+이 코드에서는 문자열의 각 문자별로 indexOf를 호출하여 인덱스를 구하고 이를 저장하는 과정이 필요하다.
+따라서 문자열의 길이가 n이라면 이 과정에서 최대 n번의 indexOf() 호출이 발생하며,
+
+이는 O(n²)의 시간복잡도를 가진다.
+```
+space:  O(n)
+```
+이 코드에서는 문자열 s의 길이에 비례하는 크기의 해시 테이블 idxTable을 생성하므로 O(n)이다. 
+result 배열의 크기는 문자열 s에서 나누어진 부분 문자열의 개수에 비례하므로 최대 O(n)이다.
+
+따라서 전체적인 공간복잡도는 O(n)이다.
+```
+
+### 코드 1/2
+
 ```js
 /**
  * @param {string} s
@@ -813,7 +1002,7 @@ var partitionLabels = function(s) {
 };
 ```
 
-**문제 풀이 2/2**
+### 문제 풀이 2/2
 
 이후 좋은 풀이를 참조하니, 
 
@@ -821,7 +1010,21 @@ var partitionLabels = function(s) {
 
 코드가 직관적이어서 따로 설명이 필요 없을 정도였다.
 
-    time: O(n)
+### 시·공간 복잡도 2/2
+
+time:   O(n²)
+```
+for 루프 내에서 lastIndexOf를 호출하면서, lastIndexOf의 시간복잡도는 O(n)이다.
+for 루프를 n번 반복하므로, 
+
+전체 시간 복잡도는 O(n²)가 된다.
+```
+space:  O(1)
+```
+입력 문자열의 길이와 무관하며, 상수 공간만 사용하므로 O(1)이다.
+```
+
+### 코드 2/2
 
 ```js
 /**
@@ -857,17 +1060,8 @@ var partitionLabels = function(s) {
 </summary>
 <br/>
 
-**문제 풀이 1/2**    
-    
-    time:  O(n^3)
-
-      some          → O(n)
-        while       → O(n)
-          indexOf   → O(n)
-        some        → O(n)
-
-    ----------------------------------
-
+### 문제 풀이
+  
     Input:
       s         = "abcd"
       wordDict  = ["a","abc","b","cd"]
@@ -904,6 +1098,23 @@ var partitionLabels = function(s) {
           s        = "ccbb"
           wordDict = ["bc","cb"]
 
+### 시·공간 복잡도
+
+time:   O(mn²)
+```
+최악의 경우 문자열 s의 길이가 n, 단어 사전 wordDict의 단어 개수가 m이라면,
+내부의 while 루프를 m번 반복하고 각 루프에서 문자열의 길이가 최대 n만큼 줄어들 수 있다.
+
+따라서 이 코드의 시간복잡도는 O(mn²)이다.
+```
+space:  O(m)
+```
+주어진 단어 사전 wordDict의 크기에 비례한다.
+단어 사전을 복사한 배열을 만들어서 정렬하기 때문에, 추가적인 O(m)의 공간이 필요하다.
+```
+
+### 코드
+
 ```js
 /**
  * @param {string} s
@@ -935,14 +1146,6 @@ var wordBreak = function(s, wordDict) {
     });  
 };
 ```
-
-**문제 풀이 2/2**
-
-참고할 풀이들이 BFS나 DP를 활용하는 것 같다.
-
-앞으로 관련된 주제의 스터디 시간 때 개념을 익히고, 풀이를 참고하도록 하겠다.
-
-    ...
 
 </details>
 
