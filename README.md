@@ -23,7 +23,7 @@
       </tr>
       <tr>
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/00">0주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/00">0th</a>
             </td>
             <td colspan="3">빅오</td>
       </tr>
@@ -33,88 +33,88 @@
       </tr>
       <tr>
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/01">1주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/01">1st</a>
             </td>
             <td>문자열 조작</td>
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/12">12주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/12">12th</a>
             </td>
             <td>정렬</td>
       </tr>
       <tr>
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/02">2주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/02">2nd</a>
             </td>
             <td>배열</td>
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/13">13주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/13">13th</a>
             </td>
             <td>이진 탐색</td>
       </tr>
       <tr>
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/03">3주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/03">3rd</a>
             </td>
             <td>연결리스트</td>
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/14">14주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/14">14th</a>
             </td>
             <td>비트 조작</td>
       </tr>
       <tr>
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/04">4주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/04">4th</a>
             </td>
             <td>스택, 큐</td>
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/15">15주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/15">15th</a>
             </td>
             <td>슬라이딩 윈도우</td>
       </tr>
       <tr>
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/05">5주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/05">5th</a>
             </td>
             <td>데크, 우선순위 큐</td>
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/16">16주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/16">16th</a>
             </td>
             <td>그리디</td>
       </tr>
       <tr>
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/06">6주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/06">6th</a>
             </td>
             <td>해시 테이블</td>
             <td align="center" rowspan="6" colspan="2">-</td>   
       </tr>
       <tr>
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/07">7주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/07">7th</a>
             </td>
             <td>그래프</td>            
       </tr>
       <tr>
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/08">8주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/08">8th</a>
             </td>
             <td>최단 경로</td>
       </tr>
       <tr>
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/09">9주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/09">9th</a>
             </td>
             <td>트리</td>            
       </tr>      
       <tr>            
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/10">10주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/10">10th</a>
             </td>
             <td>힙</td>                       
       </tr>
       <tr>            
             <td>
-                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/11">11주차</a>
+                  <a href="https://github.com/cs-study-org/algorithm-study/tree/main/11">11th</a>
             </td>
             <td>트라이</td>            
       </tr>
